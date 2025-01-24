@@ -4,14 +4,19 @@
 </script>
 
 <h1>Releases</h1>
+<p>
+  Nomad has seen {data.releases.length} releases since its inception in 2015.
+</p>
+
+<!-- <h1>Releases</h1>
 {#each data.releases as release}
   <h2>{release.name}</h2>
   <textarea>{release.body}</textarea>
-{/each}
+{/each} -->
 
 <hr />
 
-<h1>Files</h1>
+<!-- <h1>Files</h1>
 {#each data.files as file}
   <h2>{file.file}</h2>
   <h3>Top Authors:</h3>
@@ -30,4 +35,4 @@
       </li>
     {/each}
   </ul>
-{/each}
+{/each} -->
