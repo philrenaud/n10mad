@@ -3,16 +3,16 @@
 	import { onDestroy, onMount } from 'svelte';
 	import Canvas from '$lib/Canvas.svelte';
 	import Circle from '$lib/Circle.svelte';
-	// import Swarm from "$lib/Swarm.svelte";
 	import * as d3 from 'd3';
-	// import d3ForceLimit from 'd3-force-limit';
 
 	let width = $state(500);
 	let height = $state(500);
 
 	let numberOfCircles = $state(1000);
 	let minWidth = 2;
-	let circleSize = $derived.by(() => Math.max(minWidth, width / numberOfCircles / .5));
+	// let circleSize = $derived.by(() => Math.max(minWidth, width / numberOfCircles / 2));
+  // ^--- perf nightmare
+  let circleSize = 2;
 
 	let mouseX = $state(0);
 	let mouseY = $state(0);
@@ -22,13 +22,12 @@
 		.scaleLinear()
 		.domain([0, 1])
 		.range([
-			d3.hsl(nomadGreen).darker(0.5), // 50% darker
-			d3.hsl(nomadGreen).brighter(0.5) // 50% brighter
+			d3.hsl(nomadGreen).darker(0.5),
+			d3.hsl(nomadGreen).brighter(0.5)
 		]);
 
   let canvasContext:CanvasRenderingContext2D | null = $state(null);
-  $inspect(canvasContext);
-  $inspect({width, height});
+  // $inspect({width, height});
 
 	function onpointermove(e: PointerEvent) {
 		canvasContext?.clearRect(0, 0, width, height);
@@ -39,6 +38,11 @@
 			x: mouseX,
 			y: mouseY
 		};
+
+    // Generally follow the mouse, lightly.
+    if (simulation) {
+      simulation.force('mouse', d3.forceRadial(100, mouseX, mouseY).strength((d,i) => i ? 0.02 : 0))
+    }
 	}
 
 	let radius = $derived.by(() => d3.randomUniform(circleSize, circleSize * 4)); // TODO: this is plainly not being observed anymore
@@ -46,58 +50,21 @@
 	let circles = $state<any[]>([]);
 
 	let localCircles: any[] = [];
-	// let localCircles = $state<any[]>([]);
-	// let localCircles = $derived.by(() => {
-	//   // console.log('localCircles', simulation?.nodes());
-	//   // console.log('does just asking about circles fuck me up', circles);
-	//   // console.log('what about the sim', simulation);
-	//   // console.log('localCircles re-derived. How many circles do we already have, vs how many do we want?', circles.length, numberOfCircles);
-
-	//   return Array.from({length: numberOfCircles})
-	//     .map((_, i) => ({
-	//       r: i ? radius() : minWidth * 10,
-	//       vx: 50,
-	//       vy: 50,
-	//       // color: '#00ca8e',
-	//       color: nomadGreenScale(Math.random()),
-	//     }))
-
-	// })
-
-	let canvasElement: HTMLCanvasElement | null;
 
 	function initializeCircles() {
-		console.log('initializing circles');
 		localCircles = Array.from({ length: numberOfCircles }).map((_, i) => ({
 			r: i ? radius() : minWidth * 10,
-			x: 0,
-			y: 0,
-			// vx: 50,
-			// vy: 50,
-			// color: '#00ca8e',
+			x: width / 2,
+			y: height / 2,
 			color: nomadGreenScale(Math.random())
 		}));
 	}
-
-	// function initializeCircles() {
-	//   const k = circleSize;
-	//   const r = d3.randomUniform(k, k * 4);
-	//   const n = 2;
-
-	//   localCircles = Array.from({length: numberOfCircles})
-	//     .map((_, i) => ({
-	//       r: r(),
-	//       x: 0,
-	//       y: 0,
-	//       color: '#00ca8e',
-	//     }))
-	// }
 
 	function ticked() {
 		circles = [...localCircles];
 	}
 
-	let repulsion = $state(1);
+	let repulsion = $state(2);
 
 	function appendCircles(circles) {
 		circles.forEach((c) => {
@@ -106,10 +73,19 @@
 		circles = [...localCircles];
 	}
 
-  let iterations = $derived.by(() => {
+  let performanceIterations = $derived.by(() => {
     return Math.round(d3
       .scaleLinear()
       .domain([2000, 5000]).range([3, 1])(numberOfCircles));
+  })
+
+  // When height/width change, re-centre the graph
+
+  let centeringStrength = $state(0.01);
+  $effect(() => {
+    if (!simulation) return;
+    simulation.force('x', d3.forceX(width / 2).strength((_, i) => (!i ? 0 : centeringStrength)))
+    simulation.force('y', d3.forceY(height / 2).strength((_, i) => (!i ? 0 : centeringStrength)))
   })
 
 	function simulate() {
@@ -143,22 +119,23 @@
 			.velocityDecay(0.1)
 			.force(
 				'x',
-				d3.forceX(width / 2).strength((_, i) => (!i ? 0 : 0.01))
+				d3.forceX(width / 2).strength((_, i) => (!i ? 0 : centeringStrength))
 			)
 			.force(
 				'y',
-				d3.forceY(height / 2).strength((_, i) => (!i ? 0 : 0.01))
+				d3.forceY(height / 2).strength((_, i) => (!i ? 0 : centeringStrength))
 			)
 			.force(
 				'collide',
 				d3
 					.forceCollide()
 					.radius((d) => d.r + repulsion)
-					.iterations(iterations)
+					.iterations(performanceIterations)
+          .strength(1)
 			)
 			.force(
-				'charge',
-				d3.forceManyBody().strength((d, i) => (i ? 0 : (-width * (2 * repulsion)) / 10))
+				'mouseRepulsion',
+				d3.forceManyBody().strength((d, i) => (i ? 0 : -200 * repulsion))
 			)
 			.on('tick', () => {
 				ticked();
@@ -167,73 +144,21 @@
 
 	onMount(() => {
 		initializeCircles();
-
-		// set each localcircle position to 50 50
-		localCircles.forEach((c) => {
-			c.x = width / 2;
-			c.y = height / 2;
-		});
-
 		simulate();
-		// simulation = d3.forceSimulation(localCircles)
-		//   .alphaTarget(0.3)
-		//   .velocityDecay(0.1)
-		//   .force("x", d3.forceX(width / 2).strength(0.01))
-		//   .force("y", d3.forceY(height / 2).strength(0.01))
-		//   .force("collide", d3.forceCollide().radius(d => d.r + 1).iterations(3))
-		//   .force("charge", d3.forceManyBody().strength((d, i) => i ? 0 : -width * 2 / 10))
-		//   .on('tick', () => {
-		//     circles = [...localCircles];
-		//     ticked();
-		//   })
 	});
 
 	onDestroy(() => {
 		if (simulation) simulation.stop();
 	});
-	//   $effect(() => {
-	//     const deps = [width, height, repulsion, repulsion];
-	//     console.log('effect', deps);
-
-	//     simulate();
-	//   // // Track these explicitly so the effect knows to update
-	//   // const w = width;
-	//   // const h = height;
-	//   // const rep = repulsion;
-
-	//   // // Only update forces if simulation exists and dimensions are valid
-	//   // if (!simulation || w <= 0 || h <= 0) return;
-
-	//   // simulation
-	//   //   .force("x", d3.forceX<CircleNode>(w / 2).strength(0.01))
-	//   //   .force("y", d3.forceY<CircleNode>(h / 2).strength(0.01))
-	//   //   .force("collide", d3.forceCollide<CircleNode>().radius(d => d.r + rep).iterations(3))
-	//   //   .force("charge", d3.forceManyBody<CircleNode>().strength((d, i) => i ? 0 : -w * (2 * rep) / 10));
-
-	//   // simulation.alpha(1).restart();
-	// });
 </script>
 
 <svelte:window bind:innerHeight={height} bind:innerWidth={width} {onpointermove} />
+
 <Canvas
   {width}
   {height}
   bind:ctx={canvasContext}
 >
-<!-- <Canvas
-  {width}
-  {height}
-  on:mousemove={({ detail: { e, canvas } }) => {
-    followMouse(e, canvas);
-  }}
-  on:touchmove={({ detail: { e, canvas } }) => {
-    e.preventDefault();
-    followMouse(e, canvas);
-  }}
-  bind:canvasContext={canvasContext}
-> -->
-
-<!-- <Swarm nodes={circles} /> -->
   {#each circles as circle}
     <Circle midPoint={[circle.x, circle.y]} radius={circle.r} color={circle.color} />
   {/each}
@@ -241,7 +166,7 @@
 
 <main>
   <header>
-    <h1>
+    <h1 aria-label="Nomad">
       <svg viewBox="0 0 1806.58 629.99" xmlns="http://www.w3.org/2000/svg">
         <path
           class="letter-n"
@@ -264,31 +189,42 @@
           d="M1498.79,106.79c0-10.8,6-16.8,16.8-16.8h123.6c142.8,0,141.6,94.8,142.2,104.4.6,13.2,1.2,42.6,1.2,43.8v123.6c0,1.2.6,24.6-1.2,37.8-1.2,9.6,1.2,110.4-142.2,110.4h-140.4c.6,0,0-324.6,0-403.2ZM1642.19,409.79c28.8-.6,28.8-25.2,28.8-25.2v-169.2s0-25.2-28.8-25.8h-24c-3.6,0-6,2.4-6,6v214.2c0,1.2,12.6,0,30,0Z"
         />
       </svg>
-      zzz{height}, {width}yyy
-      <br />
-      aaa{mouseX}, {mouseY}bbb
-      <br />
-      {iterations}
     </h1>
   </header>
-  <input
-    type="range"
-    bind:value={numberOfCircles}
-    min="10"
-    max="5000"
-    onchange={simulate}
-  />
-  {numberOfCircles}
-  <hr />
-  Repulsion:
-  <input
-    type="range"
-    bind:value={repulsion}
-    min="1"
-    max="10"
-    onchange={simulate}
-  />
-  {repulsion}
-  <hr />
-  <slot />
+  <section class="meta">
+    <div>
+      h/w: {height}, {width}
+    </div>
+    <div>
+      mouse: {mouseX.toFixed(0)}, {mouseY.toFixed(0)}
+    </div>
+    <div>
+      perf iters: {performanceIterations}
+    </div>
+    <hr />
+    Num Circles:<br />
+    <input
+      type="range"
+      bind:value={numberOfCircles}
+      min="10"
+      max="5000"
+      onchange={simulate}
+    />
+    {numberOfCircles}
+    <hr />
+    Repulsion:<br />
+    <input
+      type="range"
+      bind:value={repulsion}
+      min="1"
+      max="10"
+      onchange={simulate}
+    />
+    {repulsion}
+
+  </section>
+
+  <section class="page">
+    <slot />
+  </section>
 </main>

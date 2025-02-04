@@ -8,12 +8,10 @@
   // let ctx: CanvasRenderingContext2D | null; // TODO: might have to make this state
   let { ctx = $bindable(), width, height } = $props();
   
-  // let width: number = $state(0);
-  // let height: number = $state(0);
   let reDraw = true;
   let memo: any;
 
-  $inspect({width, height});
+  // $inspect({width, height});
 
   // Using Svelte 5's state management
   let fnsToDraw: $state = [];
@@ -70,7 +68,7 @@
     click: MouseEvent;
   }>();
 </script>
-ddd{width}, {height}
+<!-- ddd{width}, {height} -->
 <canvas
   {width}
   {height}

@@ -14,8 +14,6 @@
   <textarea>{release.body}</textarea>
 {/each} -->
 
-<hr />
-
 <!-- <h1>Files</h1>
 {#each data.files as file}
   <h2>{file.file}</h2>
