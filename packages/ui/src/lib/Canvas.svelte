@@ -1,15 +1,19 @@
 <script lang="ts">
   import { getContext, setContext, onDestroy, onMount, createEventDispatcher } from "svelte";
+
   // import { derived, type Signal } from "svelte";
 
   let canvasElement: HTMLCanvasElement;
   let frameId: number;
-  let ctx: CanvasRenderingContext2D | null;
+  // let ctx: CanvasRenderingContext2D | null; // TODO: might have to make this state
+  let { ctx = $bindable(), width, height } = $props();
   
-  export let width: number;
-  export let height: number;
-  export let reDraw = true;
-  export let memo: any;
+  // let width: number = $state(0);
+  // let height: number = $state(0);
+  let reDraw = true;
+  let memo: any;
+
+  $inspect({width, height});
 
   // Using Svelte 5's state management
   let fnsToDraw: $state = [];
@@ -66,7 +70,7 @@
     click: MouseEvent;
   }>();
 </script>
-
+ddd{width}, {height}
 <canvas
   {width}
   {height}
