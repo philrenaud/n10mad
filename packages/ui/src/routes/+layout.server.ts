@@ -1,5 +1,5 @@
 import { error } from '@sveltejs/kit';
-import type { PageLoad } from './$types';
+import type { LayoutServerLoad } from './$types';
 import releases from '../../../../data/releases.json';
 import files from '../../../../data/files.json';
 import contributors from '../../../../data/contributors.json';
@@ -22,11 +22,12 @@ const filesMap = files.map((f) => {
   }
 });
 
-export const load: PageLoad = async () => {
+// export const load: PageLoad = async () => {
+export const load: LayoutServerLoad = async () => {
   return {
     releases: releases.data,
-    files: filesMap,
-    contributors: contributors,
-    stars: stars,
+    // files: filesMap,
+    // contributors: contributors,
+    // stars: stars,
   }
 }

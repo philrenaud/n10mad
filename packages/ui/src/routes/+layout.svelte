@@ -5,6 +5,14 @@
 	import Circle from '$lib/Circle.svelte';
 	import * as d3 from 'd3';
 
+	import type { LayoutProps } from './$types';
+
+	let { data, children }: LayoutProps = $props();
+  console.log('ok data from layout', data, children);
+
+  // Set up app state for a "data" value
+
+
 	let width = $state(500);
 	let height = $state(500);
 
@@ -153,6 +161,9 @@
 </script>
 
 <svelte:window bind:innerHeight={height} bind:innerWidth={width} {onpointermove} />
+<svelte:head>
+  <title>NOMAD@10</title>
+</svelte:head>
 
 <Canvas
   {width}

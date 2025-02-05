@@ -26,6 +26,7 @@ canvas {
 }
 
 main {
+  overflow: auto;
   position: relative;
   background: #ffe;
   border: 2rem solid rgba(0,0,0,0.2);
@@ -36,9 +37,18 @@ main {
     max-width: 80%;
     margin: 0 auto;
     position: relative;
+    /* background-color: #fff; */
+    z-index: 2;
     h1 {
-      display: grid;
+      /* display: grid; */
       z-index: 1;
+      margin: 0;
+    }
+  }
+
+  &.data-loaded {
+    header {
+      max-width: 30%;
     }
   }
 }
@@ -60,3 +70,12 @@ main {
   margin: 0 auto;
   max-width: 80%;
 }
+
+/* Print media query that sets things in standard document ratio */
+/* 
+@media print {
+  main {
+    max-width: 100%;    
+  }
+}
+*/
