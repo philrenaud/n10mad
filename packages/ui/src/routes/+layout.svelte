@@ -3,9 +3,14 @@
 	import { onDestroy, onMount } from 'svelte';
 	import Canvas from '$lib/Canvas.svelte';
 	import Circle from '$lib/Circle.svelte';
+	import { page } from '$app/state';
 	import * as d3 from 'd3';
 
 	import type { LayoutProps } from './$types';
+
+  // Check for a ?meta=true query param
+  let meta: boolean = $state(false);
+  meta = page.url.searchParams.get('meta') === 'true';
 
 	let { data, children }: LayoutProps = $props();
   console.log('ok data from layout', data, children);
@@ -112,7 +117,7 @@
 				);
 
 				// Cool the simulation slightly so they're not insane mode
-				alpha = 0.9;
+				alpha = 0.3;
 
 				appendCircles(newCircles);
 			} else {
@@ -202,38 +207,41 @@
       </svg>
     </h1>
   </header>
-  <section class="meta">
-    <div>
-      h/w: {height}, {width}
-    </div>
-    <div>
-      mouse: {mouseX.toFixed(0)}, {mouseY.toFixed(0)}
-    </div>
-    <div>
-      perf iters: {performanceIterations}
-    </div>
-    <hr />
-    Num Circles:<br />
-    <input
-      type="range"
-      bind:value={numberOfCircles}
-      min="10"
-      max="5000"
-      onchange={simulate}
-    />
-    {numberOfCircles}
-    <hr />
-    Repulsion:<br />
-    <input
-      type="range"
-      bind:value={repulsion}
-      min="1"
-      max="10"
-      onchange={simulate}
-    />
-    {repulsion}
 
-  </section>
+  {#if meta}
+    <section class="meta">
+      <div>
+        h/w: {height}, {width}
+      </div>
+      <div>
+        mouse: {mouseX.toFixed(0)}, {mouseY.toFixed(0)}
+      </div>
+      <div>
+        perf iters: {performanceIterations}
+      </div>
+      <hr />
+      Num Circles:<br />
+      <input
+        type="range"
+        bind:value={numberOfCircles}
+        min="10"
+        max="5000"
+        onchange={simulate}
+      />
+      {numberOfCircles}
+      <hr />
+      Repulsion:<br />
+      <input
+        type="range"
+        bind:value={repulsion}
+        min="1"
+        max="10"
+        onchange={simulate}
+      />
+      {repulsion}
+
+    </section>
+  {/if}
 
   <section class="page">
     <slot />
