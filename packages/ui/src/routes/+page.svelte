@@ -7,17 +7,6 @@
   console.log('page', page);
 </script>
 
-<h2>Explore Data</h2>
-<p class="intro">
-  Nomad has been around for ten years. Explore the data:
-  <button onclick={(e) => console.log(e)}>Releases</button>
-</p>
-
-<h2>Releases</h2>
-<p>
-  Nomad has seen {data.releases.length} releases since its inception in 2015.
-</p>
-
 <div style="height: 1600px; background: rgba(0,0,0,0.1);">
   Testing a pretty long one
 </div>
