@@ -140,6 +140,16 @@
 	const oTop = $derived(oBounds?.top);
 	const oBottom = $derived(oBounds?.bottom);
 
+  let cachedNPoints = [];
+  let cachedOPoints = [];
+
+  $effect(() => {
+    if (letterN && letterO) {
+      cachedNPoints = letterNPoints;
+      cachedOPoints = letterOPoints;
+    }
+  });
+
 	const letterNPoints = $derived.by(() => {
     console.log('---letterNPoints Calc');
 		return Array.from({ length: numberOfCircles }).map((_, i) => {
@@ -316,7 +326,7 @@
 			.force('y', null)
 			.force('collide', null)
 			.force('mouseRepulsion', null)
-			.force('toTarget', d3.forceRadial(0, 0, 0).strength(0)); // placeholder, will tween in a sec
+			// .force('toTarget', d3.forceRadial(0, 0, 0).strength(0)); // placeholder, will tween in a sec
 		// remove mouseRepulsion
 		// .force('mouseRepulsion', null)
 		// .force('boundingForce', hoveredProps.boundingForce(simulation))
@@ -324,14 +334,14 @@
 		// .force('coverTitle2', hoveredProps.force2)
 
     const oCircleThreshold = 0.3;
-    console.log("before I begin, ", letterNPoints.length, letterOPoints.length, letterOPoints[300]);
 
 		localCircles.forEach((c, i) => {
+      d3.select(c).interrupt();
       let targetPoint;
       if (i < numberOfCircles * oCircleThreshold) {
-        targetPoint = letterNPoints[i];
+        targetPoint = cachedNPoints[i];
       } else {
-        targetPoint = letterOPoints[i];
+        targetPoint = cachedOPoints[i];
       }
 			if (!targetPoint) return; // in case I screw up my math (likely)
 			d3.select(c)
@@ -353,6 +363,9 @@
 					};
 				});
 
+      // c.x = targetPoint.x;
+      // c.y = targetPoint.y;
+
 			// c.r = 0;
 			// d3.select(c)
 		});
@@ -362,7 +375,7 @@
 	function unhoverTitle(e: PointerEvent) {
 		console.log('unhoverTitle', e);
 		titleHovered = false;
-
+    d3.selectAll('circle').interrupt();
 		simulate();
 	}
 	// $inspect({titleHovered});
