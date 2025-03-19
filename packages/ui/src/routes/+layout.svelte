@@ -64,7 +64,31 @@
 		.domain([0, 1])
 		.range([d3.hsl(nomadGreen).darker(0.5), d3.hsl(nomadGreen).brighter(0.5)]);
 
+	const borderColor = 'rgba(0,0,0,0.3)';
+	const borderWidth = 0.5;
+
 	let canvasContext: CanvasRenderingContext2D | null = $state(null);
+
+  const gooeyFilter = () => {
+    const svg = `<svg xmlns="http://www.w3.org/2000/svg">
+    <filter id="gooey">
+      <feGaussianBlur in="SourceGraphic" stdDeviation="8" color-interpolation-filters="sRGB" result="blur" />
+      <feColorMatrix class="blurValues" in="blur" mode="matrix" values=".2 0 0 0 0  0 .2 0 0 0  0 0 .2 0 0  0 0 0 17 -5" result="goo" />
+			<feBlend in2="goo" in="SourceGraphic" result="mix" />
+    </filter>
+  </svg>`;
+	// <feComposite in="SourceGraphic" in2="goo" operator="xor" result="comp" />
+	// <feBlend in="comp" in2="SourceGraphic" mode="multiply" result="mix" />
+
+
+    const blob = new Blob([svg], { type: 'image/svg+xml' });
+    const url = URL.createObjectURL(blob);
+    const filter = `url('${url}#gooey')`;
+    console.log(filter);
+    console.log(url);
+    return filter;
+  }
+
 
 	function onpointermove(e: PointerEvent) {
 		canvasContext?.clearRect(0, 0, width, height);
@@ -96,7 +120,10 @@
 			r: i ? radius() : minWidth * 10,
 			x: width / 2,
 			y: height / 2,
-			color: nomadGreenScale(Math.random())
+			color: nomadGreenScale(Math.random()),
+			borderColor,
+			borderWidth,
+			// color: '#00ca8e',
 			// color: d3.color(nomadGreenScale(Math.random()))?.formatRgb()
 			// .replace('rgb', 'rgba')
 			// .replace(')', ', 0.6)'),
@@ -239,8 +266,8 @@
 		);
 	});
 
-	function simulate() {
-		let alpha = 0.1;
+	function simulate(props: {alpha?: number} = {}) {
+		let alpha = props.alpha || 0.1;
 		if (localCircles.length !== numberOfCircles) {
 			// Remove or add circles according to the difference
 			if (localCircles.length && localCircles.length < numberOfCircles) {
@@ -249,7 +276,10 @@
 						r: radius(),
 						x: width / 2,
 						y: height / 2,
-						color: nomadGreenScale(Math.random())
+						color: nomadGreenScale(Math.random()),
+						borderColor,
+						borderWidth,
+						// color: '#00ca8e',
 					})
 				);
 				appendCircles(newCircles);
@@ -318,6 +348,7 @@
 
 	function hoverTitle(e: PointerEvent) {
 		titleHovered = true;
+		canvasContext.canvas.style.filter = gooeyFilter();
 		simulation
 			.alpha(hoveredProps.alpha)
 			.alphaTarget(hoveredProps.alphaTarget)
@@ -346,8 +377,8 @@
 			if (!targetPoint) return; // in case I screw up my math (likely)
 			d3.select(c)
 				.transition()
-				.duration(i * 0.5 + 50)
-				.ease(d3.easeCubicInOut)
+				.duration(i * 1 + 1250)
+				.ease(d3.easeElastic)
 				.tween('position', () => {
 					const startPoint = {
 						x: c.x,
@@ -357,6 +388,8 @@
 					// console.log(i, 'SP TP', startPoint, targetPoint);
 
 					return (t: number) => {
+            // If no longer hovering, break.
+            if (!titleHovered) return;
 						c.x = startPoint.x + (targetPoint.x - startPoint.x) * t;
 						c.y = startPoint.y + (targetPoint.y - startPoint.y) * t;
 						// c.r = 1;
@@ -375,11 +408,97 @@
 	function unhoverTitle(e: PointerEvent) {
 		console.log('unhoverTitle', e);
 		titleHovered = false;
+		canvasContext.canvas.style.filter = '';
     d3.selectAll('circle').interrupt();
 		simulate();
 	}
 	// $inspect({titleHovered});
 	// #endregion title interaction
+
+  //#region hover data source
+
+  const dataHoveredProps = {
+		alpha: 0.1,
+		velocityDecay: 0.4,
+		alphaTarget: 0.2
+  }
+  function hoverDataSource(e: PointerEvent) {
+    console.log('hoverDataSource', e);
+		canvasContext.canvas.style.filter = gooeyFilter();
+    const midPoint = [e.target.getBoundingClientRect().left + e.target.getBoundingClientRect().width / 2, e.target.getBoundingClientRect().top + e.target.getBoundingClientRect().height / 2];
+    console.log('midPoint', midPoint);
+    // Strongly attract all nodes to the srcElement's position
+
+    // Chop off half the circles
+    localCircles = localCircles.slice(0, numberOfCircles / 10);
+    // localCircles.slice(numberOfCircles / 5, numberOfCircles).forEach((c) => {
+    //   c.r = 0;
+    // });
+    simulation
+      .alpha(dataHoveredProps.alpha)
+			.alphaTarget(dataHoveredProps.alphaTarget)
+			.velocityDecay(dataHoveredProps.velocityDecay)
+      .force('x', null)
+      .force('y', null)
+      // .force('collide', null)
+			// .force(
+			// 	'collide',
+			// 	d3
+			// 		.forceCollide()
+			// 		.radius(1.5)
+			// 		.iterations(performanceIterations)
+			// 		.strength(0.5)
+			// )
+      // .force('mouseRepulsion', null)
+      // .force('data', d3.forceRadial(20, midPoint[0], midPoint[1]).strength(0.9))
+      .force('dataX', d3.forceX(midPoint[0]).strength(1))
+      .force('dataY', d3.forceY(midPoint[1]).strength(2));
+      // .force('dataX', d3.forceX(e.clientX).strength(0.5))
+      // .force('dataY', d3.forceY(e.clientY).strength(0.5));
+
+    simulation.force('collide').strength(0.2);
+    // simulation.force('mouseRepulsion').strength(-1)
+    simulation
+    // .alpha(0.001)
+    // .velocityDecay(0.01)
+    // .alphaTarget(0.001)
+    .force(
+				'mouseRepulsion',
+				d3.forceManyBody().strength((d, i) => (i ? -10 : -1 * repulsion))
+			)
+
+    
+    // localCircles.forEach((c) => {
+      // c.r = 1;
+      // c.color = '#00ca8e';
+    // });
+
+    // localCircles.forEach((c, i) => {
+    //   d3.select(c).interrupt();
+    //   d3.select(c)
+    //     .transition()
+    //     .duration(50)
+    //     .ease(d3.easeCubicInOut)
+    //     .tween('r', () => {
+    //       const startR = c.r;
+    //       const endR = 0.5;
+    //       return (t: number) => {
+    //         c.r = startR + (endR - startR) * t;
+    //       };
+    //     });
+    // });
+
+  }
+  function unhoverDataSource(e: PointerEvent) {
+    console.log('unhoverDataSource', e);
+		canvasContext.canvas.style.filter = '';
+    simulation.alpha(0.1);
+    localCircles.slice(1).forEach((c) => {
+      c.r = radius();
+    });
+    simulate({alpha: 0.5});
+  }
+  //#endregion hover data source
 </script>
 
 <svelte:window bind:innerHeight={height} bind:innerWidth={width} {onpointermove} />
@@ -389,7 +508,7 @@
 
 <Canvas {width} {height} bind:ctx={canvasContext}>
 	{#each circles as circle}
-		<Circle midPoint={[circle.x, circle.y]} radius={circle.r} color={circle.color} />
+		<Circle midPoint={[circle.x, circle.y]} radius={circle.r} color={circle.color} borderColor={circle.borderColor} borderWidth={circle.borderWidth} />
 	{/each}
 </Canvas>
 
@@ -403,39 +522,47 @@
 			onblur={unhoverTitle}
 			class:hovered={titleHovered}
 		>
-			<svg viewBox="24 79 1759 443" xmlns="http://www.w3.org/2000/svg">
-				<path
-					bind:this={letterN}
-					class="letter-n"
-					d="M205.8,498.59l-67.8-153c-2.4-6-7.2-4.2-7.2,1.8l2.4,145.8c0,11.4-6,16.8-16.8,16.8H40.8c-10.8,0-16.8-6-16.8-16.8V106.79c0-10.8,6-16.8,16.8-16.8h84c9.6,0,15.6,4.2,19.2,12.6l66,153c2.4,6,7.2,4.8,7.2-1.2V106.79c0-10.8,6-16.8,16.8-16.8h75.6c10.8,0,16.8,5.4,16.8,16.8l-.6,387c0,11.4-6,16.8-16.8,16.8l-84,.6c-9.6,0-15.6-3.6-19.2-12.6Z"
-				/>
-				<path
-					bind:this={letterO}
-					class="letter-o"
-					d="M375.6,410.99c-1.2-11.4-1.2-40.2-1.2-39v-143.4c0,1.2,0-27.6,1.2-39,2.4-14.4-.6-110.4,139.8-110.4s139.2,100.8,140.4,110.4c1.2,13.2,1.2,39,1.2,37.8v145.8c0-1.2,0,24.6-1.2,37.8-1.2,9.6,1.2,110.4-140.4,110.4s-137.4-96-139.8-110.4ZM514.8,422.39c28.8-.6,28.8-26.4,28.8-26.4v-191.4s0-26.4-28.8-26.4c-25.8,0-27,26.4-27,26.4v191.4s1.2,27,27,26.4Z"
-				/>
-				<path
-					class="letter-m"
-					d="M721.8,89.99h90.6c9.6,0,15.6,4.8,19.2,13.2l51.6,123c1.8,4.8,6.6,4.8,8.4,0l51.6-123c3.6-8.4,9.6-13.2,19.2-13.2h90.6c10.8,0,16.8,6,16.8,16.8v386.4c0,10.8-6,16.8-16.8,16.8h-76.8c-10.8,0-16.8-6-16.8-16.8v-157.2c0-5.4-4.8-6.6-6.6-1.2l-25.2,65.4c-3.6,9-10.2,13.2-19.8,13.2h-40.8c-9.6,0-16.2-4.2-19.8-13.2l-25.2-65.4c-1.8-5.4-6.6-4.2-6.6,1.2v157.2c0,10.8-6,16.8-16.8,16.8h-76.8c-10.8,0-16.8-6-16.8-16.8V106.79c0-10.8,6-16.8,16.8-16.8Z"
-				/>
-				<path
-					class="letter-a"
-					d="M1111.19,491.39l105.6-387c2.4-9.6,9.6-14.4,19.2-14.4h96.6c9.6,0,16.8,4.8,19.2,14.4l105.6,387c3,12-2.4,18.6-14.4,18.6h-76.2c-9.6,0-15.6-4.8-18.6-13.8l-7.2-25.2c-1.2-3-3.6-4.8-7.2-4.8h-99c-3.6,0-6,1.8-7.2,4.8l-7.2,25.2c-3,9-9,13.8-18.6,13.8h-76.2c-12,0-17.4-6.6-14.4-18.6ZM1258.19,367.79h51.6c4.2,0,6.6-2.4,5.4-6.6l-28.2-106.8c-1.2-5.4-6-6-7.2,0l-26.4,106.8c-1.2,4.2.6,6.6,4.8,6.6Z"
-				/>
-				<path
-					bind:this={letterD}
-					class="letter-d"
-					d="M1498.79,106.79c0-10.8,6-16.8,16.8-16.8h123.6c142.8,0,141.6,94.8,142.2,104.4.6,13.2,1.2,42.6,1.2,43.8v123.6c0,1.2.6,24.6-1.2,37.8-1.2,9.6,1.2,110.4-142.2,110.4h-140.4c.6,0,0-324.6,0-403.2ZM1642.19,409.79c28.8-.6,28.8-25.2,28.8-25.2v-169.2s0-25.2-28.8-25.8h-24c-3.6,0-6,2.4-6,6v214.2c0,1.2,12.6,0,30,0Z"
-				/>
-			</svg>
+      <a href="/">
+        <svg viewBox="24 79 1759 443" xmlns="http://www.w3.org/2000/svg">
+          <path
+            bind:this={letterN}
+            class="letter-n"
+            d="M205.8,498.59l-67.8-153c-2.4-6-7.2-4.2-7.2,1.8l2.4,145.8c0,11.4-6,16.8-16.8,16.8H40.8c-10.8,0-16.8-6-16.8-16.8V106.79c0-10.8,6-16.8,16.8-16.8h84c9.6,0,15.6,4.2,19.2,12.6l66,153c2.4,6,7.2,4.8,7.2-1.2V106.79c0-10.8,6-16.8,16.8-16.8h75.6c10.8,0,16.8,5.4,16.8,16.8l-.6,387c0,11.4-6,16.8-16.8,16.8l-84,.6c-9.6,0-15.6-3.6-19.2-12.6Z"
+          />
+          <path
+            bind:this={letterO}
+            class="letter-o"
+            d="M375.6,410.99c-1.2-11.4-1.2-40.2-1.2-39v-143.4c0,1.2,0-27.6,1.2-39,2.4-14.4-.6-110.4,139.8-110.4s139.2,100.8,140.4,110.4c1.2,13.2,1.2,39,1.2,37.8v145.8c0-1.2,0,24.6-1.2,37.8-1.2,9.6,1.2,110.4-140.4,110.4s-137.4-96-139.8-110.4ZM514.8,422.39c28.8-.6,28.8-26.4,28.8-26.4v-191.4s0-26.4-28.8-26.4c-25.8,0-27,26.4-27,26.4v191.4s1.2,27,27,26.4Z"
+          />
+          <path
+            class="letter-m"
+            d="M721.8,89.99h90.6c9.6,0,15.6,4.8,19.2,13.2l51.6,123c1.8,4.8,6.6,4.8,8.4,0l51.6-123c3.6-8.4,9.6-13.2,19.2-13.2h90.6c10.8,0,16.8,6,16.8,16.8v386.4c0,10.8-6,16.8-16.8,16.8h-76.8c-10.8,0-16.8-6-16.8-16.8v-157.2c0-5.4-4.8-6.6-6.6-1.2l-25.2,65.4c-3.6,9-10.2,13.2-19.8,13.2h-40.8c-9.6,0-16.2-4.2-19.8-13.2l-25.2-65.4c-1.8-5.4-6.6-4.2-6.6,1.2v157.2c0,10.8-6,16.8-16.8,16.8h-76.8c-10.8,0-16.8-6-16.8-16.8V106.79c0-10.8,6-16.8,16.8-16.8Z"
+          />
+          <path
+            class="letter-a"
+            d="M1111.19,491.39l105.6-387c2.4-9.6,9.6-14.4,19.2-14.4h96.6c9.6,0,16.8,4.8,19.2,14.4l105.6,387c3,12-2.4,18.6-14.4,18.6h-76.2c-9.6,0-15.6-4.8-18.6-13.8l-7.2-25.2c-1.2-3-3.6-4.8-7.2-4.8h-99c-3.6,0-6,1.8-7.2,4.8l-7.2,25.2c-3,9-9,13.8-18.6,13.8h-76.2c-12,0-17.4-6.6-14.4-18.6ZM1258.19,367.79h51.6c4.2,0,6.6-2.4,5.4-6.6l-28.2-106.8c-1.2-5.4-6-6-7.2,0l-26.4,106.8c-1.2,4.2.6,6.6,4.8,6.6Z"
+          />
+          <path
+            bind:this={letterD}
+            class="letter-d"
+            d="M1498.79,106.79c0-10.8,6-16.8,16.8-16.8h123.6c142.8,0,141.6,94.8,142.2,104.4.6,13.2,1.2,42.6,1.2,43.8v123.6c0,1.2.6,24.6-1.2,37.8-1.2,9.6,1.2,110.4-142.2,110.4h-140.4c.6,0,0-324.6,0-403.2ZM1642.19,409.79c28.8-.6,28.8-25.2,28.8-25.2v-169.2s0-25.2-28.8-25.8h-24c-3.6,0-6,2.4-6,6v214.2c0,1.2,12.6,0,30,0Z"
+          />
+        </svg>
+      </a>
 		</h1>
 		<h2>Explore Data</h2>
 		<p class="intro">
 			Nomad has been around for ten years. Explore the data:
 			<!-- <button onclick={(e) => console.log(e)}>Releases</button> -->
-			<a href="/releases">Releases</a>
 		</p>
-	</header>
+    <nav>
+      <a onmouseover={hoverDataSource} onmouseout={unhoverDataSource} href="/releases">Releases</a>
+      <a onmouseover={hoverDataSource} onmouseout={unhoverDataSource} href="/files">Files</a>
+      <a onmouseover={hoverDataSource} onmouseout={unhoverDataSource} href="/contributors">Contributors</a>
+      <a onmouseover={hoverDataSource} onmouseout={unhoverDataSource} href="/stars">Stars</a>
+
+    </nav>
+</header>
 
 	{#if meta}
 		<section class="meta">
@@ -460,6 +587,9 @@
 	{/if}
 
 	<section class="page">
-		{@render children()}
+		{@render children({
+      hoverDataSource,
+      unhoverDataSource
+    })}
 	</section>
 </main>

@@ -26,8 +26,8 @@ const filesMap = files.map((f) => {
 export const load: LayoutServerLoad = async () => {
   return {
     releases: releases.data,
-    // files: filesMap,
-    // contributors: contributors,
-    // stars: stars,
+    files: filesMap,
+    contributors: contributors,
+    stars: stars,
   }
 }

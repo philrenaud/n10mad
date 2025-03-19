@@ -30,6 +30,7 @@
 
   onMount(() => {
     ctx = canvasElement?.getContext("2d");
+    // ctx.canvas.style.filter = 'blur(20px)';
     frameId = requestAnimationFrame(() => draw(ctx));
   });
 

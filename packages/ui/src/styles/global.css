@@ -51,6 +51,25 @@ main {
         z-index: 1;
       }
     }
+
+    nav {
+      /* background-color: rgba(0,0,0,0.2); */
+      display: grid;
+      gap: 1rem;
+      grid-auto-flow: column;
+      a {
+        display: block;
+        padding: 0.5rem 1rem;
+        background-color: black;
+        border-radius: 0.5rem;
+        text-decoration: none;
+        color: white;
+        font-family: 'VaultAlarm', sans-serif;
+        text-align: center;
+      }
+      position: relative;
+      z-index: 2;
+    }
   }
 
   &.data-loaded {
@@ -86,3 +105,20 @@ main {
   }
 }
  */
+
+
+ /* TODO: testground */
+
+ /* .viz {
+  display: grid;
+  gap: 0;
+  grid-template-columns: repeat(100, 1fr);
+  position: relative;
+  height: 600px;
+  width: 100%;
+  background-color: rgba(0,0,0,0.2);
+  .data-point {
+    transform: rotate(-45deg);
+    transform-origin: left top;
+  }
+ } */
