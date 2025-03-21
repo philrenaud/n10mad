@@ -1,35 +1,39 @@
 <script lang="ts">
   import { page } from '$app/state';
-  let { data } = $props();
+  import type { PageProps } from './$types';
+  import ChartContainer from '$lib/components/chart/ChartContainer.svelte';
+	let { data }: PageProps = $props();
 
-  console.log('data', data);
-  console.log('page', page);
-
-  function hoverDataSource(release) {
-    console.log('hovering', release);
-  }
-
-  function unhoverDataSource() {
-    console.log('unhovering');
-  }
+  let chartWidth: number = $state(600);
+  let chartHeight: number = $state(400);
 </script>
-<h2>Releases</h2>
-<p>
-  Nomad has seen {data.releases.length} releases since its inception in 2015.
-</p>
 
+<style>
+  #container {
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    display: grid;
+    grid-template-rows: auto 1fr;
+  }
+</style>
 
-<div>
-  <h3>Hypothetical data viz</h3>
-  <div class="viz">
-    {#each data.releases as release}
-      <div class="data-point"
-      onmouseover={hoverDataSource}
-      onmouseout={unhoverDataSource}
-      >
-        <h4>{release.name}</h4>
-        <p>{release.body.length} chars</p>
-      </div>
-    {/each}
-  </div>
+<div id="container">
+  {#await data}
+    Loading...
+  {:then}
+    <header>
+      <h2>Releases</h2>
+      <p>
+        Nomad has seen {data.releases.length} releases since its inception in 2015.
+      </p>
+    </header>
+    <section class="main" bind:clientWidth={chartWidth} bind:clientHeight={chartHeight}>
+      <ChartContainer width={chartWidth} height={chartHeight} />
+    </section>
+  {:catch error}
+    <p>
+      Error loading data: {error}
+    </p>
+  {/await}
 </div>
