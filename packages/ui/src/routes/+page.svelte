@@ -7,6 +7,10 @@
   console.log('page', page);
 </script>
 
+<p class="intro">
+  Nomad has been around for ten years. Explore the data:
+</p>
+
 <div style="height: 1600px; background: rgba(0,0,0,0.1);">
   Testing a pretty long one
 </div>

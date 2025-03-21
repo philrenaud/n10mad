@@ -7,14 +7,14 @@
 	import * as d3 from 'd3';
 
 	import type { LayoutProps } from './$types';
-
+console.log('prepping layout');
 	// Check for a ?meta=true query param
 	let meta: boolean = $state(false);
 	meta = page.url.searchParams.get('meta') === 'true';
-
+console.time('layout');
 	let { data, children }: LayoutProps = $props();
 	console.log('ok data from layout', data, children);
-
+console.timeEnd('layout');
 	function pathToPoints(
 		pathElement: SVGPathElement,
 		numPoints: number = 32,
@@ -50,6 +50,7 @@
 	let height = $state(500);
 
 	let numberOfCircles = $state(1000);
+	// TODO: numberOfCircles, and circleSize, should be derived from mobile v desktop
 	let minWidth = 2;
 	// let circleSize = $derived.by(() => Math.max(minWidth, width / numberOfCircles / 2));
 	// ^--- perf nightmare
@@ -84,8 +85,6 @@
     const blob = new Blob([svg], { type: 'image/svg+xml' });
     const url = URL.createObjectURL(blob);
     const filter = `url('${url}#gooey')`;
-    console.log(filter);
-    console.log(url);
     return filter;
   }
 
@@ -177,8 +176,10 @@
     }
   });
 
+	// TODO: Resizeobserver was kind enough to let me know it was going really slowly, so I need to do a little perfy debouncing on letterNPoints and letterOPoints.
+
 	const letterNPoints = $derived.by(() => {
-    console.log('---letterNPoints Calc');
+    // console.log('---letterNPoints Calc');
 		return Array.from({ length: numberOfCircles }).map((_, i) => {
 			return {
 				x: Math.random() * (nRight - nLeft) + nLeft,
@@ -188,7 +189,7 @@
 	});
 
 	const letterOPoints = $derived.by(() => {
-    console.log('---letterOPoints Calc');
+    // console.log('---letterOPoints Calc');
 		if (!letterO || !oBounds) return [];
 
 		// Find the inner path start point using some real dark magic
@@ -207,7 +208,7 @@
 		const outerPoints = pathToPoints(letterO, 32, 0, innerStartIndex);
 		const innerPoints = pathToPoints(letterO, 32, innerStartIndex, length);
 
-    console.time('randomPoints');
+    // console.time('randomPoints');
     const randomPoints = [];
     while (randomPoints.length < numberOfCircles) {
       const x = Math.random() * (oRight - oLeft) + oLeft;
@@ -227,7 +228,7 @@
       }
     }
 
-    console.timeEnd('randomPoints');
+    // console.timeEnd('randomPoints');
     return randomPoints;
 	});
 
@@ -253,7 +254,7 @@
 
 	// When height/width change, re-centre the graph
 
-	let centeringStrength = $state(0.01);
+	let centeringStrength = $state(0.005);
 	$effect(() => {
 		if (!simulation) return;
 		simulation.force(
@@ -348,7 +349,7 @@
 
 	function hoverTitle(e: PointerEvent) {
 		titleHovered = true;
-		canvasContext.canvas.style.filter = gooeyFilter();
+		if (canvasContext?.canvas) canvasContext.canvas.style.filter = gooeyFilter();
 		simulation
 			.alpha(hoveredProps.alpha)
 			.alphaTarget(hoveredProps.alphaTarget)
@@ -408,7 +409,7 @@
 	function unhoverTitle(e: PointerEvent) {
 		console.log('unhoverTitle', e);
 		titleHovered = false;
-		canvasContext.canvas.style.filter = '';
+		if (canvasContext?.canvas) canvasContext.canvas.style.filter = '';
     d3.selectAll('circle').interrupt();
 		simulate();
 	}
@@ -424,7 +425,7 @@
   }
   function hoverDataSource(e: PointerEvent) {
     console.log('hoverDataSource', e);
-		canvasContext.canvas.style.filter = gooeyFilter();
+		if (canvasContext?.canvas) canvasContext.canvas.style.filter = gooeyFilter();
     const midPoint = [e.target.getBoundingClientRect().left + e.target.getBoundingClientRect().width / 2, e.target.getBoundingClientRect().top + e.target.getBoundingClientRect().height / 2];
     console.log('midPoint', midPoint);
     // Strongly attract all nodes to the srcElement's position
@@ -491,7 +492,7 @@
   }
   function unhoverDataSource(e: PointerEvent) {
     console.log('unhoverDataSource', e);
-		canvasContext.canvas.style.filter = '';
+		if (canvasContext?.canvas) canvasContext.canvas.style.filter = '';
     simulation.alpha(0.1);
     localCircles.slice(1).forEach((c) => {
       c.r = radius();
@@ -522,7 +523,7 @@
 			onblur={unhoverTitle}
 			class:hovered={titleHovered}
 		>
-      <a href="/">
+      <a href="/" aria-label="Nomad">
         <svg viewBox="24 79 1759 443" xmlns="http://www.w3.org/2000/svg">
           <path
             bind:this={letterN}
@@ -550,11 +551,6 @@
         </svg>
       </a>
 		</h1>
-		<h2>Explore Data</h2>
-		<p class="intro">
-			Nomad has been around for ten years. Explore the data:
-			<!-- <button onclick={(e) => console.log(e)}>Releases</button> -->
-		</p>
     <nav>
       <a onmouseover={hoverDataSource} onmouseout={unhoverDataSource} href="/releases">Releases</a>
       <a onmouseover={hoverDataSource} onmouseout={unhoverDataSource} href="/files">Files</a>
