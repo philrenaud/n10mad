@@ -85,7 +85,7 @@ main {
     position: relative;
     z-index: 3;
     /* margin: 0 10%; */
-    background-color: rgba(255, 255, 238, 0.5);
+    background-color: rgba(255, 255, 238, 0.8);
     border-top: 1px solid rgba(0, 0, 0, 0.4);
     /* frosted glass */
     backdrop-filter: blur(4px);

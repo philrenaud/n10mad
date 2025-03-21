@@ -15,6 +15,8 @@ but will probably end up block-levelling them if this gets much more complicated
   const props: {
     width: number;
     height: number;
+    yDomain: [number, number];
+    xDomain: [number, number];
   } = $props();
 
   let parentWidth: number = $derived(props.width);
@@ -34,21 +36,21 @@ but will probably end up block-levelling them if this gets much more complicated
 </style>
 
 <!-- <div class="chart-container"> -->
-  <slot />
   <svg>
     <VariableAxis 
       height={parentHeight}
       width={parentWidth}
-      domain={[0, 100]}
+      domain={props.yDomain}
       position="left"
       orientation="vertical"
     />
     <VariableAxis 
       height={parentHeight}
       width={parentWidth}
-      domain={[0, 100]}
+      domain={props.xDomain}
       position="bottom"
       orientation="horizontal"
     />
+    <slot />
   </svg>
 <!-- </div> -->
