@@ -378,8 +378,9 @@ console.timeEnd('layout');
 			if (!targetPoint) return; // in case I screw up my math (likely)
 			d3.select(c)
 				.transition()
-				.duration(i * 1 + 1250)
-				.ease(d3.easeElastic)
+				.delay(i * .2)
+				.duration(1000)
+				.ease(d3.easeCubicOut)
 				.tween('position', () => {
 					const startPoint = {
 						x: c.x,
