@@ -21,7 +21,7 @@
     : axisBottom(scale).tickSize(10)
   );
 
-  const padding = 50;
+  const padding = 80;
 
   let atlisTransform = $derived(
     orientation === 'vertical'
