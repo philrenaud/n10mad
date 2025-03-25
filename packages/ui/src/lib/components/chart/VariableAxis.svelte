@@ -7,11 +7,11 @@
   import { select } from 'd3';
   // import { scaleLinear } from 'd3';
 
-  let { height, width, domain, orientation, position } = $props();
+  let { height, width, domain, orientation, position, scale } = $props();
 
-  let scale = $derived(scaleLinear()
-    .domain(domain)
-    .range(orientation === 'vertical' ? [height - padding*2, 0] : [0, width - padding*2]));
+  // let scale = $derived(scaleLinear()
+  //   .domain(domain)
+  //   .range(orientation === 'vertical' ? [height - padding*2, 0] : [0, width - padding*2]));
 
   let axisElement: SVGGElement | null = $state(null);
 
@@ -25,8 +25,8 @@
 
   let atlisTransform = $derived(
     orientation === 'vertical'
-    ? `translate(${padding}, ${padding})`
-    : `translate(${padding}, ${height - padding})`
+    ? `translate(${padding}, 0)`
+    : `translate(0, ${height - padding})`
   );
 
   // let tickValues = $derived.by(() => {
@@ -44,6 +44,7 @@
     let tickSpacing = (orientation === 'vertical' ? height : width) / 50;
     let minNumTicks = 1;
     let maxNumTicks = 20;
+    console.log('scale', scale);
     let baseTickValues = scale.ticks(Math.max(minNumTicks, Math.min(maxNumTicks, tickSpacing)));
 
     // If the ceiling is not included (because it doesn't divide evenly with tickSpacing, say), add it
@@ -59,6 +60,7 @@
     }
 
     // Don't show the 0 ticks
+    // TODO: this is probably bad policy!
     if (baseTickValues.includes(0)) {
       baseTickValues = baseTickValues.filter(tick => tick !== 0);
     }

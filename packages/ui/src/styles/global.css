@@ -103,13 +103,18 @@ main {
 }
 
 /* Print media query that sets things in standard document ratio */
-/* 
+
 @media print {
   main {
     background-color: red;
+    header {
+      nav {
+        display: none;
+      }
+    }
   }
 }
- */
+
 
 
  /* TODO: testground */

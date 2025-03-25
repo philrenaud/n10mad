@@ -49,7 +49,7 @@
       </p>
     </header>
     <section class="main" bind:clientWidth={chartWidth} bind:clientHeight={chartHeight}>
-      <ChartContainer width={chartWidth} height={chartHeight} {yDomain} xDomain={[0,100]}>
+      <ChartContainer width={chartWidth} height={chartHeight} {yDomain} xDomain={[0,100]} {xScale} {yScale}>
         {#each data.releases as release, i}
           <circle
             r={radScale(release.body.length)}
@@ -59,6 +59,9 @@
             on:click={() => {
               console.log('release', release);
               window.open(release.html_url, '_blank');
+            }}
+            on:mouseenter={() => {
+              console.log('release', release);
             }}
           />
         {/each}

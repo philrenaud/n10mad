@@ -3,7 +3,7 @@
   import { goto } from '$app/navigation';
   import type { PageProps } from './$types';
   import ChartContainer from '$lib/components/chart/ChartContainer.svelte';
-  import { scaleLinear } from 'd3';
+  import { scaleLinear, scaleTime, type ScaleTime } from 'd3';
 	let { data }: PageProps = $props();
   let { stars } = data;
 
@@ -156,10 +156,10 @@
     useRollingAverage ? 'rollingDiff' : 'count'
   ); // TODO: Consider using rollingAverage or something instead.
 
-  // const rollingPeriod = 12;
-  let rollingPeriod = $derived.by(() => {
-    return starsByPeriod.length / 20;
-  })
+  const rollingPeriod = 12;
+  // let rollingPeriod = $derived.by(() => {
+  //   return starsByPeriod.length / 20;
+  // })
 
   let maxPeriodCount: number = $derived(Math.max(...chartData.map(p => p[dataKey])));
   let minPeriodCount: number = $derived(Math.min(...chartData.map(p => p[dataKey])));
@@ -167,10 +167,27 @@
   let zeroPoint = 0; // Leaving this as a marker for when I thought I was soooooooo clever but ended up just saying "zero is zero actually"
 
   let yDomain: [number, number] = $derived([minPeriodCount, maxPeriodCount]);
-  let xDomain: [number, number] = $derived([0, chartData.length]);
+  // let xDomain: [number, number] = $derived([0, chartData.length]);
+  // ^--- lets use dates instead
+  let xDomain: [Date, Date] = $derived([
+    new Date(chartData[0].period),
+    new Date(chartData[chartData.length - 1].period)
+  ]);
+
+  // let xDomainDates: ScaleTime<number, number> = $derived.by(() => {
+  //   // We want this to be a list of dates. Probably use d3.scaleTime.
+  //   return scaleTime().domain(chartData.map(p => new Date(p.period)));
+  // });
+  // $effect(() => {
+  //   console.log('xDomainDates', xDomainDates);
+  // });
 
   let yScale = $derived(scaleLinear().domain(yDomain).range([chartHeight - padding, padding]));
-  let xScale = $derived(scaleLinear().domain(xDomain).range([padding, chartWidth - padding]));
+  // let xScale = $derived(scaleLinear().domain(xDomain).range([padding, chartWidth - padding]));
+  let xScale = $derived(scaleTime().domain(xDomain).range([padding, chartWidth - padding]));
+  $effect(() => {
+    console.log('xScale', xScale);
+  });
 
   const padding = 80;
 
@@ -206,7 +223,7 @@
     <header>
       <h2>Stars</h2>
       <p>
-        Can you beileve Nomad has {data.stars.length} stars? That's {(data.stars.length / 10 / 52).toFixed(1)} stars per week. Actually, that's an interesting measure. How do the weeks stack up?
+        Can you believe Nomad has {data.stars.length} stars? That's {(data.stars.length / 10 / 52).toFixed(1)} stars per week. Actually, that's an interesting measure. How do the weeks stack up?
       </p>
       {#each ['day', 'week', 'month'] as p}
         <button class:active={period === p} onclick={() => {
@@ -224,11 +241,13 @@
       </label>
     </header>
     <section class="main" bind:clientWidth={chartWidth} bind:clientHeight={chartHeight}>
-      <ChartContainer width={chartWidth} height={chartHeight} {yDomain} xDomain={[0,100]}>
+      <ChartContainer width={chartWidth} height={chartHeight} {yDomain} xDomain={xDomain}
+        xScale={xScale} yScale={yScale}
+      >
         {#each chartData as period, i}
           <g>
             <rect
-              x={xScale(i)}
+              x={xScale(new Date(period.period))}
               y={
                 useRollingAverage
                   ? (
@@ -238,7 +257,7 @@
                 )
                   : yScale(period.count)
               }
-              width={xScale(1) - xScale(0)}
+              width={chartWidth / chartData.length}
               height={useRollingAverage ? 
                 Math.abs(yScale(0) - yScale(period[dataKey])) :
                 yScale(0) - yScale(period[dataKey])
@@ -251,7 +270,7 @@
             />
             <rect
               class="hoverbar"
-              x={xScale(i)}
+              x={xScale(new Date(period.period))}
               y={padding}
               width={xScale(1) - xScale(0)}
               height={chartHeight - padding * 2}

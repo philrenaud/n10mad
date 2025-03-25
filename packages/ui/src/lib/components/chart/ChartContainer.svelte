@@ -6,7 +6,7 @@ but will probably end up block-levelling them if this gets much more complicated
 
 <script lang="ts">
   import VariableAxis from './VariableAxis.svelte';
-  
+  import { type ScaleTime, type ScaleLinear } from 'd3';
   $effect(() => {
     console.log('fx...width', props.width);
     console.log('fx...height', props.height);
@@ -17,6 +17,8 @@ but will probably end up block-levelling them if this gets much more complicated
     height: number;
     yDomain: [number, number];
     xDomain: [number, number];
+    xScale: ScaleTime<number, number> | ScaleLinear<number, number>;
+    yScale: ScaleLinear<number, number>;
   } = $props();
 
   let parentWidth: number = $derived(props.width);
@@ -41,6 +43,7 @@ but will probably end up block-levelling them if this gets much more complicated
       height={parentHeight}
       width={parentWidth}
       domain={props.yDomain}
+      scale={props.yScale}
       position="left"
       orientation="vertical"
     />
@@ -48,6 +51,7 @@ but will probably end up block-levelling them if this gets much more complicated
       height={parentHeight}
       width={parentWidth}
       domain={props.xDomain}
+      scale={props.xScale}
       position="bottom"
       orientation="horizontal"
     />
