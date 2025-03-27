@@ -16,6 +16,23 @@
   window.d3 = d3;
 
 	let { data }: PageProps = $props();
+
+  // #region Query Params
+  const defaultMode = 'stream';
+  let mode: 'stream' | 'ridgeline' = $state(page.url.searchParams.get('mode') as 'stream' | 'ridgeline' || defaultMode);
+
+  $effect(() => {
+    if (mode !== page.url.searchParams.get('mode')) {
+      mode = page.url.searchParams.get('mode') as 'stream' | 'ridgeline' || defaultMode;
+    }
+    if (mode === defaultMode && page.url.searchParams.get('mode')) {
+      page.url.searchParams.delete('mode');
+      goto(`?${page.url.searchParams.toString()}`, { replaceState: true, keepFocus: true });
+    }
+  });
+
+  // #endregion Query Params
+
   let { contributors } = data;
   contributors = contributors.slice(0, 100);
   $effect(() => {
@@ -49,6 +66,21 @@
     return Math.max(...weeklySums, 1); // Ensure at least 1 to avoid division by zero
   });
 
+  let maxContributorSum = $derived.by(() => {
+    return Math.max(...contributors.map(c => c.total), 1);
+  });
+
+  let maxContributorWeeklySum = $derived.by(() => {
+    // return Math.max(...contributors.map(c => c.weeks.map(w => w.c).reduce((a, b) => a + b, 0)), 1);
+    return 1000; // TODO: lol, lmao
+  });
+
+  $effect(() => {
+    console.log('maxWeeklySum', maxWeeklySum);
+    console.log('maxContributorSum', maxContributorSum);
+    console.log('maxContributorWeeklySum', maxContributorWeeklySum);
+  });
+
   let timePivot = $derived.by(() => {
     if (!contributors) return [];
     const allWeeks = weeks;
@@ -74,22 +106,32 @@
   $effect(() => {
     console.log('timePivot', timePivot);
   });
+
+  // const RIDGELINE_SPACING = 4.5; // TODO: maybe derived based on chartHeight / number of contributors?
+  let RIDGELINE_SPACING = $derived.by(() => {
+    return chartHeight / contributors.length * .58; // we love a magic number
+  });
   
   let series = $derived.by(() => {
-    return d3.stack()
+    const stackGenerator = d3.stack()
       .keys(contributors.map(c => c.author.login))
       .order(d3.stackOrderInsideOut)
       // .order(d3.stackOrderDescending)
       // .order(d3.stackOrderAppearance)
-      .offset(d3.stackOffsetWiggle)
+      // .offset(d3.stackOffsetWiggle)
       // .offset(d3.stackOffsetSilhouette)
-        (timePivot); // NOTE IEFE
+
+    if (mode === 'stream') {
+      stackGenerator.offset(d3.stackOffsetWiggle);
+    } else if (mode === 'ridgeline') {
+      stackGenerator.offset(d3.stackOffsetNone);
+    }
 
     // return d3.stack()
     //   .keys(contributors.map(c => c.author.login))
     //   .order(d3.stackOrderAppearance)
     //   .offset(d3.stackOffsetSilhouette)
-    //     (timePivot); // NOTE IEFE
+    return stackGenerator(timePivot);
   });
 
   // const scheme = d3.schemeObservable10;
@@ -153,7 +195,7 @@
   });
 
   let yDomain = $derived.by(() => {
-    return [0, maxWeeklySum];
+    return [0, mode === 'stream' ? maxWeeklySum : maxContributorWeeklySum];
   });
 
   let xScale = $derived.by(() => {
@@ -174,22 +216,39 @@
   });
 
   let areaGenerator = $derived.by(() => {
+    // For ridgeline mode, return a function that takes an index
+    if (mode === 'ridgeline') {
+      return (data, index) => {
+        const baseY = chartHeight - padding - (index * RIDGELINE_SPACING);
+        return d3.area()
+          .x(d => xScale(d.data))
+          .y0(() => baseY)
+          .y1(d => {
+            const value = d[1] - d[0];
+            // Instead of subtracting from baseY, we'll add a scaled height
+            // We'll use a separate scale for the ridge heights to keep them reasonable
+            const ridgeHeight = value * (RIDGELINE_SPACING * 0.1); // 80% of spacing
+            if (index === 0) {
+              console.log('data point:', {
+                value,
+                ridgeHeight,
+                baseY,
+                finalY: baseY - ridgeHeight
+              });
+            }
+            return baseY - ridgeHeight;
+          })          .curve(d3.curveBasis)
+          (data);
+      };
+    }
+
+    // For stream mode, return the regular area generator
     return d3.area()
-    .x((d,i) => {
-      // console.log('xScale(d.data)', i, xScale(d.data));
-      return xScale(d.data)
-    })
-    .y0((d) => {
-      // console.log('yScale(d[0])', d[0], yScale(d[0]));
-      return yScale(d[0]) - chartHeight / 2.8
-    })
-    .y1(d => yScale(d[1]) - chartHeight / 2.8)
-    .curve(d3.curveBasis)
-    // .curve(d3.curveBumpX)
-    // .curve(d3.curveNatural)
-    // .curve(d3.curveCatmullRom)
-    // .curve(d3.curveStep)
-  })
+      .x(d => xScale(d.data))
+      .y0(d => yScale(d[0]) - chartHeight / 2.8)
+      .y1(d => yScale(d[1]) - chartHeight / 2.8)
+      .curve(d3.curveBasis);
+  });
 
   let handleContributorFocus = (event, contributor) => {
     console.log('mouseenter', contributor.key, contributors.find(c => c.author.login === contributor.key));
@@ -201,7 +260,7 @@
   let handleContributorBlur = (event, contributor) => {
     event.target.style.fill = fillColorScale(contributor.key);
     event.target.style.strokeWidth = '1px';
-    event.target.style.fillOpacity = '0.5';
+    event.target.style.fillOpacity = '0.2';
   };
 
   </script>
@@ -213,6 +272,12 @@
     position: absolute;
     display: grid;
     grid-template-rows: auto 1fr;
+  }
+
+  path {
+    transition: fill-opacity 0.3s ease,
+    d 0.5s ease-in-out var(--delay),
+    transform 0.5s ease-in-out var(--delay);
   }
 
   path:focus {
@@ -232,6 +297,15 @@
       <p>
         Here are the stats for the top 100 contributors to Nomad over the past decade. Between them, they represent about 25,000 of the 26,000 commits Nomad has seen over her lifetime.
       </p>
+      <button class:active={mode === 'stream'} onclick={() => {
+        page.url.searchParams.set('mode', 'stream');
+        goto(`?${page.url.searchParams.toString()}`, { replaceState: false, keepFocus: true });
+      }}>Stream Mode</button>
+      <button class:active={mode === 'ridgeline'} onclick={() => {
+        page.url.searchParams.set('mode', 'ridgeline');
+        goto(`?${page.url.searchParams.toString()}`, { replaceState: false, keepFocus: true });
+      }}>Ridgeline Mode</button>
+
     </header>
     <section class="main" bind:clientWidth={chartWidth} bind:clientHeight={chartHeight}>
       <ChartContainer width={chartWidth} height={chartHeight} {yDomain} xDomain={xDomain}
@@ -242,18 +316,19 @@
       {#each series as s, i}
     <!-- {console.log('s', i, areaGenerator(s))} -->
           <path
-            d={areaGenerator(s)}
+            style:--delay="{(contributors.length - i) * 0.000}s"
+            d={areaGenerator(s,contributors.length - i)}
             fill={fillColorScale(s.key)}
-            fill-opacity={0.5}
+            fill-opacity={0.2}
             stroke={colorScale(s.key)}
-            tabindex="{i}"
+            tabindex="0"
             role="button"
             aria-label={`Contributor ${s.key}'s contributions over time`}
-            on:mouseenter={(event) => handleContributorFocus(event, s)}
-            on:focus={(event) => handleContributorFocus(event, s)}
-            on:mouseleave={(event) => handleContributorBlur(event, s)}
-            on:blur={(event) => handleContributorBlur(event, s)}
-            on:keydown={(event) => {
+            onmouseenter={(event) => handleContributorFocus(event, s)}
+            onfocus={(event) => handleContributorFocus(event, s)}
+            onmouseleave={(event) => handleContributorBlur(event, s)}
+            onblur={(event) => handleContributorBlur(event, s)}
+            onkeydown={(event) => {
               if (event.key === 'Enter' || event.key === ' ') {
                 event.preventDefault();
                 // Trigger the same behavior as mouseenter

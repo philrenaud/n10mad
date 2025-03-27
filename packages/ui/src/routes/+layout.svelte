@@ -49,7 +49,7 @@ console.timeEnd('layout');
 	let width = $state(500);
 	let height = $state(500);
 
-	let numberOfCircles = $state(1000);
+	let numberOfCircles = $state(500);
 	// TODO: numberOfCircles, and circleSize, should be derived from mobile v desktop
 	let minWidth = 2;
 	// let circleSize = $derived.by(() => Math.max(minWidth, width / numberOfCircles / 2));
