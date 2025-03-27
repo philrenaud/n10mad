@@ -196,7 +196,7 @@
     // midpoint
     zeroPoint,
     Math.max(...chartData.map(p => p[dataKey]))
-  ]).range(['red', 'yellow', 'green']));
+  ]).range(['#c84034', 'yellow', '#00ca8e']));
 </script>
 
 <style>
@@ -242,7 +242,7 @@
     </header>
     <section class="main" bind:clientWidth={chartWidth} bind:clientHeight={chartHeight}>
       <ChartContainer width={chartWidth} height={chartHeight} {yDomain} xDomain={xDomain}
-        xScale={xScale} yScale={yScale}
+        xScale={xScale} yScale={yScale} maxTicks={10}
       >
         {#each chartData as period, i}
           <g>
@@ -265,14 +265,14 @@
               fill={
                 useRollingAverage
                   ? rollingColorScale(period[dataKey])
-                  : 'orange'
+                  : '#00ca8e'
               }
             />
             <rect
               class="hoverbar"
               x={xScale(new Date(period.period))}
               y={padding}
-              width={xScale(1) - xScale(0)}
+              width={chartWidth / chartData.length}
               height={chartHeight - padding * 2}
               opacity={0.1}
               role="tooltip"

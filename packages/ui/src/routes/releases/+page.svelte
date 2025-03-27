@@ -55,7 +55,7 @@
             r={radScale(release.body.length)}
             cx={xScale(i)}
             cy={yScale(release.reactions?.total_count || 0)}
-            fill="orange"
+            fill="#00ca8e"
             on:click={() => {
               console.log('release', release);
               window.open(release.html_url, '_blank');

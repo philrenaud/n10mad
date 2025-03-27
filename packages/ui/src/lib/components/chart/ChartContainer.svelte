@@ -54,6 +54,7 @@ but will probably end up block-levelling them if this gets much more complicated
       scale={props.xScale}
       position="bottom"
       orientation="horizontal"
+      maxTicks={props.maxTicks}
     />
     <slot />
   </svg>

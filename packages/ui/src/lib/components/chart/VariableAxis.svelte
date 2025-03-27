@@ -7,7 +7,7 @@
   import { select } from 'd3';
   // import { scaleLinear } from 'd3';
 
-  let { height, width, domain, orientation, position, scale } = $props();
+  let { height, width, domain, orientation, position, scale, maxTicks = 20 } = $props();
 
   // let scale = $derived(scaleLinear()
   //   .domain(domain)
@@ -43,7 +43,8 @@
   $effect(() => {
     let tickSpacing = (orientation === 'vertical' ? height : width) / 50;
     let minNumTicks = 1;
-    let maxNumTicks = 20;
+    // let maxNumTicks = 20;
+    let maxNumTicks = maxTicks;
     console.log('scale', scale);
     let baseTickValues = scale.ticks(Math.max(minNumTicks, Math.min(maxNumTicks, tickSpacing)));
 
@@ -61,7 +62,7 @@
 
     // Don't show the 0 ticks
     // TODO: this is probably bad policy!
-    if (baseTickValues.includes(0)) {
+    if (domain[0] === 0) {
       baseTickValues = baseTickValues.filter(tick => tick !== 0);
     }
     
