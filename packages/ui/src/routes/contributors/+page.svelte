@@ -310,13 +310,14 @@
     <section class="main" bind:clientWidth={chartWidth} bind:clientHeight={chartHeight}>
       <ChartContainer width={chartWidth} height={chartHeight} {yDomain} xDomain={xDomain}
         xScale={xScale} yScale={yScale} maxTicks={10}
+        hideYAxis={true}
       >
       <!-- {console.log('timePivot', timePivot)}
       {console.log('series', series)} -->
       {#each series as s, i}
     <!-- {console.log('s', i, areaGenerator(s))} -->
           <path
-            style:--delay="{(contributors.length - i) * 0.000}s"
+            style:--delay="{(contributors.length - i) * 0.00}s"
             d={areaGenerator(s,contributors.length - i)}
             fill={fillColorScale(s.key)}
             fill-opacity={0.2}

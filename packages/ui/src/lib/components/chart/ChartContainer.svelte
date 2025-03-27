@@ -7,10 +7,10 @@ but will probably end up block-levelling them if this gets much more complicated
 <script lang="ts">
   import VariableAxis from './VariableAxis.svelte';
   import { type ScaleTime, type ScaleLinear } from 'd3';
-  $effect(() => {
-    console.log('fx...width', props.width);
-    console.log('fx...height', props.height);
-  });
+  // $effect(() => {
+  //   console.log('fx...width', props.width);
+  //   console.log('fx...height', props.height);
+  // });
 
   const props: {
     width: number;
@@ -19,6 +19,7 @@ but will probably end up block-levelling them if this gets much more complicated
     xDomain: [number, number];
     xScale: ScaleTime<number, number> | ScaleLinear<number, number>;
     yScale: ScaleLinear<number, number>;
+    hideYAxis: boolean;
   } = $props();
 
   let parentWidth: number = $derived(props.width);
@@ -36,17 +37,18 @@ but will probably end up block-levelling them if this gets much more complicated
     border: 1px solid red; */
   }
 </style>
-
 <!-- <div class="chart-container"> -->
   <svg>
-    <VariableAxis 
-      height={parentHeight}
-      width={parentWidth}
-      domain={props.yDomain}
-      scale={props.yScale}
-      position="left"
-      orientation="vertical"
-    />
+    {#if !props.hideYAxis}
+      <VariableAxis 
+        height={parentHeight}
+        width={parentWidth}
+        domain={props.yDomain}
+        scale={props.yScale}
+        position="left"
+        orientation="vertical"
+      />
+    {/if}
     <VariableAxis 
       height={parentHeight}
       width={parentWidth}
