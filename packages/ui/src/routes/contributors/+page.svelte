@@ -247,33 +247,39 @@
   };
 
   let handleContributorBlur = (event, area) => {
-  // Get current searched contributors
-  const searchedLogins = searchQuery !== defaultSearch
-    ? searchQuery.split(',').map(login => login.trim()).filter(login => login.length > 0)
-    : [];
-  
-  if (area && searchedLogins.includes(area.author.login)) {
-    // Skip removing if this is one of the searched contributors
-    return;
-  }
-  
-  // Only filter if there's something to remove
-  if (area && focusedContributors.includes(area.author.login)) {
-    focusedContributors = focusedContributors.filter(c => c !== area.author.login);
-  } else if (!area) {
-    // When clearing all, preserve the searched contributors if there are any
-    if (searchedLogins.length > 0) {
-      const matchedContributors = searchedLogins
-        .map(login => contributors.find(c => c.author.login === login))
-        .filter(c => c !== undefined)
-        .map(c => c.author.login);
-      
-      focusedContributors = matchedContributors;
-    } else {
-      focusedContributors = [];
+
+    // remove hoveredContributor if it's the same as the area
+    // if (hoveredContributor && hoveredContributor.login === area.author.login) {
+    //   hoveredContributor = null;
+    // }
+
+    // Get current searched contributors
+    const searchedLogins = searchQuery !== defaultSearch
+      ? searchQuery.split(',').map(login => login.trim()).filter(login => login.length > 0)
+      : [];
+    
+    if (area && searchedLogins.includes(area.author.login)) {
+      // Skip removing if this is one of the searched contributors
+      return;
     }
-  }
-};
+    
+    // Only filter if there's something to remove
+    if (area && focusedContributors.includes(area.author.login)) {
+      focusedContributors = focusedContributors.filter(c => c !== area.author.login);
+    } else if (!area) {
+      // When clearing all, preserve the searched contributors if there are any
+      if (searchedLogins.length > 0) {
+        const matchedContributors = searchedLogins
+          .map(login => contributors.find(c => c.author.login === login))
+          .filter(c => c !== undefined)
+          .map(c => c.author.login);
+        
+        focusedContributors = matchedContributors;
+      } else {
+        focusedContributors = [];
+      }
+    }
+  };
   
   let focusedContributors = $state<string[]>([]);
 
@@ -288,6 +294,19 @@
     }
     goto(`?${page.url.searchParams.toString()}`, { replaceState: true, keepFocus: true });
   }
+
+  // #region Hovered Contributor
+
+  let hoveredContributor = $state<Contributor['author'] | null>(null);
+
+  let handleContributorHover = (event, area: Contributor) => {
+    console.log('hovering', event, area);
+    hoveredContributor = area.author;
+    hoveredContributor.x = `${event.layerX - 32}px`;
+    hoveredContributor.y = `${event.layerY - 32 }px`;
+  }
+  
+  // #endregion Hovered Contributor
 
 </script>
 
@@ -305,6 +324,7 @@
     /* stroke-width 0.5s ease 0.5s,
     stroke-opacity 0.5s ease 0.5s, */
     d 0.75s ease-in-out var(--delay);
+    cursor: none;
   }
 
   path:focus {
@@ -316,6 +336,26 @@
     &.active {
       background-color: #000;
       color: #fff;
+    }
+  }
+
+  #contributor-avatar {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 64px;
+    height: 64px;
+    border-radius: 50%;
+    border: 8px solid #000;
+    background-color: #fff;
+    overflow: hidden;
+    pointer-events: none; /* This makes mouse events pass through */
+    /* transition: transform 0.1s ease-out; */
+    filter: drop-shadow(0 4px 6px rgba(0, 0, 0, 0.3));
+    img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
     }
   }
 </style>
@@ -344,12 +384,14 @@
           value={searchQuery}
           oninput={handleSearch}
         />
-        {#if focusedContributors.length > 0}
+        {#if searchQuery !== defaultSearch && focusedContributors.length > 0}
           Found {focusedContributors.length} contributor{focusedContributors.length === 1 ? '' : 's'}
         {/if}
       </div>
     </header>
-    <section class="main" bind:clientWidth={chartWidth} bind:clientHeight={chartHeight}>
+    <section class="main" bind:clientWidth={chartWidth} bind:clientHeight={chartHeight}
+      onmouseleave={() => hoveredContributor = null}
+    >
       <ChartContainer width={chartWidth} height={chartHeight} {yDomain} {xDomain}
         xScale={xScale} yScale={yScale} maxTicks={10}
         hideYAxis={true}
@@ -376,6 +418,7 @@
           onfocus={(event) => handleContributorFocus(event, area)}
           onmouseleave={(event) => handleContributorBlur(event, area)}
           onblur={(event) => handleContributorBlur(event, area)}
+          onmousemove={(event) => handleContributorHover(event, area)}
           onkeydown={(event) => {
             if (event.key === 'Enter' || event.key === ' ') {
               console.log('double plus focus')
@@ -389,6 +432,16 @@
         />
       {/each}
     </ChartContainer>
+      {#if hoveredContributor}
+        <div id="contributor-avatar" style="transform: translate({hoveredContributor.x}, {hoveredContributor.y});">
+        <!-- <div id="contributor-avatar" style="transform: translate(50px, 50px);"> -->
+          <img 
+            class="avatar-image" 
+            src={hoveredContributor.avatar_url || 'https://github.com/identicons/github.png'} 
+            alt={`${hoveredContributor.login}'s avatar`}
+          />
+        </div>
+      {/if}
     </section>
   {:catch error}
     <p>
