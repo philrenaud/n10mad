@@ -22,6 +22,9 @@ export type Contributor = {
   total: number;  // Total commits
   weeks: Week[];
   author: Author;
+  mode?: string;
+  stack?: unknown[];
+  color?: string;
 }
 
 // New type for quarterly data
