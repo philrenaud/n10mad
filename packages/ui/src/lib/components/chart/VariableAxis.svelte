@@ -45,7 +45,7 @@
     let minNumTicks = 1;
     // let maxNumTicks = 20;
     let maxNumTicks = maxTicks;
-    console.log('scale', scale);
+    // console.log('scale', scale);
     let baseTickValues = scale.ticks(Math.max(minNumTicks, Math.min(maxNumTicks, tickSpacing)));
 
     // If the ceiling is not included (because it doesn't divide evenly with tickSpacing, say), add it

@@ -7,13 +7,13 @@
 	import * as d3 from 'd3';
 
 	import type { LayoutProps } from './$types';
-console.log('prepping layout');
+// console.log('prepping layout');
 	// Check for a ?meta=true query param
 	let meta: boolean = $state(false);
 	meta = page.url.searchParams.get('meta') === 'true';
 console.time('layout');
 	let { data, children }: LayoutProps = $props();
-	console.log('ok data from layout', data, children);
+	// console.log('ok data from layout', data, children);
 console.timeEnd('layout');
 	function pathToPoints(
 		pathElement: SVGPathElement,
@@ -408,7 +408,6 @@ console.timeEnd('layout');
 	}
 
 	function unhoverTitle(e: PointerEvent) {
-		console.log('unhoverTitle', e);
 		titleHovered = false;
 		if (canvasContext?.canvas) canvasContext.canvas.style.filter = '';
     d3.selectAll('circle').interrupt();
@@ -425,10 +424,8 @@ console.timeEnd('layout');
 		alphaTarget: 0.2
   }
   function hoverDataSource(e: PointerEvent) {
-    console.log('hoverDataSource', e);
 		if (canvasContext?.canvas) canvasContext.canvas.style.filter = gooeyFilter();
     const midPoint = [e.target.getBoundingClientRect().left + e.target.getBoundingClientRect().width / 2, e.target.getBoundingClientRect().top + e.target.getBoundingClientRect().height / 2];
-    console.log('midPoint', midPoint);
     // Strongly attract all nodes to the srcElement's position
 
     // Chop off half the circles
@@ -492,7 +489,6 @@ console.timeEnd('layout');
 
   }
   function unhoverDataSource(e: PointerEvent) {
-    console.log('unhoverDataSource', e);
 		if (canvasContext?.canvas) canvasContext.canvas.style.filter = '';
     simulation.alpha(0.1);
     localCircles.slice(1).forEach((c) => {

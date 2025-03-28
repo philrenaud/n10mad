@@ -35,9 +35,8 @@
   });
 
   $effect(() => {
-    console.log('query fx recompute');
     if (searchQuery !== page.url.searchParams.get('query')) {
-      handleContributorBlur(null, null);
+      focusedContributors = [];
       searchQuery = page.url.searchParams.get('query') || defaultSearch;
     }
     if (searchQuery === defaultSearch && page.url.searchParams.get('query')) {
@@ -45,13 +44,24 @@
       goto(`?${page.url.searchParams.toString()}`, { replaceState: true, keepFocus: true });
     }
     if (searchQuery !== defaultSearch) {
-      console.log('+++++ searchQuery', searchQuery);
-      // handleFocus on it
-      const contributor = contributors.find(c => c.author.login === searchQuery);
-      if (contributor) {
-        handleContributorFocus(null, contributor);
+      const searchedLogins = searchQuery
+        .split(',')
+        .map(login => login.trim())
+        .filter(login => login.length > 0);
+      
+      if (searchedLogins.length > 0) {
+        const matchedContributors = searchedLogins
+          .map(login => contributors.find(c => c.author.login === login))
+          .filter(c => c !== undefined)
+          .map(c => c.author.login);
+
+        if (matchedContributors.length > 0) {
+          focusedContributors = matchedContributors;
+        } else {
+          focusedContributors = [];
+        }
       } else {
-        handleContributorBlur(null, null);
+        focusedContributors = [];
       }
     }
   });
@@ -126,6 +136,7 @@
     // return Math.max(...contributors.map(c => Math.max(...c.weeks.map(week => week.c))), 1);
     // ^--- not quite d3.axisRight, that gives us the biggest total
     let allWeeksFlattened = contributors.flatMap(c => c.weeks);
+    // TODO: still not quite right! Slice contributors to 20 to see it break.
     return Math.max(...allWeeksFlattened.map(week => week.c), 1);
   });
 
@@ -135,7 +146,6 @@
   });
 
   let yDomain = $derived.by(() => {
-    console.log('maxContributorWeeklySum', maxContributorWeeklySum);
     return [0, mode === 'stream' ? maxWeeklySum : maxContributorWeeklySum];
   });
 
@@ -231,24 +241,48 @@
 
   let handleContributorFocus = (event, area) => {
     console.log(`${area.author.login} has made ${area.total} commits`);
-    focusedContributor = area.author.login;
+    if (!focusedContributors.includes(area.author.login)) {
+      focusedContributors = [...focusedContributors, area.author.login];
+    }
   };
 
   let handleContributorBlur = (event, area) => {
-    focusedContributor = null;
-  };
+  // Get current searched contributors
+  const searchedLogins = searchQuery !== defaultSearch
+    ? searchQuery.split(',').map(login => login.trim()).filter(login => login.length > 0)
+    : [];
+  
+  if (area && searchedLogins.includes(area.author.login)) {
+    // Skip removing if this is one of the searched contributors
+    return;
+  }
+  
+  // Only filter if there's something to remove
+  if (area && focusedContributors.includes(area.author.login)) {
+    focusedContributors = focusedContributors.filter(c => c !== area.author.login);
+  } else if (!area) {
+    // When clearing all, preserve the searched contributors if there are any
+    if (searchedLogins.length > 0) {
+      const matchedContributors = searchedLogins
+        .map(login => contributors.find(c => c.author.login === login))
+        .filter(c => c !== undefined)
+        .map(c => c.author.login);
+      
+      focusedContributors = matchedContributors;
+    } else {
+      focusedContributors = [];
+    }
+  }
+};
+  
+  let focusedContributors = $state<string[]>([]);
 
-  let focusedContributor = $state<string | null>(null);
-
+  // Change your URL so the read-url-param handling does the hard work,
+  // rather than setting the prop here.
   function handleSearch(event: Event) {
     const value = (event.target as HTMLInputElement).value;
     if (value) {
       page.url.searchParams.set('query', value);
-      const found = areas.find(a => a.author.login === value);
-      console.log('found', found);
-      if (found) {
-        handleContributorFocus(null, found);
-      }
     } else {
       page.url.searchParams.delete('query');
     }
@@ -276,6 +310,14 @@
   path:focus {
     outline: none;
   }
+
+  button {
+    margin-right: 1rem;
+    &.active {
+      background-color: #000;
+      color: #fff;
+    }
+  }
 </style>
 
 <div id="container">
@@ -302,6 +344,9 @@
           value={searchQuery}
           oninput={handleSearch}
         />
+        {#if focusedContributors.length > 0}
+          Found {focusedContributors.length} contributor{focusedContributors.length === 1 ? '' : 's'}
+        {/if}
       </div>
     </header>
     <section class="main" bind:clientWidth={chartWidth} bind:clientHeight={chartHeight}>
@@ -315,15 +360,15 @@
           d={area.path}
           fill={area.style.color}
           fill-opacity={
-            focusedContributor === area.author.login
+            focusedContributors.includes(area.author.login)
               ? 1
-              : focusedContributor
-                ? 0.2
+              : focusedContributors.length > 0
+                ? 0.1
                 : 1
           }
           stroke={baseAreaStyle[mode].strokeColor}
           stroke-width={baseAreaStyle[mode].strokeWidth}
-          stroke-opacity={focusedContributor ? 0 : baseAreaStyle[mode].strokeOpacity}
+          stroke-opacity={focusedContributors.length > 0 ? 0 : baseAreaStyle[mode].strokeOpacity}
           tabindex="0"
           role="button"
           aria-label={`Contributor ${area.key}'s contributions over time`}
