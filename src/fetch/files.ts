@@ -11,13 +11,14 @@ const octokit = new Octokit({
 
 // Curated list by way of running `git log --name-only --pretty=format: | sort | uniq -c | sort -rg | head -100` and picking the fun ones.
 const files = [
-  'nomad/structs/structs.go',
-  'client/client.go',
-  'nomad/state/state_store.go',
-  'client/driver/docker.go',
-  'nomad/fsm.go',
-  'api/jobs.go',
-  'ui/mirage/config.js'
+  "/"
+  // 'nomad/structs/structs.go',
+  // 'client/client.go',
+  // 'nomad/state/state_store.go',
+  // 'client/driver/docker.go',
+  // 'nomad/fsm.go',
+  // 'api/jobs.go',
+  // 'ui/mirage/config.js'
 ]
 
 export async function fetchFiles() {
@@ -45,7 +46,9 @@ async function fetchCommitsForFile(file: string) {
   const commits = [];
   let page = 1;
   while (true) {
+  // while (page < 20) {
     try {
+      console.log('trying', file, page);
       const response = await octokit.rest.repos.listCommits({
         ...REPO_DETAILS,
         path: file,

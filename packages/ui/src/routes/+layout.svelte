@@ -503,13 +503,13 @@ console.timeEnd('layout');
 <svelte:head>
 	<title>NOMAD@10</title>
 </svelte:head>
-<!-- 
+
 <Canvas {width} {height} bind:ctx={canvasContext}>
 	{#each circles as circle}
 		<Circle midPoint={[circle.x, circle.y]} radius={circle.r} color={circle.color} borderColor={circle.borderColor} borderWidth={circle.borderWidth} />
 	{/each}
 </Canvas>
- -->
+
 <main>
 	<header>
 		<h1

@@ -29,6 +29,9 @@
     : `translate(0, ${height - padding})`
   );
 
+  // $effect(() => {
+  //   console.log('height as received by axis', orientation, 'is', height)
+  // })
   // let tickValues = $derived.by(() => {
   //   let tickScale = scaleLinear().domain([0, 100]).range([0, orientation === 'vertical' ? height : width]);
   //   console.log('tick scale', tickScale, tickScale.ticks(Math.max(5, Math.min(20, width / 100))));
@@ -45,8 +48,8 @@
     let minNumTicks = 1;
     // let maxNumTicks = 20;
     let maxNumTicks = maxTicks;
-    // console.log('scale', scale);
     let baseTickValues = scale.ticks(Math.max(minNumTicks, Math.min(maxNumTicks, tickSpacing)));
+    // console.log('scale', orientation, scale, maxNumTicks, baseTickValues);
 
     // If the ceiling is not included (because it doesn't divide evenly with tickSpacing, say), add it
     // UNLESS it's within X of the baseTickValues[baseTickValues.length - 1], where X is some fraction of tickSpacing

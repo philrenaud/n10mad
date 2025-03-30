@@ -30,16 +30,17 @@ but will probably end up block-levelling them if this gets much more complicated
  
   svg {
     overflow: visible;
-    width: 100%;
-    height: 100%;
+    /* width: 100%;
+    height: 100%; */
     display: block;
     /* box-sizing: border-box;
     border: 1px solid red; */
   }
 </style>
 <!-- <div class="chart-container"> -->
-  <svg>
+  <svg style="height:{parentHeight}px">
     {#if !props.hideYAxis}
+    <!-- {console.log('passing down height to yAxis as', parentHeight)} -->
       <VariableAxis 
         height={parentHeight}
         width={parentWidth}
