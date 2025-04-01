@@ -189,12 +189,16 @@
               height={individualChartHeight}
               opacity={0}
               role="tooltip"
-              onmouseenter={() => {
+              onmouseenter={(e) => {
                 console.log(`week ${weekIter}`);
                 console.log(`${new Date(week.weekStart).toLocaleDateString()} to ${new Date(week.weekEnd).toLocaleDateString()}`);
                 console.log('Commit count', week.count);
+                e.target.style.opacity = .1;
               }}
-              fill='transparent'
+              onmouseleave={(e) => {
+                e.target.style.opacity = 0;
+              }}
+              fill='blue'
             />
             {/each}
         </ChartContainer>

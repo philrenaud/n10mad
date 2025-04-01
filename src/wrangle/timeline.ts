@@ -6,6 +6,10 @@ import { readFileSync } from 'fs';
 import { join } from 'path';
 import files from '../../data/files.json';
 
+if (!files) {
+  throw new Error('files.json does not exist; you need to run `bun fetch files` first');
+}
+
 type Commit = {
   author: string;
   date: string;

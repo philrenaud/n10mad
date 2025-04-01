@@ -1,10 +1,14 @@
 import { parseArgs } from 'util';
 import { wrangleTimeline } from './wrangle/timeline';
-const AVAILABLE_SOURCES = ['timeline'] as const;
+import { wrangleTopicsAuthor } from './wrangle/topics_author';
+import { wrangleTopicsWeek } from './wrangle/topics_week';
+const AVAILABLE_SOURCES = ['timeline', 'topics_author', 'topics_week'] as const;
 type DataSource = typeof AVAILABLE_SOURCES[number];
 
 const fetchers: Record<DataSource, () => Promise<any>> = {
   timeline: wrangleTimeline,
+  topics_author: wrangleTopicsAuthor,
+  topics_week: wrangleTopicsWeek,
 };
 
 const {positionals} = parseArgs({

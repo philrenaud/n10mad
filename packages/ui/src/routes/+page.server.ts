@@ -6,7 +6,7 @@ import timeline from '../../../../data/wrangled/timeline.json';
 import contributors from '../../../../data/contributors.json';
 import stars from '../../../../data/stars.json';
 
-export const ssr = true;
+export const ssr = false;
 
 export const load: LayoutServerLoad = async () => {
   return {
