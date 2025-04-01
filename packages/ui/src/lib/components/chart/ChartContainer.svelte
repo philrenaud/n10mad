@@ -20,6 +20,7 @@ but will probably end up block-levelling them if this gets much more complicated
     xScale: ScaleTime<number, number> | ScaleLinear<number, number>;
     yScale: ScaleLinear<number, number>;
     hideYAxis: boolean;
+    hideXAxis: boolean;
   } = $props();
 
   let parentWidth: number = $derived(props.width);
@@ -38,7 +39,7 @@ but will probably end up block-levelling them if this gets much more complicated
   }
 </style>
 <!-- <div class="chart-container"> -->
-  <svg style="height:{parentHeight}px">
+  <svg style="height:{parentHeight}px; width: 100%;">
     {#if !props.hideYAxis}
     <!-- {console.log('passing down height to yAxis as', parentHeight)} -->
       <VariableAxis 
@@ -50,15 +51,17 @@ but will probably end up block-levelling them if this gets much more complicated
         orientation="vertical"
       />
     {/if}
-    <VariableAxis 
-      height={parentHeight}
-      width={parentWidth}
-      domain={props.xDomain}
-      scale={props.xScale}
-      position="bottom"
-      orientation="horizontal"
-      maxTicks={props.maxTicks}
-    />
+    {#if !props.hideXAxis}
+      <VariableAxis 
+        height={parentHeight}
+        width={parentWidth}
+        domain={props.xDomain}
+        scale={props.xScale}
+        position="bottom"
+        orientation="horizontal"
+        maxTicks={props.maxTicks}
+      />
+    {/if}
     <slot />
   </svg>
 <!-- </div> -->

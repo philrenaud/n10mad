@@ -176,3 +176,5 @@ dist
 
 # Data files
 data/
+# TODO: maybe don't ignore wrangled files, just raw files?
+

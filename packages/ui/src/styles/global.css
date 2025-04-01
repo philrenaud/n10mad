@@ -18,7 +18,7 @@ h1, h2, h3, h4, h5, h6 {
   font-family: 'VaultAlarm', sans-serif;
 }
 
-canvas {
+canvas#backgrounder {
   position: fixed;
   top: 0;
   left: 0;
@@ -116,6 +116,9 @@ main {
         display: none;
       }
     }
+  }
+  .meta {
+    display: none;
   }
 }
 

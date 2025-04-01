@@ -6,7 +6,7 @@
   let canvasElement: HTMLCanvasElement;
   let frameId: number;
   // let ctx: CanvasRenderingContext2D | null; // TODO: might have to make this state
-  let { ctx = $bindable(), width, height } = $props();
+  let { ctx = $bindable(), width, height, id } = $props();
   
   let reDraw = true;
   let memo: any;
@@ -70,7 +70,9 @@
   }>();
 </script>
 <!-- ddd{width}, {height} -->
+ {console.log('canvas', width, height, id)}
 <canvas
+  id={id}
   {width}
   {height}
   on:mousemove={(e) => {

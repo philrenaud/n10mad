@@ -5,7 +5,8 @@
   "scripts": {
     "start": "bun run index.ts",
     "dev": "bun --watch index.ts",
-    "fetch": "bun run src/fetch.ts"
+    "fetch": "bun run src/fetch.ts",
+    "wrangle": "bun run src/wrangle.ts"
   },
   "devDependencies": {
     "@types/bun": "latest"
