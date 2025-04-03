@@ -100,7 +100,7 @@ export async function wrangleTopicsAuthor() {
   // Fun method to turn down the "temperature": only show terms with idf < 5 or so. Because idf is "number of commit messages divided by number containing this word", high values mean "this is pretty dang rare".
   // That's okay! That can be a signal! In fact TFIDF depends on that signal explicitly!
   // But it's probably too spicy in a clustered-homogeneity context like "Nomad authors".
-  // For example: James and I, wihtout this method, have "behaviour" as one of our terms.
+  // For example: James and I, without this method, have "behaviour" as one of our terms.
   // It's not like we talk about behaviour a lot. It's just that we respect the Crown enough to use her english.
   const SPICE_TOLERANCE = 10;
 

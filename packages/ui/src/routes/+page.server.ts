@@ -19,6 +19,7 @@ export const load: LayoutServerLoad = async () => {
     // Add the new weekly commit data
     // weeklyCommits: weeklyCommits,
     timeline: timeline,
+    // milestones,
     topics,
     // weeklyStats: weeklyStats
   }

@@ -1,7 +1,7 @@
 import type { PageServerLoad } from './$types';
 import contributors from '../../../../../data/contributors.json';
 
-export const ssr = false;
+export const ssr = true;
 
 type Author = {
   login: string;

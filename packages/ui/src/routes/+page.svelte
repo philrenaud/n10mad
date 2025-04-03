@@ -7,7 +7,7 @@
 	import type { PageProps } from './$types';
 
 	let { data }: PageProps = $props();
-  console.log('data', data);
+  console.log('stars', data.stars);
 
   let timeline = $state(data.timeline);
   let contributors = $state(data.contributors);
@@ -51,7 +51,6 @@
     })
   })
 
-
   // let weeks = data.weeklyCommits;
   // let weeksByYear = $derived.by(() => {
   //   return weeks.reduce((acc, week) => {
@@ -94,7 +93,6 @@
       return [min, max];
     });
   });
-  $inspect(yDomains);
 
   const xPadding = 90;
   const yPadding = 30;
@@ -263,12 +261,15 @@
     /* grid-template-rows: auto 1fr; */
   }
 
-  .authors {
+  .authors, .topics {
     display: flex;
     flex-wrap: wrap;
     gap: 5px;
+    max-width: 850px;
+    margin: auto;
+    margin-bottom: 10px;
 
-    .author {
+    .author, .topic {
       display: inline-grid;
       grid-template-columns: 20px 1fr;
       gap: 5px;
@@ -282,6 +283,9 @@
       &:hover {
         background: #f0f0f0;
       }
+      &.topic {
+        grid-template-columns: 1fr;
+      }
     }
   }
 
@@ -291,6 +295,14 @@
     /* make them start from the bottom, because I don't know how to math otherwise. */
     transition: width 0.1s ease-in-out;
     
+  }
+
+  .milestone {
+    font-family: system-ui, sans-serif;
+    font-size: 12px;
+    letter-spacing: -0.05em;
+    font-style: italic;
+    opacity: 0.4;
   }
 
   .hoverbar {
@@ -306,18 +318,26 @@
     max-width: 1000px;
     width: 100%;
   }
+
 </style>
 
 <div id="container">
   {#await data}
     Loading...
   {:then}
-    <header>
-      <input type="text" bind:value={topic} />
-      {#each TOPICS as topicButton}
-        <button onmouseover={() => { topic = topicButton }}>{topicButton}</button>
-      {/each}
-      <hr />
+    <div class="options">
+      <div class="topics">
+        <!-- <input type="text" bind:value={topic} /> -->
+        {#each TOPICS as topicButton}
+          <button class="topic"
+            onmouseover={() => { topic = topicButton }}
+            onfocus={() => { topic = topicButton }}
+            onmouseleave={() => { topic = '' }}
+          >
+            {topicButton}
+          </button>
+        {/each}
+      </div>
       <div class="authors">
         {#each authors as author}
           <button class="author"
@@ -330,7 +350,7 @@
         </button>
       {/each}
     </div>
-    </header>
+  </div>
     <section class="main" bind:clientWidth={chartWidth} bind:clientHeight={chartHeight}>
       {#each timeline as year, yearIter}
         <!-- <Canvas width={chartWidth} height={chartHeight / weeksByYear.length - yPadding} bind:ctx={canvasContexts[yearIter]}>
@@ -349,6 +369,13 @@
         <ChartContainer width={chartWidth} height={individualChartHeight} yDomain={yDomains[yearIter]} {xDomain}
           xScale={xScale} yScale={yScales[yearIter]} hideXAxis={true} hideYAxis={true}>
           {#each year as week, weekIter}
+            {#if week.milestone}
+              <g class="milestone">
+                <text x={xScale(weekIter) + barContainerWidth / 2 + 5} y={25}>{week.milestone.title}</text>
+                <line x1={xScale(weekIter) + barContainerWidth / 2} y1={15} x2={xScale(weekIter) + barContainerWidth / 2} y2={individualChartHeight - 5} stroke="black" stroke-dasharray="1,3" />
+              </g>
+            {/if}
+
             <rect
               class="commit"
               x={xScale(weekIter) + barContainerWidth / 2 - barWidth / 2} {...{/* lol, lmao */}}
@@ -367,10 +394,14 @@
               opacity=0
               role="tooltip"
               onmouseenter={(e) => {
-                console.log(`week ${weekIter}`);
-                console.log(`${new Date(week.weekStart).toLocaleDateString()} to ${new Date(week.weekEnd).toLocaleDateString()}`);
-                console.log('Commit count', week.count);
-                console.log('raw', week);
+                console.log(week.milestone);
+                if (week.milestone) {
+                  console.log('milestone', week.milestone);
+                }
+                // console.log(`week ${weekIter}`);
+                // console.log(`${new Date(week.weekStart).toLocaleDateString()} to ${new Date(week.weekEnd).toLocaleDateString()}`);
+                // console.log('Commit count', week.count);
+                // console.log('raw', week);
                 // console.log('Terms', week.terms.slice(0,10).map(x => x.term));
                 // e.target.style.opacity = .1;
               }}
@@ -379,7 +410,7 @@
               }}
               fill="transparent"
             />
-            {/each}
+          {/each}
         </ChartContainer>
       {/each}
         <!-- {#each circles as circle}

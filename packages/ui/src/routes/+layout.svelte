@@ -548,13 +548,12 @@ console.timeEnd('layout');
         </svg>
       </a>
 		</h1>
-    <nav>
+    <!-- <nav>
+      <a onmouseover={hoverDataSource} onmouseout={unhoverDataSource} href="/">Timeline</a>
       <a onmouseover={hoverDataSource} onmouseout={unhoverDataSource} href="/releases">Releases</a>
-      <a onmouseover={hoverDataSource} onmouseout={unhoverDataSource} href="/files">Files</a>
       <a onmouseover={hoverDataSource} onmouseout={unhoverDataSource} href="/contributors">Contributors</a>
       <a onmouseover={hoverDataSource} onmouseout={unhoverDataSource} href="/stars">Stars</a>
-
-    </nav>
+    </nav> -->
 </header>
 
 	{#if meta}

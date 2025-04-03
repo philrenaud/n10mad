@@ -13,7 +13,7 @@
 
   // TODO: Temporary D3 in the browser so I can fuck around a bit
   import * as d3 from 'd3';
-  window.d3 = d3;
+  // window.d3 = d3;
 
 	let { data }: PageProps = $props();
 
@@ -108,8 +108,8 @@
     }
   }));
 
-  let chartWidth: number = $state(600);
-  let chartHeight: number = $state(400);
+  let chartWidth: number = $state(0);
+  let chartHeight: number = $state(0);
 
   const padding = 80;
 
