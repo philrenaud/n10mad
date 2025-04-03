@@ -70,6 +70,8 @@
 
   let { contributors } = data;
 
+  contributors = contributors.sort((a, b) => b.total - a.total);
+
   const nomadGreen = '#00ca8e';
 
   const baseAreaStyle = {

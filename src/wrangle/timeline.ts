@@ -71,13 +71,13 @@ const getWeeklyCommitsByYear = () => {
     // Count by weekNumber
     const weekCounts = weeksInYear.map((week) => {  
       const commitsForWeek = binnedCommits.filter((commit) => commit.weekNumber === week);
-      const uniqueAuthorCountPerWeek = new Set(commitsForWeek.map((commit) => commit.commit.author)).size;
+      const uniqueAuthors = new Set(commitsForWeek.map((commit) => commit.commit.author));
       return {
         weekNumber: week,
         count: commitsForWeek.length,
         weekStart: new Date(`${year}-01-01`).getTime() + (week * 7 * 24 * 60 * 60 * 1000),
         weekEnd: new Date(`${year}-01-01`).getTime() + ((week + 1) * 7 * 24 * 60 * 60 * 1000),
-        uniqueAuthorCount: uniqueAuthorCountPerWeek
+        authors: Array.from(uniqueAuthors),
         // weekStart: commitsForWeek[0].date,
         // weekEnd: commitsForWeek[commitsForWeek.length - 1].date
       }

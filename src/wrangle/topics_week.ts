@@ -48,6 +48,8 @@ const getWeeklyCommitsByYear = () => {
       const weekNumber = Math.min(Math.floor(dayOfYear / 7), 51); // Cap at 51 (week 52)
       return {
         weekNumber,
+        weekStart: new Date(`${year}-01-01`).getTime() + (weekNumber * 7 * 24 * 60 * 60 * 1000),
+        weekEnd: new Date(`${year}-01-01`).getTime() + ((weekNumber + 1) * 7 * 24 * 60 * 60 * 1000),
         date,
         commit
       }
@@ -127,14 +129,12 @@ export async function wrangleTopicsWeek() {
     // console.log('adding some commits', week.commits.length, week.commits.join());
   });
 
-  // console.log('corpus', corpus.listTerms(0));
-
   // Fun method to turn down the "temperature": only show terms with idf < 5 or so. Because idf is "number of commit messages divided by number containing this word", high values mean "this is pretty dang rare".
   // That's okay! That can be a signal! In fact TFIDF depends on that signal explicitly!
   // But it's probably too spicy in a clustered-homogeneity context like "Nomad authors".
   // For example: James and I, wihtout this method, have "behaviour" as one of our terms.
   // It's not like we talk about behaviour a lot. It's just that we respect the Crown enough to use her english.
-  const SPICE_TOLERANCE = 10;
+  const SPICE_TOLERANCE = 4;
 
   // const AUTHORS_TO_INCLUDE = 100;
   const TERMS_TO_INCLUDE = 20;
@@ -145,13 +145,15 @@ export async function wrangleTopicsWeek() {
       return {
         year: flatWeeks[i].year,
         weekNumber: flatWeeks[i].weekNumber,
+        weekStart: flatWeeks[i].weekStart,
+        weekEnd: flatWeeks[i].weekEnd,
         terms: corpus.listTerms(i)
-        .filter(t => t.idf < SPICE_TOLERANCE)
+        .filter(t => t.tf >= 2 && t.idf < SPICE_TOLERANCE)
         .slice(0, TERMS_TO_INCLUDE)
         .map(t => {
           return {
             term: t.term,
-            tfidf: t.tfidf
+            tfidf: t.tfidf,
           }
         })
       }
