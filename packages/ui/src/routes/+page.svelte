@@ -5,8 +5,40 @@
   import Canvas from '$lib/Canvas.svelte';
 	import Circle from '$lib/Circle.svelte';
 	import type { PageProps } from './$types';
-
+  import { getContext, setContext } from 'svelte';
+  import type { Metadata, createMetadataStore } from '$lib/components/metadata.svelte';
+  // import { metadata } from '$lib/stores/metadata';
 	let { data }: PageProps = $props();
+
+  // Inherit topic from layout.svelte
+  console.log('page data', page.data);
+
+  let focusContext: () => Focus = getContext('focus');
+  let focus: Focus = $derived.by(() => {
+    return focusContext();
+  })
+
+  let metadataStore: ReturnType<typeof createMetadataStore> = getContext('metadataStore');
+  let metadata: Metadata[] = $derived.by(() => {
+    console.log('letting metadata be', metadataStore.metadata);
+    return metadataStore.metadata;
+  })
+  console.log('METADATA FROM PAGE', metadata);
+  $inspect(metadata);
+
+  let topic = $derived.by(() => {
+    return focus.type === 'topic' ? focus.query : '';
+  })
+
+  let author = $derived.by(() => {
+    return focus.type === 'author' ? focus.query : '';
+  })
+
+  $inspect(topic);
+  $inspect(author);
+
+  let authors = [];
+
   console.log('stars', data.stars);
 
   let timeline = $state(data.timeline);
@@ -94,8 +126,8 @@
     });
   });
 
-  const xPadding = 90;
-  const yPadding = 30;
+  const xPadding = 90; // space along the side margins; maybe replace with css margins instead of accounting in d3?
+  const yPadding = 30; // vertical space between years
 
   // let xScale = $derived(scaleLinear().domain(xDomain).range([padding, chartWidth - padding]));
   // ^--- use a time scale scale for week/months of the year
@@ -163,82 +195,26 @@
     });
   });
 
+  // let topicIsAuthor = $derived(authors.map(a => a.name).includes(topic));
 
-  const TOPICS = [
-    'docs',
-    'consul',
-    'node',
-    'docker',
-    'tests',
-    'api',
-    'ui',
-    'cli',
-    'csi',
-    'connect',
-    'rpc',
-    'token',
-    'namespace',
-    'scheduler',
-    'volumes',
-    'master',
-    'grpc',
-    'memory',
-    'identity',
-    'raft',
-    'windows',
-    'variables',
-    'panic',
-    'policy',
-    'fingerprint',
-    'ember',
-    'go',
-    'auth',
-    'region',
-    'vault',
-    'actions',
-    'tls',
-    'e2e',
-    'fs',
-    'dependency',
-    'preemption',
-    'vagrant',
-    'hcl2',
-    'quota',
-    'disconnected',
-  ]
-
-  let authors = $derived.by(() => {
-    // console.log('contributors', contributors);
-    return contributors.slice(0,20).map((c) => {
-      return {
-        avatar: c.author.avatar_url,
-        name: c.author.login,
-      }
-    })
-  })
-
-  let topic = $state('');
-  let topicIsAuthor = $derived(authors.map(a => a.name).includes(topic));
-
-  function highlightWeek(week: Week) {
-    if (topicIsAuthor) {
-      return week.authors.includes(topic) ? 0.5 : 0;
-    } else {
-      return topicScale(week.terms?.find(term => term.term === topic)?.tfidf || 0);
-    }
-  }
+  // function highlightWeek(week: Week) {
+  //   if (topicIsAuthor) {
+  //     return week.authors.includes(topic) ? 0.5 : 0;
+  //   } else {
+  //     return topicScale(week.terms?.find(term => term.term === topic)?.tfidf || 0);
+  //   }
+  // }
 
   let calculateBarWidth = $derived.by(() => {
     // console.log('CBW', topic, topicIsAuthor);
     return (week) => {
-      if (!topic) return barWidth;
-      
-      if (topicIsAuthor) {
-        return week.authors.includes(topic) ? barWidth * 2 : 0.5;
+      if (!topic && !author) return barWidth;
+      if (author) {
+        return week.authors.includes(author) ? barWidth * 2 : 0.5;
       }
-      // console.log('week', week, week.terms);
-      
-      return week.terms?.find(term => term.term === topic)?.tfidf > 0 ? barWidth * 2 : 1;
+      if (topic) {
+        return week.terms?.find(term => term.term === topic)?.tfidf > 0 ? barWidth * 2 : 1;
+      }      
     };
   });
   
@@ -253,41 +229,12 @@
 </script>
 
 <style>
-  #container {
+  /* #container {
     width: 100%;
     height: 100%;
     position: absolute;
     display: grid;
-    /* grid-template-rows: auto 1fr; */
-  }
-
-  .authors, .topics {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 5px;
-    max-width: 850px;
-    margin: auto;
-    margin-bottom: 10px;
-
-    .author, .topic {
-      display: inline-grid;
-      grid-template-columns: 20px 1fr;
-      gap: 5px;
-      background: white;
-      border-radius: 40px;
-      padding: 2px 4px;
-      box-shadow: 2px 2px 2px 0px rgba(0, 0, 0, 0.1);
-      border: none;
-      align-items: center;
-      cursor: pointer;
-      &:hover {
-        background: #f0f0f0;
-      }
-      &.topic {
-        grid-template-columns: 1fr;
-      }
-    }
-  }
+  } */
 
   .commit {
     /* fill: #000; */
@@ -311,46 +258,27 @@
   }
 
   .main {
+    width: 100%;
+    display: block;
+    height: 100%;
+    max-width: 1000px;
+    margin: 0 auto;
+  }
+
+  /* .main {
     display: grid;
     grid-auto-flow: row;
     gap: 0;
     margin: 0 auto 50px auto;
     max-width: 1000px;
     width: 100%;
-  }
-
+  } */
 </style>
 
-<div id="container">
+<!-- <div id="container"> -->
   {#await data}
     Loading...
   {:then}
-    <div class="options">
-      <div class="topics">
-        <!-- <input type="text" bind:value={topic} /> -->
-        {#each TOPICS as topicButton}
-          <button class="topic"
-            onmouseover={() => { topic = topicButton }}
-            onfocus={() => { topic = topicButton }}
-            onmouseleave={() => { topic = '' }}
-          >
-            {topicButton}
-          </button>
-        {/each}
-      </div>
-      <div class="authors">
-        {#each authors as author}
-          <button class="author"
-            onmouseover={() => { topic = author.name }}
-            onfocus={() => { topic = author.name }}
-            onmouseleave={() => { topic = '' }}
-        >
-          <img src={author.avatar} style="width: 20px; height: 20px; border-radius: 50%;" />
-          {author.name}
-        </button>
-      {/each}
-    </div>
-  </div>
     <section class="main" bind:clientWidth={chartWidth} bind:clientHeight={chartHeight}>
       {#each timeline as year, yearIter}
         <!-- <Canvas width={chartWidth} height={chartHeight / weeksByYear.length - yPadding} bind:ctx={canvasContexts[yearIter]}>
@@ -394,9 +322,14 @@
               opacity=0
               role="tooltip"
               onmouseenter={(e) => {
-                console.log(week.milestone);
                 if (week.milestone) {
                   console.log('milestone', week.milestone);
+                  console.log('but what about metadataStore', metadataStore, metadata);
+                  // set metadata context
+                  metadataStore.set(Object.entries(week.milestone).map(([key, value]) => ({
+                    key,
+                    value
+                  })));
                 }
                 // console.log(`week ${weekIter}`);
                 // console.log(`${new Date(week.weekStart).toLocaleDateString()} to ${new Date(week.weekEnd).toLocaleDateString()}`);
@@ -422,4 +355,4 @@
       Error loading data: {error}
     </p>
   {/await}
-</div>
+<!-- </div> -->

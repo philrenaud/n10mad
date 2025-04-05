@@ -316,9 +316,15 @@
   #container {
     width: 100%;
     height: 100%;
-    position: absolute;
+    max-width: 1000px;
+    margin: 0 auto;
+    /* position: absolute; */
     display: grid;
     grid-template-rows: auto 1fr;
+
+    .main {
+      width: 100%;
+    }
   }
 
   path {
@@ -333,13 +339,13 @@
     outline: none;
   }
 
-  button {
+  /* button {
     margin-right: 1rem;
     &.active {
       background-color: #000;
       color: #fff;
     }
-  }
+  } */
 
   #contributor-avatar {
     position: absolute;

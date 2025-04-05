@@ -3,6 +3,7 @@ import type { LayoutServerLoad } from './$types';
 import releases from '../../../../data/releases.json';
 import files from '../../../../data/files.json';
 import contributors from '../../../../data/contributors.json';
+// TODO: use a wrangled contributors file instead of raw
 import stars from '../../../../data/stars.json';
 
 const filesMap = files.map((f) => {
@@ -30,11 +31,17 @@ export const ssr = true;
 // UPDATE: maybe set ssr false on page but ssr true on layout?
 
 export const load: LayoutServerLoad = async () => {
-  return {};
+  // return {};
   return {
-    releases: releases.data,
-    files: filesMap,
-    contributors: contributors,
-    stars: stars,
+    // releases: releases.data,
+    // files: filesMap,
+    contributors: contributors
+    .filter(c => {
+      return c.author.login !== 'dependabot[bot]' && !c.author.login.includes('hc-github-team-nomad-core')
+    })
+    .sort((a, b) => b.contributions - a.contributions)
+    .reverse()
+    .slice(0,30),
+    // stars: stars,
   }
 }
