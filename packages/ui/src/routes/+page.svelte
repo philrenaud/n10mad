@@ -20,11 +20,8 @@
 
   let metadataStore: ReturnType<typeof createMetadataStore> = getContext('metadataStore');
   let metadata: Metadata[] = $derived.by(() => {
-    console.log('letting metadata be', metadataStore.metadata);
     return metadataStore.metadata;
   })
-  console.log('METADATA FROM PAGE', metadata);
-  $inspect(metadata);
 
   let topic = $derived.by(() => {
     return focus.type === 'topic' ? focus.query : '';

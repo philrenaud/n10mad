@@ -3,6 +3,7 @@
  */
 
 import files from '../../data/files.json';
+import contributors from '../../data/contributors.json';
 import natural from 'natural';
 
 const stopwords = natural.stopwords;
@@ -26,17 +27,53 @@ type Year = {
   weeks: Week[];
 }
 
+type ContributorWeek = {
+  w: number;
+  a: number;
+  d: number;
+  c: number;
+}
+
+type Author = {
+  login: string;
+  id: number;
+  node_id: string;
+  avatar_url: string;
+  gravatar_id: string;
+  url: string;
+  html_url: string;
+  followers_url: string;
+  following_url: string;
+  gists_url: string;
+  starred_url: string;
+  subscriptions_url: string;
+  organizations_url: string;
+  repos_url: string;
+  events_url: string;
+  received_events_url: string;
+  type: string;
+  user_view_type: string;
+  site_admin: boolean;
+}
+
+
 const allCommits = files[0].commits;
+
+
+const AUTHORS_TO_IGNORE = [
+  'dependabot[bot]',
+  'hc-github-team-nomad-core',
+];
 
 function organizeCommitsByAuthor(commits: Commit[]) {
   const authorMap = new Map<string, {author: string, commits: Commit[]}>();
-  
+
   // Fun mystery: a good chunk of commits are made by "undefined" when returned by oktokit,
   // like https://github.com/hashicorp/nomad/commit/0cc2ab5ae96f96fb29e97937936476863dca08b4 etc.
   // My best guess is that this happens when a user sometimes merges via CLI, and other times via the github UI,
   // and github doesn't know how to reconcile it?
   commits
-  .filter(c => c.author !== undefined)
+  .filter(c => c.author !== undefined && !AUTHORS_TO_IGNORE.includes(c.author))
   .forEach(commit => {
     if (!authorMap.has(commit.author)) {
       authorMap.set(commit.author, {author: commit.author, commits: []});
@@ -107,7 +144,7 @@ export async function wrangleTopicsAuthor() {
   const AUTHORS_TO_INCLUDE = 100;
   const TERMS_TO_INCLUDE = 20;
 
-  const output = corpus.documents
+  const topicsByAuthor = corpus.documents
     .slice(0, AUTHORS_TO_INCLUDE)
     .map((doc, i) => {
       return {
@@ -123,5 +160,26 @@ export async function wrangleTopicsAuthor() {
         })
       }
     });
-  return output;
+  // return topicsByAuthor;
+
+  const wrangledContributors = contributors
+  .filter(c => !AUTHORS_TO_IGNORE.includes(c.author.login))
+  .sort((a, b) => b.contributions - a.contributions)
+  .slice(0, AUTHORS_TO_INCLUDE)
+  .map(c => {
+    return {
+      weeks: c.weeks.map(week => {
+        return {
+          w: week.w,
+          c: week.c,
+        }
+      }),
+      author: {
+        ...c.author,
+        terms: topicsByAuthor.find(t => t.author === c.author.login)?.terms || []
+      },
+    }
+  })
+  
+  return wrangledContributors;
 }

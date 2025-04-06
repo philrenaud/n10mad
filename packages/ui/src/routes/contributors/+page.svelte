@@ -4,6 +4,18 @@
   import type { PageProps } from './$types';
   // Contributor type is a child of data.contributors; get it
   // type Contributor = PageProps['data']['contributors'][0];
+  import { getContext, setContext } from 'svelte';
+  import type { Metadata, createMetadataStore } from '$lib/components/metadata.svelte';
+
+  // let focusContext: () => Focus = getContext('focus');
+  // let focus: Focus = $derived.by(() => {
+  //   return focusContext();
+  // })
+
+  let metadataStore: ReturnType<typeof createMetadataStore> = getContext('metadataStore');
+  let metadata: Metadata[] = $derived.by(() => {
+    return metadataStore.metadata;
+  })
 
   // get PageData type
   type Contributor = PageProps['data']['contributors'][0]; // TODO: this feel unnecessary and Svelte should be handling it for me.
@@ -243,6 +255,12 @@
 
   let handleContributorFocus = (event, area) => {
     console.log(`${area.author.login} has made ${area.total} commits`);
+    console.log('area', area);
+    metadataStore.set([
+      {key: 'contributor', value: area.author.login},
+      // ...area.author.terms.map(t => ({key: t.term, value: t.tfidf}))
+      {key: 'terms', value: area.author.terms.map(t => t.term).join(', ')}
+    ]);
     if (!focusedContributors.includes(area.author.login)) {
       focusedContributors = [...focusedContributors, area.author.login];
     }
