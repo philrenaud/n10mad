@@ -28,7 +28,7 @@ async function fetchData(sourcesToFetch: DataSource[]) {
     }
     console.log('fetching resource', resource);
     const data = await fetchers[resource]();
-    Bun.write(`data/${resource}.json`, JSON.stringify(data, null, 2));
+    Bun.write(`data/raw/${resource}.json`, JSON.stringify(data, null, 2));
   }
 }
 

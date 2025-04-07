@@ -1,5 +1,5 @@
 import type { PageServerLoad } from './$types';
-// import contributors from '../../../../../data/contributors.json';
+// import contributors from '../../../../../data/raw/contributors.json';
 import wrangledContributors from '../../../../../data/wrangled/topics_author.json';
 export const ssr = true;
 

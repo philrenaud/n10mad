@@ -1,5 +1,5 @@
 import type { PageServerLoad } from './$types';
-import stars from '../../../../../data/stars.json';
+import stars from '../../../../../data/raw/stars.json';
 
 export const ssr = false;
 

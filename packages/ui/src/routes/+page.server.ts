@@ -1,10 +1,10 @@
 import { error } from '@sveltejs/kit';
 import type { LayoutServerLoad } from './$types';
-import releases from '../../../../data/releases.json';
-// import files from '../../../../data/files.json';
+// import releases from '../../../../data/raw/releases.json';
+// import files from '../../../../data/raw/files.json';
 import timeline from '../../../../data/wrangled/timeline.json';
-// import contributors from '../../../../data/contributors.json';
-import stars from '../../../../data/stars.json';
+// import contributors from '../../../../data/raw/contributors.json';
+import stars from '../../../../data/raw/stars.json';
 import topics from '../../../../data/wrangled/topics_week.json';
 
 export const ssr = true;

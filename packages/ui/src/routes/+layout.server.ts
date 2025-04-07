@@ -1,10 +1,10 @@
 import { error } from '@sveltejs/kit';
 import type { LayoutServerLoad } from './$types';
-import releases from '../../../../data/releases.json';
-import files from '../../../../data/files.json';
-import contributors from '../../../../data/contributors.json';
+import releases from '../../../../data/raw/releases.json';
+import files from '../../../../data/raw/files.json';
+import contributors from '../../../../data/raw/contributors.json';
 // TODO: use a wrangled contributors file instead of raw
-import stars from '../../../../data/stars.json';
+import stars from '../../../../data/raw/stars.json';
 
 const filesMap = files.map((f) => {
   // Count authors and tally them

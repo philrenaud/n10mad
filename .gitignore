@@ -175,6 +175,6 @@ dist
 .DS_Store
 
 # Data files
-data/
+data/raw/
 # TODO: maybe don't ignore wrangled files, just raw files?
 

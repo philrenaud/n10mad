@@ -22,11 +22,12 @@
   );
 
   const padding = 80;
+  const horizontalXAxisPadding = -padding / 2;
 
-  let atlisTransform = $derived(
+  let axisTransform = $derived(
     orientation === 'vertical'
     ? `translate(${padding}, 0)`
-    : `translate(0, ${height - padding})`
+    : `translate(${horizontalXAxisPadding}, ${height - padding})`
   );
 
   // $effect(() => {
@@ -76,7 +77,7 @@
   $effect(() => {
     if (axisElement) {
       select(axisElement)
-      .attr('transform', atlisTransform)
+      .attr('transform', axisTransform)
       .call(axis);
     }
   });

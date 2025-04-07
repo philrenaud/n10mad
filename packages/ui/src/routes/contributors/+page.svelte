@@ -23,9 +23,8 @@
   import ChartContainer from '$lib/components/chart/ChartContainer.svelte';
   import { scaleLinear, scaleTime, type ScaleTime } from 'd3';
 
-  // TODO: Temporary D3 in the browser so I can fuck around a bit
+  // TODO: Don't import the whole shebang
   import * as d3 from 'd3';
-  // window.d3 = d3;
 
 	let { data }: PageProps = $props();
 
@@ -391,10 +390,10 @@
     Loading...
   {:then}
     <header>
-      <h2>Contributors</h2>
+      <!-- <h2>Contributors</h2>
       <p>
         Here are the stats for the top 100 contributors to Nomad over the past decade. Between them, they represent about 25,000 of the 26,000 commits Nomad has seen over her lifetime.
-      </p>
+      </p> -->
       <button class:active={mode === 'stream'} onclick={() => {
         page.url.searchParams.set('mode', 'stream');
         goto(`?${page.url.searchParams.toString()}`, { replaceState: false, keepFocus: true });

@@ -2,8 +2,8 @@
  * Goes over all contributions data and assigns topics to each commit author
  */
 
-import files from '../../data/files.json';
-import contributors from '../../data/contributors.json';
+import files from '../../data/raw/files.json';
+import contributors from '../../data/raw/contributors.json';
 import natural from 'natural';
 
 const stopwords = natural.stopwords;

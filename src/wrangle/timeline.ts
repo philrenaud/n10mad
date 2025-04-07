@@ -4,7 +4,7 @@
 
 import { readFileSync } from 'fs';
 import { join } from 'path';
-import files from '../../data/files.json';
+import files from '../../data/raw/files.json';
 
 if (!files) {
   throw new Error('files.json does not exist; you need to run `bun fetch files` first');

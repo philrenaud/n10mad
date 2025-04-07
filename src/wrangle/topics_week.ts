@@ -2,8 +2,8 @@
  * Goes over all contributions data and assigns topics to each in the timeline
  */
 
-import files from '../../data/files.json';
-import timeline from '../../data/wrangled/timeline.json';
+import files from '../../data/raw/files.json';
+// import timeline from '../../data/wrangled/timeline.json';
 import natural from 'natural';
 
 const stopwords = natural.stopwords;
