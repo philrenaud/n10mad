@@ -616,6 +616,8 @@
 		goto(`?${type}=${query}`, { keepFocus: true });
 	}
 
+	let sidebarOpen = $state(false);
+
 	// #endregion sidebar
 </script>
 
@@ -676,7 +678,20 @@
     </nav> -->
 	</header>
 
-	<aside>
+	<aside class:open={sidebarOpen}>
+		{#if sidebarOpen}
+			<button class="toggle" onclick={() => {
+				sidebarOpen = false;
+			}}>
+				Close
+			</button>
+		{:else}
+			<button class="toggle" onclick={() => {
+				sidebarOpen = true;
+			}}>
+				Open
+			</button>
+		{/if}
 		<nav>
 			<a class:active={page.url.pathname === '/'} href="/">Timeline</a>
 			<!-- <a href="/releases">Releases</a> -->
@@ -785,13 +800,14 @@
 		width: 100vw;
 		height: 100vh;
 		box-sizing: border-box;
-		display: grid;
+		/* display: grid; */
 		/* grid-template-rows: auto 1fr; */
-		grid-template-columns: minmax(150px, 280px) 1fr;
+		/* grid-auto-flow: row; */
+		/* grid-template-columns: minmax(150px, 280px) 1fr;
 		grid-template-rows: auto 1fr;
 		grid-template-areas:
 			'sidebar header'
-			'sidebar main';
+			'sidebar main'; */
 
 		header {
 			grid-area: header;
@@ -839,6 +855,33 @@
 	aside {
 		grid-area: sidebar;
 		padding: 1rem;
+		position: fixed;
+		width: calc(100vw - 2rem);
+		height: 100vh;
+		top: 0;
+		left: calc(-100vw + 2rem);
+		box-sizing: border-box;
+		z-index: 2;
+		background-color: rgba(255, 255, 255, 0.9);
+		transition: left 0.3s ease-in-out;
+
+		&.open {
+			left: 0;
+		}
+
+		.toggle {
+			position: absolute;
+			top: calc(50% - 25px);
+			right: -25px;
+			width: 50px;
+			height: 50px;
+			background-color: black;
+			color: white;
+			border-radius: 0 4px 4px 0;
+			border: none;
+			cursor: pointer;
+		}
+		
 
 		nav {
 			display: grid;
@@ -896,12 +939,21 @@
 	.page {
 		grid-area: main;
 		width: 100%;
+		height: 100%;
 		padding-bottom: 4rem;
 	}
 
 	@media (min-width: 960px) {
 		main {
 			border: 2rem solid rgba(0,0,0,0.2);
+			display: grid;
+			grid-template-columns: minmax(150px, 280px) 1fr;
+			grid-template-rows: auto 1fr;
+			grid-template-areas:
+				'sidebar header'
+				'sidebar main';
+
+			
 			header {
 				nav {
 					grid-auto-flow: column;
@@ -909,6 +961,22 @@
 					a {
 						padding: 0.5rem 1rem;
 					}
+				}
+			}
+
+			.page {
+				height: auto;
+			}
+
+			aside {
+				position: relative;
+				left: 0;
+				width: auto;
+				height: 100%;
+				transition: left 0.3s ease-in-out;
+				background-color: transparent;
+				.toggle {
+					display: none;
 				}
 			}
 		}
