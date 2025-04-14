@@ -31,12 +31,10 @@
     return focus.type === 'author' ? focus.query : '';
   })
 
-  $inspect(topic);
-  $inspect(author);
+  // $inspect(topic);
+  // $inspect(author);
 
   let authors = [];
-
-  console.log('stars', data.stars);
 
   let timeline = $state(data.timeline);
   let contributors = $state(data.contributors);

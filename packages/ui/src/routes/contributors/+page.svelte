@@ -7,10 +7,30 @@
   import { getContext, setContext } from 'svelte';
   import type { Metadata, createMetadataStore } from '$lib/components/metadata.svelte';
 
-  // let focusContext: () => Focus = getContext('focus');
-  // let focus: Focus = $derived.by(() => {
-  //   return focusContext();
-  // })
+  let focusContext: () => Focus = getContext('focus');
+  let streamModeContext = getContext('streamMode');
+
+  let focus: Focus = $derived.by(() => {
+    return focusContext();
+  })
+
+  let streamMode = $derived.by(() => {
+    return streamModeContext();
+  })
+
+  let topic = $derived.by(() => {
+    return focus.type === 'topic' ? focus.query : '';
+  })
+
+  let author = $derived.by(() => {
+    return focus.type === 'author' ? focus.query : '';
+  })
+
+  let mode = $derived.by(() => {
+    // return focus.mode === 'topic' ? focus.query : '';
+    console.log('++=interpreting streamMode in a deriver', streamMode);
+    return streamMode;
+  })
 
   let metadataStore: ReturnType<typeof createMetadataStore> = getContext('metadataStore');
   let metadata: Metadata[] = $derived.by(() => {
@@ -29,53 +49,77 @@
 	let { data }: PageProps = $props();
 
   // #region Query Params
-  const defaultMode = 'stream';
-  let mode: 'stream' | 'ridgeline' = $state(page.url.searchParams.get('mode') as 'stream' | 'ridgeline' || defaultMode);
+  // const defaultMode = 'stream';
+  // let mode: 'stream' | 'ridgeline' = $state(page.url.searchParams.get('mode') as 'stream' | 'ridgeline' || defaultMode);
 
   const defaultSearch = "";
   let searchQuery: string = $state(page.url.searchParams.get('query') || defaultSearch);
 
-  $effect(() => {
-    if (mode !== page.url.searchParams.get('mode')) {
-      mode = page.url.searchParams.get('mode') as 'stream' | 'ridgeline' || defaultMode;
-    }
-    if (mode === defaultMode && page.url.searchParams.get('mode')) {
-      page.url.searchParams.delete('mode');
-      goto(`?${page.url.searchParams.toString()}`, { replaceState: true, keepFocus: true });
-    }
-  });
+  // $effect(() => {
+  //   if (mode !== page.url.searchParams.get('mode')) {
+  //     mode = page.url.searchParams.get('mode') as 'stream' | 'ridgeline' || defaultMode;
+  //   }
+  //   if (mode === defaultMode && page.url.searchParams.get('mode')) {
+  //     page.url.searchParams.delete('mode');
+  //     goto(`?${page.url.searchParams.toString()}`, { replaceState: true, keepFocus: true });
+  //   }
+  // });
 
-  $effect(() => {
-    if (searchQuery !== page.url.searchParams.get('query')) {
-      focusedContributors = [];
-      searchQuery = page.url.searchParams.get('query') || defaultSearch;
-    }
-    if (searchQuery === defaultSearch && page.url.searchParams.get('query')) {
-      page.url.searchParams.delete('query');
-      goto(`?${page.url.searchParams.toString()}`, { replaceState: true, keepFocus: true });
-    }
-    if (searchQuery !== defaultSearch) {
-      const searchedLogins = searchQuery
-        .split(',')
-        .map(login => login.trim())
-        .filter(login => login.length > 0);
-      
-      if (searchedLogins.length > 0) {
-        const matchedContributors = searchedLogins
-          .map(login => contributors.find(c => c.author.login === login))
-          .filter(c => c !== undefined)
-          .map(c => c.author.login);
+  let focusedContributors = $state<string[]>([]);
 
-        if (matchedContributors.length > 0) {
-          focusedContributors = matchedContributors;
-        } else {
-          focusedContributors = [];
+  let queriedContributors = $derived.by(() => {
+    // TODO: currently, looks like by combining Author and Topic into a single "Focus", I'm making them mutually exclusive. Gotta fix that.
+    let ret = [];
+    console.log('checking on queried contributors', topic, author);
+    if (author) {
+      ret = [author];
+    }
+    if (topic) {
+      console.log('topic present, check the authors', contributors);
+      contributors.forEach((c) => {
+        if (c.author.terms.map(t => t.term).includes(topic)) {
+          ret.push(c.author.login);
         }
-      } else {
-        focusedContributors = [];
-      }
+      });
     }
+    return ret;
   });
+
+  $effect(() => {
+    focusedContributors = queriedContributors;
+  })
+
+  // $effect(() => {
+  //   if (searchQuery !== page.url.searchParams.get('query')) {
+  //     focusedContributors = [];
+  //     searchQuery = page.url.searchParams.get('query') || defaultSearch;
+  //   }
+  //   if (searchQuery === defaultSearch && page.url.searchParams.get('query')) {
+  //     page.url.searchParams.delete('query');
+  //     goto(`?${page.url.searchParams.toString()}`, { replaceState: true, keepFocus: true });
+  //   }
+  //   if (searchQuery !== defaultSearch) {
+  //     const searchedLogins = searchQuery
+  //       .split(',')
+  //       .map(login => login.trim())
+  //       .filter(login => login.length > 0);
+      
+  //     if (searchedLogins.length > 0) {
+  //       const matchedContributors = searchedLogins
+  //         .map(login => contributors.find(c => c.author.login === login))
+  //         .filter(c => c !== undefined)
+  //         .map(c => c.author.login);
+
+  //       if (matchedContributors.length > 0) {
+  //         focusedContributors = matchedContributors;
+  //       } else {
+  //         focusedContributors = [];
+  //       }
+  //     } else {
+  //       focusedContributors = [];
+  //     }
+  //   }
+  // });
 
   // #endregion Query Params
 
@@ -300,8 +344,6 @@
     }
   };
   
-  let focusedContributors = $state<string[]>([]);
-
   // Change your URL so the read-url-param handling does the hard work,
   // rather than setting the prop here.
   function handleSearch(event: Event) {
@@ -346,10 +388,7 @@
 
   path {
     transition: fill-opacity 0.3s ease,
-    /* stroke-width 0.5s ease 0.5s,
-    stroke-opacity 0.5s ease 0.5s, */
     d 0.75s ease-in-out var(--delay);
-    cursor: none;
   }
 
   path:focus {
@@ -423,7 +462,7 @@
       >
       {#each areas as area, i}
         <path
-          style:--delay="{(contributors.length - i) * 0.005}s"
+          style:--delay="{(contributors.length - i) * 0.003}s"
           d={area.path}
           fill={area.style.color}
           fill-opacity={

@@ -27,15 +27,25 @@
   // #region Query Params
   const defaultTopic = null;
   const defaultAuthor = null;
+  const defaultMode = 'stream';
   let topic: string = $state(page.url.searchParams.get('topic') || defaultTopic);
   let author: string | null = $state(page.url.searchParams.get('author') || defaultAuthor);
+  let mode: 'stream' | 'ridgeline' = $state(page.url.searchParams.get('mode') as 'stream' | 'ridgeline' || defaultMode);
+
+  let searchParams = $state(page.url.searchParams.entries().toArray().flat())
+  $effect(() => {
+	// console.log('searchParams', searchParams);
+	console.log('topic updated via effect', topic);
+	
+  })
 
 	// Set focused data if it comes from query params
   $effect(() => {
     if (author !== page.url.searchParams.has('author')) { // TODO: shouldn't be .hasing here, right?
 			// console.log('setting focus from layout to author', author);
       author = page.url.searchParams.get('author') || defaultAuthor;
-			focusedData = { type: 'author', query: author };
+			// focusedData = { type: 'author', query: author };
+			focusedAuthor = author;
     }
 
 		if (!author && page.url.searchParams.has('author')) {
@@ -47,11 +57,23 @@
 	$effect(() => {
 		if (topic !== page.url.searchParams.get('topic')) {
 			topic = page.url.searchParams.get('topic') || defaultTopic;
-			focusedData = { type: 'topic', query: topic };
+			// focusedData = { type: 'topic', query: topic };
+			focusedTopic = topic;
 		}
 
 		if (!topic && page.url.searchParams.has('topic')) {
 			page.url.searchParams.delete('topic');
+			goto(`?${page.url.searchParams.toString()}`, { replaceState: true, keepFocus: true });
+		}
+	});
+
+	$effect(() => {
+		console.log("@@@ modeFX", mode);
+		if (mode !== page.url.searchParams.get('mode')) {
+			mode = page.url.searchParams.get('mode') as 'stream' | 'ridgeline' || defaultMode;
+		}
+		if (mode === defaultMode && page.url.searchParams.get('mode')) {
+			page.url.searchParams.delete('mode');
 			goto(`?${page.url.searchParams.toString()}`, { replaceState: true, keepFocus: true });
 		}
 	});
@@ -567,7 +589,7 @@
 		'windows',
 		'variables',
 		'panic',
-		'policy',
+		'policies',
 		'fingerprint',
 		'ember',
 		'go',
@@ -591,29 +613,101 @@
 		query: string;
 	};
 
-	let focusedData: Focus = $state({
-		type: 'topic',
-		query: ''
-	});
+	// let focusedData: Focus = $state({
+	// 	type: 'topic',
+	// 	query: ''
+	// });
+
+	let highlightedTopic: string | null = $state(null);
+	let highlightedAuthor: string | null = $state(null);
+	let focusedTopic: string | null = $state(null);
+	let focusedAuthor: string | null = $state(null);
+
+	// let streamModeContext = $state(mode);
 
 	// let topic = $state('');
-	setContext('focus', () => focusedData); // TODO: tie to queryParams
+	// setContext('focus', () => focusedData); // TODO: tie to queryParams
+	setContext('focusedTopic', () => focusedTopic);
+	setContext('focusedAuthor', () => focusedAuthor);
+	setContext('streamMode', () => mode)
 
 	let contributors = $state(data.contributors);
-	let authors = $derived.by(() => {
-		// console.log('contributors', contributors);
-		return contributors.map((c) => {
-			return {
-				avatar: c.author.avatar_url,
-				name: c.author.login
-			};
-		});
+	console.log('contributors', contributors);
+	// let authors = $derived.by(() => {
+	// 	// console.log('contributors', contributors);
+	// 	return contributors.map((c) => {
+	// 		return {
+	// 			avatar: c.author.avatar_url,
+	// 			name: c.author.login
+	// 		};
+	// 	});
+	// });
+
+	// function setFocus({ type, query }: { type: 'topic' | 'author'; query: string }) {
+	// 	console.log('setting focus from layout to', type, query);
+	// 	focusedData = { type, query };
+	// 	// goto(`?${type}=${query}`, { keepFocus: true });
+	// 	page.url.searchParams.set(type, query);
+	// 	goto(`?${page.url.searchParams.toString()}`, { keepFocus: true });
+
+	// 	// console.log('existing query on setFocus is', query);
+	// }
+
+	function focusTopic(topic: string | null) {
+		focusedTopic = topic;
+		if (topic) {
+			page.url.searchParams.set('topic', topic);
+			goto(`?${page.url.searchParams.toString()}`, { keepFocus: true });
+		} else {
+			page.url.searchParams.delete('topic');
+			goto(`?${page.url.searchParams.toString()}`, { keepFocus: true });
+		}
+	}
+
+	function focusAuthor(author: string | null) {
+		focusedAuthor = author;
+		if (author) {
+			page.url.searchParams.set('author', author);
+			goto(`?${page.url.searchParams.toString()}`, { keepFocus: true });
+		} else {
+			page.url.searchParams.delete('author');
+			goto(`?${page.url.searchParams.toString()}`, { keepFocus: true });
+		}
+	}
+
+	function highlightTopic(topic: string | null) {
+		if (topic) {
+			highlightedTopic = topic;
+		} else {
+			// metadataStore.set([]);
+			highlightedTopic = null;
+		}
+	}
+
+	function highlightAuthor(author: string | null) {
+		if (author) {
+			highlightedAuthor = author;
+		} else {
+			highlightedAuthor = null;
+		}
+	}
+
+	let associatedAuthors = $derived.by(() => {
+		let filtered = contributors.filter(c => c.author.terms.map(t => t.term).includes(highlightedTopic)).map(c => c.author.login);
+		// console.log('filtered', filtered);
+		return filtered;
+	});
+	
+	let associatedTopics = $derived.by(() => {
+		let filtered = TOPICS.filter(t => highlightedAuthor?.author.terms.map(t => t.term).includes(t));
+		console.log('filtered', filtered);
+		return filtered;
 	});
 
-	function setFocus({ type, query }: { type: 'topic' | 'author'; query: string }) {
-		console.log('setting focus from layout to', type, query);
-		// focusedData = { type, query };
-		goto(`?${type}=${query}`, { keepFocus: true });
+	function setStreamMode(vizType) {
+		page.url.searchParams.set('mode', vizType);
+		goto(`?${page.url.searchParams.toString()}`, { replaceState: false, keepFocus: true });
+		mode = 'ridgeline';
 	}
 
 	let sidebarOpen = $state(false);
@@ -698,14 +792,39 @@
 			<a class:active={page.url.pathname === '/contributors'} href="/contributors">Contributors</a>
 			<!-- <a href="/stars">Stars</a> -->
 		</nav>
+
+		<!-- if page is contributors -->
+
+		{#if page.url.pathname === '/contributors'}
+			<button class:active={mode === 'stream'} onclick={() => {
+				setStreamMode('stream');
+			}}>Stream Mode</button>
+			<button class:active={mode === 'ridgeline'} onclick={() => {
+				setStreamMode('ridgeline');
+			}}>Ridgeline Mode</button>
+		{/if}
+
 		<div class="topics">
 			<!-- <input type="text" bind:value={topic} /> -->
 			{#each TOPICS as topicButton}
 				<button
 					class="topic"
+					class:highlighted={associatedTopics.includes(topicButton)}
+					onmouseover={() => {
+						highlightTopic(topicButton);
+					}}
+					onfocus={() => {
+						highlightTopic(topicButton);
+					}}
+					onmouseout={() => {
+						highlightTopic(null);
+					}}
+					onblur={() => {
+						highlightTopic(null);
+					}}
 					onclick={() => {
-						metadataStore.add({key: "Topic", value: topicButton});
-						setFocus({ type: 'topic', query: topicButton });
+						metadataStore.set([{key: "Topic", value: topicButton}]);
+						focusTopic(topicButton);
 					}}
 				>
 					{topicButton}
@@ -713,21 +832,35 @@
 			{/each}
 		</div>
 		<div class="authors">
-			{#each authors as author}
+			{#each contributors.slice(0, 30) as contributor}
 				<button
 					class="author"
+					class:highlighted={associatedAuthors.includes(contributor.author.login)}
+					onmouseover={() => {
+						highlightAuthor(contributor);
+					}}
+					onfocus={() => {
+						highlightAuthor(contributor);
+					}}
+					onmouseout={() => {
+						highlightAuthor(null);
+					}}
+					onblur={() => {
+						highlightAuthor(null);
+					}}
 					onclick={() => {
-						setFocus({ type: 'author', query: author.name });
+						focusAuthor(contributor.author.login);
 					}}
 				>
-					<img src={author.avatar} style="width: 20px; height: 20px; border-radius: 50%;" />
-					{author.name}
+					<img src={contributor.author.avatar_url} style="width: 20px; height: 20px; border-radius: 50%;" />
+					{contributor.author.login}
 				</button>
 			{/each}
 		</div>
-		{#if focusedData.query}
+		{#if focusedAuthor || focusedTopic}
 			<button class="clear-filter" onclick={() => {
-				setFocus({ type: 'author', query: '' });
+				focusAuthor(null);
+				focusTopic(null);
 			}}>
 				Clear Filter
 			</button>
@@ -926,8 +1059,14 @@
 				border: none;
 				align-items: center;
 				cursor: pointer;
+				transition: background 0.1s ease-in-out;
 				&:hover {
 					background: #f0f0f0;
+				}
+				&.highlighted {
+					/* background: #00ca8e; */
+					background: rgba(0, 202, 142, 0.5);
+					color: black;
 				}
 				&.topic {
 					grid-template-columns: 1fr;

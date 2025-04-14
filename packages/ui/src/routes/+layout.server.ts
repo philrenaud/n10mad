@@ -1,8 +1,10 @@
 import { error } from '@sveltejs/kit';
 import type { LayoutServerLoad } from './$types';
-import releases from '../../../../data/raw/releases.json';
+// import releases from '../../../../data/raw/releases.json';
 import files from '../../../../data/raw/files.json';
-import contributors from '../../../../data/raw/contributors.json';
+// import contributors from '../../../../data/raw/contributors.json';
+import contributors from '../../../../data/wrangled/topics_author.json';
+
 // TODO: use a wrangled contributors file instead of raw
 import stars from '../../../../data/raw/stars.json';
 
@@ -36,12 +38,8 @@ export const load: LayoutServerLoad = async () => {
     // releases: releases.data,
     // files: filesMap,
     contributors: contributors
-    .filter(c => {
-      return c.author.login !== 'dependabot[bot]' && !c.author.login.includes('hc-github-team-nomad-core')
-    })
-    .sort((a, b) => b.contributions - a.contributions)
-    .reverse()
-    .slice(0,30),
+    .sort((a, b) => b.total - a.total)
+    .slice(0,100),
     // stars: stars,
   }
 }

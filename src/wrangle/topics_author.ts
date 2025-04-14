@@ -142,7 +142,7 @@ export async function wrangleTopicsAuthor() {
   const SPICE_TOLERANCE = 10;
 
   const AUTHORS_TO_INCLUDE = 100;
-  const TERMS_TO_INCLUDE = 20;
+  const TERMS_TO_INCLUDE = 50;
 
   const topicsByAuthor = corpus.documents
     .slice(0, AUTHORS_TO_INCLUDE)
@@ -174,6 +174,7 @@ export async function wrangleTopicsAuthor() {
           c: week.c,
         }
       }),
+      total: c.total,
       author: {
         ...c.author,
         terms: topicsByAuthor.find(t => t.author === c.author.login)?.terms || []

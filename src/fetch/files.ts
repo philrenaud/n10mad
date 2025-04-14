@@ -55,6 +55,7 @@ async function fetchCommitsForFile(file: string) {
         page: page,
         per_page: 1000
       });
+      console.log('response', response.data.length);
       if (response.data.length === 0) break;
       commits.push(...response.data);
       page++;
