@@ -24,25 +24,32 @@ but will probably end up block-levelling them if this gets much more complicated
   } = $props();
 
   let parentWidth: number = $derived(props.width);
-  let parentHeight: number = $derived(props.height);
+  let parentHeight: number = $derived(props.height || 0);
 </script>
 
 <style>
- 
+
+  .chart-container {
+    display: block;
+    position: relative;
+    width: 100%;
+    height: 0px;
+    overflow: hidden;
+  }
+
   svg {
     overflow: visible;
-    /* width: 100%;
-    height: 100%; */
     display: block;
-    /* box-sizing: border-box;
-    border: 1px solid red; */
+    width: 100%;
+    height: 100%;
   }
 </style>
-<!-- <div class="chart-container"> -->
-  <svg style="height:{parentHeight}px; width: 100%;">
+<div class="chart-container" style="height: {parentHeight}px;">
+  <!-- <svg style="width: 100%; height: {50}px; outline: 1px solid red; overflow: hidden;"> -->
+  <svg>
     {#if !props.hideYAxis}
     <!-- {console.log('passing down height to yAxis as', parentHeight)} -->
-      <VariableAxis 
+      <VariableAxis
         height={parentHeight}
         width={parentWidth}
         domain={props.yDomain}
@@ -52,7 +59,7 @@ but will probably end up block-levelling them if this gets much more complicated
       />
     {/if}
     {#if !props.hideXAxis}
-      <VariableAxis 
+      <VariableAxis
         height={parentHeight}
         width={parentWidth}
         domain={props.xDomain}
@@ -64,4 +71,4 @@ but will probably end up block-levelling them if this gets much more complicated
     {/if}
     <slot />
   </svg>
-<!-- </div> -->
+</div>

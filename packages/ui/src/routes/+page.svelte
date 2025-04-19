@@ -7,16 +7,42 @@
 	import type { PageProps } from './$types';
   import { getContext, setContext } from 'svelte';
   import type { Metadata, createMetadataStore } from '$lib/components/metadata.svelte';
-  // import { metadata } from '$lib/stores/metadata';
 	let { data }: PageProps = $props();
 
   // Inherit topic from layout.svelte
   console.log('page data', page.data);
 
-  let focusContext: () => Focus = getContext('focus');
-  let focus: Focus = $derived.by(() => {
-    return focusContext();
-  })
+  // let focusContext: () => Focus = getContext('focus');
+  // let focus: Focus = $derived.by(() => {
+  //   return focusContext();
+  // })
+  
+  // 	// let topic = $state('');
+	// // setContext('focus', () => focusedData); // TODO: tie to queryParams
+	// setContext('focusedTopic', () => focusedTopic);
+	// setContext('focusedAuthor', () => focusedAuthor);
+
+  let focus: Focus | null = $state({});
+
+  let focusedTopic = getContext('focusedTopic');
+  let focusedAuthor = getContext('focusedAuthor');
+
+  // $effect(() => {
+  //   // Just for fun let's have author override topic. TODO:.
+  //   if (focusedAuthor) {
+  //     focus = {
+  //       type: 'author',
+  //       query: focusedAuthor
+  //     }
+  //   } else if (focusedTopic) {
+  //     focus = {
+  //       type: 'topic',
+  //       query: focusedTopic
+  //     }
+  //   } else {
+  //     focus = {};
+  //   }
+  // });
 
   let metadataStore: ReturnType<typeof createMetadataStore> = getContext('metadataStore');
   let metadata: Metadata[] = $derived.by(() => {
@@ -99,6 +125,10 @@
   let chartWidth: number = $state(0);
   let chartHeight: number = $state(0);
 
+  $effect(() => {
+    console.log('++==chartWidth', chartWidth);
+  })
+
   let xDomain: [number, number] = $derived.by(() => {
     let min = 0;
     let max = 52;
@@ -124,11 +154,18 @@
   const xPadding = 90; // space along the side margins; maybe replace with css margins instead of accounting in d3?
   const yPadding = 30; // vertical space between years
 
-  // let xScale = $derived(scaleLinear().domain(xDomain).range([padding, chartWidth - padding]));
-  // ^--- use a time scale scale for week/months of the year
-  // let xScale = $derived(scaleLinear().domain(xDomain).range([padding, chartWidth - padding]));
-  let xScale = $derived(scaleTime().domain(xDomain).range([xPadding, chartWidth - xPadding]));
-  const barContainerWidth = $derived(xScale(1) - xScale(0));
+  let xScale = $derived.by(() => {
+    return scaleTime().domain(xDomain).range([xPadding, chartWidth - xPadding]);
+  });
+  // let barContainerWidth = $derived.by(() => {
+  //   if (xScale.length === 0) return 1;
+  //   return xScale(1) - xScale(0);
+  // });
+
+  // eh, just use num divided by 52
+  let barContainerWidth = $derived.by(() => {
+    return chartWidth / 52;
+  });
   const barWidth = 3;
 
 
@@ -156,7 +193,7 @@
   // #endregion fun canvas detour
 
 
-  let individualChartHeight = $derived(chartHeight / timeline.length);
+  let individualChartHeight = $derived(chartHeight / timeline.length - 1);
 
   // One way to do spacing would be with a hard value:
   // const barSpacing = 5;
@@ -201,13 +238,15 @@
   // }
 
   let calculateBarWidth = $derived.by(() => {
-    // console.log('CBW', topic, topicIsAuthor);
+    console.log('CBW', topic, author);
     return (week) => {
       if (!topic && !author) return barWidth;
       if (author) {
+        console.log('author found', author);
         return week.authors.includes(author) ? barWidth * 2 : 0.5;
       }
       if (topic) {
+        console.log('topic found', topic);
         return week.terms?.find(term => term.term === topic)?.tfidf > 0 ? barWidth * 2 : 1;
       }      
     };
@@ -220,6 +259,23 @@
     // console.log("maxWeekTFIDF", maxWeekTFIDF);
     return scaleLinear().domain([0, maxWeekTFIDF]).range([0, 0.5]);
   });
+
+  let onbeforeprint = () => {
+    console.log('onbeforeprint');
+    // TODO: magic numbers. A4 suitable though.
+    chartWidth = 775;
+    chartHeight = 775;
+  }
+
+  let mainSection: HTMLDivElement | null = $state(null);
+
+  let onafterprint = () => {
+    console.log('onafterprint');
+    // TODO: almost certainly too hacky for prod. window. + might SSR = woof.
+    window.dispatchEvent(new Event('resize'));
+    chartWidth = mainSection?.clientWidth || 0;
+    chartHeight = mainSection?.clientHeight || 0;
+  }
 
 </script>
 
@@ -253,42 +309,23 @@
   }
 
   .main {
-    width: 100%;
-    display: block;
+    display: grid;
     height: 100%;
-    max-width: 1000px;
+    max-width: 1100px;
     margin: 0 auto;
   }
-
-  /* .main {
-    display: grid;
-    grid-auto-flow: row;
-    gap: 0;
-    margin: 0 auto 50px auto;
-    max-width: 1000px;
-    width: 100%;
-  } */
 </style>
+
+<!-- Watch for beforeprint event -->
+<svelte:window {onbeforeprint} {onafterprint} />
+
 
 <!-- <div id="container"> -->
   {#await data}
     Loading...
   {:then}
-    <section class="main" bind:clientWidth={chartWidth} bind:clientHeight={chartHeight}>
+    <section class="main" bind:clientWidth={chartWidth} bind:clientHeight={chartHeight} bind:this={mainSection}>
       {#each timeline as year, yearIter}
-        <!-- <Canvas width={chartWidth} height={chartHeight / weeksByYear.length - yPadding} bind:ctx={canvasContexts[yearIter]}>
-          {#each year.data as week, weekIter}
-            {#each week.commits as commit, commitIter}
-              <Circle
-                midPoint={[xScale(weekIter), yScales[yearIter](commitIter)]}
-                radius={chartHeight / weeksByYear.length / yDomains[yearIter][1] / .5}
-                color="black"
-                borderColor="green"
-                borderWidth={0}
-              />
-            {/each}
-          {/each}
-        </Canvas> -->
         <ChartContainer width={chartWidth} height={individualChartHeight} yDomain={yDomains[yearIter]} {xDomain}
           xScale={xScale} yScale={yScales[yearIter]} hideXAxis={true} hideYAxis={true}>
           {#each year as week, weekIter}
@@ -301,7 +338,7 @@
 
             <rect
               class="commit"
-              x={xScale(weekIter) + barContainerWidth / 2 - barWidth / 2} {...{/* lol, lmao */}}
+              x={xScale(weekIter) + barContainerWidth / 2 - barWidth / 2 + 1} {...{/* lol, lmao */}}
               y={individualChartHeight - yScales[yearIter](week.count)}
               fill={colorScales[yearIter](week[colorDomainMetric])}
               width={calculateBarWidth(week)}
@@ -340,6 +377,7 @@
             />
           {/each}
         </ChartContainer>
+
       {/each}
         <!-- {#each circles as circle}
           <Circle midPoint={[circle.x, circle.y]} radius={circle.r} color={circle.color} borderColor={circle.borderColor} borderWidth={circle.borderWidth} />

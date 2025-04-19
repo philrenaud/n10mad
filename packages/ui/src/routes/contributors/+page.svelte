@@ -456,7 +456,7 @@
     <section class="main" bind:clientWidth={chartWidth} bind:clientHeight={chartHeight}
       onmouseleave={() => hoveredContributor = null}
     >
-      <ChartContainer width={chartWidth} height={chartHeight} {yDomain} {xDomain}
+      <ChartContainer height={chartHeight} {yDomain} {xDomain}
         xScale={xScale} yScale={yScale} maxTicks={10}
         hideYAxis={true}
       >

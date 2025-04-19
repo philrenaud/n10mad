@@ -9,7 +9,6 @@
 
 	import type { LayoutProps } from './$types';
 	import { setContext, getContext } from 'svelte';
-	// import { metadata } from '$lib/stores/metadata';
 	import { createMetadataStore } from '$lib/components/metadata.svelte'
 	let metadataStore = createMetadataStore();
 	let metadata = $derived.by(() => {
@@ -32,7 +31,7 @@
   let author: string | null = $state(page.url.searchParams.get('author') || defaultAuthor);
   let mode: 'stream' | 'ridgeline' = $state(page.url.searchParams.get('mode') as 'stream' | 'ridgeline' || defaultMode);
 
-  let searchParams = $state(page.url.searchParams.entries().toArray().flat())
+  let searchParams = $state(Array.from(page.url.searchParams.entries()).flat())
   $effect(() => {
 	// console.log('searchParams', searchParams);
 	console.log('topic updated via effect', topic);
@@ -206,17 +205,17 @@
 		bottom: 0
 	});
 
-	$effect(() => {
-		if (width && height && letterN) {
-			nBounds = letterN.getBoundingClientRect();
-		}
-	});
+	// $effect(() => {
+	// 	if (width && height && letterN) {
+	// 		nBounds = letterN.getBoundingClientRect();
+	// 	}
+	// });
 
-	$effect(() => {
-		if (width && height && letterO) {
-			oBounds = letterO.getBoundingClientRect();
-		}
-	});
+	// $effect(() => {
+	// 	if (width && height && letterO) {
+	// 		oBounds = letterO.getBoundingClientRect();
+	// 	}
+	// });
 
 	const buffer = 10;
 	const nLeft = $derived(nBounds?.left + nBounds?.width * 0.65 + buffer);
@@ -700,7 +699,7 @@
 	
 	let associatedTopics = $derived.by(() => {
 		let filtered = TOPICS.filter(t => highlightedAuthor?.author.terms.map(t => t.term).includes(t));
-		console.log('filtered', filtered);
+		// console.log('filtered', filtered);
 		return filtered;
 	});
 
@@ -933,8 +932,11 @@
 		width: 100vw;
 		height: 100vh;
 		box-sizing: border-box;
-		/* display: grid; */
-		/* grid-template-rows: auto 1fr; */
+		display: grid;
+		grid-template-rows: auto 1fr;
+		grid-template-areas:
+			'header'
+			'main';
 		/* grid-auto-flow: row; */
 		/* grid-template-columns: minmax(150px, 280px) 1fr;
 		grid-template-rows: auto 1fr;
@@ -1077,9 +1079,9 @@
 
 	.page {
 		grid-area: main;
-		width: 100%;
+		/* width: 100%; */
 		height: 100%;
-		padding-bottom: 4rem;
+		/* padding-bottom: 4rem; */
 	}
 
 	@media (min-width: 960px) {
@@ -1105,6 +1107,7 @@
 
 			.page {
 				height: auto;
+				padding-bottom: 0;
 			}
 
 			aside {
@@ -1120,5 +1123,37 @@
 			}
 		}
 	}
+
+	@page {
+		size: A4;
+		margin: 0;
+	}
+
+	@media print {
+    aside {
+      display: none;
+    }
+		.meta {
+			display: none;
+		}
+	}
+
+	/* @media print {
+		main {
+			display: block;
+			width: 100vw;
+			height: 100vh;
+			overflow: visible;
+			border: none;
+			header {
+				height: 20vh;
+			}
+
+			.page {
+				height: 80vh;
+				width: 100vw;
+			}
+		}
+	} */
 
 </style>

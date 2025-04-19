@@ -15,6 +15,11 @@ html, body {
   font-family: 'Inter', sans-serif;
 }
 
+body {
+  -webkit-print-color-adjust: exact !important;
+  print-color-adjust: exact !important;
+}
+
 h1, h2, h3, h4, h5, h6 {
   font-family: 'VaultAlarm', sans-serif;
 }
@@ -45,21 +50,6 @@ canvas#backgrounder {
 }
 
 /* Print media query that sets things in standard document ratio */
-
-@media print {
-  main {
-    background-color: red;
-    header {
-      nav {
-        display: none;
-      }
-    }
-  }
-  .meta {
-    display: none;
-  }
-}
-
 
 
  /* TODO: testground */

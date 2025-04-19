@@ -6497,7 +6497,7 @@
         "TheConner",
         "DerekStrickland",
         "jrasell",
-        "amacfie",
+        "andrew222651",
         "shishir-a412ed",
         "greut"
       ]
@@ -9076,25 +9076,33 @@
     },
     {
       "weekNumber": 14,
-      "count": 15,
+      "count": 27,
       "weekStart": 1744156800000,
       "weekEnd": 1744761600000,
       "authors": [
-        "aimeeu",
         "tgross",
+        "Juanadelacuesta",
+        "pkazmierczak",
+        "arianvp",
+        "jrasell",
+        "aimeeu",
         "carlosgaldino",
         "schmichael",
         "Ranjandas",
-        "jrasell",
         "hc-github-team-nomad-core"
       ]
     },
     {
       "weekNumber": 15,
-      "count": 0,
+      "count": 5,
       "weekStart": 1744761600000,
       "weekEnd": 1745366400000,
-      "authors": []
+      "authors": [
+        "jrasell",
+        "tgross",
+        "dependabot[bot]",
+        "pkazmierczak"
+      ]
     },
     {
       "weekNumber": 16,
