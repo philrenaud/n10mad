@@ -27,57 +27,61 @@
   const defaultTopic = null;
   const defaultAuthor = null;
   const defaultMode = 'stream';
-  let topic: string = $state(page.url.searchParams.get('topic') || defaultTopic);
+  let topic: string | null = $state(page.url.searchParams.get('topic') || defaultTopic);
   let author: string | null = $state(page.url.searchParams.get('author') || defaultAuthor);
   let mode: 'stream' | 'ridgeline' = $state(page.url.searchParams.get('mode') as 'stream' | 'ridgeline' || defaultMode);
 
-  let searchParams = $state(Array.from(page.url.searchParams.entries()).flat())
+  // Sync URL changes to state
   $effect(() => {
-	// console.log('searchParams', searchParams);
-	console.log('topic updated via effect', topic);
-	
-  })
-
-	// Set focused data if it comes from query params
-  $effect(() => {
-    if (author !== page.url.searchParams.has('author')) { // TODO: shouldn't be .hasing here, right?
-			// console.log('setting focus from layout to author', author);
-      author = page.url.searchParams.get('author') || defaultAuthor;
-			// focusedData = { type: 'author', query: author };
-			focusedAuthor = author;
+    // Check for author parameter changes
+    const urlAuthor = page.url.searchParams.get('author');
+    if (urlAuthor !== author) {
+      author = urlAuthor;
+      focusedAuthor = urlAuthor;
     }
 
-		if (!author && page.url.searchParams.has('author')) {
-			page.url.searchParams.delete('author');
-			goto(`?${page.url.searchParams.toString()}`, { replaceState: true, keepFocus: true });
-		}
+    // Check for topic parameter changes
+    const urlTopic = page.url.searchParams.get('topic');
+    if (urlTopic !== topic) {
+      topic = urlTopic;
+      focusedTopic = urlTopic;
+    }
+
+    // Check for mode parameter changes
+    const urlMode = page.url.searchParams.get('mode') as 'stream' | 'ridgeline';
+    if (urlMode !== mode && (urlMode === 'stream' || urlMode === 'ridgeline')) {
+      mode = urlMode;
+    }
   });
 
-	$effect(() => {
-		if (topic !== page.url.searchParams.get('topic')) {
-			topic = page.url.searchParams.get('topic') || defaultTopic;
-			// focusedData = { type: 'topic', query: topic };
-			focusedTopic = topic;
-		}
-
-		if (!topic && page.url.searchParams.has('topic')) {
-			page.url.searchParams.delete('topic');
-			goto(`?${page.url.searchParams.toString()}`, { replaceState: true, keepFocus: true });
-		}
-	});
-
-	$effect(() => {
-		console.log("@@@ modeFX", mode);
-		if (mode !== page.url.searchParams.get('mode')) {
-			mode = page.url.searchParams.get('mode') as 'stream' | 'ridgeline' || defaultMode;
-		}
-		if (mode === defaultMode && page.url.searchParams.get('mode')) {
-			page.url.searchParams.delete('mode');
-			goto(`?${page.url.searchParams.toString()}`, { replaceState: true, keepFocus: true });
-		}
-	});
-
-	// #endregion Query Params
+  // Clean up URL parameters when values are null
+  $effect(() => {
+    let needsUpdate = false;
+    
+    // Remove topic param if it's the default
+    if (!topic && page.url.searchParams.has('topic')) {
+      page.url.searchParams.delete('topic');
+      needsUpdate = true;
+    }
+    
+    // Remove author param if it's the default
+    if (!author && page.url.searchParams.has('author')) {
+      page.url.searchParams.delete('author');
+      needsUpdate = true;
+    }
+    
+    // Remove mode param if it's the default
+    if (mode === defaultMode && page.url.searchParams.has('mode')) {
+      page.url.searchParams.delete('mode');
+      needsUpdate = true;
+    }
+    
+    // Update URL if needed
+    if (needsUpdate) {
+      goto(`?${page.url.searchParams.toString()}`, { replaceState: true, keepFocus: true });
+    }
+  });
+  // #endregion Query Params
 	
 	function pathToPoints(
 		pathElement: SVGPathElement,
@@ -607,28 +611,54 @@
 		'disconnected'
 	];
 
-	type Focus = {
-		type: 'topic' | 'author';
-		query: string;
-	};
-
-	// let focusedData: Focus = $state({
-	// 	type: 'topic',
-	// 	query: ''
-	// });
+	// Define Focus interface and export it
+	export interface Focus {
+		type?: 'topic' | 'author';
+		query?: string;
+	}
 
 	let highlightedTopic: string | null = $state(null);
 	let highlightedAuthor: string | null = $state(null);
-	let focusedTopic: string | null = $state(null);
-	let focusedAuthor: string | null = $state(null);
+	let focusedTopic: string | null = $state(topic);
+	let focusedAuthor: string | null = $state(author);
 
-	// let streamModeContext = $state(mode);
+	// Calculate the current focus based on highlighted and focused states
+	let currentFocus: Focus = $state({});
 
-	// let topic = $state('');
-	// setContext('focus', () => focusedData); // TODO: tie to queryParams
+	$effect(() => {
+		// Priority: highlight (hover) takes precedence over focus (clicked/URL)
+		if (highlightedAuthor) {
+			currentFocus = {
+				type: 'author',
+				query: highlightedAuthor
+			};
+		} else if (highlightedTopic) {
+			currentFocus = {
+				type: 'topic',
+				query: highlightedTopic
+			};
+		} else if (focusedAuthor) {
+			currentFocus = {
+				type: 'author',
+				query: focusedAuthor
+			};
+		} else if (focusedTopic) {
+			currentFocus = {
+				type: 'topic',
+				query: focusedTopic
+			};
+		} else {
+			currentFocus = {};
+		}
+	});
+
+	// Set context for all the focus states
+	setContext('focus', () => currentFocus);
 	setContext('focusedTopic', () => focusedTopic);
 	setContext('focusedAuthor', () => focusedAuthor);
-	setContext('streamMode', () => mode)
+	setContext('highlightedTopic', () => highlightedTopic);
+	setContext('highlightedAuthor', () => highlightedAuthor);
+	setContext('streamMode', () => mode);
 
 	let contributors = $state(data.contributors);
 	console.log('contributors', contributors);
@@ -652,42 +682,69 @@
 	// 	// console.log('existing query on setFocus is', query);
 	// }
 
-	function focusTopic(topic: string | null) {
-		focusedTopic = topic;
-		if (topic) {
-			page.url.searchParams.set('topic', topic);
-			goto(`?${page.url.searchParams.toString()}`, { keepFocus: true });
+	function focusTopic(newTopic: string | null) {
+		if (newTopic === focusedTopic) return;
+		
+		focusedTopic = newTopic;
+		topic = newTopic;
+		
+		if (newTopic) {
+			// Clear any author focus when setting topic
+			focusedAuthor = null;
+			author = null;
+			
+			// Update URL
+			page.url.searchParams.set('topic', newTopic);
+			if (page.url.searchParams.has('author')) {
+				page.url.searchParams.delete('author');
+			}
 		} else {
+			// Clear topic from URL
 			page.url.searchParams.delete('topic');
-			goto(`?${page.url.searchParams.toString()}`, { keepFocus: true });
 		}
+		
+		goto(`?${page.url.searchParams.toString()}`, { keepFocus: true });
 	}
 
-	function focusAuthor(author: string | null) {
-		focusedAuthor = author;
-		if (author) {
-			page.url.searchParams.set('author', author);
-			goto(`?${page.url.searchParams.toString()}`, { keepFocus: true });
+	function focusAuthor(newAuthor: string | null) {
+		if (newAuthor === focusedAuthor) return;
+		
+		focusedAuthor = newAuthor;
+		author = newAuthor;
+		
+		if (newAuthor) {
+			// Clear any topic focus when setting author
+			focusedTopic = null;
+			topic = null;
+			
+			// Update URL
+			page.url.searchParams.set('author', newAuthor);
+			if (page.url.searchParams.has('topic')) {
+				page.url.searchParams.delete('topic');
+			}
 		} else {
+			// Clear author from URL
 			page.url.searchParams.delete('author');
-			goto(`?${page.url.searchParams.toString()}`, { keepFocus: true });
 		}
+		
+		goto(`?${page.url.searchParams.toString()}`, { keepFocus: true });
 	}
 
-	function highlightTopic(topic: string | null) {
-		if (topic) {
-			highlightedTopic = topic;
-		} else {
-			// metadataStore.set([]);
-			highlightedTopic = null;
-		}
-	}
-
-	function highlightAuthor(author: string | null) {
-		if (author) {
-			highlightedAuthor = author;
-		} else {
+	function highlightTopic(newTopic: string | null) {
+		highlightedTopic = newTopic;
+		
+		if (newTopic) {
+			// Clear any author highlight when setting topic highlight
 			highlightedAuthor = null;
+		}
+	}
+
+	function highlightAuthor(newAuthor: string | null) {
+		highlightedAuthor = newAuthor;
+		
+		if (newAuthor) {
+			// Clear any topic highlight when setting author highlight
+			highlightedTopic = null;
 		}
 	}
 
@@ -698,7 +755,8 @@
 	});
 	
 	let associatedTopics = $derived.by(() => {
-		let filtered = TOPICS.filter(t => highlightedAuthor?.author.terms.map(t => t.term).includes(t));
+		let author = contributors.find(c => c.author.login === highlightedAuthor);
+		let filtered = TOPICS.filter(t => author?.author.terms.map(t => t.term).includes(t));
 		// console.log('filtered', filtered);
 		return filtered;
 	});
@@ -836,10 +894,10 @@
 					class="author"
 					class:highlighted={associatedAuthors.includes(contributor.author.login)}
 					onmouseover={() => {
-						highlightAuthor(contributor);
+						highlightAuthor(contributor.author.login);
 					}}
 					onfocus={() => {
-						highlightAuthor(contributor);
+						highlightAuthor(contributor.author.login);
 					}}
 					onmouseout={() => {
 						highlightAuthor(null);

@@ -6,125 +6,85 @@
   // type Contributor = PageProps['data']['contributors'][0];
   import { getContext, setContext } from 'svelte';
   import type { Metadata, createMetadataStore } from '$lib/components/metadata.svelte';
+  import ChartContainer from '$lib/components/chart/ChartContainer.svelte';
+  import { scaleLinear, scaleTime } from 'd3';
+  import * as d3 from 'd3';
+  import type { Focus, Topic } from '$lib/types';
 
+  // Get focus information from layout
   let focusContext: () => Focus = getContext('focus');
-  let streamModeContext = getContext('streamMode');
+  let streamModeContext: () => string = getContext('streamMode');
 
-  let focus: Focus = $derived.by(() => {
+  let focus = $derived.by(() => {
     return focusContext();
-  })
+  });
 
   let streamMode = $derived.by(() => {
     return streamModeContext();
-  })
+  });
 
+  // Extract topic and author from focus
   let topic = $derived.by(() => {
     return focus.type === 'topic' ? focus.query : '';
-  })
+  });
 
   let author = $derived.by(() => {
     return focus.type === 'author' ? focus.query : '';
-  })
+  });
 
   let mode = $derived.by(() => {
-    // return focus.mode === 'topic' ? focus.query : '';
-    console.log('++=interpreting streamMode in a deriver', streamMode);
     return streamMode;
-  })
+  });
 
+  // Get metadata store
   let metadataStore: ReturnType<typeof createMetadataStore> = getContext('metadataStore');
-  let metadata: Metadata[] = $derived.by(() => {
+  let metadata = $derived.by(() => {
     return metadataStore.metadata;
-  })
+  });
 
-  // get PageData type
-  type Contributor = PageProps['data']['contributors'][0]; // TODO: this feel unnecessary and Svelte should be handling it for me.
+  // Define contributor type
+  interface Author {
+    login: string;
+    terms: Topic[];
+    [key: string]: any;
+  }
 
-  import ChartContainer from '$lib/components/chart/ChartContainer.svelte';
-  import { scaleLinear, scaleTime, type ScaleTime } from 'd3';
+  interface Contributor {
+    author: Author;
+    total: number;
+    weeks: any[];
+    [key: string]: any;
+  }
 
-  // TODO: Don't import the whole shebang
-  import * as d3 from 'd3';
+  let { data }: PageProps = $props();
+  let { contributors }: { contributors: Contributor[] } = data;
 
-	let { data }: PageProps = $props();
-
-  // #region Query Params
-  // const defaultMode = 'stream';
-  // let mode: 'stream' | 'ridgeline' = $state(page.url.searchParams.get('mode') as 'stream' | 'ridgeline' || defaultMode);
-
-  const defaultSearch = "";
-  let searchQuery: string = $state(page.url.searchParams.get('query') || defaultSearch);
-
-  // $effect(() => {
-  //   if (mode !== page.url.searchParams.get('mode')) {
-  //     mode = page.url.searchParams.get('mode') as 'stream' | 'ridgeline' || defaultMode;
-  //   }
-  //   if (mode === defaultMode && page.url.searchParams.get('mode')) {
-  //     page.url.searchParams.delete('mode');
-  //     goto(`?${page.url.searchParams.toString()}`, { replaceState: true, keepFocus: true });
-  //   }
-  // });
-
+  // Focus contributors based on topic or author
   let focusedContributors = $state<string[]>([]);
 
   let queriedContributors = $derived.by(() => {
-    // TODO: currently, looks like by combining Author and Topic into a single "Focus", I'm making them mutually exclusive. Gotta fix that.
-    let ret = [];
-    console.log('checking on queried contributors', topic, author);
+    let ret: string[] = [];
+    
     if (author) {
       ret = [author];
     }
+    
     if (topic) {
-      console.log('topic present, check the authors', contributors);
       contributors.forEach((c) => {
         if (c.author.terms.map(t => t.term).includes(topic)) {
           ret.push(c.author.login);
         }
       });
     }
+    
     return ret;
   });
 
   $effect(() => {
     focusedContributors = queriedContributors;
-  })
+  });
 
-  // $effect(() => {
-  //   if (searchQuery !== page.url.searchParams.get('query')) {
-  //     focusedContributors = [];
-  //     searchQuery = page.url.searchParams.get('query') || defaultSearch;
-  //   }
-  //   if (searchQuery === defaultSearch && page.url.searchParams.get('query')) {
-  //     page.url.searchParams.delete('query');
-  //     goto(`?${page.url.searchParams.toString()}`, { replaceState: true, keepFocus: true });
-  //   }
-  //   if (searchQuery !== defaultSearch) {
-  //     const searchedLogins = searchQuery
-  //       .split(',')
-  //       .map(login => login.trim())
-  //       .filter(login => login.length > 0);
-      
-  //     if (searchedLogins.length > 0) {
-  //       const matchedContributors = searchedLogins
-  //         .map(login => contributors.find(c => c.author.login === login))
-  //         .filter(c => c !== undefined)
-  //         .map(c => c.author.login);
-
-  //       if (matchedContributors.length > 0) {
-  //         focusedContributors = matchedContributors;
-  //       } else {
-  //         focusedContributors = [];
-  //       }
-  //     } else {
-  //       focusedContributors = [];
-  //     }
-  //   }
-  // });
-
-  // #endregion Query Params
-
-  let { contributors } = data;
-
+  // Sort contributors by total contributions
   contributors = contributors.sort((a, b) => b.total - a.total);
 
   const nomadGreen = '#00ca8e';
@@ -140,26 +100,17 @@
       strokeOpacity: 0.5,
       strokeWidth: 0.5,
     }
-  }
+  };
 
   let randomColor = () => {
     return d3.hsl(nomadGreen).darker((Math.random() * 1.5) - 0.5);
-  }
-
-  // I'm hungry, let's get weird
-  let funkyColor = () => {
-    const funkyColors = d3.schemeTableau10.map(color => 
-      d3.color(color)?.brighter(0.5).toString()
-    );
-    return funkyColors[Math.floor(Math.random() * funkyColors.length)];
   };
 
-  // Apply a colour to persist through later transforms
+  // Apply color to contributors
   contributors = contributors.slice(0, 100).map(c => ({
     ...c,
     style: {
       color: randomColor(),
-      // color: funkyColor(),
     }
   }));
 
@@ -309,53 +260,16 @@
     }
   };
 
-  let handleContributorBlur = (event, area) => {
-
-    // remove hoveredContributor if it's the same as the area
-    // if (hoveredContributor && hoveredContributor.login === area.author.login) {
-    //   hoveredContributor = null;
-    // }
-
-    // Get current searched contributors
-    const searchedLogins = searchQuery !== defaultSearch
-      ? searchQuery.split(',').map(login => login.trim()).filter(login => login.length > 0)
-      : [];
-    
-    if (area && searchedLogins.includes(area.author.login)) {
-      // Skip removing if this is one of the searched contributors
-      return;
-    }
-    
+  // Handle contributor blur
+  let handleContributorBlur = (event: Event, area: any) => {
     // Only filter if there's something to remove
     if (area && focusedContributors.includes(area.author.login)) {
       focusedContributors = focusedContributors.filter(c => c !== area.author.login);
     } else if (!area) {
-      // When clearing all, preserve the searched contributors if there are any
-      if (searchedLogins.length > 0) {
-        const matchedContributors = searchedLogins
-          .map(login => contributors.find(c => c.author.login === login))
-          .filter(c => c !== undefined)
-          .map(c => c.author.login);
-        
-        focusedContributors = matchedContributors;
-      } else {
-        focusedContributors = [];
-      }
+      focusedContributors = [];
     }
   };
   
-  // Change your URL so the read-url-param handling does the hard work,
-  // rather than setting the prop here.
-  function handleSearch(event: Event) {
-    const value = (event.target as HTMLInputElement).value;
-    if (value) {
-      page.url.searchParams.set('query', value);
-    } else {
-      page.url.searchParams.delete('query');
-    }
-    goto(`?${page.url.searchParams.toString()}`, { replaceState: true, keepFocus: true });
-  }
-
   // #region Hovered Contributor
 
   let hoveredContributor = $state<Contributor['author'] | null>(null);
@@ -442,15 +356,7 @@
         goto(`?${page.url.searchParams.toString()}`, { replaceState: false, keepFocus: true });
       }}>Ridgeline Mode</button>
       <div class="search-box">
-        <input
-          type="text"
-          placeholder="Search contributors..."
-          value={searchQuery}
-          oninput={handleSearch}
-        />
-        {#if searchQuery !== defaultSearch && focusedContributors.length > 0}
-          Found {focusedContributors.length} contributor{focusedContributors.length === 1 ? '' : 's'}
-        {/if}
+        <span>Focused Contributors: {focusedContributors.length}</span>
       </div>
     </header>
     <section class="main" bind:clientWidth={chartWidth} bind:clientHeight={chartHeight}

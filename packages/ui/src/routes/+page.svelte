@@ -5,148 +5,78 @@
   import Canvas from '$lib/Canvas.svelte';
 	import Circle from '$lib/Circle.svelte';
 	import type { PageProps } from './$types';
-  import { getContext, setContext } from 'svelte';
+  import { getContext } from 'svelte';
   import type { Metadata, createMetadataStore } from '$lib/components/metadata.svelte';
+  import type { Focus, Week, Topic, TopicWeek } from '$lib/types';
 	let { data }: PageProps = $props();
 
-  // Inherit topic from layout.svelte
-  console.log('page data', page.data);
+  // Get focus context from layout with proper typing
+  let focusContext: () => Focus = getContext('focus');
+  let focus = $derived.by(() => {
+    return focusContext();
+  });
 
-  // let focusContext: () => Focus = getContext('focus');
-  // let focus: Focus = $derived.by(() => {
-  //   return focusContext();
-  // })
-  
-  // 	// let topic = $state('');
-	// // setContext('focus', () => focusedData); // TODO: tie to queryParams
-	// setContext('focusedTopic', () => focusedTopic);
-	// setContext('focusedAuthor', () => focusedAuthor);
-
-  let focus: Focus | null = $state({});
-
-  let focusedTopic = getContext('focusedTopic');
-  let focusedAuthor = getContext('focusedAuthor');
-
-  // $effect(() => {
-  //   // Just for fun let's have author override topic. TODO:.
-  //   if (focusedAuthor) {
-  //     focus = {
-  //       type: 'author',
-  //       query: focusedAuthor
-  //     }
-  //   } else if (focusedTopic) {
-  //     focus = {
-  //       type: 'topic',
-  //       query: focusedTopic
-  //     }
-  //   } else {
-  //     focus = {};
-  //   }
-  // });
-
-  let metadataStore: ReturnType<typeof createMetadataStore> = getContext('metadataStore');
-  let metadata: Metadata[] = $derived.by(() => {
-    return metadataStore.metadata;
-  })
-
+  // Extract topic and author from the focus context
   let topic = $derived.by(() => {
     return focus.type === 'topic' ? focus.query : '';
-  })
+  });
 
   let author = $derived.by(() => {
     return focus.type === 'author' ? focus.query : '';
-  })
+  });
 
-  // $inspect(topic);
-  // $inspect(author);
-
-  let authors = [];
+  // Get metadata store context with proper typing
+  let metadataStore: ReturnType<typeof createMetadataStore> = getContext('metadataStore');
+  let metadata = $derived.by(() => {
+    return metadataStore.metadata;
+  });
 
   let timeline = $state(data.timeline);
   let contributors = $state(data.contributors);
 
   let topics: TopicWeek[] = data.topics;
 
-  type Topic = {
-    term: string;
-    tfidf: number;
-  }
-
-  type TopicWeek = {
-    year: string;
-    weekNumber: number;
-    weekStart: number;
-    weekEnd: number;
-    terms: Topic[];
-  }
-
   let topTopics = $derived.by(() => {
-    return topics.map(topic => {
+    return topics.map((topic: TopicWeek) => {
       return {
         year: topic.year,
         weekNumber: topic.weekNumber,
         weekStart: topic.weekStart,
         weekEnd: topic.weekEnd,
         terms: topic.terms
-      }
-    })
-  })
+      };
+    });
+  });
 
   // TODO: do this on the server or something
   $effect(() => {
-    topics.forEach((topicWeek) => {
-      timeline.flat().forEach((week) => {
+    topics.forEach((topicWeek: TopicWeek) => {
+      timeline.flat().forEach((week: Week) => {
         if (week.weekStart === topicWeek.weekStart) {
           // console.log('week', week);
           week.terms = topicWeek.terms;
         }
-      })
-    })
-  })
-
-  // let weeks = data.weeklyCommits;
-  // let weeksByYear = $derived.by(() => {
-  //   return weeks.reduce((acc, week) => {
-  //     let year = week.weekStart.slice(0, 4);
-  //     const existingIndex = acc.findIndex(item => item.year === year);
-      
-  //     if (existingIndex === -1) {
-  //       acc.push({ year, data: [week] });
-  //     } else {
-  //       acc[existingIndex].data.push(week);
-  //     }
-      
-  //     return acc;
-  //   }, []);
-  // });
-  // $inspect(weeks);
-  // $inspect(weeksByYear);
+      });
+    });
+  });
 
   let chartWidth: number = $state(0);
   let chartHeight: number = $state(0);
 
   $effect(() => {
     console.log('++==chartWidth', chartWidth);
-  })
+  });
 
   let xDomain: [number, number] = $derived.by(() => {
     let min = 0;
     let max = 52;
     return [min, max];
   });
-  // let maxWeek = $derived.by(() => {
-  //   return Math.max(...weeks.map(week => week.count));
-  // });
-  // let yDomain: [number, number] = $derived.by(() => {
-  //   let min = 0;
-  //   let max = maxWeek;
-  //   return [min, max];
-  // });
 
   let yDomains: [number, number][] = $derived.by(() => {
-    return timeline.map(year => {
+    return timeline.map((year: Week[]) => {
       let min = 0;
-      let max = Math.max(...year.map(week => week.count));
+      let max = Math.max(...year.map((week: Week) => week.count));
       return [min, max];
     });
   });
@@ -157,17 +87,12 @@
   let xScale = $derived.by(() => {
     return scaleTime().domain(xDomain).range([xPadding, chartWidth - xPadding]);
   });
-  // let barContainerWidth = $derived.by(() => {
-  //   if (xScale.length === 0) return 1;
-  //   return xScale(1) - xScale(0);
-  // });
 
   // eh, just use num divided by 52
   let barContainerWidth = $derived.by(() => {
     return chartWidth / 52;
   });
   const barWidth = 3;
-
 
   const minBarHeight = 1;
 
@@ -180,83 +105,45 @@
         .clamp(true); // prevent a bug with negative <rect> from clientHeight race condition (maybe!)
     });
   });
-  // $effect(() => {
-  //   console.log('yScales', yScales, yDomains)
-  // })
-
-  // $effect(() => {
-  //   console.log({chartHeight})
-  // })
 
   // #region fun canvas detour
   let canvasContexts: CanvasRenderingContext2D[] = $state([]);  
   // #endregion fun canvas detour
 
-
   let individualChartHeight = $derived(chartHeight / timeline.length - 1);
-
-  // One way to do spacing would be with a hard value:
-  // const barSpacing = 5;
-
-  // Another way might be to have a "barWidth" const
-  // let barSpacing = $derived(chartWidth / 52 - barWidth);
-  // and finally, a min/max solution
-  // let minBarWidth = 1;
-  // let maxBarWidth = 20;
-  // let barWidth = $derived.by(() => {
-  //   console.log('chartWidth', chartWidth);
-  //   return Math.min(Math.max(chartWidth / 52 - 5, minBarWidth), maxBarWidth);
-  // });
-  // let barSpacing = $derived.by(() => {
-  //   return chartWidth / 52 - barWidth;
-  // });
-  // $effect(() => {
-  //   console.log('barSpacing', barSpacing);
-  // })
 
   const nomadGreen = '#00ca8e';
 
   // let colorDomainMetric = 'uniqueAuthorCount';
-  let colorDomainMetric = 'count';
+  let colorDomainMetric = 'count' as keyof Week;
 
   let colorScales = $derived.by(() => {
-    return timeline.map((year, yearIter) => {
-      let maxMetric = Math.max(...year.map(week => week[colorDomainMetric]));
-      // console.log(`max ${colorDomainMetric} for year ${yearIter} is`, maxMetric);
+    return timeline.map((year: Week[], yearIter: number) => {
+      let maxMetric = Math.max(...year.map((week: Week) => week[colorDomainMetric] as number));
       return scaleLinear().domain([0, maxMetric]).range(['black', nomadGreen]);
     });
   });
 
-  // let topicIsAuthor = $derived(authors.map(a => a.name).includes(topic));
-
-  // function highlightWeek(week: Week) {
-  //   if (topicIsAuthor) {
-  //     return week.authors.includes(topic) ? 0.5 : 0;
-  //   } else {
-  //     return topicScale(week.terms?.find(term => term.term === topic)?.tfidf || 0);
-  //   }
-  // }
-
   let calculateBarWidth = $derived.by(() => {
     console.log('CBW', topic, author);
-    return (week) => {
+    return (week: Week) => {
       if (!topic && !author) return barWidth;
       if (author) {
-        console.log('author found', author);
+        // console.log('author found', author);
         return week.authors.includes(author) ? barWidth * 2 : 0.5;
       }
       if (topic) {
-        console.log('topic found', topic);
-        return week.terms?.find(term => term.term === topic)?.tfidf > 0 ? barWidth * 2 : 1;
+        // console.log('topic found', topic);
+        return week.terms?.find((term: Topic) => term.term === topic)?.tfidf > 0 ? barWidth * 2 : 1;
       }      
     };
   });
   
   let topicScale = $derived.by(() => {
     let flatWeeks = timeline.flat();
-    let maxWeekTFIDF = Math.max(...flatWeeks.map(week => week.terms?.find(term => term.term === topic)?.tfidf || 0));
-    // console.log("color scale update", topic, maxWeekTFIDF);
-    // console.log("maxWeekTFIDF", maxWeekTFIDF);
+    let maxWeekTFIDF = Math.max(...flatWeeks.map((week: Week) => 
+      week.terms?.find((term: Topic) => term.term === topic)?.tfidf || 0
+    ));
     return scaleLinear().domain([0, maxWeekTFIDF]).range([0, 0.5]);
   });
 
@@ -265,9 +152,9 @@
     // TODO: magic numbers. A4 suitable though.
     chartWidth = 775;
     chartHeight = 775;
-  }
+  };
 
-  let mainSection: HTMLDivElement | null = $state(null);
+  let mainSection: HTMLElement | null = $state(null);
 
   let onafterprint = () => {
     console.log('onafterprint');
@@ -275,7 +162,7 @@
     window.dispatchEvent(new Event('resize'));
     chartWidth = mainSection?.clientWidth || 0;
     chartHeight = mainSection?.clientHeight || 0;
-  }
+  };
 
 </script>
 

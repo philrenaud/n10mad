@@ -1,6 +1,6 @@
 export type Metadata = {
   key: string;
-  value: string;
+  value: string | unknown;
 }
 export function createMetadataStore() {
   let metadata: Metadata[] = $state([]);
