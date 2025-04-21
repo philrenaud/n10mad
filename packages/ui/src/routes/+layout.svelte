@@ -117,7 +117,8 @@
 	let width = $state(500);
 	let height = $state(500);
 
-	let numberOfCircles = $state(500);
+	let numberOfCircles = $state(200);
+	const NODE_DELAY = 10;
 	// TODO: numberOfCircles, and circleSize, should be derived from mobile v desktop
 	let minWidth = 2;
 	// let circleSize = $derived.by(() => Math.max(minWidth, width / numberOfCircles / 2));
@@ -131,10 +132,11 @@
 	const nomadGreenScale = d3
 		.scaleLinear()
 		.domain([0, 1])
-		.range([d3.hsl(nomadGreen).darker(0.5), d3.hsl(nomadGreen).brighter(0.5)]);
+		.range([d3.hsl(nomadGreen).darker(0.2), d3.hsl(nomadGreen).brighter(0.2)]);
 
 	const borderColor = 'rgba(0,0,0,0.3)';
-	const borderWidth = 0.5;
+	// const borderWidth = 0.5;
+	const borderWidth = 0.05;
 
 	let canvasContext: CanvasRenderingContext2D | null = $state(null);
 
@@ -142,7 +144,7 @@
 		const svg = `<svg xmlns="http://www.w3.org/2000/svg">
     <filter id="gooey">
       <feGaussianBlur in="SourceGraphic" stdDeviation="8" color-interpolation-filters="sRGB" result="blur" />
-      <feColorMatrix class="blurValues" in="blur" mode="matrix" values=".2 0 0 0 0  0 .2 0 0 0  0 0 .2 0 0  0 0 0 17 -5" result="goo" />
+      <feColorMatrix class="blurValues" in="blur" mode="matrix" values=".5 0 0 0 0  0 .5 0 0 0  0 0 .5 0 0  0 0 0 17 -5" result="goo" />
 			<feBlend in2="goo" in="SourceGraphic" result="mix" />
     </filter>
   </svg>`;
@@ -155,48 +157,27 @@
 		return filter;
 	};
 
-	function onpointermove(e: PointerEvent) {
-		canvasContext?.clearRect(0, 0, width, height);
-		mouseX = e.pageX;
-		mouseY = e.pageY;
-		localCircles[0] = {
-			...circles[0],
-			x: mouseX,
-			y: mouseY
-		};
-
-		// Generally follow the mouse, lightly.
-		if (simulation && !titleHovered) {
-			simulation.force(
-				'mouse',
-				d3.forceRadial(100, mouseX, mouseY).strength((d, i) => (i ? 0.02 : 0))
-			);
-		}
-	}
-
 	let radius = $derived.by(() => d3.randomUniform(circleSize, circleSize * 4)); // TODO: this is plainly not being observed anymore
 	let simulation: d3.Simulation = $state(null);
 	let circles = $state<any[]>([]);
 
 	let localCircles: any[] = [];
 
+	const ANIMATION_DELAY = 1000;
+
 	function initializeCircles() {
-		let nodes = Array.from({ length: numberOfCircles }).map((_, i) => ({
-			r: i ? radius() : minWidth * 10,
-			x: width / 2,
-			y: height / 2,
-			color: nomadGreenScale(Math.random()),
-			borderColor,
-			borderWidth
-			// color: '#00ca8e',
-			// color: d3.color(nomadGreenScale(Math.random()))?.formatRgb()
-			// .replace('rgb', 'rgba')
-			// .replace(')', ', 0.6)'),
-		}));
+  let nodes = Array.from({ length: numberOfCircles }).map((_, i) => ({
+    r: radius(),
+    x: Math.random() * width,
+    y: -500 + Math.random() * 500, // Start off-screen
+    color: nomadGreenScale(Math.random()),
+    borderColor,
+    borderWidth
+  }));
 
-		localCircles = [...nodes];
-	}
-
+  localCircles = [...nodes];
+}
+	
 	let letterN: SVGPathElement | null = null;
 	let nBounds: DOMRect | null = $state(null);
 	let letterO: SVGPathElement | null = null;
@@ -209,19 +190,19 @@
 		bottom: 0
 	});
 
-	// $effect(() => {
-	// 	if (width && height && letterN) {
-	// 		nBounds = letterN.getBoundingClientRect();
-	// 	}
-	// });
+	$effect(() => {
+		if (width && height && letterN) {
+			nBounds = letterN.getBoundingClientRect();
+		}
+	});
 
-	// $effect(() => {
-	// 	if (width && height && letterO) {
-	// 		oBounds = letterO.getBoundingClientRect();
-	// 	}
-	// });
+	$effect(() => {
+		if (width && height && letterO) {
+			oBounds = letterO.getBoundingClientRect();
+		}
+	});
 
-	const buffer = 10;
+	const buffer = 5;
 	const nLeft = $derived(nBounds?.left + nBounds?.width * 0.65 + buffer);
 	const nRight = $derived(nBounds?.right - buffer);
 	const nTop = $derived(nBounds?.top + buffer);
@@ -232,8 +213,8 @@
 	const oTop = $derived(oBounds?.top);
 	const oBottom = $derived(oBounds?.bottom);
 
-	let cachedNPoints = [];
-	let cachedOPoints = [];
+	let cachedNPoints = $state<{x: number, y: number}[]>([]);
+	let cachedOPoints = $state<{x: number, y: number}[]>([]);
 
 	$effect(() => {
 		if (letterN && letterO) {
@@ -281,7 +262,7 @@
 			const y = Math.random() * (oBottom - oTop) + oTop;
 
 			// Add 5px buffer by checking if point is at least 5px away from inner path
-			let buffer = 10;
+			// let buffer = 10;
 			if (
 				d3.polygonContains(outerPoints, [x + buffer, y]) &&
 				d3.polygonContains(outerPoints, [x - buffer, y]) &&
@@ -300,272 +281,118 @@
 		return randomPoints;
 	});
 
-	// $inspect(letterNPoints);
-	// $inspect(letterOPoints);
-
-	function ticked() {
-		circles = [...localCircles];
-	}
-
-	let repulsion = $state(2);
-
-	function appendCircles(circles) {
-		circles.forEach((c) => {
-			localCircles.push(c);
-		});
-		circles = [...localCircles];
-	}
-
-	let performanceIterations = $derived.by(() => {
-		return Math.round(d3.scaleLinear().domain([2000, 5000]).range([3, 1])(numberOfCircles));
-	});
-
-	// When height/width change, re-centre the graph
-
-	let centeringStrength = $state(0.005);
-	$effect(() => {
-		if (!simulation) return;
-		simulation.force(
-			'x',
-			d3.forceX(width / 2).strength((d, i) => (!i || d.isBoundary ? 0 : centeringStrength))
-		);
-		simulation.force(
-			'y',
-			d3.forceY(height / 2).strength((d, i) => (!i || d.isBoundary ? 0 : centeringStrength))
-		);
-	});
-
-	function simulate(props: { alpha?: number } = {}) {
-		let alpha = props.alpha || 0.1;
-		if (localCircles.length !== numberOfCircles) {
-			// Remove or add circles according to the difference
-			if (localCircles.length && localCircles.length < numberOfCircles) {
-				const newCircles = Array.from({ length: numberOfCircles - localCircles.length }).map(
-					(_, i) => ({
-						r: radius(),
-						x: width / 2,
-						y: height / 2,
-						color: nomadGreenScale(Math.random()),
-						borderColor,
-						borderWidth
-						// color: '#00ca8e',
-					})
-				);
-				appendCircles(newCircles);
-			} else {
-				localCircles = localCircles.slice(0, numberOfCircles);
-			}
-		}
+	function startSimpleSimulation() {
+		// Stop any existing simulation
 		if (simulation) simulation.stop();
+		
+		// Create a simple initial simulation
 		simulation = d3
 			.forceSimulation(localCircles)
-			.alpha(alpha)
-			.alphaTarget(0.3)
-			.velocityDecay(0.1)
-			.force(
-				'x',
-				d3.forceX(width / 2).strength((d, i) => (!i || d.isBoundary ? 0 : centeringStrength))
-			)
-			.force(
-				'y',
-				d3.forceY(height / 2).strength((d, i) => (!i || d.isBoundary ? 0 : centeringStrength))
-			)
-			.force(
-				'collide',
-				d3
-					.forceCollide()
-					.radius((d) => (d.isBoundary ? d.r + repulsion * 5 : d.r + repulsion))
-					.iterations(performanceIterations)
-					.strength(1)
-			)
-			// .force('boundaryRepulsion', d3.forceManyBody().strength((d, i) => (!d.isBoundary ? -200 * repulsion : 0)))
-			.force(
-				'mouseRepulsion',
-				d3.forceManyBody().strength((d, i) => (i ? 0 : -200 * repulsion))
-			)
+			.alpha(0.3)
+			.alphaDecay(0.01)
+			.force('collide', d3.forceCollide().radius(d => d.r + 0.2).iterations(2))
 			.on('tick', () => {
-				ticked();
+				circles = [...localCircles];
+			});
+
+		// Start timer to transition to letter shapes
+		setTimeout(() => {
+			moveCirclesToLetters();
+		}, ANIMATION_DELAY);
+	}
+
+	function moveCirclesToLetters() {
+		console.log('moving circles to letters');
+		if (!cachedNPoints.length || !cachedOPoints.length) return;
+		
+		// Stop the simulation during transition
+		simulation.stop();
+		
+		const oCircleThreshold = 0.3;
+		
+		// For each circle, transition to its letter position
+		localCircles.forEach((c, i) => {
+			// First interrupt any ongoing transitions
+			d3.select(c).interrupt();
+			
+			// Determine target position
+			let targetPoint;
+			if (i < numberOfCircles * oCircleThreshold) {
+				targetPoint = cachedNPoints[i];
+			} else {
+				targetPoint = cachedOPoints[i - Math.floor(numberOfCircles * oCircleThreshold)];
+			}
+			
+			if (!targetPoint) return;
+			
+			// Create transition with staggered delay
+			d3.select(c)
+				.transition()
+				.delay(i * NODE_DELAY)
+				.duration(1000)
+				.ease(d3.easeCubicOut)
+				.tween('position', () => {
+					const startX = c.x;
+					const startY = c.y;
+					
+					return (t) => {
+						c.x = startX + (targetPoint.x - startX) * t;
+						c.y = startY + (targetPoint.y - startY) * t;
+						circles = [...localCircles]; 
+					};
+				});
+		});
+		
+		// Set up animation loop to continuously update circles during transition
+		const updateCircles = () => {
+			circles = [...localCircles];
+		};
+		
+		// Start the animation loop
+		updateCircles();
+		
+		// After all transitions complete, stop the animation loop and start final simulation
+		setTimeout(() => {
+			startFinalSimulation();
+		}, numberOfCircles * NODE_DELAY + 1100); // Slightly longer than the longest transition
+	}
+
+	function startFinalSimulation() {
+		// Very light simulation to maintain letter shape
+		simulation = d3
+			.forceSimulation(localCircles)
+			.alpha(0.1)
+			.alphaDecay(0.02)
+			.velocityDecay(0.8)
+			.force('collide', d3.forceCollide().radius(d => d.r * 0.3).iterations(2))
+			.on('tick', () => {
+				circles = [...localCircles];
 			});
 	}
 
 	onMount(() => {
 		initializeCircles();
-		simulate();
+		if (canvasContext?.canvas) {
+			canvasContext.canvas.style.filter = gooeyFilter();
+		}
+		// Wait for letter elements to be available
+		const checkLetters = setInterval(() => {
+			if (letterN && letterO) {
+				clearInterval(checkLetters);
+				nBounds = letterN.getBoundingClientRect();
+				oBounds = letterO.getBoundingClientRect();
+				cachedNPoints = letterNPoints;
+				cachedOPoints = letterOPoints;
+				console.log('cachedOPoints', cachedOPoints);
+				startSimpleSimulation();
+			}
+		}, 100);
+		// simulate();
 	});
 
 	onDestroy(() => {
 		if (simulation) simulation.stop();
 	});
-
-	// #region title interaction
-
-	const hoveredProps = {
-		alpha: 0.001,
-		velocityDecay: 0.95,
-		alphaTarget: 0.01
-		// force: d3.forceY(100).strength((_,i) => !i ? 0 : 10),
-		// force2: d3.forceX(200).strength((_,i) => !i ? 0 : 10),
-	};
-
-	const unhoveredProps = {
-		alpha: 0.1,
-		velocityDecay: 0.9,
-		alphaTarget: 0.1
-	};
-
-	let titleHovered = $state(false);
-
-	function hoverTitle(e: PointerEvent) {
-		titleHovered = true;
-		if (canvasContext?.canvas) canvasContext.canvas.style.filter = gooeyFilter();
-		simulation
-			.alpha(hoveredProps.alpha)
-			.alphaTarget(hoveredProps.alphaTarget)
-			.velocityDecay(hoveredProps.velocityDecay)
-			.force('x', null)
-			.force('y', null)
-			.force('collide', null)
-			.force('mouseRepulsion', null);
-		// .force('toTarget', d3.forceRadial(0, 0, 0).strength(0)); // placeholder, will tween in a sec
-		// remove mouseRepulsion
-		// .force('mouseRepulsion', null)
-		// .force('boundingForce', hoveredProps.boundingForce(simulation))
-		// .force('coverTitle', hoveredProps.force)
-		// .force('coverTitle2', hoveredProps.force2)
-
-		const oCircleThreshold = 0.3;
-
-		localCircles.forEach((c, i) => {
-			d3.select(c).interrupt();
-			let targetPoint;
-			if (i < numberOfCircles * oCircleThreshold) {
-				targetPoint = cachedNPoints[i];
-			} else {
-				targetPoint = cachedOPoints[i];
-			}
-			if (!targetPoint) return; // in case I screw up my math (likely)
-			d3.select(c)
-				.transition()
-				.delay(i * 0.2)
-				.duration(1000)
-				.ease(d3.easeCubicOut)
-				.tween('position', () => {
-					const startPoint = {
-						x: c.x,
-						y: c.y
-					};
-
-					// console.log(i, 'SP TP', startPoint, targetPoint);
-
-					return (t: number) => {
-						// If no longer hovering, break.
-						if (!titleHovered) return;
-						c.x = startPoint.x + (targetPoint.x - startPoint.x) * t;
-						c.y = startPoint.y + (targetPoint.y - startPoint.y) * t;
-						// c.r = 1;
-					};
-				});
-
-			// c.x = targetPoint.x;
-			// c.y = targetPoint.y;
-
-			// c.r = 0;
-			// d3.select(c)
-		});
-		simulation.alpha(0.1).restart();
-	}
-
-	function unhoverTitle(e: PointerEvent) {
-		titleHovered = false;
-		if (canvasContext?.canvas) canvasContext.canvas.style.filter = '';
-		d3.selectAll('circle').interrupt();
-		simulate();
-	}
-	// $inspect({titleHovered});
-	// #endregion title interaction
-
-	//#region hover data source
-
-	const dataHoveredProps = {
-		alpha: 0.1,
-		velocityDecay: 0.4,
-		alphaTarget: 0.2
-	};
-	function hoverDataSource(e: PointerEvent) {
-		if (canvasContext?.canvas) canvasContext.canvas.style.filter = gooeyFilter();
-		const midPoint = [
-			e.target.getBoundingClientRect().left + e.target.getBoundingClientRect().width / 2,
-			e.target.getBoundingClientRect().top + e.target.getBoundingClientRect().height / 2
-		];
-		// Strongly attract all nodes to the srcElement's position
-
-		// Chop off half the circles
-		localCircles = localCircles.slice(0, numberOfCircles / 10);
-		// localCircles.slice(numberOfCircles / 5, numberOfCircles).forEach((c) => {
-		//   c.r = 0;
-		// });
-		simulation
-			.alpha(dataHoveredProps.alpha)
-			.alphaTarget(dataHoveredProps.alphaTarget)
-			.velocityDecay(dataHoveredProps.velocityDecay)
-			.force('x', null)
-			.force('y', null)
-			// .force('collide', null)
-			// .force(
-			// 	'collide',
-			// 	d3
-			// 		.forceCollide()
-			// 		.radius(1.5)
-			// 		.iterations(performanceIterations)
-			// 		.strength(0.5)
-			// )
-			// .force('mouseRepulsion', null)
-			// .force('data', d3.forceRadial(20, midPoint[0], midPoint[1]).strength(0.9))
-			.force('dataX', d3.forceX(midPoint[0]).strength(1))
-			.force('dataY', d3.forceY(midPoint[1]).strength(2));
-		// .force('dataX', d3.forceX(e.clientX).strength(0.5))
-		// .force('dataY', d3.forceY(e.clientY).strength(0.5));
-
-		simulation.force('collide').strength(0.2);
-		// simulation.force('mouseRepulsion').strength(-1)
-		simulation
-			// .alpha(0.001)
-			// .velocityDecay(0.01)
-			// .alphaTarget(0.001)
-			.force(
-				'mouseRepulsion',
-				d3.forceManyBody().strength((d, i) => (i ? -10 : -1 * repulsion))
-			);
-
-		// localCircles.forEach((c) => {
-		// c.r = 1;
-		// c.color = '#00ca8e';
-		// });
-
-		// localCircles.forEach((c, i) => {
-		//   d3.select(c).interrupt();
-		//   d3.select(c)
-		//     .transition()
-		//     .duration(50)
-		//     .ease(d3.easeCubicInOut)
-		//     .tween('r', () => {
-		//       const startR = c.r;
-		//       const endR = 0.5;
-		//       return (t: number) => {
-		//         c.r = startR + (endR - startR) * t;
-		//       };
-		//     });
-		// });
-	}
-	function unhoverDataSource(e: PointerEvent) {
-		if (canvasContext?.canvas) canvasContext.canvas.style.filter = '';
-		simulation.alpha(0.1);
-		localCircles.slice(1).forEach((c) => {
-			c.r = radius();
-		});
-		simulate({ alpha: 0.5 });
-	}
-	//#endregion hover data source
 
 	// #region sidebar
 	const TOPICS = [
@@ -612,7 +439,7 @@
 	];
 
 	// Define Focus interface and export it
-	export interface Focus {
+	interface Focus {
 		type?: 'topic' | 'author';
 		query?: string;
 	}
@@ -772,26 +599,21 @@
 	// #endregion sidebar
 </script>
 
-<svelte:window bind:innerHeight={height} bind:innerWidth={width} {onpointermove} />
+<svelte:window bind:innerHeight={height} bind:innerWidth={width} />
 <svelte:head>
 	<title>NOMAD@10</title>
 </svelte:head>
-<!-- 
+
 <Canvas id="backgrounder" {width} {height} bind:ctx={canvasContext}>
 	{#each circles as circle}
 		<Circle midPoint={[circle.x, circle.y]} radius={circle.r} color={circle.color} borderColor={circle.borderColor} borderWidth={circle.borderWidth} />
 	{/each}
 </Canvas>
- -->
+
 <main>
 	<header>
 		<h1
 			aria-label="Nomad"
-			onmouseover={hoverTitle}
-			onmouseout={unhoverTitle}
-			onfocus={hoverTitle}
-			onblur={unhoverTitle}
-			class:hovered={titleHovered}
 		>
 			<a href="/" aria-label="Nomad">
 				<svg viewBox="24 79 1759 443" xmlns="http://www.w3.org/2000/svg">
@@ -867,6 +689,7 @@
 				<button
 					class="topic"
 					class:highlighted={associatedTopics.includes(topicButton)}
+					class:pinned={focusedTopic === topicButton}
 					onmouseover={() => {
 						highlightTopic(topicButton);
 					}}
@@ -880,8 +703,12 @@
 						highlightTopic(null);
 					}}
 					onclick={() => {
-						metadataStore.set([{key: "Topic", value: topicButton}]);
-						focusTopic(topicButton);
+						if (topicButton === focusedTopic) {
+							focusTopic(null);
+						} else {
+							metadataStore.set([{key: "Topic", value: topicButton}]);
+							focusTopic(topicButton);
+						}
 					}}
 				>
 					{topicButton}
@@ -893,6 +720,7 @@
 				<button
 					class="author"
 					class:highlighted={associatedAuthors.includes(contributor.author.login)}
+					class:pinned={focusedAuthor === contributor.author.login}
 					onmouseover={() => {
 						highlightAuthor(contributor.author.login);
 					}}
@@ -906,7 +734,12 @@
 						highlightAuthor(null);
 					}}
 					onclick={() => {
-						focusAuthor(contributor.author.login);
+						if (contributor.author.login === focusedAuthor) {
+							focusAuthor(null);
+						} else {
+							metadataStore.set([{key: "Author", value: contributor.author.login}]);
+							focusAuthor(contributor.author.login);
+						}
 					}}
 				>
 					<img src={contributor.author.avatar_url} style="width: 20px; height: 20px; border-radius: 50%;" />
@@ -951,13 +784,10 @@
 	</aside>
 
 	<section class="page">
-		{@render children({
-			hoverDataSource,
-			unhoverDataSource
-		})}
+		{@render children()}
 	</section>
 </main>
-
+<!-- 
 {#if meta}
 	<section class="meta">
 		<div>
@@ -979,7 +809,7 @@
 		{repulsion}
 	</section>
 {/if}
-
+ -->
 <style>
 	main {
 		overflow: hidden;
@@ -1011,7 +841,8 @@
 				max-width: 500px;
 				display: grid;
 				position: relative;
-				z-index: 2;
+				/* z-index: 2; */
+				z-index: 1;
 				margin: 0 auto;
 				padding: 1rem 0;
 				&.hovered {
@@ -1109,6 +940,7 @@
 
 			.author,
 			.topic {
+				border: 2px solid transparent;
 				display: inline-grid;
 				grid-template-columns: 20px 1fr;
 				gap: 5px;
@@ -1116,7 +948,6 @@
 				border-radius: 40px;
 				padding: 2px 4px;
 				box-shadow: 2px 2px 2px 0px rgba(0, 0, 0, 0.1);
-				border: none;
 				align-items: center;
 				cursor: pointer;
 				transition: background 0.1s ease-in-out;
@@ -1127,6 +958,13 @@
 					/* background: #00ca8e; */
 					background: rgba(0, 202, 142, 0.5);
 					color: black;
+				}
+				&.pinned {
+					/* background: #222; */
+					border: 2px solid #00ca8e;
+					box-sizing: border-box;
+					/* color: white; */
+					box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
 				}
 				&.topic {
 					grid-template-columns: 1fr;
