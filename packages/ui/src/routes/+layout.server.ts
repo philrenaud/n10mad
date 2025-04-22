@@ -1,29 +1,8 @@
 import { error } from '@sveltejs/kit';
 import type { LayoutServerLoad } from './$types';
 // import releases from '../../../../data/raw/releases.json';
-import files from '../../../../data/raw/files.json';
 // import contributors from '../../../../data/raw/contributors.json';
 import contributors from '../../../../data/wrangled/topics_author.json';
-
-// TODO: use a wrangled contributors file instead of raw
-import stars from '../../../../data/raw/stars.json';
-
-const filesMap = files.map((f) => {
-  // Count authors and tally them
-  const authors = f.commits.map(c => c.author).filter(Boolean);
-  let authorEntries = authors.reduce((acc, author) => {
-    acc[author] = (acc[author] || 0) + 1;
-    return acc;
-  }, {});
-  let sortedAuthorEntries = Object.entries(authorEntries)
-    .sort((a, b) => b[1] - a[1]);
-  let authorCounts = sortedAuthorEntries.map(([author, count]) => ({ author, count }));
-  return {
-    file: f.file,
-    authors: authorCounts,
-    commits: f.commits,
-  }
-});
 
 export const ssr = false;
 // export const ssr = true;
