@@ -40,6 +40,19 @@
     }
   });
 
+	let onbeforeprint = () => {
+		console.log('onbeforeprint', canvasElement);
+		if (canvasElement) {
+			canvasElement.style.display = 'none';
+		}
+	};
+
+	let onafterprint = () => {
+		if (canvasElement) {
+			canvasElement.style.display = 'block';
+		}
+	};
+
   function draw(ctx: CanvasRenderingContext2D | null) {
     if (!ctx) return;
     
@@ -71,6 +84,7 @@
 </script>
 <!-- ddd{width}, {height} -->
  {console.log('canvas', width, height, id)}
+ <svelte:window {onbeforeprint} {onafterprint} />
 <canvas
   id={id}
   {width}

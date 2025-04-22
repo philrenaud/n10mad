@@ -371,23 +371,24 @@
 	}
 
 	onMount(() => {
-		initializeCircles();
-		if (canvasContext?.canvas) {
-			canvasContext.canvas.style.filter = gooeyFilter();
-		}
-		// Wait for letter elements to be available
-		const checkLetters = setInterval(() => {
-			if (letterN && letterO) {
-				clearInterval(checkLetters);
-				nBounds = letterN.getBoundingClientRect();
-				oBounds = letterO.getBoundingClientRect();
-				cachedNPoints = letterNPoints;
-				cachedOPoints = letterOPoints;
-				console.log('cachedOPoints', cachedOPoints);
-				startSimpleSimulation();
+		if (width > 1000) {
+			initializeCircles();
+			if (canvasContext?.canvas) {
+				canvasContext.canvas.style.filter = gooeyFilter();
 			}
-		}, 100);
-		// simulate();
+			// Wait for letter elements to be available
+			const checkLetters = setInterval(() => {
+				if (letterN && letterO) {
+					clearInterval(checkLetters);
+					nBounds = letterN.getBoundingClientRect();
+					oBounds = letterO.getBoundingClientRect();
+					cachedNPoints = letterNPoints;
+					cachedOPoints = letterOPoints;
+					console.log('cachedOPoints', cachedOPoints);
+					startSimpleSimulation();
+				}
+			}, 100);
+		}
 	});
 
 	onDestroy(() => {
@@ -600,6 +601,7 @@
 </script>
 
 <svelte:window bind:innerHeight={height} bind:innerWidth={width} />
+
 <svelte:head>
 	<title>NOMAD@10</title>
 </svelte:head>
@@ -960,10 +962,9 @@
 					color: black;
 				}
 				&.pinned {
-					/* background: #222; */
-					border: 2px solid #00ca8e;
+					background: #00ca8e;
+					border: 2px solid rgba(0, 0, 0, 0.6);
 					box-sizing: border-box;
-					/* color: white; */
 					box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
 				}
 				&.topic {

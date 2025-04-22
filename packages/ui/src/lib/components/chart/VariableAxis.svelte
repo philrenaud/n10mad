@@ -22,7 +22,7 @@
   );
 
   const padding = 80;
-  const horizontalXAxisPadding = -padding / 2;
+  const horizontalXAxisPadding = -padding / 4;
 
   let axisTransform = $derived(
     orientation === 'vertical'

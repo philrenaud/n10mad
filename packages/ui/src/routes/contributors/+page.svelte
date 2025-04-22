@@ -119,6 +119,23 @@
 
   const padding = 80;
 
+  let onbeforeprint = () => {
+    console.log('onbeforeprint');
+    // TODO: magic numbers. A4 suitable though.
+    chartWidth = 775;
+    chartHeight = 775;
+  };
+
+  let mainSection: HTMLElement | null = $state(null);
+
+  let onafterprint = () => {
+    console.log('onafterprint');
+    // TODO: almost certainly too hacky for prod. window. + might SSR = woof.
+    window.dispatchEvent(new Event('resize'));
+    chartWidth = mainSection?.clientWidth || 0;
+    chartHeight = mainSection?.clientHeight || 0;
+  };
+
   // Contributors' weeks are all the same, so we can just use the first one
   let weeks = $derived(contributors[0].weeks.map(week => new Date(week.w * 1000)));
   
@@ -277,8 +294,12 @@
   let handleContributorHover = (event, area: Contributor) => {
     console.log('hovering', event, area);
     hoveredContributor = area.author;
-    hoveredContributor.x = `${event.layerX - 32}px`;
-    hoveredContributor.y = `${event.layerY - 32 }px`;
+    // hoveredContributor.x = `${event.layerX - 32}px`;
+    // hoveredContributor.y = `${event.layerY - 32 }px`;
+    // I recently changed it so that layerX doesn't seem to work.
+    hoveredContributor.x = `${event.x - padding/2 - 32}px`;
+    hoveredContributor.y = `${event.y - padding/2 - 82}px`;
+
   }
   
   // #endregion Hovered Contributor
@@ -338,6 +359,8 @@
   }
 </style>
 
+<svelte:window {onbeforeprint} {onafterprint} />
+
 <div id="container">
   {#await data}
     Loading...
@@ -347,22 +370,11 @@
       <p>
         Here are the stats for the top 100 contributors to Nomad over the past decade. Between them, they represent about 25,000 of the 26,000 commits Nomad has seen over her lifetime.
       </p> -->
-      <button class:active={mode === 'stream'} onclick={() => {
-        page.url.searchParams.set('mode', 'stream');
-        goto(`?${page.url.searchParams.toString()}`, { replaceState: false, keepFocus: true });
-      }}>Stream Mode</button>
-      <button class:active={mode === 'ridgeline'} onclick={() => {
-        page.url.searchParams.set('mode', 'ridgeline');
-        goto(`?${page.url.searchParams.toString()}`, { replaceState: false, keepFocus: true });
-      }}>Ridgeline Mode</button>
-      <div class="search-box">
-        <span>Focused Contributors: {focusedContributors.length}</span>
-      </div>
     </header>
-    <section class="main" bind:clientWidth={chartWidth} bind:clientHeight={chartHeight}
+    <section class="main" bind:clientWidth={chartWidth} bind:clientHeight={chartHeight} bind:this={mainSection}
       onmouseleave={() => hoveredContributor = null}
     >
-      <ChartContainer height={chartHeight} {yDomain} {xDomain}
+      <ChartContainer height={chartHeight} width={chartWidth} {yDomain} {xDomain}
         xScale={xScale} yScale={yScale} maxTicks={10}
         hideYAxis={true}
       >

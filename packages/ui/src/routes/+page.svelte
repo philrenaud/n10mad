@@ -125,7 +125,6 @@
   });
 
   let calculateBarWidth = $derived.by(() => {
-    console.log('CBW', topic, author);
     return (week: Week) => {
       if (!topic && !author) return barWidth;
       if (author) {
