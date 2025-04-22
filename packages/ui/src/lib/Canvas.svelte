@@ -82,9 +82,7 @@
     click: MouseEvent;
   }>();
 </script>
-<!-- ddd{width}, {height} -->
- {console.log('canvas', width, height, id)}
- <svelte:window {onbeforeprint} {onafterprint} />
+<svelte:window {onbeforeprint} {onafterprint} />
 <canvas
   id={id}
   {width}

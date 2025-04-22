@@ -16,6 +16,16 @@
 	})
 	setContext('metadataStore', metadataStore);
 
+	// find by key 'author' or null
+	let authorMetadata: { key: string; value: string } | null = $derived.by(() => {
+		console.log('searching metadata for author', metadata.length, metadata[0]?.key);
+		return metadata.find(m => m.key === 'author') || null;
+	})
+
+	let topicMetadata: { key: string; value: string } | null = $derived.by(() => {
+		return metadata.find(m => m.key === 'topic') || null;
+	})
+
 	let meta: boolean = $state(false);
 	meta = page.url.searchParams.get('meta') === 'true';
 	console.time('layout');
@@ -53,6 +63,17 @@
       mode = urlMode;
     }
   });
+
+	// set metadata from url params
+	$effect(() => {
+		if (author) {
+			console.log('setting author metadata', author);
+			metadataStore.set([{key: "author", value: author}]);
+		}
+		if (topic) {
+			metadataStore.set([{key: "topic", value: topic}]);
+		}
+	})
 
   // Clean up URL parameters when values are null
   $effect(() => {
@@ -489,7 +510,6 @@
 	setContext('streamMode', () => mode);
 
 	let contributors = $state(data.contributors);
-	console.log('contributors', contributors);
 	// let authors = $derived.by(() => {
 	// 	// console.log('contributors', contributors);
 	// 	return contributors.map((c) => {
@@ -645,12 +665,6 @@
 				</svg>
 			</a>
 		</h1>
-		<!-- <nav>
-      <a onmouseover={hoverDataSource} onmouseout={unhoverDataSource} href="/">Timeline</a>
-      <a onmouseover={hoverDataSource} onmouseout={unhoverDataSource} href="/releases">Releases</a>
-      <a onmouseover={hoverDataSource} onmouseout={unhoverDataSource} href="/contributors">Contributors</a>
-      <a onmouseover={hoverDataSource} onmouseout={unhoverDataSource} href="/stars">Stars</a>
-    </nav> -->
 	</header>
 
 	<aside class:open={sidebarOpen}>
@@ -669,12 +683,8 @@
 		{/if}
 		<nav>
 			<a class:active={page.url.pathname === '/'} href="/">Timeline</a>
-			<!-- <a href="/releases">Releases</a> -->
 			<a class:active={page.url.pathname === '/contributors'} href="/contributors">Contributors</a>
-			<!-- <a href="/stars">Stars</a> -->
 		</nav>
-
-		<!-- if page is contributors -->
 
 		{#if page.url.pathname === '/contributors'}
 			<button class:active={mode === 'stream'} onclick={() => {
@@ -692,6 +702,7 @@
 					class="topic"
 					class:highlighted={associatedTopics.includes(topicButton)}
 					class:pinned={focusedTopic === topicButton}
+					title="click to pin topic"
 					onmouseover={() => {
 						highlightTopic(topicButton);
 					}}
@@ -708,7 +719,7 @@
 						if (topicButton === focusedTopic) {
 							focusTopic(null);
 						} else {
-							metadataStore.set([{key: "Topic", value: topicButton}]);
+							metadataStore.set([{key: "topic", value: topicButton}]);
 							focusTopic(topicButton);
 						}
 					}}
@@ -723,6 +734,7 @@
 					class="author"
 					class:highlighted={associatedAuthors.includes(contributor.author.login)}
 					class:pinned={focusedAuthor === contributor.author.login}
+					title="click to pin author"
 					onmouseover={() => {
 						highlightAuthor(contributor.author.login);
 					}}
@@ -739,7 +751,7 @@
 						if (contributor.author.login === focusedAuthor) {
 							focusAuthor(null);
 						} else {
-							metadataStore.set([{key: "Author", value: contributor.author.login}]);
+							metadataStore.set([{key: "author", value: contributor.author.login}]);
 							focusAuthor(contributor.author.login);
 						}
 					}}
@@ -757,6 +769,7 @@
 				Clear Filter
 			</button>
 		{/if}
+
 		<section class="metadata">
 			Metadata
 			{#if metadata.length}
@@ -783,35 +796,24 @@
 				{/each}
 			{/if}
 		</section>
+
 	</aside>
 
 	<section class="page">
+		<header>
+			{#if authorMetadata}
+				{authorMetadata.value}
+			{:else if topicMetadata}
+				{topicMetadata.value}
+			{:else}
+				<!-- Nomad is turning 10! Since the first commit on June 1st, 2015, we've merged more than 27,000 commits. Nomad has been a journey of steady growth, focus, and determination by over 1,000 authors. Explore some topics and their contributors and learn more about the project! -->
+			{/if}
+			<!-- (Metadata here) -->
+		</header>
 		{@render children()}
 	</section>
 </main>
-<!-- 
-{#if meta}
-	<section class="meta">
-		<div>
-			h/w: {height}, {width}
-		</div>
-		<div>
-			mouse: {mouseX.toFixed(0)}, {mouseY.toFixed(0)}
-		</div>
-		<div>
-			perf iters: {performanceIterations}
-		</div>
-		<hr />
-		Num Circles:<br />
-		<input type="range" bind:value={numberOfCircles} min="10" max="5000" onchange={simulate} />
-		{numberOfCircles}
-		<hr />
-		Repulsion:<br />
-		<input type="range" bind:value={repulsion} min="1" max="10" onchange={simulate} />
-		{repulsion}
-	</section>
-{/if}
- -->
+
 <style>
 	main {
 		overflow: hidden;

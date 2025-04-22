@@ -196,7 +196,7 @@
 
   .main {
     display: grid;
-    height: 100%;
+    height: calc(100% - 2rem);
     max-width: 1100px;
     margin: 0 auto;
   }
