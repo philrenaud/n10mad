@@ -765,6 +765,7 @@
 			<button class="clear-filter" onclick={() => {
 				focusAuthor(null);
 				focusTopic(null);
+				metadataStore.set([]);
 			}}>
 				Clear Filter
 			</button>
@@ -799,17 +800,17 @@
 
 	</aside>
 
-	<section class="page">
-		<header>
+	<section class="metadata">
 			{#if authorMetadata}
 				{authorMetadata.value}
 			{:else if topicMetadata}
 				{topicMetadata.value}
 			{:else}
-				<!-- Nomad is turning 10! Since the first commit on June 1st, 2015, we've merged more than 27,000 commits. Nomad has been a journey of steady growth, focus, and determination by over 1,000 authors. Explore some topics and their contributors and learn more about the project! -->
+				Nomad is turning 10! Since the first commit on June 1st, 2015, we've merged more than 27,000 commits. Nomad has been a journey of steady growth, focus, and determination by over 1,000 authors. Explore some topics and their contributors and learn more about the project!
 			{/if}
-			<!-- (Metadata here) -->
-		</header>
+	</section>
+
+	<section class="page">
 		{@render children()}
 	</section>
 </main>
@@ -879,6 +880,8 @@
 			}
 		}
 	}
+
+/* TODO: need to establish "metadata" area in the grid */
 
 	aside {
 		grid-area: sidebar;
