@@ -6,7 +6,7 @@
   let canvasElement: HTMLCanvasElement;
   let frameId: number;
   // let ctx: CanvasRenderingContext2D | null; // TODO: might have to make this state
-  let { ctx = $bindable(), width, height } = $props();
+  let { ctx = $bindable(), width, height, id } = $props();
   
   let reDraw = true;
   let memo: any;
@@ -40,6 +40,19 @@
     }
   });
 
+	let onbeforeprint = () => {
+		console.log('onbeforeprint', canvasElement);
+		if (canvasElement) {
+			canvasElement.style.display = 'none';
+		}
+	};
+
+	let onafterprint = () => {
+		if (canvasElement) {
+			canvasElement.style.display = 'block';
+		}
+	};
+
   function draw(ctx: CanvasRenderingContext2D | null) {
     if (!ctx) return;
     
@@ -69,8 +82,9 @@
     click: MouseEvent;
   }>();
 </script>
-<!-- ddd{width}, {height} -->
+<svelte:window {onbeforeprint} {onafterprint} />
 <canvas
+  id={id}
   {width}
   {height}
   on:mousemove={(e) => {

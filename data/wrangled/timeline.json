@@ -1,0 +1,9360 @@
+[
+  [
+    {
+      "weekNumber": 0,
+      "count": 0,
+      "weekStart": 1420070400000,
+      "weekEnd": 1420675200000,
+      "authors": []
+    },
+    {
+      "weekNumber": 1,
+      "count": 0,
+      "weekStart": 1420675200000,
+      "weekEnd": 1421280000000,
+      "authors": []
+    },
+    {
+      "weekNumber": 2,
+      "count": 0,
+      "weekStart": 1421280000000,
+      "weekEnd": 1421884800000,
+      "authors": []
+    },
+    {
+      "weekNumber": 3,
+      "count": 0,
+      "weekStart": 1421884800000,
+      "weekEnd": 1422489600000,
+      "authors": []
+    },
+    {
+      "weekNumber": 4,
+      "count": 0,
+      "weekStart": 1422489600000,
+      "weekEnd": 1423094400000,
+      "authors": []
+    },
+    {
+      "weekNumber": 5,
+      "count": 0,
+      "weekStart": 1423094400000,
+      "weekEnd": 1423699200000,
+      "authors": []
+    },
+    {
+      "weekNumber": 6,
+      "count": 0,
+      "weekStart": 1423699200000,
+      "weekEnd": 1424304000000,
+      "authors": []
+    },
+    {
+      "weekNumber": 7,
+      "count": 0,
+      "weekStart": 1424304000000,
+      "weekEnd": 1424908800000,
+      "authors": []
+    },
+    {
+      "weekNumber": 8,
+      "count": 0,
+      "weekStart": 1424908800000,
+      "weekEnd": 1425513600000,
+      "authors": []
+    },
+    {
+      "weekNumber": 9,
+      "count": 0,
+      "weekStart": 1425513600000,
+      "weekEnd": 1426118400000,
+      "authors": []
+    },
+    {
+      "weekNumber": 10,
+      "count": 0,
+      "weekStart": 1426118400000,
+      "weekEnd": 1426723200000,
+      "authors": []
+    },
+    {
+      "weekNumber": 11,
+      "count": 0,
+      "weekStart": 1426723200000,
+      "weekEnd": 1427328000000,
+      "authors": []
+    },
+    {
+      "weekNumber": 12,
+      "count": 0,
+      "weekStart": 1427328000000,
+      "weekEnd": 1427932800000,
+      "authors": []
+    },
+    {
+      "weekNumber": 13,
+      "count": 0,
+      "weekStart": 1427932800000,
+      "weekEnd": 1428537600000,
+      "authors": []
+    },
+    {
+      "weekNumber": 14,
+      "count": 0,
+      "weekStart": 1428537600000,
+      "weekEnd": 1429142400000,
+      "authors": []
+    },
+    {
+      "weekNumber": 15,
+      "count": 0,
+      "weekStart": 1429142400000,
+      "weekEnd": 1429747200000,
+      "authors": []
+    },
+    {
+      "weekNumber": 16,
+      "count": 0,
+      "weekStart": 1429747200000,
+      "weekEnd": 1430352000000,
+      "authors": []
+    },
+    {
+      "weekNumber": 17,
+      "count": 0,
+      "weekStart": 1430352000000,
+      "weekEnd": 1430956800000,
+      "authors": []
+    },
+    {
+      "weekNumber": 18,
+      "count": 0,
+      "weekStart": 1430956800000,
+      "weekEnd": 1431561600000,
+      "authors": []
+    },
+    {
+      "weekNumber": 19,
+      "count": 0,
+      "weekStart": 1431561600000,
+      "weekEnd": 1432166400000,
+      "authors": []
+    },
+    {
+      "weekNumber": 20,
+      "count": 0,
+      "weekStart": 1432166400000,
+      "weekEnd": 1432771200000,
+      "authors": []
+    },
+    {
+      "weekNumber": 21,
+      "count": 13,
+      "weekStart": 1432771200000,
+      "weekEnd": 1433376000000,
+      "authors": [
+        "armon"
+      ],
+      "milestone": {
+        "date": "2015-06-01T00:00:00.000Z",
+        "title": "First Commit",
+        "description": "Nomad's first commit!",
+        "url": "https://github.com/hashicorp/nomad/commit/1234567890"
+      }
+    },
+    {
+      "weekNumber": 22,
+      "count": 30,
+      "weekStart": 1433376000000,
+      "weekEnd": 1433980800000,
+      "authors": [
+        "armon"
+      ]
+    },
+    {
+      "weekNumber": 23,
+      "count": 11,
+      "weekStart": 1433980800000,
+      "weekEnd": 1434585600000,
+      "authors": [
+        "armon"
+      ]
+    },
+    {
+      "weekNumber": 24,
+      "count": 0,
+      "weekStart": 1434585600000,
+      "weekEnd": 1435190400000,
+      "authors": []
+    },
+    {
+      "weekNumber": 25,
+      "count": 0,
+      "weekStart": 1435190400000,
+      "weekEnd": 1435795200000,
+      "authors": []
+    },
+    {
+      "weekNumber": 26,
+      "count": 24,
+      "weekStart": 1435795200000,
+      "weekEnd": 1436400000000,
+      "authors": [
+        "armon"
+      ]
+    },
+    {
+      "weekNumber": 27,
+      "count": 0,
+      "weekStart": 1436400000000,
+      "weekEnd": 1437004800000,
+      "authors": []
+    },
+    {
+      "weekNumber": 28,
+      "count": 0,
+      "weekStart": 1437004800000,
+      "weekEnd": 1437609600000,
+      "authors": []
+    },
+    {
+      "weekNumber": 29,
+      "count": 36,
+      "weekStart": 1437609600000,
+      "weekEnd": 1438214400000,
+      "authors": [
+        "armon"
+      ]
+    },
+    {
+      "weekNumber": 30,
+      "count": 27,
+      "weekStart": 1438214400000,
+      "weekEnd": 1438819200000,
+      "authors": [
+        "armon"
+      ]
+    },
+    {
+      "weekNumber": 31,
+      "count": 28,
+      "weekStart": 1438819200000,
+      "weekEnd": 1439424000000,
+      "authors": [
+        "armon"
+      ]
+    },
+    {
+      "weekNumber": 32,
+      "count": 88,
+      "weekStart": 1439424000000,
+      "weekEnd": 1440028800000,
+      "authors": [
+        "armon"
+      ]
+    },
+    {
+      "weekNumber": 33,
+      "count": 61,
+      "weekStart": 1440028800000,
+      "weekEnd": 1440633600000,
+      "authors": [
+        "catsby",
+        "armon",
+        "cbednarski"
+      ]
+    },
+    {
+      "weekNumber": 34,
+      "count": 63,
+      "weekStart": 1440633600000,
+      "weekEnd": 1441238400000,
+      "authors": [
+        "catsby",
+        "cbednarski",
+        "armon"
+      ]
+    },
+    {
+      "weekNumber": 35,
+      "count": 110,
+      "weekStart": 1441238400000,
+      "weekEnd": 1441843200000,
+      "authors": [
+        "armon",
+        "ryanuber",
+        "cbednarski",
+        "catsby"
+      ]
+    },
+    {
+      "weekNumber": 36,
+      "count": 192,
+      "weekStart": 1441843200000,
+      "weekEnd": 1442448000000,
+      "authors": [
+        "ryanuber",
+        "catsby",
+        "cbednarski",
+        "armon",
+        "mitchellh",
+        "captainill"
+      ]
+    },
+    {
+      "weekNumber": 37,
+      "count": 260,
+      "weekStart": 1442448000000,
+      "weekEnd": 1443052800000,
+      "authors": [
+        "dadgar",
+        "ryanuber",
+        "armon",
+        "cbednarski",
+        "catsby",
+        "sethvargo",
+        "pearkes"
+      ]
+    },
+    {
+      "weekNumber": 38,
+      "count": 245,
+      "weekStart": 1443052800000,
+      "weekEnd": 1443657600000,
+      "authors": [
+        null,
+        "carlosdp",
+        "apognu",
+        "dadgar",
+        "ryanuber",
+        "catsby",
+        "spacejam",
+        "orivej",
+        "mrwacky42",
+        "sethvargo",
+        "lalyos",
+        "jweissig",
+        "aldergren",
+        "asbjornenge",
+        "ziporah",
+        "pearkes",
+        "captainill",
+        "mitchellh",
+        "armon",
+        "KFishner",
+        "cbednarski",
+        "bensojona"
+      ],
+      "milestone": {
+        "date": "2015-09-25T00:00:00.000Z",
+        "title": "1000th commit",
+        "description": "api: add client server methods",
+        "url": "https://github.com/hashicorp/nomad/commit/e6a3b4ec4f661aaf82195d4f2acd2df84bae6a9a"
+      }
+    },
+    {
+      "weekNumber": 39,
+      "count": 101,
+      "weekStart": 1443657600000,
+      "weekEnd": 1444262400000,
+      "authors": [
+        "dadgar",
+        "achanda",
+        null,
+        "dimfeld",
+        "iverberk",
+        "cbednarski",
+        "KFishner",
+        "armon",
+        "ryanuber",
+        "errordeveloper",
+        "apognu",
+        "legal90",
+        "mitchellh",
+        "pearkes",
+        "diptanu"
+      ]
+    },
+    {
+      "weekNumber": 40,
+      "count": 129,
+      "weekStart": 1444262400000,
+      "weekEnd": 1444867200000,
+      "authors": [
+        "dadgar",
+        "sethvargo",
+        "pearkes",
+        "achanda",
+        null,
+        "armon",
+        "dimfeld",
+        "charlieok",
+        "cbednarski",
+        "crosbymichael"
+      ]
+    },
+    {
+      "weekNumber": 41,
+      "count": 60,
+      "weekStart": 1444867200000,
+      "weekEnd": 1445472000000,
+      "authors": [
+        "catsby",
+        "gregory-m",
+        null,
+        "mitchellh",
+        "diptanu",
+        "dadgar",
+        "charlieok",
+        "cbednarski",
+        "achanda",
+        "jefferai"
+      ]
+    },
+    {
+      "weekNumber": 42,
+      "count": 90,
+      "weekStart": 1445472000000,
+      "weekEnd": 1446076800000,
+      "authors": [
+        "dadgar",
+        "diptanu",
+        "steve-jansen",
+        "cbednarski",
+        "ryanuber",
+        "nak3",
+        "mitchellh",
+        "sethvargo",
+        "charlieok",
+        "achanda",
+        "armon",
+        "catsby",
+        "kikitux",
+        "jefferai"
+      ]
+    },
+    {
+      "weekNumber": 43,
+      "count": 90,
+      "weekStart": 1446076800000,
+      "weekEnd": 1446681600000,
+      "authors": [
+        "diptanu",
+        "catsby",
+        "nak3",
+        "dadgar",
+        "ryanuber",
+        "armon",
+        "charlieok",
+        "sethvargo",
+        "cbednarski",
+        "gregory-m"
+      ]
+    },
+    {
+      "weekNumber": 44,
+      "count": 87,
+      "weekStart": 1446681600000,
+      "weekEnd": 1447286400000,
+      "authors": [
+        "diptanu",
+        "dadgar",
+        "captainill",
+        "cbednarski",
+        "mitchellh",
+        null,
+        "nak3",
+        "Sdedelbrock",
+        "catsby"
+      ]
+    },
+    {
+      "weekNumber": 45,
+      "count": 217,
+      "weekStart": 1447286400000,
+      "weekEnd": 1447891200000,
+      "authors": [
+        "diptanu",
+        "cbednarski",
+        "dadgar",
+        "ChrisHines",
+        "carlosdp",
+        null,
+        "mitchellh",
+        "gjacquet"
+      ]
+    },
+    {
+      "weekNumber": 46,
+      "count": 139,
+      "weekStart": 1447891200000,
+      "weekEnd": 1448496000000,
+      "authors": [
+        "dadgar",
+        "diptanu",
+        "ChrisHines",
+        "ryanuber",
+        null,
+        "BRMatt",
+        "cbednarski",
+        "carlosdp"
+      ]
+    },
+    {
+      "weekNumber": 47,
+      "count": 67,
+      "weekStart": 1448496000000,
+      "weekEnd": 1449100800000,
+      "authors": [
+        "dadgar",
+        "ChrisAubuchon",
+        "cbednarski",
+        "ChrisHines",
+        "carlosdp",
+        "kaskavalci",
+        "ryanuber",
+        "diptanu",
+        "legal90",
+        "bluk",
+        "armon",
+        "cdrage"
+      ]
+    },
+    {
+      "weekNumber": 48,
+      "count": 52,
+      "weekStart": 1449100800000,
+      "weekEnd": 1449705600000,
+      "authors": [
+        "dadgar",
+        "diptanu",
+        "cbednarski",
+        "ChrisHines",
+        "ChrisAubuchon",
+        "ryanuber",
+        "c4milo"
+      ],
+      "milestone": {
+        "date": "2015-12-05T00:00:00.000Z",
+        "title": "1000th star",
+        "description": "Thanks, @GregRogers"
+      }
+    },
+    {
+      "weekNumber": 49,
+      "count": 102,
+      "weekStart": 1449705600000,
+      "weekEnd": 1450310400000,
+      "authors": [
+        "dadgar",
+        "diptanu",
+        null,
+        "ChrisHines",
+        "cbednarski",
+        "iverberk",
+        "zytek",
+        "cdrage"
+      ]
+    },
+    {
+      "weekNumber": 50,
+      "count": 80,
+      "weekStart": 1450310400000,
+      "weekEnd": 1450915200000,
+      "authors": [
+        "dadgar",
+        "iverberk",
+        null,
+        "achanda",
+        "cbednarski",
+        "ChrisHines",
+        "captainill",
+        "arminc",
+        "diptanu",
+        "zytek",
+        "catsby"
+      ]
+    },
+    {
+      "weekNumber": 51,
+      "count": 22,
+      "weekStart": 1450915200000,
+      "weekEnd": 1451520000000,
+      "authors": [
+        "iverberk",
+        "dadgar",
+        "diptanu",
+        null,
+        "achanda"
+      ]
+    }
+  ],
+  [
+    {
+      "weekNumber": 0,
+      "count": 38,
+      "weekStart": 1451606400000,
+      "weekEnd": 1452211200000,
+      "authors": [
+        "dadgar",
+        "iverberk",
+        "diptanu",
+        null,
+        "achanda"
+      ]
+    },
+    {
+      "weekNumber": 1,
+      "count": 65,
+      "weekStart": 1452211200000,
+      "weekEnd": 1452816000000,
+      "authors": [
+        "diptanu",
+        "dadgar",
+        "iverberk",
+        "ryanslade",
+        "MansM",
+        "sethvargo",
+        "bastiaanb"
+      ]
+    },
+    {
+      "weekNumber": 2,
+      "count": 52,
+      "weekStart": 1452816000000,
+      "weekEnd": 1453420800000,
+      "authors": [
+        "dadgar",
+        "iverberk",
+        "diptanu"
+      ]
+    },
+    {
+      "weekNumber": 3,
+      "count": 75,
+      "weekStart": 1453420800000,
+      "weekEnd": 1454025600000,
+      "authors": [
+        "dadgar",
+        "diptanu",
+        "ryanslade",
+        "grubernaut",
+        "iverberk",
+        "slackpad",
+        "sethvargo",
+        "mitchellh"
+      ]
+    },
+    {
+      "weekNumber": 4,
+      "count": 121,
+      "weekStart": 1454025600000,
+      "weekEnd": 1454630400000,
+      "authors": [
+        null,
+        "diptanu",
+        "dadgar",
+        "iverberk",
+        "ryanuber",
+        "ranjib",
+        "grubernaut"
+      ]
+    },
+    {
+      "weekNumber": 5,
+      "count": 150,
+      "weekStart": 1454630400000,
+      "weekEnd": 1455235200000,
+      "authors": [
+        "achanda",
+        "diptanu",
+        "dadgar",
+        "zanella"
+      ]
+    },
+    {
+      "weekNumber": 6,
+      "count": 73,
+      "weekStart": 1455235200000,
+      "weekEnd": 1455840000000,
+      "authors": [
+        "achanda",
+        "dadgar",
+        "diptanu",
+        "jefferai",
+        null,
+        "stigkj",
+        "sean-"
+      ]
+    },
+    {
+      "weekNumber": 7,
+      "count": 153,
+      "weekStart": 1455840000000,
+      "weekEnd": 1456444800000,
+      "authors": [
+        "diptanu",
+        "achanda",
+        "dadgar",
+        "phinze",
+        "armon"
+      ]
+    },
+    {
+      "weekNumber": 8,
+      "count": 47,
+      "weekStart": 1456444800000,
+      "weekEnd": 1457049600000,
+      "authors": [
+        "grubernaut",
+        "dadgar",
+        "diptanu",
+        "achanda",
+        "pshima",
+        null,
+        "ErikEvenson",
+        "monder"
+      ]
+    },
+    {
+      "weekNumber": 9,
+      "count": 55,
+      "weekStart": 1457049600000,
+      "weekEnd": 1457654400000,
+      "authors": [
+        "dadgar",
+        "diptanu",
+        "iverberk",
+        "achanda",
+        "grubernaut",
+        "ErikEvenson"
+      ]
+    },
+    {
+      "weekNumber": 10,
+      "count": 75,
+      "weekStart": 1457654400000,
+      "weekEnd": 1458259200000,
+      "authors": [
+        "diptanu",
+        "dadgar",
+        "sean-",
+        "blalor",
+        "kaskavalci",
+        "pearkes",
+        "captainill",
+        "onlyjob",
+        "brimstone"
+      ]
+    },
+    {
+      "weekNumber": 11,
+      "count": 145,
+      "weekStart": 1458259200000,
+      "weekEnd": 1458864000000,
+      "authors": [
+        "dadgar",
+        "diptanu",
+        "pshima",
+        "pearkes",
+        "mssola",
+        "achanda",
+        "grubernaut",
+        "kaskavalci"
+      ]
+    },
+    {
+      "weekNumber": 12,
+      "count": 103,
+      "weekStart": 1458864000000,
+      "weekEnd": 1459468800000,
+      "authors": [
+        "diptanu",
+        "dadgar",
+        "mgenov",
+        null,
+        "pearkes"
+      ]
+    },
+    {
+      "weekNumber": 13,
+      "count": 45,
+      "weekStart": 1459468800000,
+      "weekEnd": 1460073600000,
+      "authors": [
+        "dadgar",
+        "iverberk",
+        "diptanu",
+        "phinze",
+        "kcwong-verseon",
+        null,
+        "sheldonkwok"
+      ]
+    },
+    {
+      "weekNumber": 14,
+      "count": 80,
+      "weekStart": 1460073600000,
+      "weekEnd": 1460678400000,
+      "authors": [
+        "diptanu",
+        "dadgar",
+        "sethvargo",
+        "iverberk",
+        "sandstrom",
+        "phinze",
+        "ketzacoatl"
+      ]
+    },
+    {
+      "weekNumber": 15,
+      "count": 34,
+      "weekStart": 1460678400000,
+      "weekEnd": 1461283200000,
+      "authors": [
+        "normanhh3",
+        "dadgar",
+        "diptanu",
+        "troyswanson"
+      ]
+    },
+    {
+      "weekNumber": 16,
+      "count": 22,
+      "weekStart": 1461283200000,
+      "weekEnd": 1461888000000,
+      "authors": [
+        "diptanu",
+        "dadgar",
+        "iverberk",
+        "sethvargo"
+      ]
+    },
+    {
+      "weekNumber": 17,
+      "count": 40,
+      "weekStart": 1461888000000,
+      "weekEnd": 1462492800000,
+      "authors": [
+        "sean-",
+        "diptanu",
+        "dadgar",
+        "grubernaut",
+        "sethvargo",
+        "iverberk",
+        "pshima"
+      ]
+    },
+    {
+      "weekNumber": 18,
+      "count": 87,
+      "weekStart": 1462492800000,
+      "weekEnd": 1463097600000,
+      "authors": [
+        "diptanu",
+        "dadgar",
+        "sean-",
+        "capone212",
+        "grubernaut",
+        null
+      ]
+    },
+    {
+      "weekNumber": 19,
+      "count": 49,
+      "weekStart": 1463097600000,
+      "weekEnd": 1463702400000,
+      "authors": [
+        "diptanu",
+        "dadgar",
+        "dkong",
+        "grubernaut",
+        "sean-"
+      ]
+    },
+    {
+      "weekNumber": 20,
+      "count": 115,
+      "weekStart": 1463702400000,
+      "weekEnd": 1464307200000,
+      "authors": [
+        "sean-",
+        "diptanu",
+        "dadgar",
+        "hartzell"
+      ]
+    },
+    {
+      "weekNumber": 21,
+      "count": 111,
+      "weekStart": 1464307200000,
+      "weekEnd": 1464912000000,
+      "authors": [
+        "sean-",
+        "diptanu",
+        "jefferai",
+        "dadgar",
+        "hgontijo",
+        "kennethzfeng",
+        "dkerwin"
+      ]
+    },
+    {
+      "weekNumber": 22,
+      "count": 67,
+      "weekStart": 1464912000000,
+      "weekEnd": 1465516800000,
+      "authors": [
+        "sean-",
+        "dadgar",
+        "diptanu",
+        "matthaias",
+        "joeshaw",
+        "iverberk",
+        "pshima"
+      ]
+    },
+    {
+      "weekNumber": 23,
+      "count": 220,
+      "weekStart": 1465516800000,
+      "weekEnd": 1466121600000,
+      "authors": [
+        "sean-",
+        "dadgar",
+        "diptanu",
+        "cbednarski"
+      ]
+    },
+    {
+      "weekNumber": 24,
+      "count": 109,
+      "weekStart": 1466121600000,
+      "weekEnd": 1466726400000,
+      "authors": [
+        "dadgar",
+        "diptanu",
+        "grubernaut",
+        null,
+        "sean-",
+        "Lennie",
+        "mwieczorek",
+        "tbartelmess"
+      ]
+    },
+    {
+      "weekNumber": 25,
+      "count": 48,
+      "weekStart": 1466726400000,
+      "weekEnd": 1467331200000,
+      "authors": [
+        "diptanu",
+        "dadgar",
+        null,
+        "wuub",
+        "camerondavison"
+      ]
+    },
+    {
+      "weekNumber": 26,
+      "count": 33,
+      "weekStart": 1467331200000,
+      "weekEnd": 1467936000000,
+      "authors": [
+        "diptanu",
+        "dadgar",
+        "brianshumate",
+        "camerondavison",
+        "nkvoll"
+      ]
+    },
+    {
+      "weekNumber": 27,
+      "count": 93,
+      "weekStart": 1467936000000,
+      "weekEnd": 1468540800000,
+      "authors": [
+        "dadgar",
+        "diptanu",
+        "kcwong-verseon",
+        "sean-",
+        "camerondavison",
+        "armon",
+        null
+      ]
+    },
+    {
+      "weekNumber": 28,
+      "count": 68,
+      "weekStart": 1468540800000,
+      "weekEnd": 1469145600000,
+      "authors": [
+        "diptanu",
+        "dadgar",
+        "nak3",
+        "dkong",
+        "mwieczorek",
+        "mlafeldt"
+      ]
+    },
+    {
+      "weekNumber": 29,
+      "count": 94,
+      "weekStart": 1469145600000,
+      "weekEnd": 1469750400000,
+      "authors": [
+        "nak3",
+        "dadgar",
+        "diptanu",
+        "mwieczorek",
+        "42wim",
+        null,
+        "maier"
+      ]
+    },
+    {
+      "weekNumber": 30,
+      "count": 78,
+      "weekStart": 1469750400000,
+      "weekEnd": 1470355200000,
+      "authors": [
+        "dadgar",
+        "nak3",
+        "camerondavison",
+        "mwieczorek",
+        "diptanu",
+        null,
+        "vrenjith",
+        "mlafeldt"
+      ]
+    },
+    {
+      "weekNumber": 31,
+      "count": 106,
+      "weekStart": 1470355200000,
+      "weekEnd": 1470960000000,
+      "authors": [
+        "sean-",
+        "iverberk",
+        "dadgar",
+        "vishalnayak",
+        "nak3",
+        "diptanu",
+        null,
+        "mlafeldt",
+        "camerondavison",
+        "sethvargo"
+      ]
+    },
+    {
+      "weekNumber": 32,
+      "count": 141,
+      "weekStart": 1470960000000,
+      "weekEnd": 1471564800000,
+      "authors": [
+        "evan2645",
+        "nak3",
+        "vishalnayak",
+        "dadgar",
+        "diptanu",
+        null,
+        "gitter-badger",
+        "kyhavlov",
+        "hoffoo",
+        "ramukima",
+        "camerondavison"
+      ]
+    },
+    {
+      "weekNumber": 33,
+      "count": 77,
+      "weekStart": 1471564800000,
+      "weekEnd": 1472169600000,
+      "authors": [
+        "dadgar",
+        "schmichael",
+        "diptanu",
+        "iverberk",
+        "vishalnayak",
+        "capone212",
+        "nfisher",
+        "hoffoo",
+        "nak3",
+        "sethvargo",
+        "camerondavison"
+      ]
+    },
+    {
+      "weekNumber": 34,
+      "count": 72,
+      "weekStart": 1472169600000,
+      "weekEnd": 1472774400000,
+      "authors": [
+        "dadgar",
+        "diptanu",
+        "schmichael",
+        "mwieczorek",
+        "nborkert",
+        "kcwong-verseon",
+        "vishalnayak",
+        "mlafeldt",
+        null,
+        "iverberk",
+        "groovemonkey"
+      ]
+    },
+    {
+      "weekNumber": 35,
+      "count": 22,
+      "weekStart": 1472774400000,
+      "weekEnd": 1473379200000,
+      "authors": [
+        "evan2645",
+        "Frots",
+        "diptanu",
+        "mwieczorek",
+        "schmichael",
+        "dadgar"
+      ]
+    },
+    {
+      "weekNumber": 36,
+      "count": 31,
+      "weekStart": 1473379200000,
+      "weekEnd": 1473984000000,
+      "authors": [
+        "evan2645",
+        "diptanu",
+        "dadgar",
+        "mlafeldt",
+        "schmichael",
+        null,
+        "iconara"
+      ]
+    },
+    {
+      "weekNumber": 37,
+      "count": 34,
+      "weekStart": 1473984000000,
+      "weekEnd": 1474588800000,
+      "authors": [
+        "diptanu",
+        null,
+        "schmichael",
+        "dadgar",
+        "kaskavalci",
+        "clstokes"
+      ]
+    },
+    {
+      "weekNumber": 38,
+      "count": 45,
+      "weekStart": 1474588800000,
+      "weekEnd": 1475193600000,
+      "authors": [
+        "schmichael",
+        "dadgar",
+        "sethvargo",
+        "diptanu",
+        "kcwong-verseon",
+        "jippi",
+        "mwieczorek",
+        "sandstrom"
+      ]
+    },
+    {
+      "weekNumber": 39,
+      "count": 44,
+      "weekStart": 1475193600000,
+      "weekEnd": 1475798400000,
+      "authors": [
+        "schmichael",
+        "dadgar",
+        "sethvargo",
+        "jippi",
+        "diptanu",
+        "sean-"
+      ]
+    },
+    {
+      "weekNumber": 40,
+      "count": 51,
+      "weekStart": 1475798400000,
+      "weekEnd": 1476403200000,
+      "authors": [
+        "schmichael",
+        "dadgar",
+        "evanphx",
+        "sethvargo",
+        "barnardb"
+      ]
+    },
+    {
+      "weekNumber": 41,
+      "count": 29,
+      "weekStart": 1476403200000,
+      "weekEnd": 1477008000000,
+      "authors": [
+        "schmichael",
+        "dadgar",
+        "leecalcote",
+        "diptanu",
+        "jippi"
+      ]
+    },
+    {
+      "weekNumber": 42,
+      "count": 92,
+      "weekStart": 1477008000000,
+      "weekEnd": 1477612800000,
+      "authors": [
+        "diptanu",
+        "dadgar",
+        "schmichael",
+        "sethvargo"
+      ]
+    },
+    {
+      "weekNumber": 43,
+      "count": 145,
+      "weekStart": 1477612800000,
+      "weekEnd": 1478217600000,
+      "authors": [
+        "diptanu",
+        "sethvargo",
+        "dadgar",
+        "schmichael",
+        "sean-",
+        "jussi-kalliokoski"
+      ]
+    },
+    {
+      "weekNumber": 44,
+      "count": 110,
+      "weekStart": 1478217600000,
+      "weekEnd": 1478822400000,
+      "authors": [
+        "diptanu",
+        "dadgar",
+        "schmichael",
+        null,
+        "maier",
+        "carlpett",
+        "clstokes",
+        "bastiaanb",
+        "sean-",
+        "sethvargo",
+        "cabillman"
+      ]
+    },
+    {
+      "weekNumber": 45,
+      "count": 42,
+      "weekStart": 1478822400000,
+      "weekEnd": 1479427200000,
+      "authors": [
+        "schmichael",
+        "sethvargo",
+        "dadgar",
+        "dmexe",
+        "bastiaanb",
+        "lekum"
+      ]
+    },
+    {
+      "weekNumber": 46,
+      "count": 20,
+      "weekStart": 1479427200000,
+      "weekEnd": 1480032000000,
+      "authors": [
+        "diptanu",
+        "schmichael",
+        "gliptak",
+        "dadgar",
+        "ranjib"
+      ]
+    },
+    {
+      "weekNumber": 47,
+      "count": 36,
+      "weekStart": 1480032000000,
+      "weekEnd": 1480636800000,
+      "authors": [
+        "schmichael",
+        "dadgar",
+        "diptanu",
+        "julienlevasseur"
+      ]
+    },
+    {
+      "weekNumber": 48,
+      "count": 23,
+      "weekStart": 1480636800000,
+      "weekEnd": 1481241600000,
+      "authors": [
+        "schmichael",
+        "sethvargo",
+        "dadgar",
+        null,
+        "diptanu",
+        "tmichaud314"
+      ]
+    },
+    {
+      "weekNumber": 49,
+      "count": 54,
+      "weekStart": 1481241600000,
+      "weekEnd": 1481846400000,
+      "authors": [
+        "jorgemarey",
+        "dadgar",
+        "justinwalz",
+        "schmichael",
+        "diptanu",
+        "brianshumate",
+        "zanella",
+        "christoe",
+        "ksatirli",
+        null,
+        "samber"
+      ]
+    },
+    {
+      "weekNumber": 50,
+      "count": 46,
+      "weekStart": 1481846400000,
+      "weekEnd": 1482451200000,
+      "authors": [
+        "schmichael",
+        "diptanu",
+        "dadgar",
+        "pporada-gl"
+      ]
+    },
+    {
+      "weekNumber": 51,
+      "count": 7,
+      "weekStart": 1482451200000,
+      "weekEnd": 1483056000000,
+      "authors": [
+        "diptanu",
+        "camerondavison",
+        "pgporada",
+        "clstokes"
+      ]
+    }
+  ],
+  [
+    {
+      "weekNumber": 0,
+      "count": 44,
+      "weekStart": 1483228800000,
+      "weekEnd": 1483833600000,
+      "authors": [
+        "dadgar",
+        "asvoboda",
+        "diptanu",
+        "schmichael"
+      ]
+    },
+    {
+      "weekNumber": 1,
+      "count": 62,
+      "weekStart": 1483833600000,
+      "weekEnd": 1484438400000,
+      "authors": [
+        "dadgar",
+        "schmichael",
+        "diptanu",
+        "camerondavison"
+      ]
+    },
+    {
+      "weekNumber": 2,
+      "count": 44,
+      "weekStart": 1484438400000,
+      "weekEnd": 1485043200000,
+      "authors": [
+        "dadgar",
+        "schmichael",
+        "diptanu",
+        "jasonhancock",
+        "troyswanson"
+      ]
+    },
+    {
+      "weekNumber": 3,
+      "count": 116,
+      "weekStart": 1485043200000,
+      "weekEnd": 1485648000000,
+      "authors": [
+        "dadgar",
+        "schmichael",
+        "ryon",
+        "jrasell",
+        "taylorchu",
+        "jasoncostello",
+        null,
+        "leonli",
+        "diptanu",
+        "iconara"
+      ]
+    },
+    {
+      "weekNumber": 4,
+      "count": 96,
+      "weekStart": 1485648000000,
+      "weekEnd": 1486252800000,
+      "authors": [
+        "schmichael",
+        "sean-",
+        "dadgar",
+        null,
+        "diptanu",
+        "jasoncostello"
+      ]
+    },
+    {
+      "weekNumber": 5,
+      "count": 43,
+      "weekStart": 1486252800000,
+      "weekEnd": 1486857600000,
+      "authors": [
+        "diptanu",
+        "dadgar",
+        "jefferai",
+        "schmichael",
+        "sethvargo",
+        "sean-",
+        "tomclegg"
+      ]
+    },
+    {
+      "weekNumber": 6,
+      "count": 64,
+      "weekStart": 1486857600000,
+      "weekEnd": 1487462400000,
+      "authors": [
+        "jasoncostello",
+        "dadgar",
+        "diptanu",
+        "schmichael",
+        "greenboxal"
+      ]
+    },
+    {
+      "weekNumber": 7,
+      "count": 81,
+      "weekStart": 1487462400000,
+      "weekEnd": 1488067200000,
+      "authors": [
+        "schmichael",
+        "dadgar",
+        null,
+        "sean-",
+        "pietromenna",
+        "Crypto89",
+        "jen20",
+        "sethvargo",
+        "troyswanson"
+      ]
+    },
+    {
+      "weekNumber": 8,
+      "count": 84,
+      "weekStart": 1488067200000,
+      "weekEnd": 1488672000000,
+      "authors": [
+        "jasoncostello",
+        "TheBits",
+        "dadgar",
+        "schmichael",
+        "tmichaud314",
+        "jonathanio",
+        "Daviey",
+        "sethvargo",
+        "Gerrrr",
+        "jmvacdmon",
+        "crokita",
+        "multani"
+      ],
+      "milestone": {
+        "date": "2017-03-01T00:00:00.000Z",
+        "title": "Nomad 0.1",
+        "description": "Thx Armon!",
+        "url": "https://github.com/hashicorp/nomad/commit/1234567890"
+      }
+    },
+    {
+      "weekNumber": 9,
+      "count": 56,
+      "weekStart": 1488672000000,
+      "weekEnd": 1489276800000,
+      "authors": [
+        "qkate",
+        "dadgar",
+        "diptanu",
+        "schmichael",
+        "jen20",
+        "pearkes",
+        "jasoncostello",
+        "sethvargo",
+        "barnardb"
+      ]
+    },
+    {
+      "weekNumber": 10,
+      "count": 57,
+      "weekStart": 1489276800000,
+      "weekEnd": 1489881600000,
+      "authors": [
+        "vlm",
+        "dadgar",
+        "schmichael",
+        "jen20",
+        "sean-",
+        "sethvargo",
+        "jippi",
+        "multani"
+      ]
+    },
+    {
+      "weekNumber": 11,
+      "count": 23,
+      "weekStart": 1489881600000,
+      "weekEnd": 1490486400000,
+      "authors": [
+        "schmichael",
+        "dadgar",
+        "fiddyspence",
+        "lnguyen",
+        "moritzheiber",
+        "multani",
+        "sprutner"
+      ]
+    },
+    {
+      "weekNumber": 12,
+      "count": 80,
+      "weekStart": 1490486400000,
+      "weekEnd": 1491091200000,
+      "authors": [
+        "samber",
+        "qkate",
+        "schmichael",
+        "dadgar",
+        "clstokes",
+        null,
+        "vrenjith",
+        "sethvargo",
+        "burdiyan",
+        "Sonna"
+      ]
+    },
+    {
+      "weekNumber": 13,
+      "count": 46,
+      "weekStart": 1491091200000,
+      "weekEnd": 1491696000000,
+      "authors": [
+        "qkate",
+        "schmichael",
+        "diptanu",
+        "dadgar",
+        "clinta",
+        "sethvargo",
+        "mitchellh"
+      ]
+    },
+    {
+      "weekNumber": 14,
+      "count": 60,
+      "weekStart": 1491696000000,
+      "weekEnd": 1492300800000,
+      "authors": [
+        "qkate",
+        "schmichael",
+        "dadgar",
+        "vrenjith",
+        "diptanu",
+        "sheerun"
+      ]
+    },
+    {
+      "weekNumber": 15,
+      "count": 47,
+      "weekStart": 1492300800000,
+      "weekEnd": 1492905600000,
+      "authors": [
+        "dadgar",
+        "schmichael",
+        "sethvargo"
+      ]
+    },
+    {
+      "weekNumber": 16,
+      "count": 25,
+      "weekStart": 1492905600000,
+      "weekEnd": 1493510400000,
+      "authors": [
+        "dadgar",
+        "schmichael",
+        null,
+        "weargoggles",
+        "mgagliardoedrans",
+        "therealbill"
+      ]
+    },
+    {
+      "weekNumber": 17,
+      "count": 55,
+      "weekStart": 1493510400000,
+      "weekEnd": 1494115200000,
+      "authors": [
+        "schmichael",
+        "dadgar",
+        "brianshumate",
+        "DAXaholic",
+        "devth",
+        "weargoggles"
+      ]
+    },
+    {
+      "weekNumber": 18,
+      "count": 33,
+      "weekStart": 1494115200000,
+      "weekEnd": 1494720000000,
+      "authors": [
+        "schmichael",
+        "dadgar",
+        "brianshumate"
+      ]
+    },
+    {
+      "weekNumber": 19,
+      "count": 38,
+      "weekStart": 1494720000000,
+      "weekEnd": 1495324800000,
+      "authors": [
+        "dadgar",
+        "schmichael",
+        null,
+        "sixfeetover",
+        "derzufall",
+        "rcgenova"
+      ]
+    },
+    {
+      "weekNumber": 20,
+      "count": 66,
+      "weekStart": 1495324800000,
+      "weekEnd": 1495929600000,
+      "authors": [
+        "dadgar",
+        "sethvargo",
+        "schmichael",
+        null,
+        "benmoss"
+      ]
+    },
+    {
+      "weekNumber": 21,
+      "count": 34,
+      "weekStart": 1495929600000,
+      "weekEnd": 1496534400000,
+      "authors": [
+        "dadgar",
+        null,
+        "schmichael",
+        "sethvargo",
+        "jippi"
+      ]
+    },
+    {
+      "weekNumber": 22,
+      "count": 21,
+      "weekStart": 1496534400000,
+      "weekEnd": 1497139200000,
+      "authors": [
+        "dadgar",
+        "schmichael",
+        null,
+        "kmalec",
+        "rcgenova"
+      ]
+    },
+    {
+      "weekNumber": 23,
+      "count": 17,
+      "weekStart": 1497139200000,
+      "weekEnd": 1497744000000,
+      "authors": [
+        "schmichael",
+        "hynek",
+        "paddycarver",
+        "rcgenova",
+        "dadgar"
+      ]
+    },
+    {
+      "weekNumber": 24,
+      "count": 39,
+      "weekStart": 1497744000000,
+      "weekEnd": 1498348800000,
+      "authors": [
+        "dadgar",
+        "rcgenova",
+        null,
+        "schmichael",
+        "grossws"
+      ]
+    },
+    {
+      "weekNumber": 25,
+      "count": 65,
+      "weekStart": 1498348800000,
+      "weekEnd": 1498953600000,
+      "authors": [
+        "dadgar",
+        "schmichael",
+        "rcgenova",
+        "sethvargo",
+        "angrycub",
+        "aep",
+        "ryon",
+        "multani"
+      ]
+    },
+    {
+      "weekNumber": 26,
+      "count": 140,
+      "weekStart": 1498953600000,
+      "weekEnd": 1499558400000,
+      "authors": [
+        "rcgenova",
+        "dadgar",
+        "schmichael",
+        "alexandredantas"
+      ]
+    },
+    {
+      "weekNumber": 27,
+      "count": 30,
+      "weekStart": 1499558400000,
+      "weekEnd": 1500163200000,
+      "authors": [
+        "schmichael",
+        "dadgar",
+        "rcgenova",
+        "abednarik",
+        null
+      ]
+    },
+    {
+      "weekNumber": 28,
+      "count": 134,
+      "weekStart": 1500163200000,
+      "weekEnd": 1500768000000,
+      "authors": [
+        "sethvargo",
+        "dadgar",
+        "schmichael",
+        "kmalec",
+        "angrycub",
+        "qkate"
+      ]
+    },
+    {
+      "weekNumber": 29,
+      "count": 102,
+      "weekStart": 1500768000000,
+      "weekEnd": 1501372800000,
+      "authors": [
+        "chelseakomlo",
+        "jen20",
+        "zsluedem",
+        "angrycub",
+        "dadgar",
+        "schmichael",
+        "bensojona",
+        "sethvargo",
+        "rcgenova",
+        "qkate"
+      ]
+    },
+    {
+      "weekNumber": 30,
+      "count": 105,
+      "weekStart": 1501372800000,
+      "weekEnd": 1501977600000,
+      "authors": [
+        "armon",
+        "schmichael",
+        "dadgar",
+        "chelseakomlo",
+        "sprutner",
+        "rcgenova",
+        "qkate",
+        null,
+        "sethvargo",
+        "jen20",
+        "angrycub"
+      ]
+    },
+    {
+      "weekNumber": 31,
+      "count": 121,
+      "weekStart": 1501977600000,
+      "weekEnd": 1502582400000,
+      "authors": [
+        "armon",
+        "chelseakomlo",
+        "dadgar",
+        "hynek",
+        "schmichael",
+        "angrycub",
+        null,
+        "nicolaevladescu",
+        "clinta",
+        "adamatan",
+        "rcgenova",
+        "jrasell",
+        "lfarnell",
+        "nak3"
+      ]
+    },
+    {
+      "weekNumber": 32,
+      "count": 105,
+      "weekStart": 1502582400000,
+      "weekEnd": 1503187200000,
+      "authors": [
+        "diptanu",
+        "armon",
+        "chelseakomlo",
+        "dadgar",
+        "rcgenova",
+        "schmichael",
+        "jen20",
+        "clinta",
+        "slobo",
+        "jrasell",
+        "jkburges"
+      ]
+    },
+    {
+      "weekNumber": 33,
+      "count": 131,
+      "weekStart": 1503187200000,
+      "weekEnd": 1503792000000,
+      "authors": [
+        "schmichael",
+        "armon",
+        "dadgar",
+        "chelseakomlo",
+        "clinta",
+        "jippi",
+        null,
+        "rcgenova"
+      ]
+    },
+    {
+      "weekNumber": 34,
+      "count": 108,
+      "weekStart": 1503792000000,
+      "weekEnd": 1504396800000,
+      "authors": [
+        "diptanu",
+        "dadgar",
+        "chelseakomlo",
+        "armon",
+        "clinta",
+        "jolexa",
+        "jippi",
+        "schmichael"
+      ]
+    },
+    {
+      "weekNumber": 35,
+      "count": 56,
+      "weekStart": 1504396800000,
+      "weekEnd": 1505001600000,
+      "authors": [
+        "chelseakomlo",
+        "dadgar",
+        "jen20",
+        "schmichael",
+        null,
+        "armon"
+      ]
+    },
+    {
+      "weekNumber": 36,
+      "count": 170,
+      "weekStart": 1505001600000,
+      "weekEnd": 1505606400000,
+      "authors": [
+        "chelseakomlo",
+        "DingoEatingFuzz",
+        "MGPOwner",
+        "schmichael",
+        "armon",
+        "dadgar",
+        "dezmodue",
+        "angrycub",
+        "jrasell"
+      ]
+    },
+    {
+      "weekNumber": 37,
+      "count": 45,
+      "weekStart": 1505606400000,
+      "weekEnd": 1506211200000,
+      "authors": [
+        "hsmade",
+        "angrycub",
+        "dotdc",
+        "dalegaard",
+        "schmichael",
+        "dadgar",
+        "DingoEatingFuzz",
+        "chelseakomlo"
+      ]
+    },
+    {
+      "weekNumber": 38,
+      "count": 118,
+      "weekStart": 1506211200000,
+      "weekEnd": 1506816000000,
+      "authors": [
+        "DingoEatingFuzz",
+        "chelseakomlo",
+        "schmichael",
+        "dadgar",
+        "simar7",
+        "dalegaard",
+        null,
+        "hsmade",
+        "anubhavmishra"
+      ]
+    },
+    {
+      "weekNumber": 39,
+      "count": 62,
+      "weekStart": 1506816000000,
+      "weekEnd": 1507420800000,
+      "authors": [
+        "chelseakomlo",
+        "DingoEatingFuzz",
+        "schmichael",
+        "ncorrare",
+        "dadgar",
+        "jrasell",
+        "simar7"
+      ]
+    },
+    {
+      "weekNumber": 40,
+      "count": 125,
+      "weekStart": 1507420800000,
+      "weekEnd": 1508025600000,
+      "authors": [
+        "DingoEatingFuzz",
+        "dadgar",
+        "schmichael",
+        "sheerun",
+        "rcgenova",
+        "chelseakomlo",
+        "tgross",
+        "mmcquillan"
+      ]
+    },
+    {
+      "weekNumber": 41,
+      "count": 119,
+      "weekStart": 1508025600000,
+      "weekEnd": 1508630400000,
+      "authors": [
+        null,
+        "schmichael",
+        "DingoEatingFuzz",
+        "dadgar",
+        "chelseakomlo",
+        "slackpad"
+      ]
+    },
+    {
+      "weekNumber": 42,
+      "count": 109,
+      "weekStart": 1508630400000,
+      "weekEnd": 1509235200000,
+      "authors": [
+        null,
+        "chelseakomlo",
+        "schmichael",
+        "DingoEatingFuzz",
+        "dadgar",
+        "multani",
+        "diptanu",
+        "Andrew-Klaas",
+        "rcgenova"
+      ]
+    },
+    {
+      "weekNumber": 43,
+      "count": 121,
+      "weekStart": 1509235200000,
+      "weekEnd": 1509840000000,
+      "authors": [
+        "schmichael",
+        "DingoEatingFuzz",
+        "dadgar",
+        "james-powis",
+        null,
+        "cheeseprocedure",
+        "diptanu",
+        "rcgenova",
+        "chelseakomlo",
+        "slackpad",
+        "mattkanwisher"
+      ]
+    },
+    {
+      "weekNumber": 44,
+      "count": 35,
+      "weekStart": 1509840000000,
+      "weekEnd": 1510444800000,
+      "authors": [
+        "schmichael",
+        null,
+        "dadgar",
+        "DingoEatingFuzz",
+        "angrycub",
+        "chelseakomlo",
+        "ncorrare",
+        "jrasell",
+        "multani"
+      ]
+    },
+    {
+      "weekNumber": 45,
+      "count": 106,
+      "weekStart": 1510444800000,
+      "weekEnd": 1511049600000,
+      "authors": [
+        "emate",
+        "schmichael",
+        "DingoEatingFuzz",
+        null,
+        "iconara",
+        "rcgenova",
+        "dadgar",
+        "chelseakomlo",
+        "angrycub"
+      ]
+    },
+    {
+      "weekNumber": 46,
+      "count": 36,
+      "weekStart": 1511049600000,
+      "weekEnd": 1511654400000,
+      "authors": [
+        "emate",
+        "ortz",
+        "chelseakomlo",
+        "kyhavlov",
+        "neojin",
+        "DingoEatingFuzz",
+        null,
+        "rcgenova",
+        "angrycub",
+        "multani"
+      ]
+    },
+    {
+      "weekNumber": 47,
+      "count": 57,
+      "weekStart": 1511654400000,
+      "weekEnd": 1512259200000,
+      "authors": [
+        "chelseakomlo",
+        "kyhavlov",
+        "DingoEatingFuzz",
+        "schmichael",
+        "jens-solarisbank",
+        "angrycub",
+        "jrasell",
+        "tbartelmess",
+        "yurisklar"
+      ]
+    },
+    {
+      "weekNumber": 48,
+      "count": 84,
+      "weekStart": 1512259200000,
+      "weekEnd": 1512864000000,
+      "authors": [
+        "chelseakomlo",
+        "kyhavlov",
+        "schmichael",
+        null,
+        "dadgar",
+        "DingoEatingFuzz",
+        "rcgenova",
+        "angrycub"
+      ]
+    },
+    {
+      "weekNumber": 49,
+      "count": 58,
+      "weekStart": 1512864000000,
+      "weekEnd": 1513468800000,
+      "authors": [
+        "DingoEatingFuzz",
+        "rcgenova",
+        null,
+        "schmichael",
+        "jrasell",
+        "dadgar",
+        "chelseakomlo",
+        "jippi"
+      ]
+    },
+    {
+      "weekNumber": 50,
+      "count": 45,
+      "weekStart": 1513468800000,
+      "weekEnd": 1514073600000,
+      "authors": [
+        "schmichael",
+        "mikemccracken",
+        "DingoEatingFuzz",
+        "filipochnik",
+        "jrasell",
+        "chelseakomlo",
+        "dadgar",
+        "rcgenova",
+        null,
+        "kyhavlov"
+      ]
+    },
+    {
+      "weekNumber": 51,
+      "count": 3,
+      "weekStart": 1514073600000,
+      "weekEnd": 1514678400000,
+      "authors": [
+        "matosf",
+        "rwaweber",
+        "jaeminsung"
+      ]
+    }
+  ],
+  [
+    {
+      "weekNumber": 0,
+      "count": 40,
+      "weekStart": 1514764800000,
+      "weekEnd": 1515369600000,
+      "authors": [
+        "dadgar",
+        "mikemccracken",
+        "DingoEatingFuzz",
+        "schmichael",
+        null,
+        "fho",
+        "blixtra"
+      ],
+      "milestone": {
+        "date": "2018-01-05T00:00:00.000Z",
+        "title": "10000th commit",
+        "description": "Adds the ember-test-selectors addon",
+        "url": "https://github.com/hashicorp/nomad/commit/96752ec100c4ff5dc72cd3912fd8678d969e706b"
+      }
+    },
+    {
+      "weekNumber": 1,
+      "count": 76,
+      "weekStart": 1515369600000,
+      "weekEnd": 1515974400000,
+      "authors": [
+        "dadgar",
+        null,
+        "schmichael",
+        "mikemccracken",
+        "DingoEatingFuzz",
+        "filipochnik",
+        "jsilberm",
+        "shantanugadgil",
+        "angrycub",
+        "jrasell",
+        "rcgenova",
+        "chelseakomlo",
+        "Wintermute1"
+      ]
+    },
+    {
+      "weekNumber": 2,
+      "count": 84,
+      "weekStart": 1515974400000,
+      "weekEnd": 1516579200000,
+      "authors": [
+        "dadgar",
+        null,
+        "angrycub",
+        "indradhanush",
+        "filipochnik",
+        "chelseakomlo",
+        "kyhavlov",
+        "DingoEatingFuzz",
+        "schmichael",
+        "mikemccracken",
+        "meirish",
+        "insanejudge"
+      ]
+    },
+    {
+      "weekNumber": 3,
+      "count": 97,
+      "weekStart": 1516579200000,
+      "weekEnd": 1517184000000,
+      "authors": [
+        "mildred",
+        "schmichael",
+        "chelseakomlo",
+        "dadgar",
+        "DingoEatingFuzz",
+        null,
+        "42wim",
+        "filipochnik",
+        "simar7",
+        "mikemccracken",
+        "kyhavlov",
+        "ncorrare"
+      ]
+    },
+    {
+      "weekNumber": 4,
+      "count": 79,
+      "weekStart": 1517184000000,
+      "weekEnd": 1517788800000,
+      "authors": [
+        "dadgar",
+        "DingoEatingFuzz",
+        null,
+        "chelseakomlo",
+        "42wim",
+        "schmichael",
+        "kyhavlov",
+        "jrasell",
+        "angrycub",
+        "indradhanush"
+      ]
+    },
+    {
+      "weekNumber": 5,
+      "count": 55,
+      "weekStart": 1517788800000,
+      "weekEnd": 1518393600000,
+      "authors": [
+        "emate",
+        "DingoEatingFuzz",
+        "dadgar",
+        "schmichael",
+        null,
+        "flyinprogrammer",
+        "kyhavlov",
+        "angrycub",
+        "chelseakomlo",
+        "notnoopci"
+      ]
+    },
+    {
+      "weekNumber": 6,
+      "count": 53,
+      "weekStart": 1518393600000,
+      "weekEnd": 1518998400000,
+      "authors": [
+        "burdandrei",
+        "schmichael",
+        "DingoEatingFuzz",
+        "chelseakomlo",
+        "dadgar",
+        "sepulworld",
+        "kyhavlov",
+        null,
+        "c4milo"
+      ]
+    },
+    {
+      "weekNumber": 7,
+      "count": 42,
+      "weekStart": 1518998400000,
+      "weekEnd": 1519603200000,
+      "authors": [
+        "dadgar",
+        "schmichael",
+        "chelseakomlo",
+        null,
+        "DingoEatingFuzz",
+        "filipochnik",
+        "angrycub"
+      ]
+    },
+    {
+      "weekNumber": 8,
+      "count": 82,
+      "weekStart": 1519603200000,
+      "weekEnd": 1520208000000,
+      "authors": [
+        "dadgar",
+        "schmichael",
+        "chelseakomlo",
+        null,
+        "DingoEatingFuzz",
+        "alvin-huang",
+        "maihde",
+        "csawyerYumaed"
+      ]
+    },
+    {
+      "weekNumber": 9,
+      "count": 253,
+      "weekStart": 1520208000000,
+      "weekEnd": 1520812800000,
+      "authors": [
+        null,
+        "schmichael",
+        "dadgar",
+        "chelseakomlo",
+        "fho",
+        "jsoref",
+        "DingoEatingFuzz",
+        "rcgenova",
+        "angrycub"
+      ]
+    },
+    {
+      "weekNumber": 10,
+      "count": 101,
+      "weekStart": 1520812800000,
+      "weekEnd": 1521417600000,
+      "authors": [
+        "schmichael",
+        "dadgar",
+        "chelseakomlo",
+        null,
+        "DingoEatingFuzz"
+      ]
+    },
+    {
+      "weekNumber": 11,
+      "count": 138,
+      "weekStart": 1521417600000,
+      "weekEnd": 1522022400000,
+      "authors": [
+        "dadgar",
+        "chelseakomlo",
+        "schmichael",
+        null,
+        "DingoEatingFuzz",
+        "rcgenova",
+        "jrasell"
+      ]
+    },
+    {
+      "weekNumber": 12,
+      "count": 154,
+      "weekStart": 1522022400000,
+      "weekEnd": 1522627200000,
+      "authors": [
+        "schmichael",
+        "rcgenova",
+        "dadgar",
+        "DingoEatingFuzz",
+        "chelseakomlo",
+        null,
+        "angrycub"
+      ]
+    },
+    {
+      "weekNumber": 13,
+      "count": 80,
+      "weekStart": 1522627200000,
+      "weekEnd": 1523232000000,
+      "authors": [
+        "dadgar",
+        "chelseakomlo",
+        "schmichael",
+        "topfunky",
+        "DingoEatingFuzz",
+        "angrycub",
+        null,
+        "ozkatz",
+        "rcgenova"
+      ]
+    },
+    {
+      "weekNumber": 14,
+      "count": 154,
+      "weekStart": 1523232000000,
+      "weekEnd": 1523836800000,
+      "authors": [
+        "dadgar",
+        "DingoEatingFuzz",
+        "nickethier",
+        "rcgenova",
+        "ninoles",
+        "schmichael",
+        null,
+        "chelseakomlo",
+        "angrycub",
+        "jescalan",
+        "sethvargo"
+      ]
+    },
+    {
+      "weekNumber": 15,
+      "count": 100,
+      "weekStart": 1523836800000,
+      "weekEnd": 1524441600000,
+      "authors": [
+        "chelseakomlo",
+        "dadgar",
+        null,
+        "nickethier",
+        "schmichael",
+        "DingoEatingFuzz",
+        "rcgenova",
+        "angrycub",
+        "ninoles",
+        "PeterDaveHello"
+      ]
+    },
+    {
+      "weekNumber": 16,
+      "count": 80,
+      "weekStart": 1524441600000,
+      "weekEnd": 1525046400000,
+      "authors": [
+        "dadgar",
+        null,
+        "schmichael",
+        "nickethier",
+        "DingoEatingFuzz",
+        "cryptomeme",
+        "chelseakomlo",
+        "herver",
+        "jrasell"
+      ]
+    },
+    {
+      "weekNumber": 17,
+      "count": 69,
+      "weekStart": 1525046400000,
+      "weekEnd": 1525651200000,
+      "authors": [
+        "chelseakomlo",
+        null,
+        "nickethier",
+        "DingoEatingFuzz",
+        "schmichael",
+        "jsilberm"
+      ]
+    },
+    {
+      "weekNumber": 18,
+      "count": 91,
+      "weekStart": 1525651200000,
+      "weekEnd": 1526256000000,
+      "authors": [
+        "chelseakomlo",
+        "DingoEatingFuzz",
+        "nickethier",
+        "dadgar",
+        "angrycub",
+        "maihde",
+        null,
+        "jkohrman"
+      ]
+    },
+    {
+      "weekNumber": 19,
+      "count": 9,
+      "weekStart": 1526256000000,
+      "weekEnd": 1526860800000,
+      "authors": [
+        "rkettelerij",
+        "insanejudge",
+        "nickethier",
+        "justenwalker"
+      ]
+    },
+    {
+      "weekNumber": 20,
+      "count": 94,
+      "weekStart": 1526860800000,
+      "weekEnd": 1527465600000,
+      "authors": [
+        "dadgar",
+        "chelseakomlo",
+        "gkrizek",
+        "DingoEatingFuzz",
+        "rkettelerij",
+        "angrycub",
+        "nickethier",
+        "capone212",
+        "qkate",
+        null,
+        "Omar-Khawaja",
+        "jesusvazquez",
+        "lcnja",
+        "aymericbeaumet"
+      ]
+    },
+    {
+      "weekNumber": 21,
+      "count": 89,
+      "weekStart": 1527465600000,
+      "weekEnd": 1528070400000,
+      "authors": [
+        "dadgar",
+        null,
+        "DingoEatingFuzz",
+        "chelseakomlo",
+        "rcgenova"
+      ]
+    },
+    {
+      "weekNumber": 22,
+      "count": 66,
+      "weekStart": 1528070400000,
+      "weekEnd": 1528675200000,
+      "authors": [
+        "burdandrei",
+        "schmichael",
+        "chelseakomlo",
+        "jrasell",
+        "dadgar",
+        "DingoEatingFuzz",
+        "nickethier",
+        null,
+        "listrophy",
+        "angrycub",
+        "rcgenova"
+      ]
+    },
+    {
+      "weekNumber": 23,
+      "count": 47,
+      "weekStart": 1528675200000,
+      "weekEnd": 1529280000000,
+      "authors": [
+        "DingoEatingFuzz",
+        "schmichael",
+        "margueritepd",
+        "dirkkok",
+        "dadgar",
+        "chelseakomlo",
+        "ogham",
+        null,
+        "nickethier"
+      ]
+    },
+    {
+      "weekNumber": 24,
+      "count": 46,
+      "weekStart": 1529280000000,
+      "weekEnd": 1529884800000,
+      "authors": [
+        "dadgar",
+        "rcgenova",
+        "DingoEatingFuzz",
+        "angrycub",
+        null,
+        "obitech",
+        "burdandrei",
+        "schmichael",
+        "alvin-huang",
+        "jrasell"
+      ]
+    },
+    {
+      "weekNumber": 25,
+      "count": 37,
+      "weekStart": 1529884800000,
+      "weekEnd": 1530489600000,
+      "authors": [
+        "schmichael",
+        "nickethier",
+        "DingoEatingFuzz",
+        "rcgenova"
+      ]
+    },
+    {
+      "weekNumber": 26,
+      "count": 44,
+      "weekStart": 1530489600000,
+      "weekEnd": 1531094400000,
+      "authors": [
+        "nickethier",
+        "DingoEatingFuzz",
+        "chelseakomlo",
+        "cbednarski",
+        null
+      ]
+    },
+    {
+      "weekNumber": 27,
+      "count": 69,
+      "weekStart": 1531094400000,
+      "weekEnd": 1531699200000,
+      "authors": [
+        "schmichael",
+        "dadgar",
+        "nickethier",
+        "DingoEatingFuzz",
+        "chelseakomlo",
+        "allthingsclowd",
+        "msvbhat",
+        null
+      ]
+    },
+    {
+      "weekNumber": 28,
+      "count": 61,
+      "weekStart": 1531699200000,
+      "weekEnd": 1532304000000,
+      "authors": [
+        "jrasell",
+        "schmichael",
+        "dadgar",
+        null,
+        "DingoEatingFuzz",
+        "chelseakomlo",
+        "kikitux"
+      ]
+    },
+    {
+      "weekNumber": 29,
+      "count": 57,
+      "weekStart": 1532304000000,
+      "weekEnd": 1532908800000,
+      "authors": [
+        null,
+        "DingoEatingFuzz",
+        "nickethier",
+        "schmichael",
+        "dadgar",
+        "angrycub"
+      ]
+    },
+    {
+      "weekNumber": 30,
+      "count": 48,
+      "weekStart": 1532908800000,
+      "weekEnd": 1533513600000,
+      "authors": [
+        "schmichael",
+        null,
+        "DingoEatingFuzz",
+        "chelseakomlo",
+        "msvbhat",
+        "nickethier",
+        "dadgar"
+      ]
+    },
+    {
+      "weekNumber": 31,
+      "count": 60,
+      "weekStart": 1533513600000,
+      "weekEnd": 1534118400000,
+      "authors": [
+        "schmichael",
+        null,
+        "Xopherus",
+        "chelseakomlo",
+        "dadgar",
+        "DingoEatingFuzz"
+      ]
+    },
+    {
+      "weekNumber": 32,
+      "count": 61,
+      "weekStart": 1534118400000,
+      "weekEnd": 1534723200000,
+      "authors": [
+        "schmichael",
+        null,
+        "dadgar",
+        "nickethier",
+        "DingoEatingFuzz",
+        "angrycub",
+        "chelseakomlo"
+      ]
+    },
+    {
+      "weekNumber": 33,
+      "count": 40,
+      "weekStart": 1534723200000,
+      "weekEnd": 1535328000000,
+      "authors": [
+        "schmichael",
+        "DingoEatingFuzz",
+        null,
+        "dadgar",
+        "nickethier"
+      ]
+    },
+    {
+      "weekNumber": 34,
+      "count": 42,
+      "weekStart": 1535328000000,
+      "weekEnd": 1535932800000,
+      "authors": [
+        "schmichael",
+        "oleksii-shyman",
+        "DingoEatingFuzz",
+        null,
+        "nickethier",
+        "dadgar"
+      ]
+    },
+    {
+      "weekNumber": 35,
+      "count": 36,
+      "weekStart": 1535932800000,
+      "weekEnd": 1536537600000,
+      "authors": [
+        "schmichael",
+        "oleksii-shyman",
+        "DingoEatingFuzz",
+        "dadgar",
+        "shantanugadgil",
+        null
+      ]
+    },
+    {
+      "weekNumber": 36,
+      "count": 55,
+      "weekStart": 1536537600000,
+      "weekEnd": 1537142400000,
+      "authors": [
+        null,
+        "schmichael",
+        "dadgar",
+        "nickethier",
+        "DingoEatingFuzz"
+      ]
+    },
+    {
+      "weekNumber": 37,
+      "count": 52,
+      "weekStart": 1537142400000,
+      "weekEnd": 1537747200000,
+      "authors": [
+        null,
+        "schmichael",
+        "nickethier",
+        "dadgar",
+        "oleksii-shyman",
+        "DingoEatingFuzz",
+        "chaosteil"
+      ]
+    },
+    {
+      "weekNumber": 38,
+      "count": 65,
+      "weekStart": 1537747200000,
+      "weekEnd": 1538352000000,
+      "authors": [
+        "dadgar",
+        null,
+        "nickethier",
+        "schmichael",
+        "DingoEatingFuzz",
+        "barda999"
+      ]
+    },
+    {
+      "weekNumber": 39,
+      "count": 31,
+      "weekStart": 1538352000000,
+      "weekEnd": 1538956800000,
+      "authors": [
+        null,
+        "nickethier",
+        "dadgar",
+        "sportebois",
+        "Omar-Khawaja"
+      ]
+    },
+    {
+      "weekNumber": 40,
+      "count": 55,
+      "weekStart": 1538956800000,
+      "weekEnd": 1539561600000,
+      "authors": [
+        "schmichael",
+        "nickethier",
+        null,
+        "dadgar",
+        "sportebois",
+        "jippi"
+      ]
+    },
+    {
+      "weekNumber": 41,
+      "count": 81,
+      "weekStart": 1539561600000,
+      "weekEnd": 1540166400000,
+      "authors": [
+        "dadgar",
+        "schmichael",
+        "DingoEatingFuzz",
+        null,
+        "nickethier",
+        "angrycub",
+        "rkettelerij",
+        "roansong"
+      ]
+    },
+    {
+      "weekNumber": 42,
+      "count": 14,
+      "weekStart": 1540166400000,
+      "weekEnd": 1540771200000,
+      "authors": [
+        null,
+        "schmichael"
+      ]
+    },
+    {
+      "weekNumber": 43,
+      "count": 89,
+      "weekStart": 1540771200000,
+      "weekEnd": 1541376000000,
+      "authors": [
+        null,
+        "dadgar",
+        "DingoEatingFuzz",
+        "schmichael",
+        "endocrimes",
+        "notnoop",
+        "nickethier"
+      ]
+    },
+    {
+      "weekNumber": 44,
+      "count": 90,
+      "weekStart": 1541376000000,
+      "weekEnd": 1541980800000,
+      "authors": [
+        "endocrimes",
+        null,
+        "nickethier",
+        "DingoEatingFuzz",
+        "schmichael",
+        "dadgar",
+        "angrycub",
+        "pgiles",
+        "notnoop"
+      ]
+    },
+    {
+      "weekNumber": 45,
+      "count": 94,
+      "weekStart": 1541980800000,
+      "weekEnd": 1542585600000,
+      "authors": [
+        "dadgar",
+        "schmichael",
+        null,
+        "nickethier",
+        "Omar-Khawaja",
+        "notnoop",
+        "endocrimes",
+        "sportebois",
+        "lunchbag"
+      ]
+    },
+    {
+      "weekNumber": 46,
+      "count": 50,
+      "weekStart": 1542585600000,
+      "weekEnd": 1543190400000,
+      "authors": [
+        null,
+        "notnoop",
+        "schmichael",
+        "nickethier",
+        "alvin-huang",
+        "endocrimes",
+        "angrycub",
+        "sevagh",
+        "DingoEatingFuzz"
+      ]
+    },
+    {
+      "weekNumber": 47,
+      "count": 84,
+      "weekStart": 1543190400000,
+      "weekEnd": 1543795200000,
+      "authors": [
+        "oleksii-shyman",
+        "nickethier",
+        "notnoop",
+        null,
+        "githubfoam",
+        "endocrimes",
+        "Omar-Khawaja",
+        "schmichael"
+      ]
+    },
+    {
+      "weekNumber": 48,
+      "count": 78,
+      "weekStart": 1543795200000,
+      "weekEnd": 1544400000000,
+      "authors": [
+        "schmichael",
+        "nickethier",
+        "DingoEatingFuzz",
+        null,
+        "endocrimes",
+        "notnoop",
+        "dadgar",
+        "emate",
+        "roooms"
+      ]
+    },
+    {
+      "weekNumber": 49,
+      "count": 95,
+      "weekStart": 1544400000000,
+      "weekEnd": 1545004800000,
+      "authors": [
+        "nickethier",
+        "endocrimes",
+        null,
+        "dadgar",
+        "notnoop",
+        "blalor",
+        "DingoEatingFuzz",
+        "schmichael"
+      ]
+    },
+    {
+      "weekNumber": 50,
+      "count": 89,
+      "weekStart": 1545004800000,
+      "weekEnd": 1545609600000,
+      "authors": [
+        "oleksii-shyman",
+        "schmichael",
+        "endocrimes",
+        "dadgar",
+        null,
+        "nickethier",
+        "Omar-Khawaja",
+        "DingoEatingFuzz"
+      ]
+    },
+    {
+      "weekNumber": 51,
+      "count": 0,
+      "weekStart": 1545609600000,
+      "weekEnd": 1546214400000,
+      "authors": []
+    }
+  ],
+  [
+    {
+      "weekNumber": 0,
+      "count": 66,
+      "weekStart": 1546300800000,
+      "weekEnd": 1546905600000,
+      "authors": [
+        null,
+        "schmichael",
+        "dadgar",
+        "endocrimes",
+        "notnoop"
+      ]
+    },
+    {
+      "weekNumber": 1,
+      "count": 136,
+      "weekStart": 1546905600000,
+      "weekEnd": 1547510400000,
+      "authors": [
+        "DingoEatingFuzz",
+        null,
+        "nickethier",
+        "notnoop",
+        "endocrimes",
+        "schmichael",
+        "dadgar"
+      ]
+    },
+    {
+      "weekNumber": 2,
+      "count": 103,
+      "weekStart": 1547510400000,
+      "weekEnd": 1548115200000,
+      "authors": [
+        null,
+        "arshjohar",
+        "DingoEatingFuzz",
+        "dadgar",
+        "schmichael",
+        "notnoop",
+        "nickethier",
+        "endocrimes",
+        "catstrom"
+      ]
+    },
+    {
+      "weekNumber": 3,
+      "count": 125,
+      "weekStart": 1548115200000,
+      "weekEnd": 1548720000000,
+      "authors": [
+        "arshjohar",
+        "DingoEatingFuzz",
+        "schmichael",
+        "nickethier",
+        "dadgar",
+        null,
+        "Omar-Khawaja",
+        "angrycub",
+        "notnoop",
+        "endocrimes"
+      ]
+    },
+    {
+      "weekNumber": 4,
+      "count": 83,
+      "weekStart": 1548720000000,
+      "weekEnd": 1549324800000,
+      "authors": [
+        "endocrimes",
+        "DingoEatingFuzz",
+        null,
+        "schmichael",
+        "quasilyte",
+        "Omar-Khawaja",
+        "mre",
+        "notnoop",
+        "dadgar",
+        "nickethier"
+      ]
+    },
+    {
+      "weekNumber": 5,
+      "count": 12,
+      "weekStart": 1549324800000,
+      "weekEnd": 1549929600000,
+      "authors": [
+        "DingoEatingFuzz",
+        "endocrimes",
+        "schmichael",
+        "roooms",
+        null,
+        "radicaledddd",
+        "nickethier",
+        "catstrom"
+      ]
+    },
+    {
+      "weekNumber": 6,
+      "count": 36,
+      "weekStart": 1549929600000,
+      "weekEnd": 1550534400000,
+      "authors": [
+        "DingoEatingFuzz",
+        "schmichael",
+        "endocrimes",
+        "notnoop",
+        null
+      ]
+    },
+    {
+      "weekNumber": 7,
+      "count": 59,
+      "weekStart": 1550534400000,
+      "weekEnd": 1551139200000,
+      "authors": [
+        null,
+        "schmichael",
+        "endocrimes",
+        "notnoop",
+        "angrycub",
+        "Omar-Khawaja"
+      ]
+    },
+    {
+      "weekNumber": 8,
+      "count": 32,
+      "weekStart": 1551139200000,
+      "weekEnd": 1551744000000,
+      "authors": [
+        "arshjohar",
+        "endocrimes",
+        "schmichael",
+        null,
+        "nickethier",
+        "quasilyte",
+        "Omar-Khawaja",
+        "notnoop"
+      ]
+    },
+    {
+      "weekNumber": 9,
+      "count": 29,
+      "weekStart": 1551744000000,
+      "weekEnd": 1552348800000,
+      "authors": [
+        "arshjohar",
+        null,
+        "DingoEatingFuzz",
+        "endocrimes",
+        "angrycub",
+        "schmichael",
+        "notnoop",
+        "dadgar",
+        "yishan-lin"
+      ]
+    },
+    {
+      "weekNumber": 10,
+      "count": 65,
+      "weekStart": 1552348800000,
+      "weekEnd": 1552953600000,
+      "authors": [
+        "schmichael",
+        null,
+        "DingoEatingFuzz",
+        "nickethier",
+        "notnoop",
+        "hasheddan",
+        "Omar-Khawaja",
+        "sarcasticadmin"
+      ]
+    },
+    {
+      "weekNumber": 11,
+      "count": 42,
+      "weekStart": 1552953600000,
+      "weekEnd": 1553558400000,
+      "authors": [
+        "DingoEatingFuzz",
+        null,
+        "notnoop",
+        "schmichael",
+        "hashicorp-nomad",
+        "nickethier"
+      ]
+    },
+    {
+      "weekNumber": 12,
+      "count": 79,
+      "weekStart": 1553558400000,
+      "weekEnd": 1554163200000,
+      "authors": [
+        "schmichael",
+        "endocrimes",
+        "langmartin",
+        "DingoEatingFuzz",
+        null,
+        "nfagerlund",
+        "notnoop",
+        "jefferai",
+        "briancain"
+      ]
+    },
+    {
+      "weekNumber": 13,
+      "count": 56,
+      "weekStart": 1554163200000,
+      "weekEnd": 1554768000000,
+      "authors": [
+        "langmartin",
+        "endocrimes",
+        "DingoEatingFuzz",
+        null,
+        "schmichael",
+        "nickethier",
+        "hashicorp-nomad",
+        "notnoop"
+      ]
+    },
+    {
+      "weekNumber": 14,
+      "count": 62,
+      "weekStart": 1554768000000,
+      "weekEnd": 1555372800000,
+      "authors": [
+        "endocrimes",
+        "langmartin",
+        "arshjohar",
+        null,
+        "schmichael",
+        "ArangoGutierrez",
+        "DingoEatingFuzz",
+        "nfagerlund",
+        "Omar-Khawaja",
+        "notnoop",
+        "hashicorp-nomad"
+      ]
+    },
+    {
+      "weekNumber": 15,
+      "count": 56,
+      "weekStart": 1555372800000,
+      "weekEnd": 1555977600000,
+      "authors": [
+        "endocrimes",
+        "langmartin",
+        "DingoEatingFuzz",
+        null,
+        "schmichael",
+        "notnoop",
+        "angrycub",
+        "ArangoGutierrez"
+      ]
+    },
+    {
+      "weekNumber": 16,
+      "count": 91,
+      "weekStart": 1555977600000,
+      "weekEnd": 1556582400000,
+      "authors": [
+        "nickethier",
+        null,
+        "Mongey",
+        "endocrimes",
+        "langmartin",
+        "yishan-lin",
+        "jweissig",
+        "arshjohar",
+        "schmichael",
+        "DingoEatingFuzz",
+        "ArangoGutierrez",
+        "notnoop"
+      ]
+    },
+    {
+      "weekNumber": 17,
+      "count": 72,
+      "weekStart": 1556582400000,
+      "weekEnd": 1557187200000,
+      "authors": [
+        "nickethier",
+        "jazzyfresh",
+        null,
+        "schmichael",
+        "DingoEatingFuzz",
+        "langmartin",
+        "jweissig",
+        "yishan-lin",
+        "endocrimes"
+      ]
+    },
+    {
+      "weekNumber": 18,
+      "count": 96,
+      "weekStart": 1557187200000,
+      "weekEnd": 1557792000000,
+      "authors": [
+        "endocrimes",
+        "nickethier",
+        null,
+        "langmartin",
+        "schmichael",
+        "yishan-lin",
+        "jazzyfresh",
+        "jweissig",
+        "angrycub",
+        "DingoEatingFuzz"
+      ]
+    },
+    {
+      "weekNumber": 19,
+      "count": 107,
+      "weekStart": 1557792000000,
+      "weekEnd": 1558396800000,
+      "authors": [
+        "endocrimes",
+        "nickethier",
+        "langmartin",
+        "DingoEatingFuzz",
+        "schmichael",
+        null,
+        "Omar-Khawaja",
+        "notnoop",
+        "backspace",
+        "jweissig",
+        "yishan-lin",
+        "jrasell"
+      ]
+    },
+    {
+      "weekNumber": 20,
+      "count": 66,
+      "weekStart": 1558396800000,
+      "weekEnd": 1559001600000,
+      "authors": [
+        "nickethier",
+        null,
+        "angrycub",
+        "hashicorp-nomad",
+        "langmartin",
+        "endocrimes",
+        "schmichael",
+        "DingoEatingFuzz",
+        "fwkz"
+      ]
+    },
+    {
+      "weekNumber": 21,
+      "count": 13,
+      "weekStart": 1559001600000,
+      "weekEnd": 1559606400000,
+      "authors": [
+        "langmartin",
+        "schmichael",
+        null
+      ]
+    },
+    {
+      "weekNumber": 22,
+      "count": 70,
+      "weekStart": 1559606400000,
+      "weekEnd": 1560211200000,
+      "authors": [
+        "schmichael",
+        "langmartin",
+        null,
+        "yishan-lin",
+        "jrasell",
+        "backspace",
+        "angrycub",
+        "john-lay",
+        "hashicorp-nomad",
+        "rcgenova"
+      ]
+    },
+    {
+      "weekNumber": 23,
+      "count": 101,
+      "weekStart": 1560211200000,
+      "weekEnd": 1560816000000,
+      "authors": [
+        "nickethier",
+        "langmartin",
+        "jazzyfresh",
+        "DingoEatingFuzz",
+        "damoxc",
+        "backspace",
+        null,
+        "yishan-lin",
+        "schmichael",
+        "endocrimes",
+        "hashicorp-nomad"
+      ]
+    },
+    {
+      "weekNumber": 24,
+      "count": 62,
+      "weekStart": 1560816000000,
+      "weekEnd": 1561420800000,
+      "authors": [
+        "DingoEatingFuzz",
+        "nickethier",
+        "schmichael",
+        "langmartin",
+        "endocrimes",
+        "sarcasticadmin",
+        null,
+        "backspace",
+        "Omar-Khawaja"
+      ]
+    },
+    {
+      "weekNumber": 25,
+      "count": 47,
+      "weekStart": 1561420800000,
+      "weekEnd": 1562025600000,
+      "authors": [
+        "schmichael",
+        "DingoEatingFuzz",
+        "langmartin",
+        null,
+        "yishan-lin",
+        "endocrimes",
+        "Omar-Khawaja",
+        "backspace"
+      ]
+    },
+    {
+      "weekNumber": 26,
+      "count": 41,
+      "weekStart": 1562025600000,
+      "weekEnd": 1562630400000,
+      "authors": [
+        null,
+        "DingoEatingFuzz",
+        "schmichael",
+        "backspace",
+        "nickethier",
+        "jazzyfresh",
+        "endocrimes"
+      ]
+    },
+    {
+      "weekNumber": 27,
+      "count": 36,
+      "weekStart": 1562630400000,
+      "weekEnd": 1563235200000,
+      "authors": [
+        "langmartin",
+        "yishan-lin",
+        "backspace",
+        null,
+        "shvar",
+        "cneira",
+        "Omar-Khawaja",
+        "schmichael"
+      ]
+    },
+    {
+      "weekNumber": 28,
+      "count": 57,
+      "weekStart": 1563235200000,
+      "weekEnd": 1563840000000,
+      "authors": [
+        "nickethier",
+        "DingoEatingFuzz",
+        "pete-woods",
+        null,
+        "hashicorp-nomad",
+        "schmichael",
+        "langmartin",
+        "endocrimes",
+        "backspace",
+        "jazzyfresh",
+        "yishan-lin"
+      ]
+    },
+    {
+      "weekNumber": 29,
+      "count": 54,
+      "weekStart": 1563840000000,
+      "weekEnd": 1564444800000,
+      "authors": [
+        "ilyaiqoqo",
+        "endocrimes",
+        "DingoEatingFuzz",
+        "schmichael",
+        "Omar-Khawaja",
+        "backspace",
+        "pete-woods",
+        null,
+        "hmalphettes",
+        "spuder",
+        "langmartin"
+      ]
+    },
+    {
+      "weekNumber": 30,
+      "count": 49,
+      "weekStart": 1564444800000,
+      "weekEnd": 1565049600000,
+      "authors": [
+        "endocrimes",
+        "tgross",
+        "ilyaiqoqo",
+        "schmichael",
+        "preetapan",
+        "jazzyfresh",
+        null,
+        "backspace",
+        "nickethier",
+        "DingoEatingFuzz",
+        "hashicorp-nomad",
+        "jrasell",
+        "grddev"
+      ]
+    },
+    {
+      "weekNumber": 31,
+      "count": 57,
+      "weekStart": 1565049600000,
+      "weekEnd": 1565654400000,
+      "authors": [
+        "zhiguangwang",
+        "schmichael",
+        "DingoEatingFuzz",
+        "preetapan",
+        "rlewkowicz",
+        "endocrimes",
+        "ilyaiqoqo",
+        null,
+        "tgross",
+        "nickethier",
+        "groovemonkey",
+        "defau1t",
+        "backspace",
+        "jazzyfresh",
+        "lchayoun"
+      ]
+    },
+    {
+      "weekNumber": 32,
+      "count": 47,
+      "weekStart": 1565654400000,
+      "weekEnd": 1566259200000,
+      "authors": [
+        "endocrimes",
+        "DingoEatingFuzz",
+        "tgross",
+        null,
+        "langmartin",
+        "schmichael",
+        "angrycub",
+        "dwagin",
+        "PouuleT",
+        "nickethier",
+        "preetapan",
+        "backspace"
+      ]
+    },
+    {
+      "weekNumber": 33,
+      "count": 70,
+      "weekStart": 1566259200000,
+      "weekEnd": 1566864000000,
+      "authors": [
+        "DingoEatingFuzz",
+        "preetapan",
+        null,
+        "langmartin",
+        "tgross",
+        "endocrimes",
+        "nfagerlund",
+        "pcgeek86",
+        "jeromegn",
+        "nickethier",
+        "backspace",
+        "schmichael",
+        "cgbaker",
+        "dwagin"
+      ]
+    },
+    {
+      "weekNumber": 34,
+      "count": 60,
+      "weekStart": 1566864000000,
+      "weekEnd": 1567468800000,
+      "authors": [
+        "jazzyfresh",
+        "endocrimes",
+        "EvanErcolano",
+        "preetapan",
+        "tgross",
+        "langmartin",
+        "schmichael",
+        "angrycub",
+        null,
+        "backspace",
+        "gregdel",
+        "nickethier"
+      ]
+    },
+    {
+      "weekNumber": 35,
+      "count": 113,
+      "weekStart": 1567468800000,
+      "weekEnd": 1568073600000,
+      "authors": [
+        null,
+        "backspace",
+        "angrycub",
+        "preetapan",
+        "schmichael",
+        "tgross",
+        "hashicorp-nomad",
+        "endocrimes",
+        "lgfa29",
+        "jazzyfresh",
+        "Omar-Khawaja",
+        "nickethier",
+        "finnigja",
+        "pete-woods"
+      ]
+    },
+    {
+      "weekNumber": 36,
+      "count": 31,
+      "weekStart": 1568073600000,
+      "weekEnd": 1568678400000,
+      "authors": [
+        null,
+        "endocrimes",
+        "tgross",
+        "angrycub",
+        "tantra35",
+        "lgfa29"
+      ]
+    },
+    {
+      "weekNumber": 37,
+      "count": 37,
+      "weekStart": 1568678400000,
+      "weekEnd": 1569283200000,
+      "authors": [
+        "tgross",
+        "langmartin",
+        "endocrimes",
+        "kaxap",
+        "backspace",
+        "cgbaker",
+        null,
+        "jpellman",
+        "nickethier",
+        "schmichael",
+        "Veraghin",
+        "DingoEatingFuzz"
+      ]
+    },
+    {
+      "weekNumber": 38,
+      "count": 37,
+      "weekStart": 1569283200000,
+      "weekEnd": 1569888000000,
+      "authors": [
+        "drewbailey",
+        "preetapan",
+        "nickethier",
+        "backspace",
+        "shantanugadgil",
+        "DingoEatingFuzz",
+        null,
+        "tgross",
+        "langmartin",
+        "jazzyfresh",
+        "pmcatominey",
+        "rpramodd",
+        "ebarriosjr"
+      ]
+    },
+    {
+      "weekNumber": 39,
+      "count": 26,
+      "weekStart": 1569888000000,
+      "weekEnd": 1570492800000,
+      "authors": [
+        null,
+        "drewbailey",
+        "rjspiker",
+        "angrycub",
+        "Omar-Khawaja",
+        "endocrimes",
+        "norbinsh",
+        "backspace",
+        "ddreier",
+        "DingoEatingFuzz",
+        "nickethier"
+      ]
+    },
+    {
+      "weekNumber": 40,
+      "count": 67,
+      "weekStart": 1570492800000,
+      "weekEnd": 1571097600000,
+      "authors": [
+        "langmartin",
+        null,
+        "drewbailey",
+        "shoenig",
+        "DingoEatingFuzz",
+        "alvin-huang",
+        "tgross",
+        "endocrimes",
+        "lgfa29",
+        "schmichael",
+        "hashicorp-nomad",
+        "emamulandalib",
+        "Omar-Khawaja",
+        "ogadaki",
+        "preetapan",
+        "cgbaker",
+        "backspace",
+        "angrycub"
+      ]
+    },
+    {
+      "weekNumber": 41,
+      "count": 49,
+      "weekStart": 1571097600000,
+      "weekEnd": 1571702400000,
+      "authors": [
+        "langmartin",
+        "drewbailey",
+        "DingoEatingFuzz",
+        "schmichael",
+        "endocrimes",
+        "mre",
+        null,
+        "shoenig",
+        "alvin-huang",
+        "Omar-Khawaja",
+        "angrycub",
+        "preetapan",
+        "spuder",
+        "backspace"
+      ]
+    },
+    {
+      "weekNumber": 42,
+      "count": 67,
+      "weekStart": 1571702400000,
+      "weekEnd": 1572307200000,
+      "authors": [
+        "langmartin",
+        "endocrimes",
+        "DingoEatingFuzz",
+        "drewbailey",
+        null,
+        "schmichael",
+        "tgross",
+        "Omar-Khawaja",
+        "backspace",
+        "angrycub",
+        "hashicorp-nomad"
+      ]
+    },
+    {
+      "weekNumber": 43,
+      "count": 57,
+      "weekStart": 1572307200000,
+      "weekEnd": 1572912000000,
+      "authors": [
+        "DingoEatingFuzz",
+        "langmartin",
+        "schmichael",
+        "drewbailey",
+        "rjspiker",
+        "hashicorp-nomad",
+        "tgross",
+        "alrs",
+        "angrycub",
+        "shoenig",
+        null
+      ]
+    },
+    {
+      "weekNumber": 44,
+      "count": 68,
+      "weekStart": 1572912000000,
+      "weekEnd": 1573516800000,
+      "authors": [
+        "langmartin",
+        "jrasell",
+        "DingoEatingFuzz",
+        null,
+        "tgross",
+        "angrycub",
+        "cgbaker",
+        "Xopherus",
+        "drewbailey",
+        "alrs",
+        "cneira",
+        "nickethier",
+        "rjspiker",
+        "barnardb",
+        "sarcasticadmin"
+      ]
+    },
+    {
+      "weekNumber": 45,
+      "count": 55,
+      "weekStart": 1573516800000,
+      "weekEnd": 1574121600000,
+      "authors": [
+        "shoenig",
+        "nickethier",
+        "DingoEatingFuzz",
+        "drewbailey",
+        "alrs",
+        "schmichael",
+        null,
+        "lgfa29",
+        "angrycub",
+        "jrasell"
+      ]
+    },
+    {
+      "weekNumber": 46,
+      "count": 123,
+      "weekStart": 1574121600000,
+      "weekEnd": 1574726400000,
+      "authors": [
+        "DingoEatingFuzz",
+        "angrycub",
+        null,
+        "tgross",
+        "xak2000",
+        "schmichael",
+        "hashicorp-nomad",
+        "cgbaker",
+        "drewbailey",
+        "shoenig",
+        "langmartin",
+        "backspace",
+        "preetapan",
+        "nickethier"
+      ]
+    },
+    {
+      "weekNumber": 47,
+      "count": 18,
+      "weekStart": 1574726400000,
+      "weekEnd": 1575331200000,
+      "authors": [
+        "jazzyfresh",
+        "shoenig",
+        "langmartin",
+        null,
+        "DingoEatingFuzz",
+        "schmichael",
+        "tgross",
+        "alrs"
+      ]
+    },
+    {
+      "weekNumber": 48,
+      "count": 67,
+      "weekStart": 1575331200000,
+      "weekEnd": 1575936000000,
+      "authors": [
+        "jazzyfresh",
+        null,
+        "shoenig",
+        "DingoEatingFuzz",
+        "drewbailey",
+        "nickethier",
+        "hobochili",
+        "tgross",
+        "dependabot[bot]",
+        "abhip",
+        "angrycub",
+        "fredrikhgrelland",
+        "jrasell",
+        "hoh",
+        "schmichael",
+        "lgfa29",
+        "hashicorp-nomad"
+      ]
+    },
+    {
+      "weekNumber": 49,
+      "count": 76,
+      "weekStart": 1575936000000,
+      "weekEnd": 1576540800000,
+      "authors": [
+        "endocrimes",
+        null,
+        "jazzyfresh",
+        "DingoEatingFuzz",
+        "drewbailey",
+        "shoenig",
+        "tgross",
+        "michelvocks",
+        "schmichael",
+        "backspace",
+        "preetapan",
+        "mdeggies",
+        "ebarriosjr",
+        "chrisarcand"
+      ]
+    },
+    {
+      "weekNumber": 50,
+      "count": 36,
+      "weekStart": 1576540800000,
+      "weekEnd": 1577145600000,
+      "authors": [
+        "langmartin",
+        "endocrimes",
+        "jazzyfresh",
+        "shoenig",
+        "drewbailey",
+        "schmichael",
+        "angrycub",
+        "tgross",
+        "preetapan",
+        null,
+        "schledererj"
+      ]
+    },
+    {
+      "weekNumber": 51,
+      "count": 0,
+      "weekStart": 1577145600000,
+      "weekEnd": 1577750400000,
+      "authors": []
+    }
+  ],
+  [
+    {
+      "weekNumber": 0,
+      "count": 22,
+      "weekStart": 1577836800000,
+      "weekEnd": 1578441600000,
+      "authors": [
+        "langmartin",
+        "jazzyfresh",
+        "shoenig",
+        "drewbailey",
+        "tgross",
+        "jrasell",
+        "nickethier",
+        null,
+        "schmichael"
+      ]
+    },
+    {
+      "weekNumber": 1,
+      "count": 46,
+      "weekStart": 1578441600000,
+      "weekEnd": 1579046400000,
+      "authors": [
+        "endocrimes",
+        "langmartin",
+        "jazzyfresh",
+        "JanMa",
+        "shoenig",
+        "nickethier",
+        "schmichael",
+        "angrycub",
+        "jrasell",
+        null,
+        "drewbailey",
+        "tgross"
+      ]
+    },
+    {
+      "weekNumber": 2,
+      "count": 28,
+      "weekStart": 1579046400000,
+      "weekEnd": 1579651200000,
+      "authors": [
+        "cgbaker",
+        "langmartin",
+        "jazzyfresh",
+        "shoenig",
+        "schmichael",
+        "drewbailey",
+        "backspace",
+        "tgross",
+        "TimHiggison",
+        null
+      ]
+    },
+    {
+      "weekNumber": 3,
+      "count": 75,
+      "weekStart": 1579651200000,
+      "weekEnd": 1580256000000,
+      "authors": [
+        null,
+        "cgbaker",
+        "lgfa29",
+        "endocrimes",
+        "langmartin",
+        "jazzyfresh",
+        "drewbailey",
+        "shoenig",
+        "DingoEatingFuzz",
+        "schmichael",
+        "nickethier",
+        "tgross",
+        "angrycub"
+      ]
+    },
+    {
+      "weekNumber": 4,
+      "count": 123,
+      "weekStart": 1580256000000,
+      "weekEnd": 1580860800000,
+      "authors": [
+        "schmichael",
+        "lgfa29",
+        "cgbaker",
+        "tgross",
+        "langmartin",
+        "endocrimes",
+        "jazzyfresh",
+        "shoenig",
+        "drewbailey",
+        null,
+        "DingoEatingFuzz",
+        "tiangolo",
+        "nickethier",
+        "shantanugadgil"
+      ]
+    },
+    {
+      "weekNumber": 5,
+      "count": 62,
+      "weekStart": 1580860800000,
+      "weekEnd": 1581465600000,
+      "authors": [
+        "cgbaker",
+        "endocrimes",
+        "tgross",
+        "dadgar",
+        "DingoEatingFuzz",
+        null,
+        "jescalan",
+        "drewbailey",
+        "shoenig",
+        "schmichael"
+      ]
+    },
+    {
+      "weekNumber": 6,
+      "count": 77,
+      "weekStart": 1581465600000,
+      "weekEnd": 1582070400000,
+      "authors": [
+        "jescalan",
+        "endocrimes",
+        "tgross",
+        "jazzyfresh",
+        null,
+        "treehouseops",
+        "shoenig",
+        "th0m",
+        "chancehudson",
+        "drewbailey",
+        "pulecp",
+        "nickethier",
+        "DingoEatingFuzz",
+        "schmichael",
+        "langmartin"
+      ]
+    },
+    {
+      "weekNumber": 7,
+      "count": 47,
+      "weekStart": 1582070400000,
+      "weekEnd": 1582675200000,
+      "authors": [
+        "treehouseops",
+        "cgbaker",
+        "langmartin",
+        "endocrimes",
+        "tgross",
+        "BrandonRomano",
+        "nickethier",
+        "shoenig",
+        "jrasell",
+        "jescalan",
+        "schmichael",
+        null,
+        "angrycub",
+        "notnoop",
+        "drewbailey"
+      ]
+    },
+    {
+      "weekNumber": 8,
+      "count": 41,
+      "weekStart": 1582675200000,
+      "weekEnd": 1583280000000,
+      "authors": [
+        "shoenig",
+        "langmartin",
+        "jazzyfresh",
+        "jescalan",
+        "angrycub",
+        null,
+        "bbckr",
+        "jboero",
+        "nickethier",
+        "jrasell",
+        "jonathantneal",
+        "schmichael",
+        "JanMa",
+        "derekmarcotte"
+      ]
+    },
+    {
+      "weekNumber": 9,
+      "count": 28,
+      "weekStart": 1583280000000,
+      "weekEnd": 1583884800000,
+      "authors": [
+        "shoenig",
+        null,
+        "langmartin",
+        "tgross",
+        "angrycub",
+        "schmichael",
+        "cgbaker",
+        "backspace",
+        "drewbailey"
+      ]
+    },
+    {
+      "weekNumber": 10,
+      "count": 58,
+      "weekStart": 1583884800000,
+      "weekEnd": 1584489600000,
+      "authors": [
+        "shoenig",
+        "DingoEatingFuzz",
+        "langmartin",
+        "tgross",
+        "jonathantneal",
+        null,
+        "DerekStrickland",
+        "schmichael",
+        "BrandonRomano",
+        "greut",
+        "cgbaker",
+        "jrasell",
+        "jescalan",
+        "angrycub",
+        "jboero",
+        "treehouseops"
+      ]
+    },
+    {
+      "weekNumber": 11,
+      "count": 141,
+      "weekStart": 1584489600000,
+      "weekEnd": 1585094400000,
+      "authors": [
+        "cgbaker",
+        "shoenig",
+        "greut",
+        "angrycub",
+        "treehouseops",
+        "schmichael",
+        "drewbailey",
+        "backspace",
+        null,
+        "jazzyfresh",
+        "langmartin",
+        "tgross",
+        "kybin",
+        "jrasell",
+        "notnoop"
+      ]
+    },
+    {
+      "weekNumber": 12,
+      "count": 143,
+      "weekStart": 1585094400000,
+      "weekEnd": 1585699200000,
+      "authors": [
+        "angrycub",
+        "drewbailey",
+        "DingoEatingFuzz",
+        "shoenig",
+        null,
+        "acidprime",
+        "langmartin",
+        "backspace",
+        "tgross",
+        "jrasell",
+        "schmichael",
+        "greut",
+        "jonathantneal",
+        "cgbaker",
+        "jorgemarey",
+        "jescalan",
+        "BrandonRomano",
+        "jazzyfresh"
+      ]
+    },
+    {
+      "weekNumber": 13,
+      "count": 132,
+      "weekStart": 1585699200000,
+      "weekEnd": 1586304000000,
+      "authors": [
+        "angrycub",
+        "schmichael",
+        "tgross",
+        "dependabot[bot]",
+        null,
+        "chuckyz",
+        "spuder",
+        "langmartin",
+        "nickethier",
+        "DingoEatingFuzz",
+        "backspace",
+        "drewbailey",
+        "shoenig",
+        "cgbaker",
+        "mwickett",
+        "jrasell",
+        "jazzyfresh"
+      ]
+    },
+    {
+      "weekNumber": 14,
+      "count": 57,
+      "weekStart": 1586304000000,
+      "weekEnd": 1586908800000,
+      "authors": [
+        "angrycub",
+        "langmartin",
+        "backspace",
+        "DingoEatingFuzz",
+        "shoenig",
+        "BrandonRomano",
+        "schmichael",
+        "cgbaker",
+        "drewbailey",
+        null,
+        "tgross",
+        "greut",
+        "jrasell"
+      ]
+    },
+    {
+      "weekNumber": 15,
+      "count": 36,
+      "weekStart": 1586908800000,
+      "weekEnd": 1587513600000,
+      "authors": [
+        "jrasell",
+        "jescalan",
+        "drewbailey",
+        null,
+        "cgbaker",
+        "tgross",
+        "backspace",
+        "angrycub",
+        "michaeldwan",
+        "shoenig",
+        "jf",
+        "scalp42",
+        "chuckyz",
+        "yishan-lin",
+        "dependabot[bot]",
+        "jorgemarey",
+        "schmichael"
+      ]
+    },
+    {
+      "weekNumber": 16,
+      "count": 52,
+      "weekStart": 1587513600000,
+      "weekEnd": 1588118400000,
+      "authors": [
+        "nickethier",
+        "jescalan",
+        null,
+        "langmartin",
+        "drewbailey",
+        "DingoEatingFuzz",
+        "shoenig",
+        "tgross",
+        "backspace",
+        "cgbaker",
+        "greut",
+        "angrycub",
+        "schmichael"
+      ]
+    },
+    {
+      "weekNumber": 17,
+      "count": 72,
+      "weekStart": 1588118400000,
+      "weekEnd": 1588723200000,
+      "authors": [
+        "mdeggies",
+        "DingoEatingFuzz",
+        "jescalan",
+        "tgross",
+        "drewbailey",
+        "angrycub",
+        "jlarriba",
+        null,
+        "Renerick",
+        "schmichael",
+        "changli0617",
+        "jazzyfresh",
+        "shoenig",
+        "backspace",
+        "ccn"
+      ]
+    },
+    {
+      "weekNumber": 18,
+      "count": 96,
+      "weekStart": 1588723200000,
+      "weekEnd": 1589328000000,
+      "authors": [
+        "mdeggies",
+        "jescalan",
+        "cgbaker",
+        "DingoEatingFuzz",
+        null,
+        "drewbailey",
+        "josegonzalez",
+        "spuder",
+        "tgross",
+        "backspace",
+        "shoenig",
+        "jrasell"
+      ]
+    },
+    {
+      "weekNumber": 19,
+      "count": 115,
+      "weekStart": 1589328000000,
+      "weekEnd": 1589932800000,
+      "authors": [
+        "shoenig",
+        "nickethier",
+        null,
+        "angrycub",
+        "shantanugadgil",
+        "DingoEatingFuzz",
+        "jrasell",
+        "jescalan",
+        "cgbaker",
+        "tgross",
+        "schmichael",
+        "tcassaert",
+        "spuder",
+        "backspace",
+        "hashicorp-nomad",
+        "langmartin",
+        "drewbailey"
+      ]
+    },
+    {
+      "weekNumber": 20,
+      "count": 73,
+      "weekStart": 1589932800000,
+      "weekEnd": 1590537600000,
+      "authors": [
+        "alexandrafreeman",
+        "greut",
+        "DingoEatingFuzz",
+        null,
+        "backspace",
+        "drewbailey",
+        "jmfury",
+        "shoenig",
+        "Is0MerLNtaLt",
+        "tgross",
+        "BijanJohn",
+        "jrasell"
+      ]
+    },
+    {
+      "weekNumber": 21,
+      "count": 76,
+      "weekStart": 1590537600000,
+      "weekEnd": 1591142400000,
+      "authors": [
+        "jorgemarey",
+        "pruett",
+        "jescalan",
+        "shoenig",
+        "DingoEatingFuzz",
+        null,
+        "shishir-a412ed",
+        "greut",
+        "backspace",
+        "cgbaker",
+        "drewbailey",
+        "changli0617",
+        "ogadaki",
+        "tgross"
+      ]
+    },
+    {
+      "weekNumber": 22,
+      "count": 33,
+      "weekStart": 1591142400000,
+      "weekEnd": 1591747200000,
+      "authors": [
+        "shoenig",
+        "tgross",
+        "langmartin",
+        "backspace",
+        null,
+        "yishan-lin",
+        "cgbaker",
+        "drewbailey",
+        "DingoEatingFuzz"
+      ]
+    },
+    {
+      "weekNumber": 23,
+      "count": 77,
+      "weekStart": 1591747200000,
+      "weekEnd": 1592352000000,
+      "authors": [
+        "nickethier",
+        "schmichael",
+        "tgross",
+        "drewbailey",
+        "DingoEatingFuzz",
+        "cgbaker",
+        "backspace",
+        "shoenig",
+        "jrasell",
+        null,
+        "njenwei",
+        "fhemberger",
+        "mwickett"
+      ]
+    },
+    {
+      "weekNumber": 24,
+      "count": 143,
+      "weekStart": 1592352000000,
+      "weekEnd": 1592956800000,
+      "authors": [
+        "shoenig",
+        null,
+        "pruett",
+        "schmichael",
+        "tgross",
+        "jrasell",
+        "EnMod",
+        "rkettelerij",
+        "backspace",
+        "DingoEatingFuzz",
+        "cgbaker",
+        "bmenn",
+        "yishan-lin",
+        "notnoop",
+        "nickethier",
+        "davemay99",
+        "drewbailey",
+        "lgfa29",
+        "cjonesy"
+      ]
+    },
+    {
+      "weekNumber": 25,
+      "count": 82,
+      "weekStart": 1592956800000,
+      "weekEnd": 1593561600000,
+      "authors": [
+        "shishir-a412ed",
+        "cgbaker",
+        "backspace",
+        "DingoEatingFuzz",
+        null,
+        "drewbailey",
+        "meqif",
+        "manveru",
+        "jescalan",
+        "sdgluck",
+        "jrasell",
+        "nickethier",
+        "EnMod",
+        "langmartin",
+        "tgross",
+        "shoenig",
+        "angrycub",
+        "pruett"
+      ]
+    },
+    {
+      "weekNumber": 26,
+      "count": 52,
+      "weekStart": 1593561600000,
+      "weekEnd": 1594166400000,
+      "authors": [
+        "jescalan",
+        "cgbaker",
+        null,
+        "jrasell",
+        "jorgemarey",
+        "hashicorp-nomad",
+        "nickethier",
+        "tgross",
+        "alrs",
+        "jonathantneal",
+        "langmartin",
+        "shoenig",
+        "drewbailey",
+        "DingoEatingFuzz"
+      ]
+    },
+    {
+      "weekNumber": 27,
+      "count": 67,
+      "weekStart": 1594166400000,
+      "weekEnd": 1594771200000,
+      "authors": [
+        "shoenig",
+        "DingoEatingFuzz",
+        "angrycub",
+        "kneufeld",
+        null,
+        "tgross",
+        "schmichael",
+        "backspace",
+        "jazzyfresh",
+        "nickethier",
+        "jrasell",
+        "cgbaker",
+        "kaybr01",
+        "drewbailey",
+        "galeep",
+        "lgfa29",
+        "hashicorp-nomad"
+      ]
+    },
+    {
+      "weekNumber": 28,
+      "count": 79,
+      "weekStart": 1594771200000,
+      "weekEnd": 1595376000000,
+      "authors": [
+        "drewbailey",
+        null,
+        "kobayashi",
+        "DingoEatingFuzz",
+        "backspace",
+        "tgross",
+        "dependabot[bot]",
+        "langmartin",
+        "schmichael",
+        "picatz",
+        "galeep",
+        "angrycub"
+      ]
+    },
+    {
+      "weekNumber": 29,
+      "count": 96,
+      "weekStart": 1595376000000,
+      "weekEnd": 1595980800000,
+      "authors": [
+        "shoenig",
+        "DingoEatingFuzz",
+        "schmichael",
+        "backspace",
+        null,
+        "drewbailey",
+        "tgross",
+        "langmartin",
+        "jrasell",
+        "picatz",
+        "alrs",
+        "BrandonRomano",
+        "hashicorp-nomad",
+        "nickethier",
+        "pcmccarron",
+        "lhaig"
+      ]
+    },
+    {
+      "weekNumber": 30,
+      "count": 43,
+      "weekStart": 1595980800000,
+      "weekEnd": 1596585600000,
+      "authors": [
+        "DingoEatingFuzz",
+        "shishir-a412ed",
+        "cgbaker",
+        "drewbailey",
+        "tgross",
+        "backspace",
+        "jrasell",
+        null,
+        "schmichael",
+        "jazzyfresh",
+        "shoenig"
+      ]
+    },
+    {
+      "weekNumber": 31,
+      "count": 79,
+      "weekStart": 1596585600000,
+      "weekEnd": 1597190400000,
+      "authors": [
+        "DingoEatingFuzz",
+        "nickethier",
+        "shoenig",
+        "backspace",
+        "langmartin",
+        null,
+        "drewbailey",
+        "schmichael",
+        "tgross",
+        "jrasell",
+        "alrs",
+        "picatz",
+        "angrycub",
+        "lgfa29",
+        "shishir-a412ed"
+      ]
+    },
+    {
+      "weekNumber": 32,
+      "count": 50,
+      "weekStart": 1597190400000,
+      "weekEnd": 1597795200000,
+      "authors": [
+        "DingoEatingFuzz",
+        "schmichael",
+        null,
+        "tgross",
+        "jazzyfresh",
+        "drewbailey",
+        "jrasell",
+        "davemay99",
+        "nickethier",
+        "backspace",
+        "lgfa29",
+        "hashicorp-nomad",
+        "langmartin",
+        "ryanmickler",
+        "RickyGrassmuck",
+        "JanMa"
+      ]
+    },
+    {
+      "weekNumber": 33,
+      "count": 69,
+      "weekStart": 1597795200000,
+      "weekEnd": 1598400000000,
+      "authors": [
+        "nickethier",
+        "DingoEatingFuzz",
+        "schmichael",
+        null,
+        "backspace",
+        "rberlind",
+        "picatz",
+        "drewbailey",
+        "tgross",
+        "finnigja",
+        "shoenig",
+        "greut",
+        "code0x9",
+        "jazzyfresh",
+        "shishir-a412ed",
+        "zhsj"
+      ]
+    },
+    {
+      "weekNumber": 34,
+      "count": 86,
+      "weekStart": 1598400000000,
+      "weekEnd": 1599004800000,
+      "authors": [
+        "nickethier",
+        "DingoEatingFuzz",
+        "drewbailey",
+        "schmichael",
+        "lgfa29",
+        null,
+        "jazzyfresh",
+        "shoenig",
+        "tgross",
+        "langmartin",
+        "Clivern",
+        "jf",
+        "pruett",
+        "backspace",
+        "cgbaker"
+      ]
+    },
+    {
+      "weekNumber": 35,
+      "count": 48,
+      "weekStart": 1599004800000,
+      "weekEnd": 1599609600000,
+      "authors": [
+        "nickethier",
+        "DingoEatingFuzz",
+        "shoenig",
+        "cgbaker",
+        "davemay99",
+        null,
+        "tgross",
+        "pruett",
+        "lens0021",
+        "jrasell",
+        "drewbailey",
+        "alrs",
+        "shishir-a412ed",
+        "schmichael",
+        "hashicorp-nomad",
+        "galeep",
+        "lgfa29"
+      ]
+    },
+    {
+      "weekNumber": 36,
+      "count": 60,
+      "weekStart": 1599609600000,
+      "weekEnd": 1600214400000,
+      "authors": [
+        "nickethier",
+        "cgbaker",
+        "DingoEatingFuzz",
+        "backspace",
+        null,
+        "angrycub",
+        "arthur-leclerc",
+        "shoenig",
+        "josemaia",
+        "greut",
+        "tgross",
+        "schmichael",
+        "benbuzbee",
+        "hashicorp-nomad",
+        "jrasell"
+      ]
+    },
+    {
+      "weekNumber": 37,
+      "count": 52,
+      "weekStart": 1600214400000,
+      "weekEnd": 1600819200000,
+      "authors": [
+        "shoenig",
+        "DingoEatingFuzz",
+        "drewbailey",
+        "roaks3",
+        "tgross",
+        "pete-woods",
+        "neilmock",
+        "schmichael",
+        null,
+        "davemay99",
+        "jf",
+        "pierreca",
+        "dependabot[bot]",
+        "backspace",
+        "lgfa29",
+        "bradphipps",
+        "joel0",
+        "jrasell"
+      ]
+    },
+    {
+      "weekNumber": 38,
+      "count": 43,
+      "weekStart": 1600819200000,
+      "weekEnd": 1601424000000,
+      "authors": [
+        "DingoEatingFuzz",
+        "drewbailey",
+        "lgfa29",
+        "davemay99",
+        "tgross",
+        "angrycub",
+        null,
+        "shoenig",
+        "nickethier"
+      ]
+    },
+    {
+      "weekNumber": 39,
+      "count": 78,
+      "weekStart": 1601424000000,
+      "weekEnd": 1602028800000,
+      "authors": [
+        "drewbailey",
+        "shoenig",
+        "roaks3",
+        "jrasell",
+        "davemay99",
+        null,
+        "cgbaker",
+        "tgross",
+        "picatz",
+        "lcheruka",
+        "daktari",
+        "angrycub",
+        "fredrikhgrelland",
+        "josemaia",
+        "schmichael",
+        "alrs"
+      ]
+    },
+    {
+      "weekNumber": 40,
+      "count": 47,
+      "weekStart": 1602028800000,
+      "weekEnd": 1602633600000,
+      "authors": [
+        "shoenig",
+        "DingoEatingFuzz",
+        "drewbailey",
+        "schmichael",
+        "cgbaker",
+        "backspace",
+        "tgross",
+        null,
+        "nickethier",
+        "greut",
+        "lens0021",
+        "jmfury",
+        "roaks3"
+      ]
+    },
+    {
+      "weekNumber": 41,
+      "count": 89,
+      "weekStart": 1602633600000,
+      "weekEnd": 1603238400000,
+      "authors": [
+        "roaks3",
+        null,
+        "tgross",
+        "ashtuchkin",
+        "shoenig",
+        "jorgemarey",
+        "backspace",
+        "josemaia",
+        "drewbailey",
+        "DingoEatingFuzz",
+        "sahiljambhekar",
+        "nickethier",
+        "jmfury",
+        "schmichael",
+        "jrasell",
+        "finnigja",
+        "davemay99",
+        "cgbaker",
+        "tkalus"
+      ]
+    },
+    {
+      "weekNumber": 42,
+      "count": 79,
+      "weekStart": 1603238400000,
+      "weekEnd": 1603843200000,
+      "authors": [
+        "cpiwarski",
+        null,
+        "jrasell",
+        "schmichael",
+        "cgbaker",
+        "drewbailey",
+        "barakb",
+        "DingoEatingFuzz",
+        "shoenig",
+        "fqborges",
+        "YutangShi",
+        "tgross",
+        "pruett",
+        "02strich",
+        "backspace",
+        "davidr912"
+      ]
+    },
+    {
+      "weekNumber": 43,
+      "count": 45,
+      "weekStart": 1603843200000,
+      "weekEnd": 1604448000000,
+      "authors": [
+        "DingoEatingFuzz",
+        "angrycub",
+        null,
+        "jescalan",
+        "drewbailey",
+        "jrasell",
+        "backspace",
+        "tgross",
+        "cgbaker",
+        "nvartolomei"
+      ]
+    },
+    {
+      "weekNumber": 44,
+      "count": 76,
+      "weekStart": 1604448000000,
+      "weekEnd": 1605052800000,
+      "authors": [
+        "schmichael",
+        "cgbaker",
+        "jeromegn",
+        null,
+        "backspace",
+        "shoenig",
+        "lgfa29",
+        "tgross",
+        "byronwolfman",
+        "drewbailey",
+        "jrasell",
+        "DingoEatingFuzz",
+        "nickethier",
+        "mlodato517",
+        "jmfury",
+        "RickyGrassmuck",
+        "angrycub"
+      ]
+    },
+    {
+      "weekNumber": 45,
+      "count": 70,
+      "weekStart": 1605052800000,
+      "weekEnd": 1605657600000,
+      "authors": [
+        null,
+        "shoenig",
+        "nickethier",
+        "cgbaker",
+        "tgross",
+        "jrasell",
+        "42wim",
+        "alrs",
+        "schmichael",
+        "DingoEatingFuzz",
+        "jazzyfresh",
+        "davemay99",
+        "drewbailey"
+      ]
+    },
+    {
+      "weekNumber": 46,
+      "count": 41,
+      "weekStart": 1605657600000,
+      "weekEnd": 1606262400000,
+      "authors": [
+        "lgfa29",
+        "shoenig",
+        "schmichael",
+        "drewbailey",
+        "tgross",
+        "cgbaker",
+        null
+      ]
+    },
+    {
+      "weekNumber": 47,
+      "count": 56,
+      "weekStart": 1606262400000,
+      "weekEnd": 1606867200000,
+      "authors": [
+        "shoenig",
+        "drewbailey",
+        "schmichael",
+        "davemay99",
+        "tgross",
+        "ml4",
+        "lgfa29",
+        "benbuzbee",
+        null,
+        "backspace",
+        "jrasell",
+        "roman-vynar"
+      ]
+    },
+    {
+      "weekNumber": 48,
+      "count": 66,
+      "weekStart": 1606867200000,
+      "weekEnd": 1607472000000,
+      "authors": [
+        "joel0",
+        "jescalan",
+        "tgross",
+        null,
+        "schmichael",
+        "roccoblues",
+        "davemay99",
+        "angrycub",
+        "DingoEatingFuzz",
+        "shishir-a412ed",
+        "ml4",
+        "lgfa29",
+        "shoenig",
+        "backspace",
+        "drewbailey",
+        "jrasell",
+        "cgbaker",
+        "jazzyfresh"
+      ],
+      "milestone": {
+        "date": "2020-12-08T00:00:00.000Z",
+        "title": "Nomad 1.0",
+        "description": "woohooooo",
+        "url": "https://github.com/hashicorp/nomad/commit/1234567890"
+      }
+    },
+    {
+      "weekNumber": 49,
+      "count": 61,
+      "weekStart": 1607472000000,
+      "weekEnd": 1608076800000,
+      "authors": [
+        "shoenig",
+        "fredwangwang",
+        "cgbaker",
+        null,
+        "davemay99",
+        "bert2002",
+        "drewbailey",
+        "DingoEatingFuzz",
+        "dependabot[bot]",
+        "backspace",
+        "andryyy",
+        "changli0617",
+        "jrasell"
+      ]
+    },
+    {
+      "weekNumber": 50,
+      "count": 72,
+      "weekStart": 1608076800000,
+      "weekEnd": 1608681600000,
+      "authors": [
+        "schmichael",
+        "DingoEatingFuzz",
+        "cgbaker",
+        "tgross",
+        "drewbailey",
+        null,
+        "shoenig",
+        "backspace"
+      ]
+    },
+    {
+      "weekNumber": 51,
+      "count": 1,
+      "weekStart": 1608681600000,
+      "weekEnd": 1609286400000,
+      "authors": [
+        "jeromegn"
+      ]
+    }
+  ],
+  [
+    {
+      "weekNumber": 0,
+      "count": 77,
+      "weekStart": 1609459200000,
+      "weekEnd": 1610064000000,
+      "authors": [
+        "tgross",
+        "DingoEatingFuzz",
+        "shoenig",
+        "picatz",
+        "jescalan",
+        "zchsh",
+        "jrasell",
+        "nickethier",
+        "emulanob",
+        null,
+        "Mongey",
+        "schmichael",
+        "lgfa29",
+        "gunadhya",
+        "cgbaker",
+        "nileshcs",
+        "amh4r"
+      ]
+    },
+    {
+      "weekNumber": 1,
+      "count": 63,
+      "weekStart": 1610064000000,
+      "weekEnd": 1610668800000,
+      "authors": [
+        "tgross",
+        null,
+        "shishir-a412ed",
+        "drewbailey",
+        "BrandonRomano",
+        "shoenig",
+        "hashicorp-nomad",
+        "lgfa29",
+        "davemay99",
+        "jazzyfresh",
+        "DingoEatingFuzz",
+        "apollo13",
+        "jrasell",
+        "cgbaker",
+        "jescalan",
+        "backspace",
+        "chulkilee"
+      ]
+    },
+    {
+      "weekNumber": 2,
+      "count": 28,
+      "weekStart": 1610668800000,
+      "weekEnd": 1611273600000,
+      "authors": [
+        "tgross",
+        null,
+        "angrycub",
+        "backspace",
+        "roccoblues",
+        "drewbailey",
+        "shoenig",
+        "LKNSI",
+        "leonardobsjr"
+      ]
+    },
+    {
+      "weekNumber": 3,
+      "count": 75,
+      "weekStart": 1611273600000,
+      "weekEnd": 1611878400000,
+      "authors": [
+        "lgfa29",
+        "drewbailey",
+        "DingoEatingFuzz",
+        "hashicorp-nomad",
+        "backspace",
+        "cgbaker",
+        null,
+        "tgross",
+        "nickethier",
+        "jrasell",
+        "shoenig",
+        "CarbonCollins",
+        "zzhai",
+        "jescalan"
+      ]
+    },
+    {
+      "weekNumber": 4,
+      "count": 51,
+      "weekStart": 1611878400000,
+      "weekEnd": 1612483200000,
+      "authors": [
+        "AndrewChubatiuk",
+        "drewbailey",
+        "shoenig",
+        "tgross",
+        "backspace",
+        "cgbaker",
+        "Xopherus",
+        "nickethier",
+        "DingoEatingFuzz",
+        null,
+        "changli0617"
+      ]
+    },
+    {
+      "weekNumber": 5,
+      "count": 50,
+      "weekStart": 1612483200000,
+      "weekEnd": 1613088000000,
+      "authors": [
+        "cgbaker",
+        "AndrewChubatiuk",
+        "angrycub",
+        "nickethier",
+        "jrasell",
+        "shantanugadgil",
+        "ml4",
+        "backspace",
+        "mr-karan",
+        "shoenig",
+        null,
+        "tgross",
+        "drewbailey",
+        "alexwlchan",
+        "alexiri"
+      ]
+    },
+    {
+      "weekNumber": 6,
+      "count": 23,
+      "weekStart": 1613088000000,
+      "weekEnd": 1613692800000,
+      "authors": [
+        "DingoEatingFuzz",
+        "shoenig",
+        "backspace",
+        "drewbailey",
+        "tgross",
+        "jrasell",
+        "mr-karan",
+        "AndrewChubatiuk",
+        "angrycub"
+      ]
+    },
+    {
+      "weekNumber": 7,
+      "count": 48,
+      "weekStart": 1613692800000,
+      "weekEnd": 1614297600000,
+      "authors": [
+        "shoenig",
+        "tgross",
+        null,
+        "DingoEatingFuzz",
+        "davemay99",
+        "drewbailey",
+        "lgfa29",
+        "mr-karan",
+        "michaeldwan",
+        "cgbaker",
+        "catstrom"
+      ]
+    },
+    {
+      "weekNumber": 8,
+      "count": 29,
+      "weekStart": 1614297600000,
+      "weekEnd": 1614902400000,
+      "authors": [
+        "tgross",
+        "DingoEatingFuzz",
+        "lgfa29",
+        "schmichael",
+        "EnMod",
+        "drewbailey",
+        "backspace",
+        null,
+        "asm72",
+        "AndrewChubatiuk",
+        "jrasell",
+        "fredwangwang",
+        "shoenig"
+      ]
+    },
+    {
+      "weekNumber": 9,
+      "count": 46,
+      "weekStart": 1614902400000,
+      "weekEnd": 1615507200000,
+      "authors": [
+        "tgross",
+        null,
+        "cgbaker",
+        "drewbailey",
+        "jrasell",
+        "DingoEatingFuzz",
+        "scorsi",
+        "davemay99",
+        "schmichael",
+        "sofixa",
+        "lgfa29"
+      ]
+    },
+    {
+      "weekNumber": 10,
+      "count": 28,
+      "weekStart": 1615507200000,
+      "weekEnd": 1616112000000,
+      "authors": [
+        "microadam",
+        "nick96",
+        "shoenig",
+        "tgross",
+        "DingoEatingFuzz",
+        "davemay99",
+        "angrycub",
+        "lgfa29",
+        "apollo13",
+        "schmichael"
+      ]
+    },
+    {
+      "weekNumber": 11,
+      "count": 55,
+      "weekStart": 1616112000000,
+      "weekEnd": 1616716800000,
+      "authors": [
+        "nickethier",
+        "nick96",
+        "tgross",
+        null,
+        "drewbailey",
+        "DingoEatingFuzz",
+        "jrasell",
+        "cgbaker",
+        "danlsgiga",
+        "lgfa29"
+      ]
+    },
+    {
+      "weekNumber": 12,
+      "count": 68,
+      "weekStart": 1616716800000,
+      "weekEnd": 1617321600000,
+      "authors": [
+        "nickethier",
+        "nick96",
+        "jrasell",
+        null,
+        "cgbaker",
+        "lgfa29",
+        "tgross",
+        "backspace",
+        "DingoEatingFuzz",
+        "zhsj",
+        "drewbailey",
+        "shoenig",
+        "zchsh",
+        "davemay99",
+        "apollo13",
+        "shishir-a412ed"
+      ]
+    },
+    {
+      "weekNumber": 13,
+      "count": 72,
+      "weekStart": 1617321600000,
+      "weekEnd": 1617926400000,
+      "authors": [
+        "angrycub",
+        "DingoEatingFuzz",
+        "nickethier",
+        "tgross",
+        "schmichael",
+        null,
+        "BrandonRomano",
+        "lgfa29",
+        "cgbaker",
+        "shoenig",
+        "drewbailey",
+        "greut"
+      ]
+    },
+    {
+      "weekNumber": 14,
+      "count": 58,
+      "weekStart": 1617926400000,
+      "weekEnd": 1618531200000,
+      "authors": [
+        "shoenig",
+        "schmichael",
+        "shishir-a412ed",
+        "nickethier",
+        "tgross",
+        "changli0617",
+        "mwickett",
+        null,
+        "angrycub",
+        "DingoEatingFuzz",
+        "backspace",
+        "AndrewChubatiuk",
+        "alrs",
+        "cgbaker",
+        "drewbailey",
+        "lgfa29",
+        "mlodato517"
+      ]
+    },
+    {
+      "weekNumber": 15,
+      "count": 44,
+      "weekStart": 1618531200000,
+      "weekEnd": 1619136000000,
+      "authors": [
+        "isabeldepapel",
+        "shoenig",
+        "changli0617",
+        "zchsh",
+        "backspace",
+        null,
+        "jrasell",
+        "angrycub",
+        "drewbailey",
+        "jsiebens",
+        "nickethier"
+      ]
+    },
+    {
+      "weekNumber": 16,
+      "count": 36,
+      "weekStart": 1619136000000,
+      "weekEnd": 1619740800000,
+      "authors": [
+        "tgross",
+        "schmichael",
+        "lgfa29",
+        "DingoEatingFuzz",
+        "backspace",
+        "shoenig",
+        "catinthetap",
+        "LKNSI",
+        "jrasell",
+        null,
+        "kphunter",
+        "zchsh"
+      ]
+    },
+    {
+      "weekNumber": 17,
+      "count": 38,
+      "weekStart": 1619740800000,
+      "weekEnd": 1620345600000,
+      "authors": [
+        null,
+        "mikenomitch",
+        "shoenig",
+        "dependabot[bot]",
+        "zchsh",
+        "backspace",
+        "isabeldepapel",
+        "kendallstrautman",
+        "nickethier",
+        "drewbailey",
+        "BrandonRomano",
+        "tgross",
+        "assareh",
+        "schmichael"
+      ]
+    },
+    {
+      "weekNumber": 18,
+      "count": 39,
+      "weekStart": 1620345600000,
+      "weekEnd": 1620950400000,
+      "authors": [
+        "shoenig",
+        "changli0617",
+        "schmichael",
+        "alrs",
+        null,
+        "backspace",
+        "legege",
+        "tgross",
+        "hashicorp-nomad",
+        "joel0",
+        "kendallstrautman",
+        "drewbailey",
+        "kylemac",
+        "isabeldepapel",
+        "mikenomitch",
+        "lgfa29",
+        "cgbaker",
+        "dependabot[bot]"
+      ]
+    },
+    {
+      "weekNumber": 19,
+      "count": 40,
+      "weekStart": 1620950400000,
+      "weekEnd": 1621555200000,
+      "authors": [
+        "isabeldepapel",
+        null,
+        "angrycub",
+        "durango",
+        "tgross",
+        "changli0617",
+        "shoenig",
+        "jmfury",
+        "hashicorp-nomad",
+        "attachmentgenie",
+        "Clivern",
+        "schmichael"
+      ],
+      "milestone": {
+        "date": "2021-05-18T00:00:00.000Z",
+        "title": "Nomad 1.1",
+        "description": "Memory Oversubscription, Remote task drivers, and reserved CPU cores",
+        "url": "https://www.hashicorp.com/en/blog/announcing-general-availability-of-hashicorp-nomad-1-1"
+      }
+    },
+    {
+      "weekNumber": 20,
+      "count": 28,
+      "weekStart": 1621555200000,
+      "weekEnd": 1622160000000,
+      "authors": [
+        "tgross",
+        "backspace",
+        null,
+        "lgfa29",
+        "sundbry",
+        "jrasell",
+        "apollo13",
+        "h3yduck"
+      ]
+    },
+    {
+      "weekNumber": 21,
+      "count": 19,
+      "weekStart": 1622160000000,
+      "weekEnd": 1622764800000,
+      "authors": [
+        "tgross",
+        "shoenig",
+        null,
+        "dependabot[bot]",
+        "jescalan",
+        "kendallstrautman",
+        "lgfa29"
+      ]
+    },
+    {
+      "weekNumber": 22,
+      "count": 53,
+      "weekStart": 1622764800000,
+      "weekEnd": 1623369600000,
+      "authors": [
+        null,
+        "isabeldepapel",
+        "jrasell",
+        "hashicorp-nomad",
+        "shishir-a412ed",
+        "shoenig",
+        "schmichael",
+        "tgross",
+        "dependabot[bot]",
+        "kendallstrautman",
+        "apollo13"
+      ]
+    },
+    {
+      "weekNumber": 23,
+      "count": 38,
+      "weekStart": 1623369600000,
+      "weekEnd": 1623974400000,
+      "authors": [
+        "ChaiWithJai",
+        "tgross",
+        "shoenig",
+        "dependabot[bot]",
+        "jrasell",
+        "isabeldepapel",
+        null,
+        "lgfa29"
+      ]
+    },
+    {
+      "weekNumber": 24,
+      "count": 25,
+      "weekStart": 1623974400000,
+      "weekEnd": 1624579200000,
+      "authors": [
+        "schmichael",
+        "tgross",
+        "holtwilkins",
+        "shoenig",
+        "alexmunda",
+        "zchsh",
+        null,
+        "hashicorp-nomad",
+        "davemay99",
+        "fredwangwang"
+      ]
+    },
+    {
+      "weekNumber": 25,
+      "count": 19,
+      "weekStart": 1624579200000,
+      "weekEnd": 1625184000000,
+      "authors": [
+        "alexmunda",
+        "tgross",
+        "jrasell",
+        "jcalonso",
+        "shoenig",
+        "kendallstrautman",
+        "shomodj"
+      ]
+    },
+    {
+      "weekNumber": 26,
+      "count": 37,
+      "weekStart": 1625184000000,
+      "weekEnd": 1625788800000,
+      "authors": [
+        null,
+        "tgross",
+        "shoenig",
+        "ChaiWithJai",
+        "alexmunda",
+        "isabeldepapel",
+        "jrasell",
+        "shantanugadgil"
+      ]
+    },
+    {
+      "weekNumber": 27,
+      "count": 33,
+      "weekStart": 1625788800000,
+      "weekEnd": 1626393600000,
+      "authors": [
+        null,
+        "ChaiWithJai",
+        "picatz",
+        "shoenig",
+        "jrasell",
+        "lgfa29",
+        "legege",
+        "EnMod",
+        "zchsh",
+        "mikenomitch",
+        "shishir-a412ed"
+      ]
+    },
+    {
+      "weekNumber": 28,
+      "count": 32,
+      "weekStart": 1626393600000,
+      "weekEnd": 1626998400000,
+      "authors": [
+        null,
+        "AchilleAsh",
+        "ChaiWithJai",
+        "shoenig",
+        "jrasell",
+        "lgfa29",
+        "nicholascioli",
+        "schmichael",
+        "picatz",
+        "tgxworld"
+      ]
+    },
+    {
+      "weekNumber": 29,
+      "count": 26,
+      "weekStart": 1626998400000,
+      "weekEnd": 1627603200000,
+      "authors": [
+        null,
+        "mikenomitch",
+        "picatz",
+        "hashicorp-nomad",
+        "schmichael",
+        "jrasell",
+        "HZHgagaga",
+        "ChaiWithJai"
+      ]
+    },
+    {
+      "weekNumber": 30,
+      "count": 20,
+      "weekStart": 1627603200000,
+      "weekEnd": 1628208000000,
+      "authors": [
+        "schmichael",
+        "jrasell",
+        null,
+        "lgfa29",
+        "miao1007",
+        "DerekStrickland",
+        "lirook",
+        "itorres"
+      ]
+    },
+    {
+      "weekNumber": 31,
+      "count": 20,
+      "weekStart": 1628208000000,
+      "weekEnd": 1628812800000,
+      "authors": [
+        "blake",
+        null,
+        "tgross",
+        "schmichael",
+        "lgfa29",
+        "ChaiWithJai",
+        "lirook"
+      ]
+    },
+    {
+      "weekNumber": 32,
+      "count": 8,
+      "weekStart": 1628812800000,
+      "weekEnd": 1629417600000,
+      "authors": [
+        null,
+        "jrasell"
+      ]
+    },
+    {
+      "weekNumber": 33,
+      "count": 9,
+      "weekStart": 1629417600000,
+      "weekEnd": 1630022400000,
+      "authors": [
+        null,
+        "roopakv",
+        "lgfa29",
+        "jrasell",
+        "kushsharma",
+        "zchsh"
+      ]
+    },
+    {
+      "weekNumber": 34,
+      "count": 29,
+      "weekStart": 1630022400000,
+      "weekEnd": 1630627200000,
+      "authors": [
+        "isabeldepapel",
+        "lgfa29",
+        "thiskevinwang",
+        null,
+        "assareh",
+        "DingoEatingFuzz",
+        "jrasell",
+        "DerekStrickland"
+      ]
+    },
+    {
+      "weekNumber": 35,
+      "count": 22,
+      "weekStart": 1630627200000,
+      "weekEnd": 1631232000000,
+      "authors": [
+        "watsonian",
+        "jrasell",
+        "dependabot[bot]",
+        "assareh",
+        "lgfa29",
+        "AngelOnFira",
+        "picatz"
+      ]
+    },
+    {
+      "weekNumber": 36,
+      "count": 15,
+      "weekStart": 1631232000000,
+      "weekEnd": 1631836800000,
+      "authors": [
+        "schmichael",
+        "jrasell",
+        "lgfa29",
+        null
+      ]
+    },
+    {
+      "weekNumber": 37,
+      "count": 16,
+      "weekStart": 1631836800000,
+      "weekEnd": 1632441600000,
+      "authors": [
+        "schmichael",
+        "angrycub",
+        "lgfa29",
+        "jrasell",
+        "apollo13"
+      ]
+    },
+    {
+      "weekNumber": 38,
+      "count": 13,
+      "weekStart": 1632441600000,
+      "weekEnd": 1633046400000,
+      "authors": [
+        "schmichael",
+        "lgfa29",
+        "jmwilkinson",
+        "EnMod",
+        "jrasell"
+      ]
+    },
+    {
+      "weekNumber": 39,
+      "count": 44,
+      "weekStart": 1633046400000,
+      "weekEnd": 1633651200000,
+      "authors": [
+        null,
+        "ChaiWithJai",
+        "DingoEatingFuzz",
+        "jrasell",
+        "mukerjee",
+        "amit-shuster",
+        "shantanugadgil",
+        "leelavg",
+        "apollo13",
+        "yaroot",
+        "schmichael",
+        "lgfa29"
+      ]
+    },
+    {
+      "weekNumber": 40,
+      "count": 25,
+      "weekStart": 1633651200000,
+      "weekEnd": 1634256000000,
+      "authors": [
+        "apollo13",
+        "lgfa29",
+        "davemay99",
+        "jrasell",
+        null,
+        "angrycub",
+        "schmichael",
+        "jorgemarey"
+      ]
+    },
+    {
+      "weekNumber": 41,
+      "count": 22,
+      "weekStart": 1634256000000,
+      "weekEnd": 1634860800000,
+      "authors": [
+        "lgfa29",
+        "jrasell",
+        null,
+        "schmichael",
+        "shishir-a412ed",
+        "EnMod",
+        "assareh"
+      ]
+    },
+    {
+      "weekNumber": 42,
+      "count": 22,
+      "weekStart": 1634860800000,
+      "weekEnd": 1635465600000,
+      "authors": [
+        "jrasell",
+        "davemay99",
+        null,
+        "mikenomitch",
+        "lgfa29",
+        "angrycub",
+        "EnMod"
+      ]
+    },
+    {
+      "weekNumber": 43,
+      "count": 60,
+      "weekStart": 1635465600000,
+      "weekEnd": 1636070400000,
+      "authors": [
+        "tgross",
+        "lgfa29",
+        "apollo13",
+        "pangratz",
+        "jrasell",
+        null,
+        "schmichael",
+        "finnigja",
+        "mikenomitch",
+        "sara-gawlinski",
+        "thiskevinwang",
+        "angrycub",
+        "VaultVulp"
+      ]
+    },
+    {
+      "weekNumber": 44,
+      "count": 26,
+      "weekStart": 1636070400000,
+      "weekEnd": 1636675200000,
+      "authors": [
+        "lgfa29",
+        "kfenech1",
+        "ChaiWithJai",
+        "davemay99",
+        "tgross",
+        "jrasell",
+        "deblasis"
+      ]
+    },
+    {
+      "weekNumber": 45,
+      "count": 27,
+      "weekStart": 1636675200000,
+      "weekEnd": 1637280000000,
+      "authors": [
+        "schmichael",
+        "lgfa29",
+        "dependabot[bot]",
+        "tgross",
+        "angrycub",
+        "jrasell",
+        "danishprakash",
+        "hashicorp-nomad"
+      ],
+      "milestone": {
+        "date": "2021-11-16T00:00:00.000Z",
+        "title": "Nomad 1.2",
+        "description": "Sysbatch jobs, new job statuses, and Nomad Pack",
+        "url": "https://www.hashicorp.com/en/blog/announcing-hashicorp-nomad-1-2"
+      }
+    },
+    {
+      "weekNumber": 46,
+      "count": 46,
+      "weekStart": 1637280000000,
+      "weekEnd": 1637884800000,
+      "authors": [
+        "jrasell",
+        "pavel-github",
+        "lgfa29",
+        "tgross",
+        "ChaiWithJai",
+        "hashicorp-nomad"
+      ]
+    },
+    {
+      "weekNumber": 47,
+      "count": 19,
+      "weekStart": 1637884800000,
+      "weekEnd": 1638489600000,
+      "authors": [
+        "schmichael",
+        "ChaiWithJai",
+        "DerekStrickland",
+        "tgross",
+        "jrasell",
+        null
+      ]
+    },
+    {
+      "weekNumber": 48,
+      "count": 20,
+      "weekStart": 1638489600000,
+      "weekEnd": 1639094400000,
+      "authors": [
+        "ChaiWithJai",
+        "thiskevinwang",
+        null,
+        "DerekStrickland",
+        "lukas-w",
+        "lgfa29",
+        "tgross",
+        "EnMod",
+        "Liraim",
+        "jrasell",
+        "LevelbossMike",
+        "shantanugadgil",
+        "zchsh"
+      ]
+    },
+    {
+      "weekNumber": 49,
+      "count": 44,
+      "weekStart": 1639094400000,
+      "weekEnd": 1639699200000,
+      "authors": [
+        "lgfa29",
+        "ChaiWithJai",
+        "schmichael",
+        "EnMod",
+        "tgross",
+        "thiskevinwang",
+        "alexcarpenter",
+        "hashicorp-nomad"
+      ]
+    },
+    {
+      "weekNumber": 50,
+      "count": 46,
+      "weekStart": 1639699200000,
+      "weekEnd": 1640304000000,
+      "authors": [
+        "ChaiWithJai",
+        "EnMod",
+        "schmichael",
+        "tgross",
+        "lgfa29",
+        "alexcarpenter",
+        "shishir-a412ed",
+        "assareh",
+        "gjpin",
+        "jrasell"
+      ]
+    },
+    {
+      "weekNumber": 51,
+      "count": 20,
+      "weekStart": 1640304000000,
+      "weekEnd": 1640908800000,
+      "authors": [
+        "ChaiWithJai",
+        "jescalan",
+        "schmichael"
+      ]
+    }
+  ],
+  [
+    {
+      "weekNumber": 0,
+      "count": 49,
+      "weekStart": 1640995200000,
+      "weekEnd": 1641600000000,
+      "authors": [
+        "ChaiWithJai",
+        "tgross",
+        "lgfa29",
+        "joel0",
+        "angrycub",
+        "schmichael",
+        "arkadiuss",
+        "jrasell",
+        "kevinschoonover"
+      ]
+    },
+    {
+      "weekNumber": 1,
+      "count": 43,
+      "weekStart": 1641600000000,
+      "weekEnd": 1642204800000,
+      "authors": [
+        "ChaiWithJai",
+        "shoenig",
+        "tgross",
+        "jrasell",
+        "lgfa29",
+        "schmichael",
+        "dependabot[bot]",
+        "sara-gawlinski",
+        "deblasis",
+        "grembo",
+        "conorevans",
+        "DerekStrickland"
+      ],
+      "milestone": {
+        "date": "2022-01-09T00:00:00.000Z",
+        "title": "10000th star",
+        "description": "Thanks, @Robitx"
+      }
+    },
+    {
+      "weekNumber": 2,
+      "count": 29,
+      "weekStart": 1642204800000,
+      "weekEnd": 1642809600000,
+      "authors": [
+        "ChaiWithJai",
+        "shoenig",
+        "lgfa29",
+        "dependabot[bot]",
+        null,
+        "hashicorp-nomad",
+        "davemay99",
+        "schmichael",
+        "jrasell"
+      ]
+    },
+    {
+      "weekNumber": 3,
+      "count": 63,
+      "weekStart": 1642809600000,
+      "weekEnd": 1643414400000,
+      "authors": [
+        "shoenig",
+        "schmichael",
+        "tgross",
+        "DerekStrickland",
+        "EnMod",
+        "ChaiWithJai",
+        "angrycub",
+        "jrasell",
+        "lgfa29",
+        "NomAnor",
+        "dependabot[bot]",
+        "protochron"
+      ]
+    },
+    {
+      "weekNumber": 4,
+      "count": 39,
+      "weekStart": 1643414400000,
+      "weekEnd": 1644019200000,
+      "authors": [
+        "shoenig",
+        "schmichael",
+        "tgross",
+        "lgfa29",
+        "kevinschoonover",
+        "dstaley",
+        "dependabot[bot]",
+        "Neutrollized",
+        "ttys3",
+        "resmo",
+        "beautifulentropy",
+        "jrasell",
+        null,
+        "hashicorp-nomad"
+      ]
+    },
+    {
+      "weekNumber": 5,
+      "count": 39,
+      "weekStart": 1644019200000,
+      "weekEnd": 1644624000000,
+      "authors": [
+        "shoenig",
+        "tgross",
+        "jrasell",
+        "DerekStrickland",
+        "lgfa29",
+        "ChaiWithJai",
+        "marcaurele",
+        "hashicorp-nomad",
+        "angrycub",
+        "kevinschoonover",
+        "th0m",
+        "dstaley",
+        "ttys3",
+        "rkarthick"
+      ]
+    },
+    {
+      "weekNumber": 6,
+      "count": 49,
+      "weekStart": 1644624000000,
+      "weekEnd": 1645228800000,
+      "authors": [
+        "DerekStrickland",
+        "shoenig",
+        "adrianlop",
+        "jrasell",
+        "schmichael",
+        "ChaiWithJai",
+        "LevelbossMike",
+        "lgfa29",
+        "nvx",
+        "tgross",
+        "aholyoake-bc",
+        "alrs",
+        "mikenomitch"
+      ]
+    },
+    {
+      "weekNumber": 7,
+      "count": 41,
+      "weekStart": 1645228800000,
+      "weekEnd": 1645833600000,
+      "authors": [
+        null,
+        "shoenig",
+        "ChaiWithJai",
+        "schmichael",
+        "zchsh",
+        "tgross",
+        "lgfa29",
+        "jrasell",
+        "Nkmol",
+        "apollo13",
+        "angrycub",
+        "mikenomitch"
+      ]
+    },
+    {
+      "weekNumber": 8,
+      "count": 64,
+      "weekStart": 1645833600000,
+      "weekEnd": 1646438400000,
+      "authors": [
+        "DerekStrickland",
+        "shoenig",
+        "schmichael",
+        "tgross",
+        "mikenomitch",
+        "jrasell",
+        "lgfa29",
+        "ashleemboyer",
+        "thiskevinwang",
+        "jorgemarey"
+      ]
+    },
+    {
+      "weekNumber": 9,
+      "count": 22,
+      "weekStart": 1646438400000,
+      "weekEnd": 1647043200000,
+      "authors": [
+        "DerekStrickland",
+        "th0m",
+        "lgfa29",
+        "shoenig",
+        "tgross",
+        "LevelbossMike",
+        null,
+        "mikenomitch",
+        "itorres",
+        "schmichael",
+        "jorgemarey"
+      ]
+    },
+    {
+      "weekNumber": 10,
+      "count": 46,
+      "weekStart": 1647043200000,
+      "weekEnd": 1647648000000,
+      "authors": [
+        "DerekStrickland",
+        "schmichael",
+        "shoenig",
+        "tgross",
+        "lgfa29",
+        "jrasell",
+        "alrs"
+      ]
+    },
+    {
+      "weekNumber": 11,
+      "count": 51,
+      "weekStart": 1647648000000,
+      "weekEnd": 1648252800000,
+      "authors": [
+        "shoenig",
+        "tgross",
+        "jrasell",
+        "lgfa29",
+        "hntrmrrs",
+        "Dgotlieb",
+        "rkarthick",
+        "schmichael",
+        "dependabot[bot]",
+        "mdeggies",
+        "jontey"
+      ]
+    },
+    {
+      "weekNumber": 12,
+      "count": 30,
+      "weekStart": 1648252800000,
+      "weekEnd": 1648857600000,
+      "authors": [
+        "DerekStrickland",
+        "shoenig",
+        "tgross",
+        null,
+        "mdeggies",
+        "schmichael",
+        "dependabot[bot]",
+        "nakabonne",
+        "shishir-a412ed"
+      ]
+    },
+    {
+      "weekNumber": 13,
+      "count": 76,
+      "weekStart": 1648857600000,
+      "weekEnd": 1649462400000,
+      "authors": [
+        "tgross",
+        "lgfa29",
+        "fynxiu",
+        "shoenig",
+        "jrasell",
+        null,
+        "hc-github-team-nomad-core",
+        "philrenaud",
+        "alrs",
+        "DerekStrickland",
+        "claire-labry",
+        "benbuzbee",
+        "jorgemarey",
+        "mikenomitch",
+        "shishir-a412ed",
+        "ChaiWithJai",
+        "danishprakash",
+        "schmichael",
+        "dependabot[bot]"
+      ]
+    },
+    {
+      "weekNumber": 14,
+      "count": 37,
+      "weekStart": 1649462400000,
+      "weekEnd": 1650067200000,
+      "authors": [
+        "shoenig",
+        "tgross",
+        "thiskevinwang",
+        "DerekStrickland",
+        "alrs",
+        "schmichael",
+        "lgfa29",
+        "idrennanvmware",
+        "jrasell",
+        "claire-labry",
+        "mr-karan",
+        "greut"
+      ]
+    },
+    {
+      "weekNumber": 15,
+      "count": 55,
+      "weekStart": 1650067200000,
+      "weekEnd": 1650672000000,
+      "authors": [
+        "schmichael",
+        "ChaiWithJai",
+        "philrenaud",
+        "tgross",
+        "jrasell",
+        "lgfa29",
+        "shoenig",
+        "DerekStrickland",
+        "gowthamgts",
+        "chavacava",
+        "shishir-a412ed"
+      ]
+    },
+    {
+      "weekNumber": 16,
+      "count": 22,
+      "weekStart": 1650672000000,
+      "weekEnd": 1651276800000,
+      "authors": [
+        "lgfa29",
+        "tgross",
+        null,
+        "DerekStrickland",
+        "philrenaud",
+        "ChaiWithJai",
+        "davemay99",
+        "schmichael"
+      ]
+    },
+    {
+      "weekNumber": 17,
+      "count": 29,
+      "weekStart": 1651276800000,
+      "weekEnd": 1651881600000,
+      "authors": [
+        "shoenig",
+        "schmichael",
+        "hc-github-team-nomad-core",
+        "modrake",
+        "chetan",
+        "philrenaud",
+        "lgfa29",
+        "jrasell",
+        "tgross",
+        null,
+        "mdeggies",
+        "alexcarpenter",
+        "Fuco1"
+      ]
+    },
+    {
+      "weekNumber": 18,
+      "count": 21,
+      "weekStart": 1651881600000,
+      "weekEnd": 1652486400000,
+      "authors": [
+        "angrycub",
+        "tgross",
+        "jorgemarey",
+        "lgfa29",
+        "hc-github-team-nomad-core",
+        "philrenaud",
+        "dependabot[bot]",
+        "jrasell",
+        "schmichael",
+        "Juneezee",
+        "shoenig",
+        "legege"
+      ]
+    },
+    {
+      "weekNumber": 19,
+      "count": 31,
+      "weekStart": 1652486400000,
+      "weekEnd": 1653091200000,
+      "authors": [
+        "tgross",
+        "philrenaud",
+        "shoenig",
+        "hc-github-team-nomad-core",
+        "lgfa29",
+        "sandrwich",
+        "josegonzalez",
+        "wjordan",
+        "claire-labry",
+        null,
+        "bonsi",
+        "mr-karan"
+      ]
+    },
+    {
+      "weekNumber": 20,
+      "count": 22,
+      "weekStart": 1653091200000,
+      "weekEnd": 1653696000000,
+      "authors": [
+        "angrycub",
+        "tgross",
+        "lgfa29",
+        "Vaelatern",
+        "jrasell",
+        "shoenig",
+        "Amier3"
+      ],
+      "milestone": {
+        "date": "2022-05-22T00:00:00.000Z",
+        "title": "Nomad 1.3",
+        "description": "Native Service Discovery and Edge Workloads",
+        "url": "https://www.hashicorp.com/en/blog/nomad-1-3-adds-native-service-discovery-and-edge-workload-support"
+      }
+    },
+    {
+      "weekNumber": 21,
+      "count": 25,
+      "weekStart": 1653696000000,
+      "weekEnd": 1654300800000,
+      "authors": [
+        "tgross",
+        "philrenaud",
+        "lhaig",
+        "lgfa29",
+        "fredwangwang",
+        "shoenig",
+        "shantanugadgil",
+        "jaydeland",
+        "tunzor",
+        "pabloyoyoista",
+        "jrasell",
+        "waquidvp"
+      ]
+    },
+    {
+      "weekNumber": 22,
+      "count": 46,
+      "weekStart": 1654300800000,
+      "weekEnd": 1654905600000,
+      "authors": [
+        "shoenig",
+        "philrenaud",
+        "tgross",
+        "angrycub",
+        "DerekStrickland",
+        "bogue1979",
+        "lgfa29",
+        "Raffo",
+        "phreakocious",
+        "shantanugadgil",
+        "dependabot[bot]",
+        "jrasell",
+        "kevinschoonover",
+        "conorevans",
+        "Dgotlieb",
+        "radeksimko",
+        "mr-karan"
+      ]
+    },
+    {
+      "weekNumber": 23,
+      "count": 21,
+      "weekStart": 1654905600000,
+      "weekEnd": 1655510400000,
+      "authors": [
+        "ChaiWithJai",
+        "philrenaud",
+        "angrycub",
+        "tgross",
+        "DerekStrickland",
+        "nickwales",
+        "arthur-leclerc",
+        "axsuul",
+        "jrasell",
+        "hugespoon",
+        "lgfa29",
+        null,
+        "schmichael"
+      ]
+    },
+    {
+      "weekNumber": 24,
+      "count": 25,
+      "weekStart": 1655510400000,
+      "weekEnd": 1656115200000,
+      "authors": [
+        "tgross",
+        "philrenaud",
+        "ChaiWithJai",
+        "angrycub",
+        "shoenig",
+        "schmichael",
+        "DerekStrickland",
+        "jaydeland",
+        "pop",
+        "h0tw1r3",
+        "tbehling"
+      ]
+    },
+    {
+      "weekNumber": 25,
+      "count": 25,
+      "weekStart": 1656115200000,
+      "weekEnd": 1656720000000,
+      "authors": [
+        "angrycub",
+        "tgross",
+        "shoenig",
+        "dependabot[bot]",
+        "schmichael",
+        "TheConner",
+        "DerekStrickland",
+        "jrasell",
+        "andrew222651",
+        "shishir-a412ed",
+        "greut"
+      ]
+    },
+    {
+      "weekNumber": 26,
+      "count": 42,
+      "weekStart": 1656720000000,
+      "weekEnd": 1657324800000,
+      "authors": [
+        "tgross",
+        "philrenaud",
+        "angrycub",
+        "ChaiWithJai",
+        "mdeggies",
+        "jrasell",
+        "schmichael",
+        "shoenig",
+        "lgfa29",
+        "tbehling",
+        "leelavg",
+        "michelleN",
+        "yanc0",
+        "CarbonCollins"
+      ]
+    },
+    {
+      "weekNumber": 27,
+      "count": 48,
+      "weekStart": 1657324800000,
+      "weekEnd": 1657929600000,
+      "authors": [
+        "lgfa29",
+        "schmichael",
+        "kpenfound",
+        "shoenig",
+        "tgross",
+        "jrasell",
+        "hc-github-team-nomad-core",
+        "dependabot[bot]",
+        "philrenaud",
+        "angrycub",
+        "mdeggies"
+      ]
+    },
+    {
+      "weekNumber": 28,
+      "count": 46,
+      "weekStart": 1657929600000,
+      "weekEnd": 1658534400000,
+      "authors": [
+        "ChaiWithJai",
+        "lgfa29",
+        "shoenig",
+        "angrycub",
+        "tgross",
+        "schmichael",
+        "wjordan",
+        "philrenaud",
+        "jrasell",
+        "dependabot[bot]",
+        "nh2",
+        "assareh",
+        "claire-labry"
+      ]
+    },
+    {
+      "weekNumber": 29,
+      "count": 8,
+      "weekStart": 1658534400000,
+      "weekEnd": 1659139200000,
+      "authors": [
+        "tgross",
+        "alrs",
+        "shoenig",
+        "asymmetric",
+        "scottt732"
+      ]
+    },
+    {
+      "weekNumber": 30,
+      "count": 55,
+      "weekStart": 1659139200000,
+      "weekEnd": 1659744000000,
+      "authors": [
+        "shoenig",
+        "angrycub",
+        "ChaiWithJai",
+        "dependabot[bot]",
+        "jrasell",
+        "philrenaud",
+        "lgfa29",
+        "chuckyz",
+        "DerekStrickland",
+        "pkazmierczak",
+        "mdeggies",
+        "tgross",
+        "ejweber"
+      ]
+    },
+    {
+      "weekNumber": 31,
+      "count": 38,
+      "weekStart": 1659744000000,
+      "weekEnd": 1660348800000,
+      "authors": [
+        "philrenaud",
+        "shoenig",
+        "jrasell",
+        "Morantron",
+        "lgfa29",
+        "ChaiWithJai",
+        "Dgotlieb",
+        "brian-athinkingape",
+        "dependabot[bot]",
+        "Abirdcfly",
+        "claire-labry"
+      ]
+    },
+    {
+      "weekNumber": 32,
+      "count": 66,
+      "weekStart": 1660348800000,
+      "weekEnd": 1660953600000,
+      "authors": [
+        "shoenig",
+        "schmichael",
+        "dependabot[bot]",
+        "DerekStrickland",
+        "philrenaud",
+        "pkazmierczak",
+        "jrasell",
+        "ChaiWithJai",
+        "tgross",
+        "ksatirli",
+        "angrycub",
+        "mikenomitch"
+      ]
+    },
+    {
+      "weekNumber": 33,
+      "count": 63,
+      "weekStart": 1660953600000,
+      "weekEnd": 1661558400000,
+      "authors": [
+        "ChaiWithJai",
+        "philrenaud",
+        "schmichael",
+        "tgross",
+        "vsvastey",
+        "shoenig",
+        "lgfa29",
+        "dependabot[bot]",
+        "angrycub",
+        "jrasell",
+        "pkazmierczak"
+      ]
+    },
+    {
+      "weekNumber": 34,
+      "count": 44,
+      "weekStart": 1661558400000,
+      "weekEnd": 1662163200000,
+      "authors": [
+        "philrenaud",
+        "yaroot",
+        "geovannyAvelar",
+        "nvx",
+        "lgfa29",
+        "jrasell",
+        "tgross",
+        "dependabot[bot]",
+        "brettplarson",
+        "DerekStrickland",
+        "angrycub",
+        "shoenig",
+        "quoing",
+        "pkazmierczak"
+      ]
+    },
+    {
+      "weekNumber": 35,
+      "count": 39,
+      "weekStart": 1662163200000,
+      "weekEnd": 1662768000000,
+      "authors": [
+        "shoenig",
+        "angrycub",
+        "tgross",
+        "jrasell",
+        "philrenaud",
+        "schmichael",
+        "ChaiWithJai",
+        "lgfa29",
+        "Kellel",
+        "tonytrg"
+      ]
+    },
+    {
+      "weekNumber": 36,
+      "count": 52,
+      "weekStart": 1662768000000,
+      "weekEnd": 1663372800000,
+      "authors": [
+        "tgross",
+        "philrenaud",
+        "shoenig",
+        null,
+        "jrasell",
+        "DerekStrickland",
+        "schmichael",
+        "hc-github-team-nomad-core",
+        "krarey",
+        "lgfa29",
+        "notnoop",
+        "ashleemboyer",
+        "angrycub"
+      ]
+    },
+    {
+      "weekNumber": 37,
+      "count": 25,
+      "weekStart": 1663372800000,
+      "weekEnd": 1663977600000,
+      "authors": [
+        "philrenaud",
+        "tgross",
+        "angrycub",
+        "schmichael",
+        "DerekStrickland",
+        "shoenig",
+        "jorgemarey",
+        "apollo13",
+        "lgfa29",
+        "jrasell"
+      ]
+    },
+    {
+      "weekNumber": 38,
+      "count": 56,
+      "weekStart": 1663977600000,
+      "weekEnd": 1664582400000,
+      "authors": [
+        "ChaiWithJai",
+        "dependabot[bot]",
+        "lgfa29",
+        "tgross",
+        "philrenaud",
+        "shoenig",
+        "schmichael",
+        "DerekStrickland",
+        "hc-github-team-nomad-core",
+        "jimrazmus",
+        "mr-karan"
+      ]
+    },
+    {
+      "weekNumber": 39,
+      "count": 30,
+      "weekStart": 1664582400000,
+      "weekEnd": 1665187200000,
+      "authors": [
+        "philrenaud",
+        "tgross",
+        "Trojan295",
+        "DarthBenro008",
+        "wjordan",
+        "gabivlj",
+        "pruiz",
+        "geovannyAvelar",
+        "schmichael",
+        "hashibot-web",
+        "DerekStrickland",
+        "hc-github-team-nomad-core",
+        "lgfa29",
+        "jrasell",
+        "pop"
+      ],
+      "milestone": {
+        "date": "2022-10-06T00:00:00.000Z",
+        "title": "Nomad 1.4",
+        "description": "Secure Variables, Service Discovery Health Checks, and Keyboard Shortcuts",
+        "url": "https://www.hashicorp.com/en/blog/nomad-1-4-adds-nomad-variables-and-updates-service-discovery"
+      }
+    },
+    {
+      "weekNumber": 40,
+      "count": 12,
+      "weekStart": 1665187200000,
+      "weekEnd": 1665792000000,
+      "authors": [
+        "schmichael",
+        "mikenomitch",
+        "hashicorp-copywrite[bot]",
+        "tgross",
+        "shoenig"
+      ]
+    },
+    {
+      "weekNumber": 41,
+      "count": 39,
+      "weekStart": 1665792000000,
+      "weekEnd": 1666396800000,
+      "authors": [
+        "tgross",
+        "shoenig",
+        "schmichael",
+        "lgfa29",
+        "jrasell",
+        "ChaiWithJai",
+        "philrenaud",
+        "zchsh",
+        "tunzor",
+        "hashibot-web",
+        null,
+        "thiskevinwang"
+      ]
+    },
+    {
+      "weekNumber": 42,
+      "count": 25,
+      "weekStart": 1666396800000,
+      "weekEnd": 1667001600000,
+      "authors": [
+        "tgross",
+        "shoenig",
+        "angrycub",
+        "hc-github-team-nomad-core",
+        "jrasell",
+        "dependabot[bot]",
+        "zchsh",
+        "ChaiWithJai"
+      ]
+    },
+    {
+      "weekNumber": 43,
+      "count": 21,
+      "weekStart": 1667001600000,
+      "weekEnd": 1667606400000,
+      "authors": [
+        "lgfa29",
+        "angrycub",
+        "shoenig",
+        "vuuihc",
+        "philrenaud",
+        "tgross",
+        "dependabot[bot]"
+      ]
+    },
+    {
+      "weekNumber": 44,
+      "count": 19,
+      "weekStart": 1667606400000,
+      "weekEnd": 1668211200000,
+      "authors": [
+        "angrycub",
+        "shoenig",
+        "tgross",
+        "lgfa29",
+        "pkazmierczak",
+        "DerekStrickland",
+        null,
+        "drewgonzales360",
+        "philrenaud",
+        "dependabot[bot]"
+      ]
+    },
+    {
+      "weekNumber": 45,
+      "count": 25,
+      "weekStart": 1668211200000,
+      "weekEnd": 1668816000000,
+      "authors": [
+        "shoenig",
+        "jrasell",
+        "lgfa29",
+        "tgross",
+        "stswidwinski",
+        "ayrat555",
+        "ChaiWithJai",
+        "nikita-b",
+        "douglasjose",
+        "kyleroot"
+      ]
+    },
+    {
+      "weekNumber": 46,
+      "count": 34,
+      "weekStart": 1668816000000,
+      "weekEnd": 1669420800000,
+      "authors": [
+        "lgfa29",
+        "pkazmierczak",
+        "tgross",
+        "jdockerty",
+        "ChaiWithJai",
+        "dependabot[bot]",
+        "SamMousa",
+        "jrasell",
+        "philrenaud",
+        "lhaig",
+        "hc-github-team-nomad-core",
+        "shoenig"
+      ]
+    },
+    {
+      "weekNumber": 47,
+      "count": 26,
+      "weekStart": 1669420800000,
+      "weekEnd": 1670025600000,
+      "authors": [
+        "philrenaud",
+        "prestonbourne",
+        "tgross",
+        "hashibot-web",
+        "ChaiWithJai",
+        "shoenig",
+        "Fuco1",
+        "lgfa29",
+        "dependabot[bot]",
+        "pkazmierczak",
+        "jrasell"
+      ]
+    },
+    {
+      "weekNumber": 48,
+      "count": 18,
+      "weekStart": 1670025600000,
+      "weekEnd": 1670630400000,
+      "authors": [
+        "shoenig",
+        "mdeggies",
+        "pkazmierczak",
+        "schmichael",
+        "tgross",
+        "philrenaud"
+      ]
+    },
+    {
+      "weekNumber": 49,
+      "count": 13,
+      "weekStart": 1670630400000,
+      "weekEnd": 1671235200000,
+      "authors": [
+        "danishprakash",
+        "shoenig",
+        "jrasell",
+        "philrenaud",
+        "pkazmierczak",
+        "mdeggies",
+        "ChaiWithJai",
+        "tgross"
+      ]
+    },
+    {
+      "weekNumber": 50,
+      "count": 17,
+      "weekStart": 1671235200000,
+      "weekEnd": 1671840000000,
+      "authors": [
+        "pkazmierczak",
+        "shoenig",
+        "dependabot[bot]",
+        "philrenaud",
+        "schmichael"
+      ]
+    },
+    {
+      "weekNumber": 51,
+      "count": 0,
+      "weekStart": 1671840000000,
+      "weekEnd": 1672444800000,
+      "authors": []
+    }
+  ],
+  [
+    {
+      "weekNumber": 0,
+      "count": 22,
+      "weekStart": 1672531200000,
+      "weekEnd": 1673136000000,
+      "authors": [
+        "shoenig",
+        "lgfa29",
+        "jrasell",
+        "tgross",
+        "dttung2905",
+        "Dgotlieb",
+        "huazhihao",
+        "dependabot[bot]"
+      ]
+    },
+    {
+      "weekNumber": 1,
+      "count": 30,
+      "weekStart": 1673136000000,
+      "weekEnd": 1673740800000,
+      "authors": [
+        "ashleemboyer",
+        "philrenaud",
+        "shoenig",
+        "dependabot[bot]",
+        "jrasell",
+        "anth0d",
+        "gulducat",
+        "dttung2905",
+        "lgfa29",
+        "pkazmierczak",
+        "tgross",
+        "eskan"
+      ]
+    },
+    {
+      "weekNumber": 2,
+      "count": 27,
+      "weekStart": 1673740800000,
+      "weekEnd": 1674345600000,
+      "authors": [
+        "schmichael",
+        "tgross",
+        "angrycub",
+        "karelorigin",
+        "jrasell",
+        "shoenig",
+        "dependabot[bot]",
+        "philrenaud",
+        "kendallstrautman",
+        "ashleemboyer",
+        "dttung2905",
+        "lgfa29",
+        "benbuzbee"
+      ]
+    },
+    {
+      "weekNumber": 3,
+      "count": 32,
+      "weekStart": 1674345600000,
+      "weekEnd": 1674950400000,
+      "authors": [
+        "pkazmierczak",
+        "shoenig",
+        "tgross",
+        "lgfa29",
+        "ChaiWithJai",
+        "ygersie",
+        "jrasell",
+        "dependabot[bot]",
+        "PJDuszynski",
+        "ashleemboyer",
+        "nickwales",
+        "kjschubert",
+        "schmichael"
+      ]
+    },
+    {
+      "weekNumber": 4,
+      "count": 45,
+      "weekStart": 1674950400000,
+      "weekEnd": 1675555200000,
+      "authors": [
+        "tgross",
+        "shoenig",
+        null,
+        "philrenaud",
+        "gulducat",
+        "angrycub",
+        "jmwilkinson",
+        "lgfa29",
+        "tristanpemble",
+        "jrasell",
+        "ChaiWithJai",
+        "Neutrollized",
+        "mikenomitch",
+        "stswidwinski",
+        "bit2pixel",
+        "sudharshan-ks",
+        "ygersie",
+        "jorgemarey",
+        "dependabot[bot]",
+        "pkazmierczak",
+        "shumin1027",
+        "dttung2905"
+      ]
+    },
+    {
+      "weekNumber": 5,
+      "count": 42,
+      "weekStart": 1675555200000,
+      "weekEnd": 1676160000000,
+      "authors": [
+        "angrycub",
+        "philrenaud",
+        "tgross",
+        "schmichael",
+        "lgfa29",
+        "shoenig",
+        "jrasell",
+        "hc-github-team-nomad-core",
+        "dttung2905",
+        null,
+        "ChaiWithJai"
+      ]
+    },
+    {
+      "weekNumber": 6,
+      "count": 34,
+      "weekStart": 1676160000000,
+      "weekEnd": 1676764800000,
+      "authors": [
+        "shoenig",
+        "schmichael",
+        "jrasell",
+        "philrenaud",
+        "alessio-perugini",
+        "mdeggies",
+        "angrycub",
+        "tgross",
+        "farbodahm",
+        "visweshs-cb",
+        "dependabot[bot]",
+        "wjnicholson",
+        null,
+        "ChaiWithJai",
+        "dttung2905"
+      ]
+    },
+    {
+      "weekNumber": 7,
+      "count": 8,
+      "weekStart": 1676764800000,
+      "weekEnd": 1677369600000,
+      "authors": [
+        "schmichael",
+        "shoenig",
+        "dependabot[bot]",
+        "dttung2905",
+        "tgross"
+      ]
+    },
+    {
+      "weekNumber": 8,
+      "count": 29,
+      "weekStart": 1677369600000,
+      "weekEnd": 1677974400000,
+      "authors": [
+        "tgross",
+        "lgfa29",
+        "dttung2905",
+        "aofei",
+        "Valefant",
+        "schmichael",
+        "philrenaud",
+        "farbodahm",
+        "jrasell",
+        "hc-github-team-nomad-core",
+        "gulducat"
+      ],
+      "milestone": {
+        "date": "2023-03-02T00:00:00.000Z",
+        "title": "Nomad 1.5",
+        "description": "Dynamic Node Metadata and SSO support",
+        "url": "https://www.hashicorp.com/en/blog/nomad-1-5-adds-single-sign-on-and-dynamic-node-metadata"
+      }
+    },
+    {
+      "weekNumber": 9,
+      "count": 30,
+      "weekStart": 1677974400000,
+      "weekEnd": 1678579200000,
+      "authors": [
+        "hc-github-team-nomad-core",
+        "schmichael",
+        "lgfa29",
+        "Juanadelacuesta",
+        null,
+        "jrasell",
+        "tgross",
+        "Oloremo",
+        "shoenig",
+        "philrenaud",
+        "lhaig",
+        "dependabot[bot]",
+        "ashleemboyer"
+      ]
+    },
+    {
+      "weekNumber": 10,
+      "count": 34,
+      "weekStart": 1678579200000,
+      "weekEnd": 1679184000000,
+      "authors": [
+        "pkazmierczak",
+        "shoenig",
+        "jrasell",
+        "schmichael",
+        "tgross",
+        "gulducat",
+        "tunzor",
+        "Juanadelacuesta",
+        "lgfa29",
+        "dttung2905",
+        "dependabot[bot]"
+      ]
+    },
+    {
+      "weekNumber": 11,
+      "count": 29,
+      "weekStart": 1679184000000,
+      "weekEnd": 1679788800000,
+      "authors": [
+        "pkazmierczak",
+        "lgfa29",
+        "ron-savoia",
+        "tgross",
+        "schmichael",
+        "philrenaud",
+        "Juanadelacuesta",
+        "jrasell",
+        "Suselz",
+        "mikenomitch",
+        "DocAdam"
+      ]
+    },
+    {
+      "weekNumber": 12,
+      "count": 27,
+      "weekStart": 1679788800000,
+      "weekEnd": 1680393600000,
+      "authors": [
+        "tgross",
+        "gburanov",
+        "Juanadelacuesta",
+        "gulducat",
+        "horaciomonsalvo",
+        "lgfa29",
+        "pkazmierczak",
+        "philrenaud",
+        "dependabot[bot]",
+        "mxab",
+        "elprans",
+        "jrasell",
+        "shoenig",
+        "tcraxs"
+      ]
+    },
+    {
+      "weekNumber": 13,
+      "count": 25,
+      "weekStart": 1680393600000,
+      "weekEnd": 1680998400000,
+      "authors": [
+        "tgross",
+        "schmichael",
+        "shoenig",
+        "angrycub",
+        "jrasell",
+        "the-nando",
+        "hc-github-team-nomad-core",
+        "Juanadelacuesta",
+        "mikenomitch"
+      ]
+    },
+    {
+      "weekNumber": 14,
+      "count": 19,
+      "weekStart": 1680998400000,
+      "weekEnd": 1681603200000,
+      "authors": [
+        "tgross",
+        "philrenaud",
+        "schmichael",
+        "NOBLES5E",
+        "shoenig",
+        "jrasell",
+        "Juanadelacuesta",
+        "pkazmierczak",
+        "gulducat",
+        "hashicorp-copywrite[bot]"
+      ]
+    },
+    {
+      "weekNumber": 15,
+      "count": 19,
+      "weekStart": 1681603200000,
+      "weekEnd": 1682208000000,
+      "authors": [
+        "valodzka",
+        "EtienneBruines",
+        "lgfa29",
+        "tgross",
+        "astudentofblake",
+        "claire-labry",
+        "chrisvanmeer",
+        "suikast42",
+        "jrasell",
+        "angrycub",
+        "IamTheFij",
+        "shoenig"
+      ]
+    },
+    {
+      "weekNumber": 16,
+      "count": 18,
+      "weekStart": 1682208000000,
+      "weekEnd": 1682812800000,
+      "authors": [
+        "philrenaud",
+        "shoenig",
+        "schmichael",
+        "tgross",
+        "jrasell",
+        "gulducat",
+        "dependabot[bot]"
+      ]
+    },
+    {
+      "weekNumber": 17,
+      "count": 19,
+      "weekStart": 1682812800000,
+      "weekEnd": 1683417600000,
+      "authors": [
+        "philrenaud",
+        "shantanugadgil",
+        "tgross",
+        "shoenig",
+        "jrasell",
+        "schmichael",
+        "angrycub",
+        "lgfa29"
+      ]
+    },
+    {
+      "weekNumber": 18,
+      "count": 23,
+      "weekStart": 1683417600000,
+      "weekEnd": 1684022400000,
+      "authors": [
+        "philrenaud",
+        "tgross",
+        "ChaiWithJai",
+        "shoenig",
+        "lgfa29",
+        "jrasell",
+        "gulducat",
+        "stswidwinski"
+      ]
+    },
+    {
+      "weekNumber": 19,
+      "count": 32,
+      "weekStart": 1684022400000,
+      "weekEnd": 1684627200000,
+      "authors": [
+        "philrenaud",
+        "tgross",
+        "Yethal",
+        "lgfa29",
+        "ChaiWithJai",
+        "attachmentgenie",
+        "jrasell",
+        "mikenomitch",
+        "romanzipp",
+        "hashicorp-tsccr[bot]",
+        "dependabot[bot]",
+        "shoenig",
+        "pkazmierczak",
+        "schmichael",
+        "ml4"
+      ]
+    },
+    {
+      "weekNumber": 20,
+      "count": 15,
+      "weekStart": 1684627200000,
+      "weekEnd": 1685232000000,
+      "authors": [
+        "philrenaud",
+        "angrycub",
+        "shoenig",
+        "tgross",
+        "dependabot[bot]",
+        "lhaig",
+        "unRob"
+      ]
+    },
+    {
+      "weekNumber": 21,
+      "count": 30,
+      "weekStart": 1685232000000,
+      "weekEnd": 1685836800000,
+      "authors": [
+        "Kamilcuk",
+        "dependabot[bot]",
+        "lgfa29",
+        "hc-github-team-es-release-engineering",
+        "gulducat",
+        "philrenaud",
+        "beautifulentropy",
+        "tgross",
+        null,
+        "shoenig",
+        "dekimsey",
+        "pkazmierczak"
+      ]
+    },
+    {
+      "weekNumber": 22,
+      "count": 24,
+      "weekStart": 1685836800000,
+      "weekEnd": 1686441600000,
+      "authors": [
+        "philrenaud",
+        "pkazmierczak",
+        "shoenig",
+        "tgross",
+        "lgfa29",
+        "jeteve",
+        "dttung2905",
+        "hashicorp-copywrite[bot]",
+        "dependabot[bot]"
+      ]
+    },
+    {
+      "weekNumber": 23,
+      "count": 42,
+      "weekStart": 1686441600000,
+      "weekEnd": 1687046400000,
+      "authors": [
+        "angrycub",
+        "DingoEatingFuzz",
+        "lgfa29",
+        "tgross",
+        "shoenig",
+        "philrenaud",
+        "TrueBrain",
+        "dependabot[bot]",
+        "jrasell",
+        "stswidwinski",
+        "gulducat"
+      ]
+    },
+    {
+      "weekNumber": 24,
+      "count": 61,
+      "weekStart": 1687046400000,
+      "weekEnd": 1687651200000,
+      "authors": [
+        "tgross",
+        "lgfa29",
+        "grembo",
+        "DingoEatingFuzz",
+        "jrasell",
+        "shoenig",
+        "philrenaud",
+        "ChaiWithJai",
+        "VishnuJin",
+        "gulducat",
+        "hashicorp-copywrite[bot]",
+        "dttung2905",
+        "dependabot[bot]",
+        "brucelok"
+      ]
+    },
+    {
+      "weekNumber": 25,
+      "count": 31,
+      "weekStart": 1687651200000,
+      "weekEnd": 1688256000000,
+      "authors": [
+        "philrenaud",
+        "tgross",
+        "jrasell",
+        "sarahethompson",
+        "gulducat",
+        "hc-github-team-nomad-core",
+        "shoenig",
+        "Juanadelacuesta",
+        "sejalapeno",
+        "nicoche",
+        "hashicorp-copywrite[bot]",
+        "dependabot[bot]",
+        "pkazmierczak",
+        "vxjohanforssell"
+      ]
+    },
+    {
+      "weekNumber": 26,
+      "count": 12,
+      "weekStart": 1688256000000,
+      "weekEnd": 1688860800000,
+      "authors": [
+        "tgross",
+        "gulducat",
+        "shoenig",
+        "ygersie",
+        "am-ak",
+        "TrueBrain",
+        "deverton-godaddy",
+        "jrasell"
+      ]
+    },
+    {
+      "weekNumber": 27,
+      "count": 31,
+      "weekStart": 1688860800000,
+      "weekEnd": 1689465600000,
+      "authors": [
+        "tgross",
+        "shoenig",
+        "jrasell",
+        "janory",
+        "philrenaud",
+        "dekimsey",
+        "hc-github-team-nomad-core",
+        "sofixa",
+        "lgfa29",
+        "dunglas",
+        "lhaig",
+        "hashicorp-copywrite[bot]",
+        "schmichael",
+        "devashishTaneja",
+        "gulducat",
+        "dependabot[bot]"
+      ]
+    },
+    {
+      "weekNumber": 28,
+      "count": 31,
+      "weekStart": 1689465600000,
+      "weekEnd": 1690070400000,
+      "authors": [
+        "stswidwinski",
+        "tgross",
+        "hc-github-team-nomad-core",
+        "philrenaud",
+        "lgfa29",
+        "shoenig",
+        "the-nando",
+        "TrueBrain",
+        "louievandyke",
+        "jrasell",
+        "angrycub"
+      ],
+      "milestone": {
+        "date": "2023-07-19T00:00:00.000Z",
+        "title": "Nomad 1.6",
+        "description": "Node Pools, Job Status UI overhaul, and Nomad Pack 1.0",
+        "url": "https://www.hashicorp.com/en/blog/nomad-1-6-adds-node-pools-ux-updates-and-more"
+      }
+    },
+    {
+      "weekNumber": 29,
+      "count": 18,
+      "weekStart": 1690070400000,
+      "weekEnd": 1690675200000,
+      "authors": [
+        "nvanthao",
+        "tgross",
+        "lgfa29",
+        "jrasell",
+        "schmichael",
+        "pkazmierczak",
+        "thevilledev",
+        "philrenaud",
+        "brucelok",
+        "lhaig",
+        "kmulvey"
+      ]
+    },
+    {
+      "weekNumber": 30,
+      "count": 18,
+      "weekStart": 1690675200000,
+      "weekEnd": 1691280000000,
+      "authors": [
+        "yazdan",
+        "tgross",
+        "dependabot[bot]",
+        "jrasell",
+        "karuppiah7890",
+        "angrycub",
+        "lgfa29",
+        "kevinschoonover",
+        "philrenaud",
+        "GunnarMorrigan"
+      ]
+    },
+    {
+      "weekNumber": 31,
+      "count": 13,
+      "weekStart": 1691280000000,
+      "weekEnd": 1691884800000,
+      "authors": [
+        "mmcquillan",
+        "hashicorp-copywrite[bot]",
+        "shoenig",
+        "angrycub",
+        "tgross",
+        "devashishTaneja"
+      ]
+    },
+    {
+      "weekNumber": 32,
+      "count": 35,
+      "weekStart": 1691884800000,
+      "weekEnd": 1692489600000,
+      "authors": [
+        "janory",
+        "tgross",
+        "lgfa29",
+        "philrenaud",
+        "jrasell",
+        "pkazmierczak",
+        "hashicorp-copywrite[bot]",
+        "shoenig",
+        "schmichael",
+        "shantanugadgil",
+        "ebarriosjr",
+        "dependabot[bot]",
+        "sarahethompson"
+      ]
+    },
+    {
+      "weekNumber": 33,
+      "count": 21,
+      "weekStart": 1692489600000,
+      "weekEnd": 1693094400000,
+      "authors": [
+        "stswidwinski",
+        "lgfa29",
+        "jrasell",
+        "pkazmierczak",
+        "shoenig",
+        "thiskevinwang",
+        "aucampia",
+        "aneustroev",
+        "lhaig"
+      ]
+    },
+    {
+      "weekNumber": 34,
+      "count": 6,
+      "weekStart": 1693094400000,
+      "weekEnd": 1693699200000,
+      "authors": [
+        "lgfa29",
+        "jrasell",
+        "shoenig",
+        "MattJustMatt",
+        "nvanthao"
+      ]
+    },
+    {
+      "weekNumber": 35,
+      "count": 18,
+      "weekStart": 1693699200000,
+      "weekEnd": 1694304000000,
+      "authors": [
+        "schmichael",
+        "gulducat",
+        "tgross",
+        "jrasell",
+        "dttung2905",
+        "pkazmierczak",
+        "dependabot[bot]"
+      ]
+    },
+    {
+      "weekNumber": 36,
+      "count": 29,
+      "weekStart": 1694304000000,
+      "weekEnd": 1694908800000,
+      "authors": [
+        "tgross",
+        "shantanugadgil",
+        "nvanthao",
+        "lgfa29",
+        "gulducat",
+        "wrli20",
+        "stswidwinski",
+        "hc-github-team-nomad-core",
+        "aminovpavel",
+        "jjti",
+        "jrasell",
+        "shoenig"
+      ]
+    },
+    {
+      "weekNumber": 37,
+      "count": 14,
+      "weekStart": 1694908800000,
+      "weekEnd": 1695513600000,
+      "authors": [
+        "tgross",
+        "gulducat",
+        "angrycub",
+        "Juanadelacuesta",
+        "pkazmierczak",
+        "philrenaud",
+        "dependabot[bot]",
+        "shoenig"
+      ]
+    },
+    {
+      "weekNumber": 38,
+      "count": 23,
+      "weekStart": 1695513600000,
+      "weekEnd": 1696118400000,
+      "authors": [
+        "lgfa29",
+        "schmichael",
+        "tgross",
+        "philrenaud",
+        "pkazmierczak",
+        "jrasell",
+        "Juanadelacuesta",
+        "gulducat",
+        "jm-merchan"
+      ]
+    },
+    {
+      "weekNumber": 39,
+      "count": 22,
+      "weekStart": 1696118400000,
+      "weekEnd": 1696723200000,
+      "authors": [
+        "lgfa29",
+        "pkazmierczak",
+        "shoenig",
+        "philrenaud",
+        "Juanadelacuesta",
+        "jrasell",
+        "angrycub",
+        "tgross",
+        "MattJustMatt",
+        "gulducat",
+        "thiskevinwang",
+        "dependabot[bot]"
+      ]
+    },
+    {
+      "weekNumber": 40,
+      "count": 22,
+      "weekStart": 1696723200000,
+      "weekEnd": 1697328000000,
+      "authors": [
+        "pkazmierczak",
+        "tgross",
+        "jrasell",
+        "dependabot[bot]",
+        "angrycub",
+        "Juanadelacuesta",
+        "lgfa29"
+      ]
+    },
+    {
+      "weekNumber": 41,
+      "count": 26,
+      "weekStart": 1697328000000,
+      "weekEnd": 1697932800000,
+      "authors": [
+        "Sanskar531",
+        "schmichael",
+        "shoenig",
+        "lgfa29",
+        "philrenaud",
+        "jrasell",
+        "tgross",
+        "pkazmierczak",
+        "gulducat",
+        "modrake",
+        "thiskevinwang",
+        "dependabot[bot]"
+      ]
+    },
+    {
+      "weekNumber": 42,
+      "count": 34,
+      "weekStart": 1697932800000,
+      "weekEnd": 1698537600000,
+      "authors": [
+        "lgfa29",
+        "jrasell",
+        "tgross",
+        "darkgeek",
+        "Juanadelacuesta",
+        "p5",
+        "shoenig",
+        "pkazmierczak",
+        "schmichael",
+        "gulducat",
+        "ksatirli"
+      ]
+    },
+    {
+      "weekNumber": 43,
+      "count": 45,
+      "weekStart": 1698537600000,
+      "weekEnd": 1699142400000,
+      "authors": [
+        "tgross",
+        "labynocle",
+        "jrasell",
+        "shoenig",
+        "schmichael",
+        "lgfa29",
+        "pkazmierczak",
+        "lattwood",
+        "tunzor",
+        "philrenaud",
+        "davemay99"
+      ]
+    },
+    {
+      "weekNumber": 44,
+      "count": 39,
+      "weekStart": 1699142400000,
+      "weekEnd": 1699747200000,
+      "authors": [
+        "tgross",
+        "shoenig",
+        "lgfa29",
+        "philrenaud",
+        "lkysow",
+        "pkazmierczak",
+        "schmichael",
+        "hc-github-team-es-release-engineering",
+        "davemay99",
+        "dependabot[bot]"
+      ]
+    },
+    {
+      "weekNumber": 45,
+      "count": 25,
+      "weekStart": 1699747200000,
+      "weekEnd": 1700352000000,
+      "authors": [
+        "tgross",
+        "angrycub",
+        "codenoid",
+        "gulducat",
+        "judithpatudith",
+        "sofixa",
+        "schmichael",
+        "hc-github-team-nomad-core",
+        "acaloiaro",
+        "philrenaud",
+        "lgfa29",
+        "dependabot[bot]",
+        "Juanadelacuesta"
+      ]
+    },
+    {
+      "weekNumber": 46,
+      "count": 14,
+      "weekStart": 1700352000000,
+      "weekEnd": 1700956800000,
+      "authors": [
+        "jrasell",
+        "lgfa29",
+        "jorgemarey",
+        "philrenaud",
+        "dependabot[bot]",
+        "pkazmierczak"
+      ]
+    },
+    {
+      "weekNumber": 47,
+      "count": 55,
+      "weekStart": 1700956800000,
+      "weekEnd": 1701561600000,
+      "authors": [
+        "modrake",
+        "gulducat",
+        "lgfa29",
+        "shoenig",
+        "tgross",
+        "philrenaud",
+        "sofixa",
+        "schmichael",
+        "pkazmierczak",
+        "jrasell",
+        "hc-github-team-es-release-engineering",
+        "jorgemarey",
+        "dependabot[bot]"
+      ]
+    },
+    {
+      "weekNumber": 48,
+      "count": 47,
+      "weekStart": 1701561600000,
+      "weekEnd": 1702166400000,
+      "authors": [
+        "tgross",
+        "hc-github-team-nomad-core",
+        "sofixa",
+        "shoenig",
+        "philrenaud",
+        "gulducat",
+        "lgfa29",
+        "pkazmierczak",
+        "Juanadelacuesta",
+        "schmichael",
+        "jrasell"
+      ],
+      "milestone": {
+        "date": "2023-12-07T00:00:00.000Z",
+        "title": "Nomad 1.7",
+        "description": "Workload Identity, improved Vault integrations, and Actions",
+        "url": "https://www.hashicorp.com/en/blog/nomad-1-7-improves-vault-and-consul-integrations-adds-numa-support"
+      }
+    },
+    {
+      "weekNumber": 49,
+      "count": 34,
+      "weekStart": 1702166400000,
+      "weekEnd": 1702771200000,
+      "authors": [
+        "Sanskar531",
+        "philrenaud",
+        "tgross",
+        "mikenomitch",
+        "DavidVentura",
+        "pkazmierczak",
+        "lgfa29",
+        "mpron",
+        "jrasell",
+        "hc-github-team-nomad-core",
+        "ggriffiths",
+        "shoenig",
+        "angrycub",
+        "gulducat",
+        "t-davies"
+      ]
+    },
+    {
+      "weekNumber": 50,
+      "count": 11,
+      "weekStart": 1702771200000,
+      "weekEnd": 1703376000000,
+      "authors": [
+        "mikenomitch",
+        "pkazmierczak",
+        "philrenaud",
+        "lgfa29",
+        "dependabot[bot]",
+        "EtienneBruines"
+      ]
+    },
+    {
+      "weekNumber": 51,
+      "count": 1,
+      "weekStart": 1703376000000,
+      "weekEnd": 1703980800000,
+      "authors": [
+        "jrasell"
+      ]
+    }
+  ],
+  [
+    {
+      "weekNumber": 0,
+      "count": 30,
+      "weekStart": 1704067200000,
+      "weekEnd": 1704672000000,
+      "authors": [
+        "jrasell",
+        "marvinchin",
+        "dependabot[bot]",
+        "philrenaud",
+        "shoenig",
+        "pkazmierczak",
+        "tgross",
+        "lgfa29",
+        "mattrobenolt",
+        "hc-github-team-es-release-engineering"
+      ]
+    },
+    {
+      "weekNumber": 1,
+      "count": 29,
+      "weekStart": 1704672000000,
+      "weekEnd": 1705276800000,
+      "authors": [
+        "tgross",
+        "lgfa29",
+        "shoenig",
+        "pkazmierczak",
+        "cjobermaier",
+        "sevensolutions",
+        "eumikhailov",
+        "jrasell",
+        "dependabot[bot]",
+        "am-ak",
+        "shantanugadgil"
+      ]
+    },
+    {
+      "weekNumber": 2,
+      "count": 16,
+      "weekStart": 1705276800000,
+      "weekEnd": 1705881600000,
+      "authors": [
+        "sofixa",
+        "lgfa29",
+        "vijesh12",
+        "pkazmierczak",
+        "t-davies",
+        "jrasell",
+        "mikenomitch",
+        "hc-github-team-nomad-core",
+        "dependabot[bot]"
+      ]
+    },
+    {
+      "weekNumber": 3,
+      "count": 8,
+      "weekStart": 1705881600000,
+      "weekEnd": 1706486400000,
+      "authors": [
+        "jrasell",
+        "schmichael",
+        "pkazmierczak",
+        "lgfa29",
+        "dependabot[bot]"
+      ]
+    },
+    {
+      "weekNumber": 4,
+      "count": 12,
+      "weekStart": 1706486400000,
+      "weekEnd": 1707091200000,
+      "authors": [
+        "hc-github-team-nomad-core",
+        "tgross",
+        "dependabot[bot]",
+        "heatlikeheatwave",
+        "gulducat",
+        "shoenig",
+        "lgfa29",
+        "jrasell"
+      ]
+    },
+    {
+      "weekNumber": 5,
+      "count": 23,
+      "weekStart": 1707091200000,
+      "weekEnd": 1707696000000,
+      "authors": [
+        "lgfa29",
+        "tgross",
+        "philrenaud",
+        "hc-github-team-nomad-core",
+        "KiaraGrouwstra",
+        "Juanadelacuesta"
+      ]
+    },
+    {
+      "weekNumber": 6,
+      "count": 19,
+      "weekStart": 1707696000000,
+      "weekEnd": 1708300800000,
+      "authors": [
+        "philrenaud",
+        "tgross",
+        "jrasell",
+        "cleroux",
+        "hc-github-team-nomad-core",
+        "lgfa29",
+        "brmzkw",
+        "shoenig"
+      ]
+    },
+    {
+      "weekNumber": 7,
+      "count": 6,
+      "weekStart": 1708300800000,
+      "weekEnd": 1708905600000,
+      "authors": [
+        "sorenisanerd",
+        "lgfa29",
+        "schmichael",
+        "mikenomitch",
+        "tgross",
+        "Juanadelacuesta"
+      ]
+    },
+    {
+      "weekNumber": 8,
+      "count": 7,
+      "weekStart": 1708905600000,
+      "weekEnd": 1709510400000,
+      "authors": [
+        "sorenisanerd",
+        "shoenig",
+        "philrenaud",
+        "jrasell",
+        "boruszak"
+      ]
+    },
+    {
+      "weekNumber": 9,
+      "count": 21,
+      "weekStart": 1709510400000,
+      "weekEnd": 1710115200000,
+      "authors": [
+        "mikenomitch",
+        "shoenig",
+        "geovannyAvelar",
+        "lkysow",
+        "tgross",
+        "schmichael",
+        "c3pmark",
+        "philrenaud"
+      ]
+    },
+    {
+      "weekNumber": 10,
+      "count": 13,
+      "weekStart": 1710115200000,
+      "weekEnd": 1710720000000,
+      "authors": [
+        "mikenomitch",
+        "tgross",
+        "Juanadelacuesta",
+        "amirabbas8",
+        "shoenig",
+        "pkazmierczak",
+        "hc-github-team-nomad-core",
+        "carrychair"
+      ]
+    },
+    {
+      "weekNumber": 11,
+      "count": 23,
+      "weekStart": 1710720000000,
+      "weekEnd": 1711324800000,
+      "authors": [
+        "mikenomitch",
+        "tgross",
+        "Mongey",
+        "schmichael",
+        "pkazmierczak",
+        "shoenig",
+        "lgfa29",
+        "Juanadelacuesta",
+        "angrycub"
+      ]
+    },
+    {
+      "weekNumber": 12,
+      "count": 14,
+      "weekStart": 1711324800000,
+      "weekEnd": 1711929600000,
+      "authors": [
+        "tgross",
+        "shoenig",
+        "Juanadelacuesta",
+        "philrenaud",
+        "jrasell"
+      ]
+    },
+    {
+      "weekNumber": 13,
+      "count": 16,
+      "weekStart": 1711929600000,
+      "weekEnd": 1712534400000,
+      "authors": [
+        "tgross",
+        "gulducat",
+        "shoenig",
+        "ygersie",
+        "brmzkw",
+        "jrasell"
+      ]
+    },
+    {
+      "weekNumber": 14,
+      "count": 27,
+      "weekStart": 1712534400000,
+      "weekEnd": 1713139200000,
+      "authors": [
+        "tgross",
+        "philrenaud",
+        "gulducat",
+        "shoenig",
+        "astudentofblake",
+        "dependabot[bot]",
+        "gabivlj",
+        "jrasell"
+      ]
+    },
+    {
+      "weekNumber": 15,
+      "count": 18,
+      "weekStart": 1713139200000,
+      "weekEnd": 1713744000000,
+      "authors": [
+        "tgross",
+        "pkazmierczak",
+        "dependabot[bot]",
+        "gulducat",
+        "Juanadelacuesta",
+        "im2nguyen",
+        "philrenaud",
+        "nickwales",
+        "lgfa29"
+      ]
+    },
+    {
+      "weekNumber": 16,
+      "count": 6,
+      "weekStart": 1713744000000,
+      "weekEnd": 1714348800000,
+      "authors": [
+        "tgross",
+        "shoenig",
+        "gulducat"
+      ]
+    },
+    {
+      "weekNumber": 17,
+      "count": 12,
+      "weekStart": 1714348800000,
+      "weekEnd": 1714953600000,
+      "authors": [
+        "philrenaud",
+        "gulducat",
+        "tgross",
+        "jrasell",
+        "shoenig",
+        "schmichael",
+        "pkazmierczak"
+      ]
+    },
+    {
+      "weekNumber": 18,
+      "count": 10,
+      "weekStart": 1714953600000,
+      "weekEnd": 1715558400000,
+      "authors": [
+        "tgross",
+        "jrasell",
+        "philrenaud",
+        "pkazmierczak",
+        "shoenig",
+        "hc-github-team-nomad-core"
+      ]
+    },
+    {
+      "weekNumber": 19,
+      "count": 25,
+      "weekStart": 1715558400000,
+      "weekEnd": 1716163200000,
+      "authors": [
+        "schmichael",
+        "tgross",
+        "pkazmierczak",
+        "shoenig",
+        "optiz0r",
+        "claire-labry",
+        "dlaguerta",
+        "myszon",
+        "philrenaud",
+        "dduzgun-security",
+        "jrasell",
+        "Juanadelacuesta"
+      ]
+    },
+    {
+      "weekNumber": 20,
+      "count": 18,
+      "weekStart": 1716163200000,
+      "weekEnd": 1716768000000,
+      "authors": [
+        "tgross",
+        null,
+        "jrasell",
+        "gulducat",
+        "hc-github-team-nomad-core",
+        "pkazmierczak",
+        "philrenaud",
+        "shoenig",
+        "KeisukeYamashita",
+        "nickwales"
+      ]
+    },
+    {
+      "weekNumber": 21,
+      "count": 30,
+      "weekStart": 1716768000000,
+      "weekEnd": 1717372800000,
+      "authors": [
+        "angrycub",
+        "philrenaud",
+        "shoenig",
+        "pkazmierczak",
+        "jrasell",
+        null,
+        "schmichael",
+        "tgross",
+        "gulducat",
+        "hc-github-team-nomad-core"
+      ],
+      "milestone": {
+        "date": "2024-05-29T00:00:00.000Z",
+        "title": "Nomad 1.8",
+        "description": "Exec2 task driver, Consul integration improvements, and a new Jobs UI",
+        "url": "https://www.hashicorp.com/en/blog/nomad-1-8-adds-exec2-task-driver-support-consul-api-gateway-transparent-proxy"
+      }
+    },
+    {
+      "weekNumber": 22,
+      "count": 17,
+      "weekStart": 1717372800000,
+      "weekEnd": 1717977600000,
+      "authors": [
+        "philrenaud",
+        "shoenig",
+        "tgross",
+        "nvanthao",
+        "pkazmierczak",
+        "ghthor",
+        "angrycub",
+        "jrasell",
+        "sundbry",
+        "dependabot[bot]"
+      ]
+    },
+    {
+      "weekNumber": 23,
+      "count": 40,
+      "weekStart": 1717977600000,
+      "weekEnd": 1718582400000,
+      "authors": [
+        "philrenaud",
+        "tgross",
+        null,
+        "gulducat",
+        "pkazmierczak",
+        "lukepalmer",
+        "mmcquillan",
+        "jrasell",
+        "nicoche"
+      ]
+    },
+    {
+      "weekNumber": 24,
+      "count": 21,
+      "weekStart": 1718582400000,
+      "weekEnd": 1719187200000,
+      "authors": [
+        "liukch",
+        "heitorPB",
+        "tgross",
+        "pkazmierczak",
+        "gulducat",
+        "jrasell",
+        "hc-github-team-nomad-core",
+        "philrenaud",
+        "awanaut",
+        "dependabot[bot]"
+      ]
+    },
+    {
+      "weekNumber": 25,
+      "count": 17,
+      "weekStart": 1719187200000,
+      "weekEnd": 1719792000000,
+      "authors": [
+        "philrenaud",
+        "pkazmierczak",
+        "tgross",
+        "mmcquillan",
+        "angrycub",
+        "dependabot[bot]",
+        "Antvirf"
+      ]
+    },
+    {
+      "weekNumber": 26,
+      "count": 12,
+      "weekStart": 1719792000000,
+      "weekEnd": 1720396800000,
+      "authors": [
+        "philrenaud",
+        "dduzgun-security",
+        "tgross",
+        "pkazmierczak",
+        "jrasell",
+        "martisah",
+        "angrycub",
+        "shoenig",
+        "dependabot[bot]"
+      ]
+    },
+    {
+      "weekNumber": 27,
+      "count": 32,
+      "weekStart": 1720396800000,
+      "weekEnd": 1721001600000,
+      "authors": [
+        "guifran001",
+        "martisah",
+        "sofixa",
+        "pkazmierczak",
+        "philrenaud",
+        "dduzgun-security",
+        "gulducat",
+        "jrasell",
+        "dependabot[bot]",
+        "tgross",
+        "20sr20",
+        "boruszak",
+        "angrycub"
+      ]
+    },
+    {
+      "weekNumber": 28,
+      "count": 28,
+      "weekStart": 1721001600000,
+      "weekEnd": 1721606400000,
+      "authors": [
+        "tgross",
+        "pkazmierczak",
+        "philrenaud",
+        "dependabot[bot]",
+        "jrasell",
+        "Juanadelacuesta",
+        "gulducat",
+        "martisah",
+        "hc-github-team-nomad-core"
+      ]
+    },
+    {
+      "weekNumber": 29,
+      "count": 9,
+      "weekStart": 1721606400000,
+      "weekEnd": 1722211200000,
+      "authors": [
+        "tgross",
+        "philrenaud",
+        "jrasell",
+        "dduzgun-security",
+        "gulducat"
+      ]
+    },
+    {
+      "weekNumber": 30,
+      "count": 8,
+      "weekStart": 1722211200000,
+      "weekEnd": 1722816000000,
+      "authors": [
+        "jeanneryan",
+        "tgross",
+        "Juanadelacuesta",
+        "sofixa",
+        "sbenoistmics"
+      ]
+    },
+    {
+      "weekNumber": 31,
+      "count": 25,
+      "weekStart": 1722816000000,
+      "weekEnd": 1723420800000,
+      "authors": [
+        "tgross",
+        "VPanteleev-S7",
+        "Kartik1397",
+        "farbodahm",
+        "johncooler",
+        "gulducat",
+        "aimeeu",
+        "Juanadelacuesta",
+        "dduzgun-security",
+        "dependabot[bot]"
+      ]
+    },
+    {
+      "weekNumber": 32,
+      "count": 16,
+      "weekStart": 1723420800000,
+      "weekEnd": 1724025600000,
+      "authors": [
+        "apollo13",
+        "pkazmierczak",
+        "tgross",
+        "mvegter",
+        "martisah",
+        "shoenig",
+        "hc-github-team-nomad-core"
+      ]
+    },
+    {
+      "weekNumber": 33,
+      "count": 9,
+      "weekStart": 1724025600000,
+      "weekEnd": 1724630400000,
+      "authors": [
+        "aimeeu",
+        "gulducat",
+        "20sr20",
+        "schmichael",
+        "shoenig",
+        "philrenaud"
+      ]
+    },
+    {
+      "weekNumber": 34,
+      "count": 8,
+      "weekStart": 1724630400000,
+      "weekEnd": 1725235200000,
+      "authors": [
+        "pkazmierczak",
+        "aimeeu"
+      ]
+    },
+    {
+      "weekNumber": 35,
+      "count": 16,
+      "weekStart": 1725235200000,
+      "weekEnd": 1725840000000,
+      "authors": [
+        "philrenaud",
+        "tgross",
+        "Juanadelacuesta",
+        "gulducat",
+        "ChefAustin"
+      ]
+    },
+    {
+      "weekNumber": 36,
+      "count": 13,
+      "weekStart": 1725840000000,
+      "weekEnd": 1726444800000,
+      "authors": [
+        "philrenaud",
+        "dependabot[bot]",
+        null,
+        "pkazmierczak",
+        "tgross",
+        "Juanadelacuesta"
+      ]
+    },
+    {
+      "weekNumber": 37,
+      "count": 29,
+      "weekStart": 1726444800000,
+      "weekEnd": 1727049600000,
+      "authors": [
+        "philrenaud",
+        "tgross",
+        "shoenig",
+        "dependabot[bot]",
+        "jrasell",
+        "mismithhisler",
+        "dduzgun-security",
+        "gulducat"
+      ]
+    },
+    {
+      "weekNumber": 38,
+      "count": 30,
+      "weekStart": 1727049600000,
+      "weekEnd": 1727654400000,
+      "authors": [
+        "aimeeu",
+        "schmichael",
+        "pkazmierczak",
+        "philrenaud",
+        "tgross",
+        "hc-github-team-nomad-core",
+        "shoenig",
+        "mismithhisler",
+        "dependabot[bot]",
+        "tunzor"
+      ]
+    },
+    {
+      "weekNumber": 39,
+      "count": 33,
+      "weekStart": 1727654400000,
+      "weekEnd": 1728259200000,
+      "authors": [
+        "gulducat",
+        "hc-github-team-nomad-core",
+        "tgross",
+        "schmichael",
+        "aimeeu",
+        "jrasell",
+        "philrenaud",
+        "mvegter",
+        "ncode",
+        "shoenig",
+        "sofixa",
+        "dependabot[bot]"
+      ]
+    },
+    {
+      "weekNumber": 40,
+      "count": 12,
+      "weekStart": 1728259200000,
+      "weekEnd": 1728864000000,
+      "authors": [
+        "rodrigol-chan",
+        "hc-github-team-nomad-core",
+        "aimeeu",
+        "tgross",
+        "shoenig",
+        "gulducat",
+        "philrenaud",
+        "the-sun-will-rise-tomorrow"
+      ]
+    },
+    {
+      "weekNumber": 41,
+      "count": 29,
+      "weekStart": 1728864000000,
+      "weekEnd": 1729468800000,
+      "authors": [
+        "jrasell",
+        "raj-hegde",
+        "philrenaud",
+        "schmichael",
+        "tgross",
+        "shoenig",
+        "pkazmierczak",
+        "gulducat",
+        "aimeeu",
+        "dependabot[bot]",
+        "mismithhisler"
+      ],
+      "milestone": {
+        "date": "2024-10-15T00:00:00.000Z",
+        "title": "Nomad 1.9",
+        "description": "NVIDIA GPU support, NUMA, and Golden Job Versions",
+        "url": "https://www.hashicorp.com/en/blog/nomad-1-9-adds-nvidia-mig-support-golden-job-versions-and-more"
+      }
+    },
+    {
+      "weekNumber": 42,
+      "count": 15,
+      "weekStart": 1729468800000,
+      "weekEnd": 1730073600000,
+      "authors": [
+        "mvegter",
+        "tgross",
+        "rboyer",
+        "aimeeu",
+        "Juanadelacuesta",
+        "philrenaud",
+        "habibimustafa",
+        "hc-github-team-nomad-core"
+      ]
+    },
+    {
+      "weekNumber": 43,
+      "count": 41,
+      "weekStart": 1730073600000,
+      "weekEnd": 1730678400000,
+      "authors": [
+        "shoenig",
+        "pkazmierczak",
+        "mismithhisler",
+        "jrasell",
+        "Juanadelacuesta",
+        "zamoore",
+        "oulman",
+        "ChefAustin",
+        "aimeeu",
+        "johncooler",
+        "EtienneBruines",
+        "dependabot[bot]",
+        "finnigja"
+      ]
+    },
+    {
+      "weekNumber": 44,
+      "count": 32,
+      "weekStart": 1730678400000,
+      "weekEnd": 1731283200000,
+      "authors": [
+        "tgross",
+        "mismithhisler",
+        "pkazmierczak",
+        "Juanadelacuesta",
+        "hc-github-team-nomad-core",
+        "dependabot[bot]",
+        "jrasell",
+        "philrenaud",
+        "shoenig",
+        "gulducat",
+        "mvegter"
+      ]
+    },
+    {
+      "weekNumber": 45,
+      "count": 23,
+      "weekStart": 1731283200000,
+      "weekEnd": 1731888000000,
+      "authors": [
+        "tgross",
+        "shoenig",
+        "pkazmierczak",
+        "NicholasWilsonDEV",
+        "schmichael",
+        "jrasell",
+        "eduardolmedeiros",
+        "shantanugadgil",
+        "dependabot[bot]",
+        "kolyshkin",
+        "hc-github-team-nomad-core"
+      ]
+    },
+    {
+      "weekNumber": 46,
+      "count": 39,
+      "weekStart": 1731888000000,
+      "weekEnd": 1732492800000,
+      "authors": [
+        "tgross",
+        "gulducat",
+        "dependabot[bot]",
+        "pkazmierczak",
+        "thefallentree",
+        "Juanadelacuesta",
+        "mvegter",
+        "mmcquillan",
+        "shoenig",
+        "jrasell",
+        "philrenaud",
+        "apollo13",
+        "aimeeu",
+        "gabivlj"
+      ]
+    },
+    {
+      "weekNumber": 47,
+      "count": 7,
+      "weekStart": 1732492800000,
+      "weekEnd": 1733097600000,
+      "authors": [
+        "philrenaud",
+        "jrasell",
+        "pkazmierczak",
+        "dependabot[bot]"
+      ]
+    },
+    {
+      "weekNumber": 48,
+      "count": 28,
+      "weekStart": 1733097600000,
+      "weekEnd": 1733702400000,
+      "authors": [
+        "tgross",
+        "gulducat",
+        "pkazmierczak",
+        "jonathanweinberg",
+        "dependabot[bot]",
+        "aimeeu",
+        "mismithhisler",
+        "cjobermaier",
+        "philrenaud",
+        "tunzor"
+      ]
+    },
+    {
+      "weekNumber": 49,
+      "count": 18,
+      "weekStart": 1733702400000,
+      "weekEnd": 1734307200000,
+      "authors": [
+        "pkazmierczak",
+        "tgross",
+        "gulducat",
+        "Juanadelacuesta",
+        "dependabot[bot]",
+        "philrenaud",
+        "jrasell",
+        "judithpatudith"
+      ]
+    },
+    {
+      "weekNumber": 50,
+      "count": 34,
+      "weekStart": 1734307200000,
+      "weekEnd": 1734912000000,
+      "authors": [
+        "dependabot[bot]",
+        "jrasell",
+        "tgross",
+        "aimeeu",
+        "angrycub",
+        "pkazmierczak",
+        "gulducat",
+        "sevensolutions",
+        "dduzgun-security",
+        "philrenaud",
+        "judithpatudith"
+      ]
+    },
+    {
+      "weekNumber": 51,
+      "count": 3,
+      "weekStart": 1734912000000,
+      "weekEnd": 1735516800000,
+      "authors": [
+        "dependabot[bot]"
+      ]
+    }
+  ],
+  [
+    {
+      "weekNumber": 0,
+      "count": 18,
+      "weekStart": 1735689600000,
+      "weekEnd": 1736294400000,
+      "authors": [
+        "tgross",
+        "Juanadelacuesta",
+        "philrenaud",
+        "schmichael",
+        "pkazmierczak",
+        "jrasell",
+        "gulducat",
+        "rmainwork",
+        "dependabot[bot]",
+        "chuckyz",
+        "vincentDcmps"
+      ]
+    },
+    {
+      "weekNumber": 1,
+      "count": 29,
+      "weekStart": 1736294400000,
+      "weekEnd": 1736899200000,
+      "authors": [
+        "tgross",
+        "schmichael",
+        "hc-github-team-nomad-core",
+        "gulducat",
+        "Juanadelacuesta",
+        "aimeeu",
+        "mismithhisler",
+        "mpron",
+        "shoenig",
+        "RubenSandwich",
+        "pkazmierczak",
+        "jrasell",
+        "dependabot[bot]"
+      ]
+    },
+    {
+      "weekNumber": 2,
+      "count": 26,
+      "weekStart": 1736899200000,
+      "weekEnd": 1737504000000,
+      "authors": [
+        "tgross",
+        "pkazmierczak",
+        "Juanadelacuesta",
+        "schmichael",
+        "gulducat",
+        "jrasell",
+        "BrianMMcClain"
+      ]
+    },
+    {
+      "weekNumber": 3,
+      "count": 24,
+      "weekStart": 1737504000000,
+      "weekEnd": 1738108800000,
+      "authors": [
+        "gulducat",
+        "tgross",
+        "Juanadelacuesta",
+        "jrasell",
+        "dduzgun-security",
+        "mismithhisler",
+        "gabivlj",
+        "philrenaud",
+        "judithpatudith",
+        "shoenig"
+      ]
+    },
+    {
+      "weekNumber": 4,
+      "count": 17,
+      "weekStart": 1738108800000,
+      "weekEnd": 1738713600000,
+      "authors": [
+        "robert-c-ewing",
+        "philrenaud",
+        "mj0nez",
+        "tgross",
+        "aimeeu",
+        "jrasell",
+        "dependabot[bot]",
+        "gulducat",
+        "mkeeler",
+        "Juanadelacuesta",
+        "mismithhisler"
+      ]
+    },
+    {
+      "weekNumber": 5,
+      "count": 40,
+      "weekStart": 1738713600000,
+      "weekEnd": 1739318400000,
+      "authors": [
+        "gulducat",
+        "hc-github-team-nomad-core",
+        "pkazmierczak",
+        "mismithhisler",
+        "aimeeu",
+        "tgross",
+        "stswidwinski",
+        "Juanadelacuesta",
+        "dependabot[bot]",
+        "jrasell",
+        "salehjafarli"
+      ]
+    },
+    {
+      "weekNumber": 6,
+      "count": 21,
+      "weekStart": 1739318400000,
+      "weekEnd": 1739923200000,
+      "authors": [
+        "mismithhisler",
+        "EtienneBruines",
+        "tgross",
+        "jrasell",
+        "Juanadelacuesta",
+        "dependabot[bot]",
+        "pawelbeza",
+        "aimeeu",
+        "jorgemarey"
+      ]
+    },
+    {
+      "weekNumber": 7,
+      "count": 31,
+      "weekStart": 1739923200000,
+      "weekEnd": 1740528000000,
+      "authors": [
+        "aimeeu",
+        "philrenaud",
+        "tgross",
+        "dependabot[bot]",
+        "pkazmierczak",
+        "Juanadelacuesta",
+        "jrasell"
+      ]
+    },
+    {
+      "weekNumber": 8,
+      "count": 23,
+      "weekStart": 1740528000000,
+      "weekEnd": 1741132800000,
+      "authors": [
+        "tgross",
+        "Juanadelacuesta",
+        "aimeeu",
+        "mismithhisler",
+        "grembo",
+        "daviddl9",
+        "jrasell",
+        "pkazmierczak",
+        "dependabot[bot]"
+      ]
+    },
+    {
+      "weekNumber": 9,
+      "count": 43,
+      "weekStart": 1741132800000,
+      "weekEnd": 1741737600000,
+      "authors": [
+        "gulducat",
+        "Juanadelacuesta",
+        "tgross",
+        "jrasell",
+        "hc-github-team-nomad-core",
+        "philrenaud",
+        "dduzgun-security",
+        "rmainwork",
+        "simon1990zcs",
+        "pkazmierczak",
+        "mismithhisler"
+      ]
+    },
+    {
+      "weekNumber": 10,
+      "count": 43,
+      "weekStart": 1741737600000,
+      "weekEnd": 1742342400000,
+      "authors": [
+        "tgross",
+        "jrasell",
+        "pkazmierczak",
+        "dependabot[bot]",
+        "mismithhisler",
+        "philrenaud",
+        "Juanadelacuesta",
+        "saiakhilesh96",
+        "pawelbeza",
+        "gulducat",
+        "habibimustafa",
+        "hc-github-team-nomad-core"
+      ]
+    },
+    {
+      "weekNumber": 11,
+      "count": 47,
+      "weekStart": 1742342400000,
+      "weekEnd": 1742947200000,
+      "authors": [
+        "Crypto89",
+        "dependabot[bot]",
+        "jrasell",
+        "allisonlarson",
+        "tgross",
+        "Juanadelacuesta",
+        "aimeeu",
+        "schmichael",
+        "pkazmierczak",
+        "gulducat",
+        "mismithhisler",
+        "philrenaud",
+        "shantanugadgil"
+      ]
+    },
+    {
+      "weekNumber": 12,
+      "count": 31,
+      "weekStart": 1742947200000,
+      "weekEnd": 1743552000000,
+      "authors": [
+        "mismithhisler",
+        "dduzgun-security",
+        "jrasell",
+        "aimeeu",
+        "tgross",
+        "Juanadelacuesta",
+        "allisonlarson",
+        "Soot3",
+        "dependabot[bot]",
+        "gulducat",
+        "pkazmierczak",
+        "mvegter"
+      ]
+    },
+    {
+      "weekNumber": 13,
+      "count": 27,
+      "weekStart": 1743552000000,
+      "weekEnd": 1744156800000,
+      "authors": [
+        "hc-github-team-nomad-core",
+        "schmichael",
+        "jrasell",
+        "dependabot[bot]",
+        "gulducat",
+        "tgross",
+        "x-dvr",
+        "tehut",
+        "neliseev",
+        "philrenaud",
+        "mismithhisler"
+      ],
+      "milestone": {
+        "date": "2025-04-08T00:00:00.000Z",
+        "title": "Nomad 1.10",
+        "description": "Dynamic Host Volumes, Upgrade testing overhaul and OIDC improvements"
+      }
+    },
+    {
+      "weekNumber": 14,
+      "count": 27,
+      "weekStart": 1744156800000,
+      "weekEnd": 1744761600000,
+      "authors": [
+        "tgross",
+        "Juanadelacuesta",
+        "pkazmierczak",
+        "arianvp",
+        "jrasell",
+        "aimeeu",
+        "carlosgaldino",
+        "schmichael",
+        "Ranjandas",
+        "hc-github-team-nomad-core"
+      ]
+    },
+    {
+      "weekNumber": 15,
+      "count": 5,
+      "weekStart": 1744761600000,
+      "weekEnd": 1745366400000,
+      "authors": [
+        "jrasell",
+        "tgross",
+        "dependabot[bot]",
+        "pkazmierczak"
+      ]
+    },
+    {
+      "weekNumber": 16,
+      "count": 0,
+      "weekStart": 1745366400000,
+      "weekEnd": 1745971200000,
+      "authors": []
+    },
+    {
+      "weekNumber": 17,
+      "count": 0,
+      "weekStart": 1745971200000,
+      "weekEnd": 1746576000000,
+      "authors": []
+    },
+    {
+      "weekNumber": 18,
+      "count": 0,
+      "weekStart": 1746576000000,
+      "weekEnd": 1747180800000,
+      "authors": []
+    },
+    {
+      "weekNumber": 19,
+      "count": 0,
+      "weekStart": 1747180800000,
+      "weekEnd": 1747785600000,
+      "authors": []
+    },
+    {
+      "weekNumber": 20,
+      "count": 0,
+      "weekStart": 1747785600000,
+      "weekEnd": 1748390400000,
+      "authors": []
+    },
+    {
+      "weekNumber": 21,
+      "count": 0,
+      "weekStart": 1748390400000,
+      "weekEnd": 1748995200000,
+      "authors": []
+    },
+    {
+      "weekNumber": 22,
+      "count": 0,
+      "weekStart": 1748995200000,
+      "weekEnd": 1749600000000,
+      "authors": []
+    },
+    {
+      "weekNumber": 23,
+      "count": 0,
+      "weekStart": 1749600000000,
+      "weekEnd": 1750204800000,
+      "authors": []
+    },
+    {
+      "weekNumber": 24,
+      "count": 0,
+      "weekStart": 1750204800000,
+      "weekEnd": 1750809600000,
+      "authors": []
+    },
+    {
+      "weekNumber": 25,
+      "count": 0,
+      "weekStart": 1750809600000,
+      "weekEnd": 1751414400000,
+      "authors": []
+    },
+    {
+      "weekNumber": 26,
+      "count": 0,
+      "weekStart": 1751414400000,
+      "weekEnd": 1752019200000,
+      "authors": []
+    },
+    {
+      "weekNumber": 27,
+      "count": 0,
+      "weekStart": 1752019200000,
+      "weekEnd": 1752624000000,
+      "authors": []
+    },
+    {
+      "weekNumber": 28,
+      "count": 0,
+      "weekStart": 1752624000000,
+      "weekEnd": 1753228800000,
+      "authors": []
+    },
+    {
+      "weekNumber": 29,
+      "count": 0,
+      "weekStart": 1753228800000,
+      "weekEnd": 1753833600000,
+      "authors": []
+    },
+    {
+      "weekNumber": 30,
+      "count": 0,
+      "weekStart": 1753833600000,
+      "weekEnd": 1754438400000,
+      "authors": []
+    },
+    {
+      "weekNumber": 31,
+      "count": 0,
+      "weekStart": 1754438400000,
+      "weekEnd": 1755043200000,
+      "authors": []
+    },
+    {
+      "weekNumber": 32,
+      "count": 0,
+      "weekStart": 1755043200000,
+      "weekEnd": 1755648000000,
+      "authors": []
+    },
+    {
+      "weekNumber": 33,
+      "count": 0,
+      "weekStart": 1755648000000,
+      "weekEnd": 1756252800000,
+      "authors": []
+    },
+    {
+      "weekNumber": 34,
+      "count": 0,
+      "weekStart": 1756252800000,
+      "weekEnd": 1756857600000,
+      "authors": []
+    },
+    {
+      "weekNumber": 35,
+      "count": 0,
+      "weekStart": 1756857600000,
+      "weekEnd": 1757462400000,
+      "authors": []
+    },
+    {
+      "weekNumber": 36,
+      "count": 0,
+      "weekStart": 1757462400000,
+      "weekEnd": 1758067200000,
+      "authors": []
+    },
+    {
+      "weekNumber": 37,
+      "count": 0,
+      "weekStart": 1758067200000,
+      "weekEnd": 1758672000000,
+      "authors": []
+    },
+    {
+      "weekNumber": 38,
+      "count": 0,
+      "weekStart": 1758672000000,
+      "weekEnd": 1759276800000,
+      "authors": []
+    },
+    {
+      "weekNumber": 39,
+      "count": 0,
+      "weekStart": 1759276800000,
+      "weekEnd": 1759881600000,
+      "authors": []
+    },
+    {
+      "weekNumber": 40,
+      "count": 0,
+      "weekStart": 1759881600000,
+      "weekEnd": 1760486400000,
+      "authors": []
+    },
+    {
+      "weekNumber": 41,
+      "count": 0,
+      "weekStart": 1760486400000,
+      "weekEnd": 1761091200000,
+      "authors": []
+    },
+    {
+      "weekNumber": 42,
+      "count": 0,
+      "weekStart": 1761091200000,
+      "weekEnd": 1761696000000,
+      "authors": []
+    },
+    {
+      "weekNumber": 43,
+      "count": 0,
+      "weekStart": 1761696000000,
+      "weekEnd": 1762300800000,
+      "authors": []
+    },
+    {
+      "weekNumber": 44,
+      "count": 0,
+      "weekStart": 1762300800000,
+      "weekEnd": 1762905600000,
+      "authors": []
+    },
+    {
+      "weekNumber": 45,
+      "count": 0,
+      "weekStart": 1762905600000,
+      "weekEnd": 1763510400000,
+      "authors": []
+    },
+    {
+      "weekNumber": 46,
+      "count": 0,
+      "weekStart": 1763510400000,
+      "weekEnd": 1764115200000,
+      "authors": []
+    },
+    {
+      "weekNumber": 47,
+      "count": 0,
+      "weekStart": 1764115200000,
+      "weekEnd": 1764720000000,
+      "authors": []
+    },
+    {
+      "weekNumber": 48,
+      "count": 0,
+      "weekStart": 1764720000000,
+      "weekEnd": 1765324800000,
+      "authors": []
+    },
+    {
+      "weekNumber": 49,
+      "count": 0,
+      "weekStart": 1765324800000,
+      "weekEnd": 1765929600000,
+      "authors": []
+    },
+    {
+      "weekNumber": 50,
+      "count": 0,
+      "weekStart": 1765929600000,
+      "weekEnd": 1766534400000,
+      "authors": []
+    },
+    {
+      "weekNumber": 51,
+      "count": 0,
+      "weekStart": 1766534400000,
+      "weekEnd": 1767139200000,
+      "authors": []
+    }
+  ]
+]

@@ -7,11 +7,11 @@
   import { select } from 'd3';
   // import { scaleLinear } from 'd3';
 
-  let { height, width, domain, orientation, position } = $props();
+  let { height, width, domain, orientation, position, scale, maxTicks = 20 } = $props();
 
-  let scale = $derived(scaleLinear()
-    .domain(domain)
-    .range(orientation === 'vertical' ? [height - padding*2, 0] : [0, width - padding*2]));
+  // let scale = $derived(scaleLinear()
+  //   .domain(domain)
+  //   .range(orientation === 'vertical' ? [height - padding*2, 0] : [0, width - padding*2]));
 
   let axisElement: SVGGElement | null = $state(null);
 
@@ -21,14 +21,18 @@
     : axisBottom(scale).tickSize(10)
   );
 
-  const padding = 50;
+  const padding = 80;
+  const horizontalXAxisPadding = -padding / 4;
 
-  let atlisTransform = $derived(
+  let axisTransform = $derived(
     orientation === 'vertical'
-    ? `translate(${padding}, ${padding})`
-    : `translate(${padding}, ${height - padding})`
+    ? `translate(${padding}, 0)`
+    : `translate(${horizontalXAxisPadding}, ${height - padding})`
   );
 
+  // $effect(() => {
+  //   console.log('height as received by axis', orientation, 'is', height)
+  // })
   // let tickValues = $derived.by(() => {
   //   let tickScale = scaleLinear().domain([0, 100]).range([0, orientation === 'vertical' ? height : width]);
   //   console.log('tick scale', tickScale, tickScale.ticks(Math.max(5, Math.min(20, width / 100))));
@@ -43,8 +47,10 @@
   $effect(() => {
     let tickSpacing = (orientation === 'vertical' ? height : width) / 50;
     let minNumTicks = 1;
-    let maxNumTicks = 20;
+    // let maxNumTicks = 20;
+    let maxNumTicks = maxTicks;
     let baseTickValues = scale.ticks(Math.max(minNumTicks, Math.min(maxNumTicks, tickSpacing)));
+    // console.log('scale', orientation, scale, maxNumTicks, baseTickValues);
 
     // If the ceiling is not included (because it doesn't divide evenly with tickSpacing, say), add it
     // UNLESS it's within X of the baseTickValues[baseTickValues.length - 1], where X is some fraction of tickSpacing
@@ -59,7 +65,8 @@
     }
 
     // Don't show the 0 ticks
-    if (baseTickValues.includes(0)) {
+    // TODO: this is probably bad policy!
+    if (domain[0] === 0) {
       baseTickValues = baseTickValues.filter(tick => tick !== 0);
     }
     
@@ -70,7 +77,7 @@
   $effect(() => {
     if (axisElement) {
       select(axisElement)
-      .attr('transform', atlisTransform)
+      .attr('transform', axisTransform)
       .call(axis);
     }
   });

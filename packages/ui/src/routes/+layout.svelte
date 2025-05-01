@@ -5,16 +5,105 @@
 	import Circle from '$lib/Circle.svelte';
 	import { page } from '$app/state';
 	import * as d3 from 'd3';
+  import { goto } from '$app/navigation';
 
 	import type { LayoutProps } from './$types';
-console.log('prepping layout');
-	// Check for a ?meta=true query param
+	import { setContext, getContext } from 'svelte';
+	import { createMetadataStore } from '$lib/components/metadata.svelte'
+	let metadataStore = createMetadataStore();
+	let metadata = $derived.by(() => {
+		return metadataStore.metadata;
+	})
+	setContext('metadataStore', metadataStore);
+
+	// find by key 'author' or null
+	let authorMetadata: { key: string; value: string } | null = $derived.by(() => {
+		console.log('searching metadata for author', metadata.length, metadata[0]?.key);
+		return metadata.find(m => m.key === 'author') || null;
+	})
+
+	let topicMetadata: { key: string; value: string } | null = $derived.by(() => {
+		return metadata.find(m => m.key === 'topic') || null;
+	})
+
 	let meta: boolean = $state(false);
 	meta = page.url.searchParams.get('meta') === 'true';
-console.time('layout');
+	console.time('layout');
 	let { data, children }: LayoutProps = $props();
-	console.log('ok data from layout', data, children);
-console.timeEnd('layout');
+	// console.log('ok data from layout', data, children);
+	console.timeEnd('layout');
+
+  // #region Query Params
+  const defaultTopic = null;
+  const defaultAuthor = null;
+  const defaultMode = 'stream';
+  let topic: string | null = $state(page.url.searchParams.get('topic') || defaultTopic);
+  let author: string | null = $state(page.url.searchParams.get('author') || defaultAuthor);
+  let mode: 'stream' | 'ridgeline' = $state(page.url.searchParams.get('mode') as 'stream' | 'ridgeline' || defaultMode);
+
+  // Sync URL changes to state
+  $effect(() => {
+    // Check for author parameter changes
+    const urlAuthor = page.url.searchParams.get('author');
+    if (urlAuthor !== author) {
+      author = urlAuthor;
+      focusedAuthor = urlAuthor;
+    }
+
+    // Check for topic parameter changes
+    const urlTopic = page.url.searchParams.get('topic');
+    if (urlTopic !== topic) {
+      topic = urlTopic;
+      focusedTopic = urlTopic;
+    }
+
+    // Check for mode parameter changes
+    const urlMode = page.url.searchParams.get('mode') as 'stream' | 'ridgeline';
+    if (urlMode !== mode && (urlMode === 'stream' || urlMode === 'ridgeline')) {
+      mode = urlMode;
+    }
+  });
+
+	// set metadata from url params
+	$effect(() => {
+		if (author) {
+			console.log('setting author metadata', author);
+			metadataStore.set([{key: "author", value: author}]);
+		}
+		if (topic) {
+			metadataStore.set([{key: "topic", value: topic}]);
+		}
+	})
+
+  // Clean up URL parameters when values are null
+  $effect(() => {
+    let needsUpdate = false;
+    
+    // Remove topic param if it's the default
+    if (!topic && page.url.searchParams.has('topic')) {
+      page.url.searchParams.delete('topic');
+      needsUpdate = true;
+    }
+    
+    // Remove author param if it's the default
+    if (!author && page.url.searchParams.has('author')) {
+      page.url.searchParams.delete('author');
+      needsUpdate = true;
+    }
+    
+    // Remove mode param if it's the default
+    if (mode === defaultMode && page.url.searchParams.has('mode')) {
+      page.url.searchParams.delete('mode');
+      needsUpdate = true;
+    }
+    
+    // Update URL if needed
+    if (needsUpdate) {
+      goto(`?${page.url.searchParams.toString()}`, { replaceState: true, keepFocus: true });
+    }
+  });
+  // #endregion Query Params
+	
 	function pathToPoints(
 		pathElement: SVGPathElement,
 		numPoints: number = 32,
@@ -49,7 +138,8 @@ console.timeEnd('layout');
 	let width = $state(500);
 	let height = $state(500);
 
-	let numberOfCircles = $state(1000);
+	let numberOfCircles = $state(200);
+	const NODE_DELAY = 10;
 	// TODO: numberOfCircles, and circleSize, should be derived from mobile v desktop
 	let minWidth = 2;
 	// let circleSize = $derived.by(() => Math.max(minWidth, width / numberOfCircles / 2));
@@ -63,50 +153,30 @@ console.timeEnd('layout');
 	const nomadGreenScale = d3
 		.scaleLinear()
 		.domain([0, 1])
-		.range([d3.hsl(nomadGreen).darker(0.5), d3.hsl(nomadGreen).brighter(0.5)]);
+		.range([d3.hsl(nomadGreen).darker(0.2), d3.hsl(nomadGreen).brighter(0.2)]);
 
 	const borderColor = 'rgba(0,0,0,0.3)';
-	const borderWidth = 0.5;
+	// const borderWidth = 0.5;
+	const borderWidth = 0.05;
 
 	let canvasContext: CanvasRenderingContext2D | null = $state(null);
 
-  const gooeyFilter = () => {
-    const svg = `<svg xmlns="http://www.w3.org/2000/svg">
+	const gooeyFilter = () => {
+		const svg = `<svg xmlns="http://www.w3.org/2000/svg">
     <filter id="gooey">
       <feGaussianBlur in="SourceGraphic" stdDeviation="8" color-interpolation-filters="sRGB" result="blur" />
-      <feColorMatrix class="blurValues" in="blur" mode="matrix" values=".2 0 0 0 0  0 .2 0 0 0  0 0 .2 0 0  0 0 0 17 -5" result="goo" />
+      <feColorMatrix class="blurValues" in="blur" mode="matrix" values=".5 0 0 0 0  0 .5 0 0 0  0 0 .5 0 0  0 0 0 17 -5" result="goo" />
 			<feBlend in2="goo" in="SourceGraphic" result="mix" />
     </filter>
   </svg>`;
-	// <feComposite in="SourceGraphic" in2="goo" operator="xor" result="comp" />
-	// <feBlend in="comp" in2="SourceGraphic" mode="multiply" result="mix" />
+		// <feComposite in="SourceGraphic" in2="goo" operator="xor" result="comp" />
+		// <feBlend in="comp" in2="SourceGraphic" mode="multiply" result="mix" />
 
-
-    const blob = new Blob([svg], { type: 'image/svg+xml' });
-    const url = URL.createObjectURL(blob);
-    const filter = `url('${url}#gooey')`;
-    return filter;
-  }
-
-
-	function onpointermove(e: PointerEvent) {
-		canvasContext?.clearRect(0, 0, width, height);
-		mouseX = e.pageX;
-		mouseY = e.pageY;
-		localCircles[0] = {
-			...circles[0],
-			x: mouseX,
-			y: mouseY
-		};
-
-		// Generally follow the mouse, lightly.
-		if (simulation && !titleHovered) {
-			simulation.force(
-				'mouse',
-				d3.forceRadial(100, mouseX, mouseY).strength((d, i) => (i ? 0.02 : 0))
-			);
-		}
-	}
+		const blob = new Blob([svg], { type: 'image/svg+xml' });
+		const url = URL.createObjectURL(blob);
+		const filter = `url('${url}#gooey')`;
+		return filter;
+	};
 
 	let radius = $derived.by(() => d3.randomUniform(circleSize, circleSize * 4)); // TODO: this is plainly not being observed anymore
 	let simulation: d3.Simulation = $state(null);
@@ -114,23 +184,21 @@ console.timeEnd('layout');
 
 	let localCircles: any[] = [];
 
+	const ANIMATION_DELAY = 1000;
+
 	function initializeCircles() {
-		let nodes = Array.from({ length: numberOfCircles }).map((_, i) => ({
-			r: i ? radius() : minWidth * 10,
-			x: width / 2,
-			y: height / 2,
-			color: nomadGreenScale(Math.random()),
-			borderColor,
-			borderWidth,
-			// color: '#00ca8e',
-			// color: d3.color(nomadGreenScale(Math.random()))?.formatRgb()
-			// .replace('rgb', 'rgba')
-			// .replace(')', ', 0.6)'),
-		}));
+  let nodes = Array.from({ length: numberOfCircles }).map((_, i) => ({
+    r: radius(),
+    x: Math.random() * width,
+    y: -500 + Math.random() * 500, // Start off-screen
+    color: nomadGreenScale(Math.random()),
+    borderColor,
+    borderWidth
+  }));
 
-		localCircles = [...nodes];
-	}
-
+  localCircles = [...nodes];
+}
+	
 	let letterN: SVGPathElement | null = null;
 	let nBounds: DOMRect | null = $state(null);
 	let letterO: SVGPathElement | null = null;
@@ -155,7 +223,7 @@ console.timeEnd('layout');
 		}
 	});
 
-	const buffer = 10;
+	const buffer = 5;
 	const nLeft = $derived(nBounds?.left + nBounds?.width * 0.65 + buffer);
 	const nRight = $derived(nBounds?.right - buffer);
 	const nTop = $derived(nBounds?.top + buffer);
@@ -166,20 +234,20 @@ console.timeEnd('layout');
 	const oTop = $derived(oBounds?.top);
 	const oBottom = $derived(oBounds?.bottom);
 
-  let cachedNPoints = [];
-  let cachedOPoints = [];
+	let cachedNPoints = $state<{x: number, y: number}[]>([]);
+	let cachedOPoints = $state<{x: number, y: number}[]>([]);
 
-  $effect(() => {
-    if (letterN && letterO) {
-      cachedNPoints = letterNPoints;
-      cachedOPoints = letterOPoints;
-    }
-  });
+	$effect(() => {
+		if (letterN && letterO) {
+			cachedNPoints = letterNPoints;
+			cachedOPoints = letterOPoints;
+		}
+	});
 
 	// TODO: Resizeobserver was kind enough to let me know it was going really slowly, so I need to do a little perfy debouncing on letterNPoints and letterOPoints.
 
 	const letterNPoints = $derived.by(() => {
-    // console.log('---letterNPoints Calc');
+		// console.log('---letterNPoints Calc');
 		return Array.from({ length: numberOfCircles }).map((_, i) => {
 			return {
 				x: Math.random() * (nRight - nLeft) + nLeft,
@@ -189,7 +257,7 @@ console.timeEnd('layout');
 	});
 
 	const letterOPoints = $derived.by(() => {
-    // console.log('---letterOPoints Calc');
+		// console.log('---letterOPoints Calc');
 		if (!letterO || !oBounds) return [];
 
 		// Find the inner path start point using some real dark magic
@@ -208,306 +276,357 @@ console.timeEnd('layout');
 		const outerPoints = pathToPoints(letterO, 32, 0, innerStartIndex);
 		const innerPoints = pathToPoints(letterO, 32, innerStartIndex, length);
 
-    // console.time('randomPoints');
-    const randomPoints = [];
-    while (randomPoints.length < numberOfCircles) {
-      const x = Math.random() * (oRight - oLeft) + oLeft;
-      const y = Math.random() * (oBottom - oTop) + oTop;
+		// console.time('randomPoints');
+		const randomPoints = [];
+		while (randomPoints.length < numberOfCircles) {
+			const x = Math.random() * (oRight - oLeft) + oLeft;
+			const y = Math.random() * (oBottom - oTop) + oTop;
 
-      // Add 5px buffer by checking if point is at least 5px away from inner path
-      let buffer = 10;
-      if (d3.polygonContains(outerPoints, [x+buffer, y]) &&
-          d3.polygonContains(outerPoints, [x-buffer, y]) &&
-          d3.polygonContains(outerPoints, [x, y+buffer]) &&
-          d3.polygonContains(outerPoints, [x, y-buffer]) &&
-          !d3.polygonContains(innerPoints, [x+buffer, y]) && 
-          !d3.polygonContains(innerPoints, [x-buffer, y]) &&
-          !d3.polygonContains(innerPoints, [x, y+buffer]) &&
-          !d3.polygonContains(innerPoints, [x, y-buffer])) {
-        randomPoints.push({ x, y });
-      }
-    }
-
-    // console.timeEnd('randomPoints');
-    return randomPoints;
-	});
-
-  // $inspect(letterNPoints);
-  // $inspect(letterOPoints);
-
-	function ticked() {
-		circles = [...localCircles];
-	}
-
-	let repulsion = $state(2);
-
-	function appendCircles(circles) {
-		circles.forEach((c) => {
-			localCircles.push(c);
-		});
-		circles = [...localCircles];
-	}
-
-	let performanceIterations = $derived.by(() => {
-		return Math.round(d3.scaleLinear().domain([2000, 5000]).range([3, 1])(numberOfCircles));
-	});
-
-	// When height/width change, re-centre the graph
-
-	let centeringStrength = $state(0.005);
-	$effect(() => {
-		if (!simulation) return;
-		simulation.force(
-			'x',
-			d3.forceX(width / 2).strength((d, i) => (!i || d.isBoundary ? 0 : centeringStrength))
-		);
-		simulation.force(
-			'y',
-			d3.forceY(height / 2).strength((d, i) => (!i || d.isBoundary ? 0 : centeringStrength))
-		);
-	});
-
-	function simulate(props: {alpha?: number} = {}) {
-		let alpha = props.alpha || 0.1;
-		if (localCircles.length !== numberOfCircles) {
-			// Remove or add circles according to the difference
-			if (localCircles.length && localCircles.length < numberOfCircles) {
-				const newCircles = Array.from({ length: numberOfCircles - localCircles.length }).map(
-					(_, i) => ({
-						r: radius(),
-						x: width / 2,
-						y: height / 2,
-						color: nomadGreenScale(Math.random()),
-						borderColor,
-						borderWidth,
-						// color: '#00ca8e',
-					})
-				);
-				appendCircles(newCircles);
-			} else {
-				localCircles = localCircles.slice(0, numberOfCircles);
+			// Add 5px buffer by checking if point is at least 5px away from inner path
+			// let buffer = 10;
+			if (
+				d3.polygonContains(outerPoints, [x + buffer, y]) &&
+				d3.polygonContains(outerPoints, [x - buffer, y]) &&
+				d3.polygonContains(outerPoints, [x, y + buffer]) &&
+				d3.polygonContains(outerPoints, [x, y - buffer]) &&
+				!d3.polygonContains(innerPoints, [x + buffer, y]) &&
+				!d3.polygonContains(innerPoints, [x - buffer, y]) &&
+				!d3.polygonContains(innerPoints, [x, y + buffer]) &&
+				!d3.polygonContains(innerPoints, [x, y - buffer])
+			) {
+				randomPoints.push({ x, y });
 			}
 		}
+
+		// console.timeEnd('randomPoints');
+		return randomPoints;
+	});
+
+	function startSimpleSimulation() {
+		// Stop any existing simulation
 		if (simulation) simulation.stop();
+		
+		// Create a simple initial simulation
 		simulation = d3
 			.forceSimulation(localCircles)
-			.alpha(alpha)
-			.alphaTarget(0.3)
-			.velocityDecay(0.1)
-			.force(
-				'x',
-				d3.forceX(width / 2).strength((d, i) => (!i || d.isBoundary ? 0 : centeringStrength))
-			)
-			.force(
-				'y',
-				d3.forceY(height / 2).strength((d, i) => (!i || d.isBoundary ? 0 : centeringStrength))
-			)
-			.force(
-				'collide',
-				d3
-					.forceCollide()
-					.radius((d) => (d.isBoundary ? d.r + repulsion * 5 : d.r + repulsion))
-					.iterations(performanceIterations)
-					.strength(1)
-			)
-			// .force('boundaryRepulsion', d3.forceManyBody().strength((d, i) => (!d.isBoundary ? -200 * repulsion : 0)))
-			.force(
-				'mouseRepulsion',
-				d3.forceManyBody().strength((d, i) => (i ? 0 : -200 * repulsion))
-			)
+			.alpha(0.3)
+			.alphaDecay(0.01)
+			.force('collide', d3.forceCollide().radius(d => d.r + 0.2).iterations(2))
 			.on('tick', () => {
-				ticked();
+				circles = [...localCircles];
+			});
+
+		// Start timer to transition to letter shapes
+		setTimeout(() => {
+			moveCirclesToLetters();
+		}, ANIMATION_DELAY);
+	}
+
+	function moveCirclesToLetters() {
+		console.log('moving circles to letters');
+		if (!cachedNPoints.length || !cachedOPoints.length) return;
+		
+		// Stop the simulation during transition
+		simulation.stop();
+		
+		const oCircleThreshold = 0.3;
+		
+		// For each circle, transition to its letter position
+		localCircles.forEach((c, i) => {
+			// First interrupt any ongoing transitions
+			d3.select(c).interrupt();
+			
+			// Determine target position
+			let targetPoint;
+			if (i < numberOfCircles * oCircleThreshold) {
+				targetPoint = cachedNPoints[i];
+			} else {
+				targetPoint = cachedOPoints[i - Math.floor(numberOfCircles * oCircleThreshold)];
+			}
+			
+			if (!targetPoint) return;
+			
+			// Create transition with staggered delay
+			d3.select(c)
+				.transition()
+				.delay(i * NODE_DELAY)
+				.duration(1000)
+				.ease(d3.easeCubicOut)
+				.tween('position', () => {
+					const startX = c.x;
+					const startY = c.y;
+					
+					return (t) => {
+						c.x = startX + (targetPoint.x - startX) * t;
+						c.y = startY + (targetPoint.y - startY) * t;
+						circles = [...localCircles]; 
+					};
+				});
+		});
+		
+		// Set up animation loop to continuously update circles during transition
+		const updateCircles = () => {
+			circles = [...localCircles];
+		};
+		
+		// Start the animation loop
+		updateCircles();
+		
+		// After all transitions complete, stop the animation loop and start final simulation
+		setTimeout(() => {
+			startFinalSimulation();
+		}, numberOfCircles * NODE_DELAY + 1100); // Slightly longer than the longest transition
+	}
+
+	function startFinalSimulation() {
+		// Very light simulation to maintain letter shape
+		simulation = d3
+			.forceSimulation(localCircles)
+			.alpha(0.1)
+			.alphaDecay(0.02)
+			.velocityDecay(0.8)
+			.force('collide', d3.forceCollide().radius(d => d.r * 0.3).iterations(2))
+			.on('tick', () => {
+				circles = [...localCircles];
 			});
 	}
 
 	onMount(() => {
-		initializeCircles();
-		simulate();
+		if (width > 1000) {
+			initializeCircles();
+			if (canvasContext?.canvas) {
+				canvasContext.canvas.style.filter = gooeyFilter();
+			}
+			// Wait for letter elements to be available
+			const checkLetters = setInterval(() => {
+				if (letterN && letterO) {
+					clearInterval(checkLetters);
+					nBounds = letterN.getBoundingClientRect();
+					oBounds = letterO.getBoundingClientRect();
+					cachedNPoints = letterNPoints;
+					cachedOPoints = letterOPoints;
+					console.log('cachedOPoints', cachedOPoints);
+					startSimpleSimulation();
+				}
+			}, 100);
+		}
 	});
 
 	onDestroy(() => {
 		if (simulation) simulation.stop();
 	});
 
-	// #region title interaction
+	// #region sidebar
+	const TOPICS = [
+		'docs',
+		'consul',
+		'node',
+		'docker',
+		'tests',
+		'api',
+		'ui',
+		'cli',
+		'csi',
+		'connect',
+		'rpc',
+		'token',
+		'namespace',
+		'scheduler',
+		'volumes',
+		'master',
+		'grpc',
+		'memory',
+		'identity',
+		'raft',
+		'windows',
+		'variables',
+		'panic',
+		'policies',
+		'fingerprint',
+		'ember',
+		'go',
+		'auth',
+		'region',
+		'vault',
+		'actions',
+		'tls',
+		'e2e',
+		'fs',
+		'dependency',
+		'preemption',
+		'vagrant',
+		'hcl2',
+		'quota',
+		'disconnected'
+	];
 
-	const hoveredProps = {
-		alpha: 0.001,
-		velocityDecay: 0.95,
-		alphaTarget: 0.01
-		// force: d3.forceY(100).strength((_,i) => !i ? 0 : 10),
-		// force2: d3.forceX(200).strength((_,i) => !i ? 0 : 10),
-	};
-
-	const unhoveredProps = {
-		alpha: 0.1,
-		velocityDecay: 0.9,
-		alphaTarget: 0.1
-	};
-
-	let titleHovered = $state(false);
-
-	function hoverTitle(e: PointerEvent) {
-		titleHovered = true;
-		if (canvasContext?.canvas) canvasContext.canvas.style.filter = gooeyFilter();
-		simulation
-			.alpha(hoveredProps.alpha)
-			.alphaTarget(hoveredProps.alphaTarget)
-			.velocityDecay(hoveredProps.velocityDecay)
-			.force('x', null)
-			.force('y', null)
-			.force('collide', null)
-			.force('mouseRepulsion', null)
-			// .force('toTarget', d3.forceRadial(0, 0, 0).strength(0)); // placeholder, will tween in a sec
-		// remove mouseRepulsion
-		// .force('mouseRepulsion', null)
-		// .force('boundingForce', hoveredProps.boundingForce(simulation))
-		// .force('coverTitle', hoveredProps.force)
-		// .force('coverTitle2', hoveredProps.force2)
-
-    const oCircleThreshold = 0.3;
-
-		localCircles.forEach((c, i) => {
-      d3.select(c).interrupt();
-      let targetPoint;
-      if (i < numberOfCircles * oCircleThreshold) {
-        targetPoint = cachedNPoints[i];
-      } else {
-        targetPoint = cachedOPoints[i];
-      }
-			if (!targetPoint) return; // in case I screw up my math (likely)
-			d3.select(c)
-				.transition()
-				.duration(i * 1 + 1250)
-				.ease(d3.easeElastic)
-				.tween('position', () => {
-					const startPoint = {
-						x: c.x,
-						y: c.y
-					};
-
-					// console.log(i, 'SP TP', startPoint, targetPoint);
-
-					return (t: number) => {
-            // If no longer hovering, break.
-            if (!titleHovered) return;
-						c.x = startPoint.x + (targetPoint.x - startPoint.x) * t;
-						c.y = startPoint.y + (targetPoint.y - startPoint.y) * t;
-						// c.r = 1;
-					};
-				});
-
-      // c.x = targetPoint.x;
-      // c.y = targetPoint.y;
-
-			// c.r = 0;
-			// d3.select(c)
-		});
-		simulation.alpha(0.1).restart();
+	// Define Focus interface and export it
+	interface Focus {
+		type?: 'topic' | 'author';
+		query?: string;
 	}
 
-	function unhoverTitle(e: PointerEvent) {
-		console.log('unhoverTitle', e);
-		titleHovered = false;
-		if (canvasContext?.canvas) canvasContext.canvas.style.filter = '';
-    d3.selectAll('circle').interrupt();
-		simulate();
+	let highlightedTopic: string | null = $state(null);
+	let highlightedAuthor: string | null = $state(null);
+	let focusedTopic: string | null = $state(topic);
+	let focusedAuthor: string | null = $state(author);
+
+	// Calculate the current focus based on highlighted and focused states
+	let currentFocus: Focus = $state({});
+
+	$effect(() => {
+		// Priority: highlight (hover) takes precedence over focus (clicked/URL)
+		if (highlightedAuthor) {
+			currentFocus = {
+				type: 'author',
+				query: highlightedAuthor
+			};
+		} else if (highlightedTopic) {
+			currentFocus = {
+				type: 'topic',
+				query: highlightedTopic
+			};
+		} else if (focusedAuthor) {
+			currentFocus = {
+				type: 'author',
+				query: focusedAuthor
+			};
+		} else if (focusedTopic) {
+			currentFocus = {
+				type: 'topic',
+				query: focusedTopic
+			};
+		} else {
+			currentFocus = {};
+		}
+	});
+
+	// Set context for all the focus states
+	setContext('focus', () => currentFocus);
+	setContext('focusedTopic', () => focusedTopic);
+	setContext('focusedAuthor', () => focusedAuthor);
+	setContext('highlightedTopic', () => highlightedTopic);
+	setContext('highlightedAuthor', () => highlightedAuthor);
+	setContext('streamMode', () => mode);
+
+	let contributors = $state(data.contributors);
+	// let authors = $derived.by(() => {
+	// 	// console.log('contributors', contributors);
+	// 	return contributors.map((c) => {
+	// 		return {
+	// 			avatar: c.author.avatar_url,
+	// 			name: c.author.login
+	// 		};
+	// 	});
+	// });
+
+	// function setFocus({ type, query }: { type: 'topic' | 'author'; query: string }) {
+	// 	console.log('setting focus from layout to', type, query);
+	// 	focusedData = { type, query };
+	// 	// goto(`?${type}=${query}`, { keepFocus: true });
+	// 	page.url.searchParams.set(type, query);
+	// 	goto(`?${page.url.searchParams.toString()}`, { keepFocus: true });
+
+	// 	// console.log('existing query on setFocus is', query);
+	// }
+
+	function focusTopic(newTopic: string | null) {
+		if (newTopic === focusedTopic) return;
+		
+		focusedTopic = newTopic;
+		topic = newTopic;
+		
+		if (newTopic) {
+			// Clear any author focus when setting topic
+			focusedAuthor = null;
+			author = null;
+			
+			// Update URL
+			page.url.searchParams.set('topic', newTopic);
+			if (page.url.searchParams.has('author')) {
+				page.url.searchParams.delete('author');
+			}
+		} else {
+			// Clear topic from URL
+			page.url.searchParams.delete('topic');
+		}
+		
+		goto(`?${page.url.searchParams.toString()}`, { keepFocus: true });
 	}
-	// $inspect({titleHovered});
-	// #endregion title interaction
 
-  //#region hover data source
+	function focusAuthor(newAuthor: string | null) {
+		if (newAuthor === focusedAuthor) return;
+		
+		focusedAuthor = newAuthor;
+		author = newAuthor;
+		
+		if (newAuthor) {
+			// Clear any topic focus when setting author
+			focusedTopic = null;
+			topic = null;
+			
+			// Update URL
+			page.url.searchParams.set('author', newAuthor);
+			if (page.url.searchParams.has('topic')) {
+				page.url.searchParams.delete('topic');
+			}
+		} else {
+			// Clear author from URL
+			page.url.searchParams.delete('author');
+		}
+		
+		goto(`?${page.url.searchParams.toString()}`, { keepFocus: true });
+	}
 
-  const dataHoveredProps = {
-		alpha: 0.1,
-		velocityDecay: 0.4,
-		alphaTarget: 0.2
-  }
-  function hoverDataSource(e: PointerEvent) {
-    console.log('hoverDataSource', e);
-		if (canvasContext?.canvas) canvasContext.canvas.style.filter = gooeyFilter();
-    const midPoint = [e.target.getBoundingClientRect().left + e.target.getBoundingClientRect().width / 2, e.target.getBoundingClientRect().top + e.target.getBoundingClientRect().height / 2];
-    console.log('midPoint', midPoint);
-    // Strongly attract all nodes to the srcElement's position
+	function highlightTopic(newTopic: string | null) {
+		highlightedTopic = newTopic;
+		
+		if (newTopic) {
+			// Clear any author highlight when setting topic highlight
+			highlightedAuthor = null;
+		}
+	}
 
-    // Chop off half the circles
-    localCircles = localCircles.slice(0, numberOfCircles / 10);
-    // localCircles.slice(numberOfCircles / 5, numberOfCircles).forEach((c) => {
-    //   c.r = 0;
-    // });
-    simulation
-      .alpha(dataHoveredProps.alpha)
-			.alphaTarget(dataHoveredProps.alphaTarget)
-			.velocityDecay(dataHoveredProps.velocityDecay)
-      .force('x', null)
-      .force('y', null)
-      // .force('collide', null)
-			// .force(
-			// 	'collide',
-			// 	d3
-			// 		.forceCollide()
-			// 		.radius(1.5)
-			// 		.iterations(performanceIterations)
-			// 		.strength(0.5)
-			// )
-      // .force('mouseRepulsion', null)
-      // .force('data', d3.forceRadial(20, midPoint[0], midPoint[1]).strength(0.9))
-      .force('dataX', d3.forceX(midPoint[0]).strength(1))
-      .force('dataY', d3.forceY(midPoint[1]).strength(2));
-      // .force('dataX', d3.forceX(e.clientX).strength(0.5))
-      // .force('dataY', d3.forceY(e.clientY).strength(0.5));
+	function highlightAuthor(newAuthor: string | null) {
+		highlightedAuthor = newAuthor;
+		
+		if (newAuthor) {
+			// Clear any topic highlight when setting author highlight
+			highlightedTopic = null;
+		}
+	}
 
-    simulation.force('collide').strength(0.2);
-    // simulation.force('mouseRepulsion').strength(-1)
-    simulation
-    // .alpha(0.001)
-    // .velocityDecay(0.01)
-    // .alphaTarget(0.001)
-    .force(
-				'mouseRepulsion',
-				d3.forceManyBody().strength((d, i) => (i ? -10 : -1 * repulsion))
-			)
+	let associatedAuthors = $derived.by(() => {
+		let filtered = contributors.filter(c => c.author.terms.map(t => t.term).includes(highlightedTopic)).map(c => c.author.login);
+		// console.log('filtered', filtered);
+		return filtered;
+	});
+	
+	let associatedTopics = $derived.by(() => {
+		let author = contributors.find(c => c.author.login === highlightedAuthor);
+		let filtered = TOPICS.filter(t => author?.author.terms.map(t => t.term).includes(t));
+		// console.log('filtered', filtered);
+		return filtered;
+	});
 
-    
-    // localCircles.forEach((c) => {
-      // c.r = 1;
-      // c.color = '#00ca8e';
-    // });
+	function setStreamMode(vizType) {
+		page.url.searchParams.set('mode', vizType);
+		goto(`?${page.url.searchParams.toString()}`, { replaceState: false, keepFocus: true });
+		mode = 'ridgeline';
+	}
 
-    // localCircles.forEach((c, i) => {
-    //   d3.select(c).interrupt();
-    //   d3.select(c)
-    //     .transition()
-    //     .duration(50)
-    //     .ease(d3.easeCubicInOut)
-    //     .tween('r', () => {
-    //       const startR = c.r;
-    //       const endR = 0.5;
-    //       return (t: number) => {
-    //         c.r = startR + (endR - startR) * t;
-    //       };
-    //     });
-    // });
+	let sidebarOpen = $state(false);
 
-  }
-  function unhoverDataSource(e: PointerEvent) {
-    console.log('unhoverDataSource', e);
-		if (canvasContext?.canvas) canvasContext.canvas.style.filter = '';
-    simulation.alpha(0.1);
-    localCircles.slice(1).forEach((c) => {
-      c.r = radius();
-    });
-    simulate({alpha: 0.5});
-  }
-  //#endregion hover data source
+	// #endregion sidebar
 </script>
 
-<svelte:window bind:innerHeight={height} bind:innerWidth={width} {onpointermove} />
+<svelte:window bind:innerHeight={height} bind:innerWidth={width} />
+
 <svelte:head>
 	<title>NOMAD@10</title>
 </svelte:head>
 
-<Canvas {width} {height} bind:ctx={canvasContext}>
+<Canvas id="backgrounder" {width} {height} bind:ctx={canvasContext}>
 	{#each circles as circle}
 		<Circle midPoint={[circle.x, circle.y]} radius={circle.r} color={circle.color} borderColor={circle.borderColor} borderWidth={circle.borderWidth} />
 	{/each}
@@ -517,75 +636,426 @@ console.timeEnd('layout');
 	<header>
 		<h1
 			aria-label="Nomad"
-			onmouseover={hoverTitle}
-			onmouseout={unhoverTitle}
-			onfocus={hoverTitle}
-			onblur={unhoverTitle}
-			class:hovered={titleHovered}
 		>
-      <a href="/" aria-label="Nomad">
-        <svg viewBox="24 79 1759 443" xmlns="http://www.w3.org/2000/svg">
-          <path
-            bind:this={letterN}
-            class="letter-n"
-            d="M205.8,498.59l-67.8-153c-2.4-6-7.2-4.2-7.2,1.8l2.4,145.8c0,11.4-6,16.8-16.8,16.8H40.8c-10.8,0-16.8-6-16.8-16.8V106.79c0-10.8,6-16.8,16.8-16.8h84c9.6,0,15.6,4.2,19.2,12.6l66,153c2.4,6,7.2,4.8,7.2-1.2V106.79c0-10.8,6-16.8,16.8-16.8h75.6c10.8,0,16.8,5.4,16.8,16.8l-.6,387c0,11.4-6,16.8-16.8,16.8l-84,.6c-9.6,0-15.6-3.6-19.2-12.6Z"
-          />
-          <path
-            bind:this={letterO}
-            class="letter-o"
-            d="M375.6,410.99c-1.2-11.4-1.2-40.2-1.2-39v-143.4c0,1.2,0-27.6,1.2-39,2.4-14.4-.6-110.4,139.8-110.4s139.2,100.8,140.4,110.4c1.2,13.2,1.2,39,1.2,37.8v145.8c0-1.2,0,24.6-1.2,37.8-1.2,9.6,1.2,110.4-140.4,110.4s-137.4-96-139.8-110.4ZM514.8,422.39c28.8-.6,28.8-26.4,28.8-26.4v-191.4s0-26.4-28.8-26.4c-25.8,0-27,26.4-27,26.4v191.4s1.2,27,27,26.4Z"
-          />
-          <path
-            class="letter-m"
-            d="M721.8,89.99h90.6c9.6,0,15.6,4.8,19.2,13.2l51.6,123c1.8,4.8,6.6,4.8,8.4,0l51.6-123c3.6-8.4,9.6-13.2,19.2-13.2h90.6c10.8,0,16.8,6,16.8,16.8v386.4c0,10.8-6,16.8-16.8,16.8h-76.8c-10.8,0-16.8-6-16.8-16.8v-157.2c0-5.4-4.8-6.6-6.6-1.2l-25.2,65.4c-3.6,9-10.2,13.2-19.8,13.2h-40.8c-9.6,0-16.2-4.2-19.8-13.2l-25.2-65.4c-1.8-5.4-6.6-4.2-6.6,1.2v157.2c0,10.8-6,16.8-16.8,16.8h-76.8c-10.8,0-16.8-6-16.8-16.8V106.79c0-10.8,6-16.8,16.8-16.8Z"
-          />
-          <path
-            class="letter-a"
-            d="M1111.19,491.39l105.6-387c2.4-9.6,9.6-14.4,19.2-14.4h96.6c9.6,0,16.8,4.8,19.2,14.4l105.6,387c3,12-2.4,18.6-14.4,18.6h-76.2c-9.6,0-15.6-4.8-18.6-13.8l-7.2-25.2c-1.2-3-3.6-4.8-7.2-4.8h-99c-3.6,0-6,1.8-7.2,4.8l-7.2,25.2c-3,9-9,13.8-18.6,13.8h-76.2c-12,0-17.4-6.6-14.4-18.6ZM1258.19,367.79h51.6c4.2,0,6.6-2.4,5.4-6.6l-28.2-106.8c-1.2-5.4-6-6-7.2,0l-26.4,106.8c-1.2,4.2.6,6.6,4.8,6.6Z"
-          />
-          <path
-            bind:this={letterD}
-            class="letter-d"
-            d="M1498.79,106.79c0-10.8,6-16.8,16.8-16.8h123.6c142.8,0,141.6,94.8,142.2,104.4.6,13.2,1.2,42.6,1.2,43.8v123.6c0,1.2.6,24.6-1.2,37.8-1.2,9.6,1.2,110.4-142.2,110.4h-140.4c.6,0,0-324.6,0-403.2ZM1642.19,409.79c28.8-.6,28.8-25.2,28.8-25.2v-169.2s0-25.2-28.8-25.8h-24c-3.6,0-6,2.4-6,6v214.2c0,1.2,12.6,0,30,0Z"
-          />
-        </svg>
-      </a>
+			<a href="/" aria-label="Nomad">
+				<svg viewBox="24 79 1759 443" xmlns="http://www.w3.org/2000/svg">
+					<path
+						bind:this={letterN}
+						class="letter-n"
+						d="M205.8,498.59l-67.8-153c-2.4-6-7.2-4.2-7.2,1.8l2.4,145.8c0,11.4-6,16.8-16.8,16.8H40.8c-10.8,0-16.8-6-16.8-16.8V106.79c0-10.8,6-16.8,16.8-16.8h84c9.6,0,15.6,4.2,19.2,12.6l66,153c2.4,6,7.2,4.8,7.2-1.2V106.79c0-10.8,6-16.8,16.8-16.8h75.6c10.8,0,16.8,5.4,16.8,16.8l-.6,387c0,11.4-6,16.8-16.8,16.8l-84,.6c-9.6,0-15.6-3.6-19.2-12.6Z"
+					/>
+					<path
+						bind:this={letterO}
+						class="letter-o"
+						d="M375.6,410.99c-1.2-11.4-1.2-40.2-1.2-39v-143.4c0,1.2,0-27.6,1.2-39,2.4-14.4-.6-110.4,139.8-110.4s139.2,100.8,140.4,110.4c1.2,13.2,1.2,39,1.2,37.8v145.8c0-1.2,0,24.6-1.2,37.8-1.2,9.6,1.2,110.4-140.4,110.4s-137.4-96-139.8-110.4ZM514.8,422.39c28.8-.6,28.8-26.4,28.8-26.4v-191.4s0-26.4-28.8-26.4c-25.8,0-27,26.4-27,26.4v191.4s1.2,27,27,26.4Z"
+					/>
+					<path
+						class="letter-m"
+						d="M721.8,89.99h90.6c9.6,0,15.6,4.8,19.2,13.2l51.6,123c1.8,4.8,6.6,4.8,8.4,0l51.6-123c3.6-8.4,9.6-13.2,19.2-13.2h90.6c10.8,0,16.8,6,16.8,16.8v386.4c0,10.8-6,16.8-16.8,16.8h-76.8c-10.8,0-16.8-6-16.8-16.8v-157.2c0-5.4-4.8-6.6-6.6-1.2l-25.2,65.4c-3.6,9-10.2,13.2-19.8,13.2h-40.8c-9.6,0-16.2-4.2-19.8-13.2l-25.2-65.4c-1.8-5.4-6.6-4.2-6.6,1.2v157.2c0,10.8-6,16.8-16.8,16.8h-76.8c-10.8,0-16.8-6-16.8-16.8V106.79c0-10.8,6-16.8,16.8-16.8Z"
+					/>
+					<path
+						class="letter-a"
+						d="M1111.19,491.39l105.6-387c2.4-9.6,9.6-14.4,19.2-14.4h96.6c9.6,0,16.8,4.8,19.2,14.4l105.6,387c3,12-2.4,18.6-14.4,18.6h-76.2c-9.6,0-15.6-4.8-18.6-13.8l-7.2-25.2c-1.2-3-3.6-4.8-7.2-4.8h-99c-3.6,0-6,1.8-7.2,4.8l-7.2,25.2c-3,9-9,13.8-18.6,13.8h-76.2c-12,0-17.4-6.6-14.4-18.6ZM1258.19,367.79h51.6c4.2,0,6.6-2.4,5.4-6.6l-28.2-106.8c-1.2-5.4-6-6-7.2,0l-26.4,106.8c-1.2,4.2.6,6.6,4.8,6.6Z"
+					/>
+					<path
+						bind:this={letterD}
+						class="letter-d"
+						d="M1498.79,106.79c0-10.8,6-16.8,16.8-16.8h123.6c142.8,0,141.6,94.8,142.2,104.4.6,13.2,1.2,42.6,1.2,43.8v123.6c0,1.2.6,24.6-1.2,37.8-1.2,9.6,1.2,110.4-142.2,110.4h-140.4c.6,0,0-324.6,0-403.2ZM1642.19,409.79c28.8-.6,28.8-25.2,28.8-25.2v-169.2s0-25.2-28.8-25.8h-24c-3.6,0-6,2.4-6,6v214.2c0,1.2,12.6,0,30,0Z"
+					/>
+				</svg>
+			</a>
 		</h1>
-    <nav>
-      <a onmouseover={hoverDataSource} onmouseout={unhoverDataSource} href="/releases">Releases</a>
-      <a onmouseover={hoverDataSource} onmouseout={unhoverDataSource} href="/files">Files</a>
-      <a onmouseover={hoverDataSource} onmouseout={unhoverDataSource} href="/contributors">Contributors</a>
-      <a onmouseover={hoverDataSource} onmouseout={unhoverDataSource} href="/stars">Stars</a>
+	</header>
 
-    </nav>
-</header>
+	<aside class:open={sidebarOpen}>
+		{#if sidebarOpen}
+			<button class="toggle" onclick={() => {
+				sidebarOpen = false;
+			}}>
+				Close
+			</button>
+		{:else}
+			<button class="toggle" onclick={() => {
+				sidebarOpen = true;
+			}}>
+				Open
+			</button>
+		{/if}
+		<nav>
+			<a class:active={page.url.pathname === '/'} href="/">Timeline</a>
+			<a class:active={page.url.pathname === '/contributors'} href="/contributors">Contributors</a>
+		</nav>
 
-	{#if meta}
-		<section class="meta">
-			<div>
-				h/w: {height}, {width}
-			</div>
-			<div>
-				mouse: {mouseX.toFixed(0)}, {mouseY.toFixed(0)}
-			</div>
-			<div>
-				perf iters: {performanceIterations}
-			</div>
-			<hr />
-			Num Circles:<br />
-			<input type="range" bind:value={numberOfCircles} min="10" max="5000" onchange={simulate} />
-			{numberOfCircles}
-			<hr />
-			Repulsion:<br />
-			<input type="range" bind:value={repulsion} min="1" max="10" onchange={simulate} />
-			{repulsion}
+		{#if page.url.pathname === '/contributors'}
+			<button class:active={mode === 'stream'} onclick={() => {
+				setStreamMode('stream');
+			}}>Stream Mode</button>
+			<button class:active={mode === 'ridgeline'} onclick={() => {
+				setStreamMode('ridgeline');
+			}}>Ridgeline Mode</button>
+		{/if}
+
+		<div class="topics">
+			<!-- <input type="text" bind:value={topic} /> -->
+			{#each TOPICS as topicButton}
+				<button
+					class="topic"
+					class:highlighted={associatedTopics.includes(topicButton)}
+					class:pinned={focusedTopic === topicButton}
+					title="click to pin topic"
+					onmouseover={() => {
+						highlightTopic(topicButton);
+					}}
+					onfocus={() => {
+						highlightTopic(topicButton);
+					}}
+					onmouseout={() => {
+						highlightTopic(null);
+					}}
+					onblur={() => {
+						highlightTopic(null);
+					}}
+					onclick={() => {
+						if (topicButton === focusedTopic) {
+							focusTopic(null);
+						} else {
+							metadataStore.set([{key: "topic", value: topicButton}]);
+							focusTopic(topicButton);
+						}
+					}}
+				>
+					{topicButton}
+				</button>
+			{/each}
+		</div>
+		<div class="authors">
+			{#each contributors.slice(0, 30) as contributor}
+				<button
+					class="author"
+					class:highlighted={associatedAuthors.includes(contributor.author.login)}
+					class:pinned={focusedAuthor === contributor.author.login}
+					title="click to pin author"
+					onmouseover={() => {
+						highlightAuthor(contributor.author.login);
+					}}
+					onfocus={() => {
+						highlightAuthor(contributor.author.login);
+					}}
+					onmouseout={() => {
+						highlightAuthor(null);
+					}}
+					onblur={() => {
+						highlightAuthor(null);
+					}}
+					onclick={() => {
+						if (contributor.author.login === focusedAuthor) {
+							focusAuthor(null);
+						} else {
+							metadataStore.set([{key: "author", value: contributor.author.login}]);
+							focusAuthor(contributor.author.login);
+						}
+					}}
+				>
+					<img src={contributor.author.avatar_url} style="width: 20px; height: 20px; border-radius: 50%;" />
+					{contributor.author.login}
+				</button>
+			{/each}
+		</div>
+		{#if focusedAuthor || focusedTopic}
+			<button class="clear-filter" onclick={() => {
+				focusAuthor(null);
+				focusTopic(null);
+				metadataStore.set([]);
+			}}>
+				Clear Filter
+			</button>
+		{/if}
+
+		<section class="metadata">
+			Metadata
+			{#if metadata.length}
+				{#each metadata as {key, value}}
+					{#if key === 'url'}
+						<a href={value} target="_blank">
+							View URL
+						</a>
+					{:else if key === 'date'}
+						<div>
+							<strong>Date</strong>
+							{new Date(value).toLocaleDateString('en-US', {
+								year: 'numeric',
+								month: 'long',
+								day: 'numeric',
+							})}
+						</div>
+					{:else}
+						<div>
+							<strong>{key}</strong>
+							{value}
+						</div>
+					{/if}
+				{/each}
+			{/if}
 		</section>
-	{/if}
+
+	</aside>
+
+	<section class="metadata">
+			{#if authorMetadata}
+				{authorMetadata.value}
+			{:else if topicMetadata}
+				{topicMetadata.value}
+			{:else}
+				Nomad is turning 10! Since the first commit on June 1st, 2015, we've merged more than 27,000 commits. Nomad has been a journey of steady growth, focus, and determination by over 1,000 authors. Explore some topics and their contributors and learn more about the project!
+			{/if}
+	</section>
 
 	<section class="page">
-		{@render children({
-      hoverDataSource,
-      unhoverDataSource
-    })}
+		{@render children()}
 	</section>
 </main>
+
+<style>
+	main {
+		overflow: hidden;
+		/* TODO: expanding chart yScale or chartHeight appears to go beyond the bottom barrier */
+		position: relative;
+		background: #ffe;
+		border: 0.4rem solid rgba(0, 0, 0, 0.2);
+		width: 100vw;
+		height: 100vh;
+		box-sizing: border-box;
+		display: grid;
+		grid-template-rows: auto 1fr;
+		grid-template-areas:
+			'header'
+			'main';
+		/* grid-auto-flow: row; */
+		/* grid-template-columns: minmax(150px, 280px) 1fr;
+		grid-template-rows: auto 1fr;
+		grid-template-areas:
+			'sidebar header'
+			'sidebar main'; */
+
+		header {
+			grid-area: header;
+			width: 100%;
+			padding: 0 10%;
+			box-sizing: border-box;
+			h1 {
+				max-width: 500px;
+				display: grid;
+				position: relative;
+				/* z-index: 2; */
+				z-index: 1;
+				margin: 0 auto;
+				padding: 1rem 0;
+				&.hovered {
+					z-index: 1;
+				}
+			}
+			/* nav {
+      display: grid;
+      gap: 1px;
+      grid-auto-flow: row;
+      margin-bottom: 1rem;
+      a {
+        display: block;
+        padding: 0.25rem 0.5rem;
+        background-color: black;
+        border-radius: 0.5rem;
+        text-decoration: none;
+        color: white;
+        font-family: 'VaultAlarm', sans-serif;
+        text-align: center;
+      }
+      position: relative;
+      z-index: 2;
+    } */
+		}
+
+		&.data-loaded {
+			header {
+				max-width: 30%;
+			}
+		}
+	}
+
+/* TODO: need to establish "metadata" area in the grid */
+
+	aside {
+		grid-area: sidebar;
+		padding: 1rem;
+		position: fixed;
+		width: calc(100vw - 2rem);
+		height: 100vh;
+		top: 0;
+		left: calc(-100vw + 2rem);
+		box-sizing: border-box;
+		z-index: 2;
+		background-color: rgba(255, 255, 255, 0.9);
+		transition: left 0.3s ease-in-out;
+
+		&.open {
+			left: 0;
+		}
+
+		.toggle {
+			position: absolute;
+			top: calc(50% - 25px);
+			right: -25px;
+			width: 50px;
+			height: 50px;
+			background-color: black;
+			color: white;
+			border-radius: 0 4px 4px 0;
+			border: none;
+			cursor: pointer;
+		}
+		
+
+		nav {
+			display: grid;
+			grid-auto-flow: column;
+			gap: 0.5rem;
+			width: 100%;
+			margin-bottom: 1rem;
+
+			a {
+				padding: 0.5rem 1rem;
+				background-color: black;
+				border-radius: 0.5rem;
+				color: white;
+				font-size: 0.8em;
+				text-decoration: none;
+				text-align: center;
+				&.active {
+					background-color: #00ca8e;
+					color: black;
+				}
+			}
+		}
+
+		.authors,
+		.topics {
+			display: flex;
+			flex-wrap: wrap;
+			gap: 5px;
+			max-width: 850px;
+			margin: auto;
+			margin-bottom: 10px;
+
+			.author,
+			.topic {
+				border: 2px solid transparent;
+				display: inline-grid;
+				grid-template-columns: 20px 1fr;
+				gap: 5px;
+				background: white;
+				border-radius: 40px;
+				padding: 2px 4px;
+				box-shadow: 2px 2px 2px 0px rgba(0, 0, 0, 0.1);
+				align-items: center;
+				cursor: pointer;
+				transition: background 0.1s ease-in-out;
+				&:hover {
+					background: #f0f0f0;
+				}
+				&.highlighted {
+					/* background: #00ca8e; */
+					background: rgba(0, 202, 142, 0.5);
+					color: black;
+				}
+				&.pinned {
+					background: #00ca8e;
+					border: 2px solid rgba(0, 0, 0, 0.6);
+					box-sizing: border-box;
+					box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+				}
+				&.topic {
+					grid-template-columns: 1fr;
+				}
+			}
+		}
+	}
+
+	.page {
+		grid-area: main;
+		/* width: 100%; */
+		height: 100%;
+		/* padding-bottom: 4rem; */
+	}
+
+	@media (min-width: 960px) {
+		main {
+			border: 2rem solid rgba(0,0,0,0.2);
+			display: grid;
+			grid-template-columns: minmax(150px, 280px) 1fr;
+			grid-template-rows: auto 1fr;
+			grid-template-areas:
+				'sidebar header'
+				'sidebar main';
+
+			
+			header {
+				nav {
+					grid-auto-flow: column;
+					gap: 1rem;
+					a {
+						padding: 0.5rem 1rem;
+					}
+				}
+			}
+
+			.page {
+				height: auto;
+				padding-bottom: 0;
+			}
+
+			aside {
+				position: relative;
+				left: 0;
+				width: auto;
+				height: 100%;
+				transition: left 0.3s ease-in-out;
+				background-color: transparent;
+				.toggle {
+					display: none;
+				}
+			}
+		}
+	}
+
+	@page {
+		size: A4;
+		margin: 0;
+	}
+
+	@media print {
+    aside {
+      display: none;
+    }
+		.meta {
+			display: none;
+		}
+	}
+
+	/* @media print {
+		main {
+			display: block;
+			width: 100vw;
+			height: 100vh;
+			overflow: visible;
+			border: none;
+			header {
+				height: 20vh;
+			}
+
+			.page {
+				height: 80vh;
+				width: 100vw;
+			}
+		}
+	} */
+
+</style>
