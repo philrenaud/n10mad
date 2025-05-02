@@ -837,6 +837,14 @@
 					{contributor.author.login}
 				</button>
 			{/each}
+
+			<input class="author-search" placeholder="search authors" type="text" onkeyup={(e) => {
+				if (contributors.find(c => c.author.login === e.target.value)) {
+					focusAuthor(e.target.value);
+				} else {
+					focusAuthor(null);
+				}
+			}} />
 		</div>
 		{#if focusedAuthor || focusedTopic}
 			<button class="clear-filter" onclick={() => {
@@ -1073,6 +1081,14 @@
 					grid-template-columns: 1fr;
 				}
 			}
+		}
+
+		.author-search {
+			width: 100%;
+			padding: 0.5rem;
+			border-radius: 0.5rem;
+			border: 1px solid #ccc;
+			margin: 1rem 0;
 		}
 
 		.clear-filter {
