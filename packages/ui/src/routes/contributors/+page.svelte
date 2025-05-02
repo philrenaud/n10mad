@@ -265,12 +265,15 @@
   });
 
   let handleContributorFocus = (event, area) => {
-    console.log(`${area.author.login} has made ${area.total} commits`);
-    console.log('area', area);
+    // console.log(`${area.author.login} has made ${area.total} commits`);
+    // console.log('area', area);
+    // metadataStore.set([
+    //   {key: 'contributor', value: area.author.login},
+    //   // ...area.author.terms.map(t => ({key: t.term, value: t.tfidf}))
+    //   {key: 'terms', value: area.author.terms.map(t => t.term).join(', ')}
+    // ]);
     metadataStore.set([
-      {key: 'contributor', value: area.author.login},
-      // ...area.author.terms.map(t => ({key: t.term, value: t.tfidf}))
-      {key: 'terms', value: area.author.terms.map(t => t.term).join(', ')}
+      {key: 'contextualAuthorName', value: area.author.login},
     ]);
     if (!focusedContributors.includes(area.author.login)) {
       focusedContributors = [...focusedContributors, area.author.login];
@@ -279,11 +282,18 @@
 
   // Handle contributor blur
   let handleContributorBlur = (event: Event, area: any) => {
+    // console.log('blurring', event, area);
     // Only filter if there's something to remove
     if (area && focusedContributors.includes(area.author.login)) {
       focusedContributors = focusedContributors.filter(c => c !== area.author.login);
+      metadataStore.set([
+        {key: 'contextualAuthorName', value: null},
+      ]);
     } else if (!area) {
       focusedContributors = [];
+      metadataStore.set([
+        {key: 'contextualAuthorName', value: null},
+      ]);
     }
   };
   
@@ -292,7 +302,7 @@
   let hoveredContributor = $state<Contributor['author'] | null>(null);
 
   let handleContributorHover = (event, area: Contributor) => {
-    console.log('hovering', event, area);
+    // console.log('hovering', event, area);
     hoveredContributor = area.author;
     // hoveredContributor.x = `${event.layerX - 32}px`;
     // hoveredContributor.y = `${event.layerY - 32 }px`;

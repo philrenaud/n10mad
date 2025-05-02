@@ -3,6 +3,7 @@ import type { LayoutServerLoad } from './$types';
 // import releases from '../../../../data/raw/releases.json';
 // import contributors from '../../../../data/raw/contributors.json';
 import contributors from '../../../../data/wrangled/topics_author.json';
+import topics from '../../../../data/wrangled/topics_week.json';
 
 export const ssr = false;
 // export const ssr = true;
@@ -19,6 +20,7 @@ export const load: LayoutServerLoad = async () => {
     contributors: contributors
     .sort((a, b) => b.total - a.total)
     .slice(0,100),
+    topics: topics,
     // stars: stars,
   }
 }

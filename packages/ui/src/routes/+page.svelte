@@ -191,7 +191,12 @@
 
   .hoverbar {
     opacity: 0;
-    transition: opacity 0.1s ease-in-out;
+    /* transition: opacity 0.1s ease-in-out; */
+    fill: rgba(0, 0, 0, 0.2);
+  }
+
+  .hoverbar:hover {
+    opacity: 1;
   }
 
   .main {
