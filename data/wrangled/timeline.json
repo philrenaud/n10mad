@@ -2162,7 +2162,6 @@
         "DingoEatingFuzz",
         "schmichael",
         null,
-        "fho",
         "blixtra"
       ],
       "milestone": {
@@ -2327,7 +2326,6 @@
         "schmichael",
         "dadgar",
         "chelseakomlo",
-        "fho",
         "jsoref",
         "DingoEatingFuzz",
         "rcgenova",
@@ -8364,16 +8362,16 @@
     },
     {
       "weekNumber": 25,
-      "count": 17,
+      "count": 20,
       "weekStart": 1719187200000,
       "weekEnd": 1719792000000,
       "authors": [
         "philrenaud",
+        "dependabot[bot]",
         "pkazmierczak",
         "tgross",
         "mmcquillan",
         "angrycub",
-        "dependabot[bot]",
         "Antvirf"
       ]
     },
@@ -8955,7 +8953,7 @@
     },
     {
       "weekNumber": 8,
-      "count": 23,
+      "count": 24,
       "weekStart": 1740528000000,
       "weekEnd": 1741132800000,
       "authors": [
@@ -8964,15 +8962,15 @@
         "aimeeu",
         "mismithhisler",
         "grembo",
+        "dependabot[bot]",
         "daviddl9",
         "jrasell",
-        "pkazmierczak",
-        "dependabot[bot]"
+        "pkazmierczak"
       ]
     },
     {
       "weekNumber": 9,
-      "count": 43,
+      "count": 45,
       "weekStart": 1741132800000,
       "weekEnd": 1741737600000,
       "authors": [
@@ -8981,6 +8979,7 @@
         "tgross",
         "jrasell",
         "hc-github-team-nomad-core",
+        "dependabot[bot]",
         "philrenaud",
         "dduzgun-security",
         "rmainwork",
@@ -8991,7 +8990,7 @@
     },
     {
       "weekNumber": 10,
-      "count": 43,
+      "count": 44,
       "weekStart": 1741737600000,
       "weekEnd": 1742342400000,
       "authors": [
@@ -9032,7 +9031,7 @@
     },
     {
       "weekNumber": 12,
-      "count": 31,
+      "count": 32,
       "weekStart": 1742947200000,
       "weekEnd": 1743552000000,
       "authors": [
@@ -9052,7 +9051,7 @@
     },
     {
       "weekNumber": 13,
-      "count": 27,
+      "count": 28,
       "weekStart": 1743552000000,
       "weekEnd": 1744156800000,
       "authors": [
@@ -9076,7 +9075,7 @@
     },
     {
       "weekNumber": 14,
-      "count": 27,
+      "count": 28,
       "weekStart": 1744156800000,
       "weekEnd": 1744761600000,
       "authors": [
@@ -9085,6 +9084,7 @@
         "pkazmierczak",
         "arianvp",
         "jrasell",
+        "dependabot[bot]",
         "aimeeu",
         "carlosgaldino",
         "schmichael",
@@ -9094,29 +9094,52 @@
     },
     {
       "weekNumber": 15,
-      "count": 5,
+      "count": 31,
       "weekStart": 1744761600000,
       "weekEnd": 1745366400000,
       "authors": [
-        "jrasell",
-        "tgross",
+        "gulducat",
+        "pkazmierczak",
+        "mismithhisler",
         "dependabot[bot]",
-        "pkazmierczak"
+        "tehut",
+        "tgross",
+        "jrasell"
       ]
     },
     {
       "weekNumber": 16,
-      "count": 0,
+      "count": 41,
       "weekStart": 1745366400000,
       "weekEnd": 1745971200000,
-      "authors": []
+      "authors": [
+        "chrisroberts",
+        "im2nguyen",
+        "aimeeu",
+        "sofixa",
+        "dependabot[bot]",
+        "pkazmierczak",
+        "jrasell",
+        "tgross",
+        "mmcquillan",
+        "Juanadelacuesta",
+        "awanaut",
+        "allisonlarson",
+        "gulducat"
+      ]
     },
     {
       "weekNumber": 17,
-      "count": 0,
+      "count": 11,
       "weekStart": 1745971200000,
       "weekEnd": 1746576000000,
-      "authors": []
+      "authors": [
+        "jrasell",
+        "Juanadelacuesta",
+        "dependabot[bot]",
+        "chrisroberts",
+        "Baozi2"
+      ]
     },
     {
       "weekNumber": 18,
