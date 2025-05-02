@@ -18,13 +18,41 @@
 
 	// find by key 'author' or null
 	let authorMetadata: { key: string; value: string } | null = $derived.by(() => {
-		console.log('searching metadata for author', metadata.length, metadata[0]?.key);
+		// console.log('searching metadata for author', metadata.length, metadata[0]?.key);
 		return metadata.find(m => m.key === 'author') || null;
 	})
 
 	let topicMetadata: { key: string; value: string } | null = $derived.by(() => {
 		return metadata.find(m => m.key === 'topic') || null;
 	})
+
+	let contextualAuthorName: string | null = $derived.by(() => {
+		return metadata.find(m => m.key === 'contextualAuthorName')?.value || null;
+	})
+
+	// let contextualAuthorMetadata: { key: string; value: string } | null = $derived.by(() => {
+	// 	console.log('FX, contextualAuthorMetadata', metadata.find(m => m.key === 'contextualAuthor'));
+	// 	return metadata.find(m => m.key === 'contextualAuthor') || null;
+	// })
+
+	let contextualAuthorMetadata = $state<{ key: string; value: string } | null>(null);
+
+	let contextualTopicName: string | null = $derived.by(() => {
+		return metadata.find(m => m.key === 'contextualTopicName')?.value || null;
+	})
+
+	// let contextualTopicMetadata: { key: string; value: string } | null = $derived.by(() => {
+	// 	return metadata.find(m => m.key === 'contextualTopic') || null;
+	// })
+	
+
+	// let contextualAuthorMetadata: { key: string; value: string } | null = $derived.by(() => {
+	// 	return contextualAuthorName || null;
+	// })
+
+	// let contextualTopicMetadata: { key: string; value: string } | null = $derived.by(() => {
+	// 	return metadata.find(m => m.key === 'contextualTopicName') || null;
+	// })
 
 	let meta: boolean = $state(false);
 	meta = page.url.searchParams.get('meta') === 'true';
@@ -64,14 +92,47 @@
     }
   });
 
-	// set metadata from url params
+	function getAuthorMetadata(author: string) {
+		// return {key: "author", value: author};
+		// Tell me things about the author based on what we have wrangled
+		let contributorInfo = data.contributors.find(c => c.author.login === author);
+		const contributingWeeks = contributorInfo?.weeks.filter(w => w.c > 0).length;
+		const firstCommitWeek = new Date(contributorInfo?.weeks.find(w => w.c > 0)?.w*1000).toLocaleDateString('en-US', {
+			year: 'numeric',
+			month: 'long',
+			day: 'numeric',
+		});
+		const totalCommits = contributorInfo?.total;
+		const topics = contributorInfo?.author.terms.map(t => t.term).slice(0,5);
+		return `${contributorInfo?.author.login} has contributed ${totalCommits} commits over ${contributingWeeks} weeks, starting ${firstCommitWeek}. <br /><br /> Characteristic commit messages include things like <strong>${topics.map(t => `"${t}"`).join('</strong>, <strong>')}</strong>.`
+	}
+
+	function getTopicMetadata(topic: string) {
+		// console.log('topic is', topic);
+		// console.log('what can we know about it', data)
+		const weeksWithTopic = data.topics.filter(t => t.terms.map(t => t.term).includes(topic));
+		const authorsWithTopic = data.contributors.filter(c => c.author.terms.map(t => t.term).includes(topic)).map(c => c.author.login).slice(0,5);
+		// console.log('weeksWithTopic', weeksWithTopic);
+		// console.log('authorsWithTopic', authorsWithTopic);
+		return `The term <strong>"${topic}"</strong> has been mentioned in ${weeksWithTopic.length} weeks, by at least ${authorsWithTopic.length} authors, including <strong>${authorsWithTopic.slice(0, -1).join('</strong>, <strong>')}</strong>, and <strong>${authorsWithTopic[authorsWithTopic.length - 1]}</strong>.`
+	}
+
+	// set metadata from url params or from in-context page setting like hover where we don't want to set urlParams
 	$effect(() => {
-		if (author) {
-			console.log('setting author metadata', author);
-			metadataStore.set([{key: "author", value: author}]);
-		}
-		if (topic) {
-			metadataStore.set([{key: "topic", value: topic}]);
+		if (contextualAuthorName) {
+			// console.log('yes, author contextually set', contextualAuthorName);
+			// metadataStore.set([{key: "author", value: contextualAuthorMetadata.value}]);
+			// metadataStore.set([{key: "contextualAuthor", value: getAuthorMetadata(contextualAuthorName)}]);
+			// console.log('thus', metadataStore.metadata.find(m => m.key === 'contextualAuthor'), 'and', contextualAuthorMetadata);
+			contextualAuthorMetadata = {key: "contextualAuthor", value: getAuthorMetadata(contextualAuthorName)};
+		// } else if (contextualTopicName) {
+			// metadataStore.set([{key: "contextualTopic", value: contextualTopicMetadata.value}]);
+			// metadataStore.set([{key: "contextualTopic", value: getTopicMetadata(contextualTopicName)}]);
+		} else if (author) {
+			// console.log('setting author metadata', author);
+			metadataStore.set([{key: "author", value: getAuthorMetadata(author)}]);
+		} else if (topic) {
+			metadataStore.set([{key: "topic", value: getTopicMetadata(topic)}]);
 		}
 	})
 
@@ -405,7 +466,7 @@
 					oBounds = letterO.getBoundingClientRect();
 					cachedNPoints = letterNPoints;
 					cachedOPoints = letterOPoints;
-					console.log('cachedOPoints', cachedOPoints);
+					// console.log('cachedOPoints', cachedOPoints);
 					startSimpleSimulation();
 				}
 			}, 100);
@@ -667,6 +728,20 @@
 		</h1>
 	</header>
 
+	<section class="metadata">
+		<p>
+			{#if contextualAuthorMetadata}
+				{@html contextualAuthorMetadata.value}
+			{:else if authorMetadata}
+				{@html authorMetadata.value}
+			{:else if topicMetadata}
+				{@html topicMetadata.value}
+			{:else}
+				Nomad is turning 10! Since the first commit on June 1st, 2015, we've merged more than 27,000 commits. Nomad has been a journey of steady growth, focus, and determination by over 1,000 authors. Explore some topics and their contributors and learn more about the project!
+			{/if}			
+		</p>
+	</section>
+
 	<aside class:open={sidebarOpen}>
 		{#if sidebarOpen}
 			<button class="toggle" onclick={() => {
@@ -687,12 +762,14 @@
 		</nav>
 
 		{#if page.url.pathname === '/contributors'}
-			<button class:active={mode === 'stream'} onclick={() => {
+		<div class="mode-buttons">
+			<button class="mode-button" class:active={mode === 'stream'} onclick={() => {
 				setStreamMode('stream');
 			}}>Stream Mode</button>
-			<button class:active={mode === 'ridgeline'} onclick={() => {
-				setStreamMode('ridgeline');
-			}}>Ridgeline Mode</button>
+				<button class="mode-button" class:active={mode === 'ridgeline'} onclick={() => {
+					setStreamMode('ridgeline');
+				}}>Ridgeline Mode</button>
+		</div>
 		{/if}
 
 		<div class="topics">
@@ -766,12 +843,14 @@
 				focusAuthor(null);
 				focusTopic(null);
 				metadataStore.set([]);
+				contextualAuthorMetadata = null;
+				// contextualTopicMetadata = null;
 			}}>
 				Clear Filter
 			</button>
 		{/if}
 
-		<section class="metadata">
+		<!-- <section class="metadata">
 			Metadata
 			{#if metadata.length}
 				{#each metadata as {key, value}}
@@ -796,19 +875,9 @@
 					{/if}
 				{/each}
 			{/if}
-		</section>
+		</section> -->
 
 	</aside>
-
-	<section class="metadata">
-			{#if authorMetadata}
-				{authorMetadata.value}
-			{:else if topicMetadata}
-				{topicMetadata.value}
-			{:else}
-				Nomad is turning 10! Since the first commit on June 1st, 2015, we've merged more than 27,000 commits. Nomad has been a journey of steady growth, focus, and determination by over 1,000 authors. Explore some topics and their contributors and learn more about the project!
-			{/if}
-	</section>
 
 	<section class="page">
 		{@render children()}
@@ -826,9 +895,10 @@
 		height: 100vh;
 		box-sizing: border-box;
 		display: grid;
-		grid-template-rows: auto 1fr;
+		grid-template-rows: auto 150px 1fr;
 		grid-template-areas:
 			'header'
+			'metadata'
 			'main';
 		/* grid-auto-flow: row; */
 		/* grid-template-columns: minmax(150px, 280px) 1fr;
@@ -874,10 +944,16 @@
     } */
 		}
 
-		&.data-loaded {
-			header {
-				max-width: 30%;
-			}
+		.metadata {
+			grid-area: metadata;
+			padding: 0 10%;
+
+			p {
+					max-width: 850px;
+					margin: auto;
+					padding: 1rem;
+				}
+
 		}
 	}
 
@@ -895,6 +971,7 @@
 		z-index: 2;
 		background-color: rgba(255, 255, 255, 0.9);
 		transition: left 0.3s ease-in-out;
+		overflow: auto;
 
 		&.open {
 			left: 0;
@@ -911,8 +988,7 @@
 			border-radius: 0 4px 4px 0;
 			border: none;
 			cursor: pointer;
-		}
-		
+		}		
 
 		nav {
 			display: grid;
@@ -923,12 +999,33 @@
 
 			a {
 				padding: 0.5rem 1rem;
-				background-color: black;
+				background-color: white;
 				border-radius: 0.5rem;
-				color: white;
+				color: black;
 				font-size: 0.8em;
 				text-decoration: none;
 				text-align: center;
+				box-shadow: 2px 2px 2px 0px rgba(0, 0, 0, 0.1);
+				
+				&.active {
+					background-color: #00ca8e;
+					color: black;
+				}
+			}
+		}
+
+		.mode-buttons {
+			display: grid;
+			grid-auto-flow: column;
+			gap: 0.5rem;
+			width: 100%;
+			margin-bottom: 1rem;
+			button {
+				padding: 0.5rem 0rem;
+				background-color: white;
+				border-radius: 0.5rem;
+				border-width: 0;
+				color: black;
 				&.active {
 					background-color: #00ca8e;
 					color: black;
@@ -977,6 +1074,15 @@
 				}
 			}
 		}
+
+		.clear-filter {
+			margin-top: 1rem;
+			width: 100%;
+			background-color: #222;
+			color: white;
+			border-radius: 0.5rem;
+			padding: 0.5rem 1rem;
+		}
 	}
 
 	.page {
@@ -991,9 +1097,10 @@
 			border: 2rem solid rgba(0,0,0,0.2);
 			display: grid;
 			grid-template-columns: minmax(150px, 280px) 1fr;
-			grid-template-rows: auto 1fr;
+			grid-template-rows: auto 150px 1fr;
 			grid-template-areas:
 				'sidebar header'
+				'sidebar metadata'
 				'sidebar main';
 
 			
@@ -1010,6 +1117,10 @@
 			.page {
 				height: auto;
 				padding-bottom: 0;
+			}
+
+			.metadata {
+				grid-area: metadata;
 			}
 
 			aside {
