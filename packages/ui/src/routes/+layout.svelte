@@ -10,6 +10,12 @@
 	import type { LayoutProps } from './$types';
 	import { setContext, getContext } from 'svelte';
 	import { createMetadataStore } from '$lib/components/metadata.svelte'
+
+	function sanitizeParam(param: string | null): string | null {
+		if (param === null) return null;
+		return param.replace(/[<>"'&]/g, '');
+	}
+	
 	let metadataStore = createMetadataStore();
 	let metadata = $derived.by(() => {
 		return metadataStore.metadata;
@@ -30,29 +36,11 @@
 		return metadata.find(m => m.key === 'contextualAuthorName')?.value || null;
 	})
 
-	// let contextualAuthorMetadata: { key: string; value: string } | null = $derived.by(() => {
-	// 	console.log('FX, contextualAuthorMetadata', metadata.find(m => m.key === 'contextualAuthor'));
-	// 	return metadata.find(m => m.key === 'contextualAuthor') || null;
-	// })
-
 	let contextualAuthorMetadata = $state<{ key: string; value: string } | null>(null);
 
 	let contextualTopicName: string | null = $derived.by(() => {
 		return metadata.find(m => m.key === 'contextualTopicName')?.value || null;
 	})
-
-	// let contextualTopicMetadata: { key: string; value: string } | null = $derived.by(() => {
-	// 	return metadata.find(m => m.key === 'contextualTopic') || null;
-	// })
-	
-
-	// let contextualAuthorMetadata: { key: string; value: string } | null = $derived.by(() => {
-	// 	return contextualAuthorName || null;
-	// })
-
-	// let contextualTopicMetadata: { key: string; value: string } | null = $derived.by(() => {
-	// 	return metadata.find(m => m.key === 'contextualTopicName') || null;
-	// })
 
 	let meta: boolean = $state(false);
 	meta = page.url.searchParams.get('meta') === 'true';
@@ -65,21 +53,22 @@
   const defaultTopic = null;
   const defaultAuthor = null;
   const defaultMode = 'stream';
-  let topic: string | null = $state(page.url.searchParams.get('topic') || defaultTopic);
-  let author: string | null = $state(page.url.searchParams.get('author') || defaultAuthor);
+  // Sanitize URL parameters at the entry point
+  let topic: string | null = $state(sanitizeParam(page.url.searchParams.get('topic')) || defaultTopic);
+  let author: string | null = $state(sanitizeParam(page.url.searchParams.get('author')) || defaultAuthor);
   let mode: 'stream' | 'ridgeline' = $state(page.url.searchParams.get('mode') as 'stream' | 'ridgeline' || defaultMode);
 
   // Sync URL changes to state
   $effect(() => {
-    // Check for author parameter changes
-    const urlAuthor = page.url.searchParams.get('author');
+    // Check for author parameter changes and sanitize
+    const urlAuthor = sanitizeParam(page.url.searchParams.get('author'));
     if (urlAuthor !== author) {
       author = urlAuthor;
       focusedAuthor = urlAuthor;
     }
 
-    // Check for topic parameter changes
-    const urlTopic = page.url.searchParams.get('topic');
+    // Check for topic parameter changes and sanitize
+    const urlTopic = sanitizeParam(page.url.searchParams.get('topic'));
     if (urlTopic !== topic) {
       topic = urlTopic;
       focusedTopic = urlTopic;
@@ -92,9 +81,17 @@
     }
   });
 
+  // Filter any new URL parameters when they're set
+  function setURLParam(name: string, value: string | null) {
+    if (value === null) {
+      page.url.searchParams.delete(name);
+    } else {
+      page.url.searchParams.set(name, sanitizeParam(value) || '');
+    }
+    goto(`?${page.url.searchParams.toString()}`, { replaceState: true, keepFocus: true });
+  }
+
 	function getAuthorMetadata(author: string) {
-		// return {key: "author", value: author};
-		// Tell me things about the author based on what we have wrangled
 		let contributorInfo = data.contributors.find(c => c.author.login === author);
 		const contributingWeeks = contributorInfo?.weeks.filter(w => w.c > 0).length;
 		const firstCommitWeek = new Date(contributorInfo?.weeks.find(w => w.c > 0)?.w*1000).toLocaleDateString('en-US', {
@@ -108,31 +105,41 @@
 	}
 
 	function getTopicMetadata(topic: string) {
-		// console.log('topic is', topic);
-		// console.log('what can we know about it', data)
 		const weeksWithTopic = data.topics.filter(t => t.terms.map(t => t.term).includes(topic));
 		const authorsWithTopic = data.contributors.filter(c => c.author.terms.map(t => t.term).includes(topic)).map(c => c.author.login).slice(0,5);
-		// console.log('weeksWithTopic', weeksWithTopic);
-		// console.log('authorsWithTopic', authorsWithTopic);
 		return `The term <strong>"${topic}"</strong> has been mentioned in ${weeksWithTopic.length} weeks, by at least ${authorsWithTopic.length} authors, including <strong>${authorsWithTopic.slice(0, -1).join('</strong>, <strong>')}</strong>, and <strong>${authorsWithTopic[authorsWithTopic.length - 1]}</strong>.`
 	}
 
 	// set metadata from url params or from in-context page setting like hover where we don't want to set urlParams
 	$effect(() => {
 		if (contextualAuthorName) {
-			// console.log('yes, author contextually set', contextualAuthorName);
-			// metadataStore.set([{key: "author", value: contextualAuthorMetadata.value}]);
-			// metadataStore.set([{key: "contextualAuthor", value: getAuthorMetadata(contextualAuthorName)}]);
-			// console.log('thus', metadataStore.metadata.find(m => m.key === 'contextualAuthor'), 'and', contextualAuthorMetadata);
-			contextualAuthorMetadata = {key: "contextualAuthor", value: getAuthorMetadata(contextualAuthorName)};
-		// } else if (contextualTopicName) {
-			// metadataStore.set([{key: "contextualTopic", value: contextualTopicMetadata.value}]);
-			// metadataStore.set([{key: "contextualTopic", value: getTopicMetadata(contextualTopicName)}]);
+			// Only set author metadata if the author exists in our data
+			const authorExists = data.contributors.some(c => c.author.login === contextualAuthorName);
+			if (authorExists) {
+				contextualAuthorMetadata = {key: "contextualAuthor", value: getAuthorMetadata(contextualAuthorName)};
+			}
 		} else if (author) {
-			// console.log('setting author metadata', author);
-			metadataStore.set([{key: "author", value: getAuthorMetadata(author)}]);
+			// Only set author metadata if the author exists in our data
+			const authorExists = data.contributors.some(c => c.author.login === author);
+			if (authorExists) {
+				metadataStore.set([{key: "author", value: getAuthorMetadata(author)}]);
+			} else {
+				// Invalid author in URL, clear it
+				author = null;
+				focusedAuthor = null;
+				setURLParam('author', null);
+			}
 		} else if (topic) {
-			metadataStore.set([{key: "topic", value: getTopicMetadata(topic)}]);
+			// Only set topic metadata if the topic exists in our data
+			const topicExists = data.topics.some(t => t.terms.some(term => term.term === topic));
+			if (topicExists) {
+				metadataStore.set([{key: "topic", value: getTopicMetadata(topic)}]);
+			} else {
+				// Invalid topic in URL, clear it
+				topic = null;
+				focusedTopic = null;
+				setURLParam('topic', null);
+			}
 		}
 	})
 
