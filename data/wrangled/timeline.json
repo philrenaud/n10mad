@@ -9130,44 +9130,75 @@
     },
     {
       "weekNumber": 17,
-      "count": 11,
+      "count": 18,
       "weekStart": 1745971200000,
       "weekEnd": 1746576000000,
       "authors": [
-        "jrasell",
         "Juanadelacuesta",
         "dependabot[bot]",
+        "tgross",
+        "jrasell",
         "chrisroberts",
         "Baozi2"
       ]
     },
     {
       "weekNumber": 18,
-      "count": 0,
+      "count": 16,
       "weekStart": 1746576000000,
       "weekEnd": 1747180800000,
-      "authors": []
+      "authors": [
+        "aimeeu",
+        "pkazmierczak",
+        "tgross",
+        "hc-github-team-nomad-core",
+        "Juanadelacuesta",
+        "dependabot[bot]",
+        "jrasell"
+      ]
     },
     {
       "weekNumber": 19,
-      "count": 0,
+      "count": 20,
       "weekStart": 1747180800000,
       "weekEnd": 1747785600000,
-      "authors": []
+      "authors": [
+        "tgross",
+        "aimeeu",
+        "dependabot[bot]",
+        "mismithhisler",
+        "pkazmierczak",
+        "allisonlarson",
+        "jrasell",
+        "martisah"
+      ]
     },
     {
       "weekNumber": 20,
-      "count": 0,
+      "count": 11,
       "weekStart": 1747785600000,
       "weekEnd": 1748390400000,
-      "authors": []
+      "authors": [
+        "tgross",
+        "dchyun",
+        "jrasell",
+        "tehut",
+        "gulducat",
+        "aimeeu",
+        "chrisroberts"
+      ]
     },
     {
       "weekNumber": 21,
-      "count": 0,
+      "count": 7,
       "weekStart": 1748390400000,
       "weekEnd": 1748995200000,
-      "authors": []
+      "authors": [
+        "pkazmierczak",
+        "tgross",
+        "MatthewJohn",
+        "mismithhisler"
+      ]
     },
     {
       "weekNumber": 22,
