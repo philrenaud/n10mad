@@ -75,3 +75,20 @@ svg {
     display: none;
   }  
 }
+
+/* Global-scope Print styles */
+
+	@media print {
+
+    main {
+      background-color: white !important;
+    }
+
+		.milestone {
+			display: none;
+		}
+
+    .commit {
+      fill: #008f64 !important;
+    }
+	}
